@@ -1,0 +1,266 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1A1A1A;
+  height: 60px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+nav {
+  max-height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+nav a{
+  display: flex;
+}
+nav a img{
+  scale: 75%;
+  align-items: center;
+  display: flex;
+}
+nav a[href*="https://www.duoc.cl/alumnos/ava-blackboard/"] {  
+  align-items: end;
+}
+
+main {
+  display: grid;
+  margin-left: 25%;
+  margin-top: 60px;
+  padding-left: 20px;
+  padding-bottom: 60px;
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  flex: 1;
+  background-image: linear-gradient(to left, #d4d4d4, #e4e4e4, #d4d4d4, rgb(255, 255, 255));
+}
+
+main .titulo-main {
+  text-align: center;
+  justify-self: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: fit-content;
+  padding: 15px;
+  font-family: sans-serif;
+  font-weight: normal;
+  color: #eeeeee;
+  background: rgba(0, 0, 0, .3);
+}
+main h3{
+  margin-bottom: 0 !important;
+}
+footer {
+  padding: 0px;
+  background-color: #1A1A1A;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  position: fixed;
+  bottom:0;
+}
+
+
+/* Side Nav */
+.sidenav {
+  height: calc(100vh - 110px);
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  background-color: #eeeeee;
+  position: fixed;
+  top: 60px;
+  overflow-y: scroll;
+}
+
+/* Side Nav Items */
+.sidenav-item {
+  display: flex;
+  padding: 0 5px;
+  justify-content: left;
+  height: 30px;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Lato', 'sans-serif';
+}
+
+hr {
+  margin: 0;
+  height: 1px;
+  border-width: 0;
+  color: gray;
+  background-color: gray;
+}
+
+.sidenav a{
+  padding: 8px 0px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+.dropdown-btn {
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Hover del dropdown */
+.dropdown-btn:hover {
+  background: #e6e6e6;
+  color: #1A1A1A;
+}
+
+.sidenav a:hover {
+  color: #1A1A1A;
+}
+
+.sidenav .dc-a:hover {
+  color: #fff;
+}
+.sidenav .dc-a{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.active {
+  background-color: #FFB800;
+  color: #000;
+}
+
+/* Contenedor con dropdown */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding: 0 20px;
+}
+
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+/* Header Navigation */
+ul {
+  margin: 0;
+  padding: 0;
+  height: 60px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 75%;
+}
+
+ul li {
+  list-style: none;
+  margin: 0 20px;
+  transition: 0.5s;
+}
+
+ul li a {
+  transform: scale(1);
+  display: flex;
+  position: relative;
+  align-items: center;
+  text-decoration: none;
+  height: 60px;
+  padding: 0 5px;
+  font-size: x-large;
+  font-family: 'Lato', 'sans-serif';
+  color: #fff;
+  transition: 0.1s;
+}
+
+ul li a:hover {
+  transform: scale(1);
+  opacity: 0.9;
+  filter: blur(2px);
+}
+
+ul:hover li a {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  text-decoration: none;
+  color: #fff;
+}
+
+ul li a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFB800;
+  transition: transform 0.3s;
+  transform-origin: right;
+  transform: scaleX(0);
+  z-index: -1;
+}
+
+ul li a:hover:before {
+  transition: transform 0.3s;
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+ul li a.active:before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.video-section {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.video-container {
+  width: 60%;
+  max-width: 633px;
+  margin-right: 20px;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 356px;
+  border-radius: 10px;
+  border: 1px solid #797979;
+}
+
+.video-description-container {
+  width: 40%;
+}
+
+.video-description {
+  font-size: 16px;
+  color: #333;
+}
+
