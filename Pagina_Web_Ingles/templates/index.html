@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Plataforma de Inglés - Alumnos</title>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="#">Profesores</a></li>
+                <li><a href="https://research-ebsco-com.webezproxy.duoc.cl/c/pzrq6l/search/details/e2mnio7r5z?db=nlebk">Recursos</a></li>
+                <li><a href="#">Sugerencias</a></li>
+                <li><a href="#">Estadisticas Personales</a></li>
+            </ul>
+            <a href="https://www.duoc.cl/alumnos/ava-blackboard/">
+                <img src="{% static 'images/logo_duoc.png' %}" alt="Logo de Duoc UC">
+            </a>
+        </nav>
+    </header>
+
+    <!-- Side Nav -->
+    <div class="sidenav">
+        <button class="dropdown-btn">Inglés Basico
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a class="dc-a" href="#">Acercamiento al Inglés.</a>
+            <hr>
+            <a class="dc-a" href="#">¡Describiendo el Mundo!</a>
+            <hr>
+            <a class="dc-a" href="#">Cumpleaños y Fechas.</a>
+            <hr>
+            <a class="dc-a" href="#">Indicaciones y Direcciones.</a>
+            <hr>
+            <a class="dc-a" href="#">¿Que he Aprendido?</a>
+        </div>
+
+        <button class="dropdown-btn">Inglés Elemental
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a class="dc-a" href="#">Repaso de conocimientos previos.</a>
+            <hr>
+            <a class="dc-a" href="#">¡El verbo To Be!</a>
+            <hr>
+            <a class="dc-a" href="#">Presente Continuo.</a>
+            <hr>
+            <a class="dc-a" href="#">Mi rutina Diaria.</a>
+            <hr>
+            <a class="dc-a" href="#">¿Que he Aprendido?</a>
+        </div>
+
+        <button class="dropdown-btn">Prueba tu Conocimiento
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a class="dc-a" href="#">Comprensión Lectora.</a>
+            <hr>
+            <a class="dc-a" href="#">Quiz de Unidades.</a>
+            <hr>
+            <a class="dc-a" href="#">¡Arrastra y Suelta!</a>
+            <hr>
+            <a class="dc-a" href="#">Une los Verbos.</a>
+        </div>
+
+        <button class="dropdown-btn">Funcionalidad
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a class="dc-a" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus maxime rerum ex suscipit accusantium pariatur rem atque et quod obcaecati.</a>
+            <hr>
+            <a class="dc-a" href="#">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati, magnam!</a>
+            <hr>
+            <a class="dc-a" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi cumque fugiat, iste ipsa vero provident.</a>
+            <hr>
+            <a class="dc-a" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus dolor cupiditate numquam? Cumque ab perspiciatis commodi, a voluptatum quaerat sint? Natus, optio. Ex, dignissimos quaerat.</a>
+        </div>
+    </div>
+    <!-- Contenido de la Pagina-->
+    <main>
+        <div class="titulo-main">Videos para Repasar / Practicar</div>
+        <div class="video-section">
+            <!-- Contenedor con descripcion -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/rFZQmXjALbU" title="Todos los PRONOMBRES en INGLÉS explicados fácilmente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-description-container">
+                <p class="video-description"><h3>Acercamiento al inglés.</h3> <br>Explicación detallada de todos los pronombres en inglés con ejemplos y ejercicios.</p>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/X9uatn1-EiE" title="Como hacer una descripción personal en INGLÉS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-description-container">
+                <p class="video-description"><h3>¡Describiendo el mundo!</h3> <br> Cómo hacer una descripción personal en inglés. Incluye ejemplos y ejercicios.</p>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/_WGqm5miv0A" title="LA FECHA EN INGLES" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-description-container">
+                <p class="video-description"><h3>Cumpleaños y Fechas.</h3> <br>Aprende a hablar sobre la fecha en inglés, con ejemplos claros y ejercicios.</p>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/NGXulBqT6p0" title="Cómo pedir y dar direcciones en inglés" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-description-container">
+                <p class="video-description"><h3>Indicaciones y Direcciones.</h3> <br> Cómo pedir y dar direcciones en inglés. Incluye vocabulario, ejemplos y diálogos.</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p>De alumnos para alumnos!</p>
+    </footer>
+    <script src="{% static 'scripts/sidenav.js' %}"></script>
+</body>
+</html>
