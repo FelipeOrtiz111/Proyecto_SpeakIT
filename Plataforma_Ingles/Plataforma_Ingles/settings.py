@@ -81,7 +81,10 @@ DATABASES = {
         'USER': 'admin_django',          # El nombre de usuario que creaste
         'PASSWORD': 'contrasem123',   # La contraseña del usuario
         'HOST': 'localhost',
-        'PORT': '5432',                # El puerto por defecto de PostgreSQL
+        'PORT': '5432', # El puerto por defecto de PostgreSQL
+        'OPTIONS': {
+            'client_encoding': 'UTF8',
+        },                
     }
 }
 
