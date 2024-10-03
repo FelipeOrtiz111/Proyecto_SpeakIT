@@ -58,7 +58,7 @@ def register(request):
             user.is_active=False
             user.save()
             activateEmail(request, user, form.cleaned_data.get('email'))
-            return redirect('homepage')
+            return redirect('index.html')
 
         else:
             for error in list(form.errors.values()):
