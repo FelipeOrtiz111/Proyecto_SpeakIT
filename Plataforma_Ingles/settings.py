@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # custom user model
-    'main',
-    'users',
+    'Pagina_Web_Ingles',
+    #'users',
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+#AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
