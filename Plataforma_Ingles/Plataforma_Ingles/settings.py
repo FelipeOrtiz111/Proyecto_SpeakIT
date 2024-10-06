@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # custom user model
     'Pagina_Web_Ingles', # <- main
+    'crispy_forms',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -60,7 +60,8 @@ ROOT_URLCONF = 'Plataforma_Ingles.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Pagina_Web_Ingles', 'templates')],
+        'DIRS': [],
+        #'DIRS': [os.path.join(BASE_DIR, 'Pagina_Web_Ingles', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
