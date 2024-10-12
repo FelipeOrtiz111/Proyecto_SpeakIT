@@ -1,0 +1,115 @@
+:root {
+  --footercolor: #003F72;
+  --navbarcolor: #003F72;
+  --btncolor: #003F72;
+  --socialcolor: #003F72;
+  --brightText: #ffffff;
+}
+
+.btncolor {
+  background-color: var(--btncolor) !important;
+  color: var(--brightText) !important;
+}
+
+.btncolor:hover, .btn-danger:hover{
+  color: var(--brightText) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.navbar-color {
+  background-color: var(--navbarcolor);
+}
+
+.footer-color {
+  background-color: var(--footercolor);
+}
+
+body {
+  background: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: var(--brightText);
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10%;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  flex-grow: 1;
+}
+.box {
+    border:1px #666 solid;
+    height: 95%;
+}
+
+.customhover {
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    cursor: pointer;
+}
+
+.customhover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+@media screen and (min-width: 600px){
+  .mobiledevice{
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+}
+@media screen and (max-width: 600px){
+  .mobiledevice{
+      padding-left: 1px;
+      padding-right: 1px;
+  }
+}
+
+.title-style {
+    font-family: fell, Georgia, Cambria, 'Times New Roman', Times, serif !important;
+}
+.subtitle-style {
+  font-family: sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  color: rgba(117, 117, 117, 1) !important;
+}
+
+/* Small devices (landscape phones, 544px and up) */
+@media (max-width: 544px) {
+    p, a, pre, code {font-size:20px !important;} /*1rem = 16px*/
+}
+
+.errorlist {
+    list-style: None;
+}
+
+
+
+
+
+

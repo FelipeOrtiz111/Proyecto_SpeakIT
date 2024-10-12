@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'users.CustomUser' # custom user (para el registro de usuarios)
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4' 
+CRISPY_TEMPLATE_PACK = 'bootstrap4' # para que cripsy use bootstrap
+
+LOGIN_REDIRECT_URL = '/' # para que rediriga a la página principal
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
