@@ -49,6 +49,9 @@ AUTH_USER_MODEL = 'users.CustomUser' # custom user (para el registro de usuarios
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # para que cripsy use bootstrap
 
 LOGIN_REDIRECT_URL = '/' # para que rediriga a la página principal
+LOGIN_URL = 'login'
+
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
