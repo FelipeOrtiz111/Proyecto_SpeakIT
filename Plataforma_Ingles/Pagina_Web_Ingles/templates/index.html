@@ -1,33 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <title>Plataforma de Inglés - Alumnos</title>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'perfil' %}">Mi perfil</a></li>
-                <li><a href="#">Profesores</a></li>
-                <li><a href="https://research-ebsco-com.webezproxy.duoc.cl/c/pzrq6l/search/details/e2mnio7r5z?db=nlebk">Recursos</a></li>
-                <li><a href="#">Sugerencias</a></li>
-                <li><a href="#">Estadisticas Personales</a></li>
-                <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
-            </ul>
-            <a href="https://www.duoc.cl/alumnos/ava-blackboard/">
-                <img src="{% static 'images/logo_duoc.png' %}" alt="Logo de Duoc UC">
-            </a>
-        </nav>
-    </header>
-
-    <!-- Sidebar -->
+{% extends "header.html" %}
+{% block content %}
 <div class="sidebar">
     <button class="dropdown-btn ing-b">Inglés Básico
         <i class="fa fa-caret-down"></i>
@@ -141,14 +113,4 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>De alumnos para alumnos!</p>
-    </footer>
-    <script src="{% static 'scripts/sidenav.js' %}"></script>
-    
-    
-
-</body>
-</html>
+{% endblock %}

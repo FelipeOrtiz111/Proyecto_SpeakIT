@@ -5,4 +5,7 @@ def index(request):
 
 def perfil_view(request):
     return render(request, 'perfil.html')
+
+def includes(request):
+    return render(request, 'header.html')
 # Create your views here.
