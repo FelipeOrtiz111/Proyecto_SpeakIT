@@ -1,6 +1,8 @@
-{% extends "main/header.html" %}
+{% extends "header.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
+<main>
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -22,4 +24,5 @@
             </small>
         </div>
     </div>
+</main>
 {% endblock content %}
