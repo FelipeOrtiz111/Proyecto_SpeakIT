@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 
-from .forms import UserRegistrationForm, UserLoginForm
+from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 
@@ -104,3 +104,14 @@ def custom_login(request):
         template_name="users/login.html",
         context={"form": form}
         )
+
+def perfil_view(request, username):
+    if request.method == 'POST':
+        pass
+
+    user = get_user_model().objects.filter(username=username).first()
+    if user:
+        form = UserUpdateForm(instance=user)
+        return render(request, 'users/perfil.html', context={'form': form})
+
+    return redirect("index")
