@@ -370,3 +370,20 @@ ul li a.active:before {
   display: flex;
   flex-direction: row;
 }
+
+/* USERS CSS */
+#main-login {
+  margin-top: 5.0em;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 100vh;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+

@@ -1,7 +1,30 @@
+{% load static %}
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">SpeakIT</a></li>
+            <li><a href="https://research-ebsco-com.webezproxy.duoc.cl/c/pzrq6l/search/details/e2mnio7r5z?db=nlebk">Recursos</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'perfil' %}">Mi perfil</a></li>
+            <li><a href="#">Profesores</a></li>
+            <li><a href="#">Estadisticas Personales</a></li>
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            <li><a href="{% url 'register' %}">Registrarse</a></li>
+            {% endif %}
+        </ul>
+        <a href="https://www.duoc.cl/alumnos/ava-blackboard/">
+            <img src="{% static 'images/logo_duoc.png' %}" alt="Logo de Duoc UC">
+        </a>
+    </nav>
+</header>
+
+<!--
 <header class="site-header" style="margin-bottom: 5px">
     <nav class="navbar navbar-expand-md navbar-color">
         <div class="container">
-            <!-- Navbar Left Side -->
+            
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/">Home</a>
             </div>
@@ -10,11 +33,11 @@
                 <i class="fas fa-bars fa-2x"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
-                <!-- Navbar Left Side -->
+                
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="/">About</a>
                 </div>
-                <!-- Navbar Right Side -->
+                
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
                         <a class="nav-item nav-link" href="{% url 'logout' %}">
@@ -33,3 +56,4 @@
         </div>
     </nav>
 </header>
+-->
