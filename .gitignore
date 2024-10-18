@@ -32,3 +32,6 @@ env/
 build/
 dist/
 *.egg
+
+# Archivos estaticos
+/staticfiles/
