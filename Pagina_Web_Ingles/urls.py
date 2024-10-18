@@ -1,0 +1,8 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('perfil', views.perfil_view, name='perfil'),
+    path('header', views.includes, name='header'),
+]   
