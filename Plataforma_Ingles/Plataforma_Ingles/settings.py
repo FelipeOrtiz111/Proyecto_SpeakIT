@@ -92,19 +92,21 @@ WSGI_APPLICATION = 'Plataforma_Ingles.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            'client_encoding': 'UTF8',
-        },                
+        'NAME': config('DB_NAME'),       # Se espera que esté en las variables de entorno
+        'USER': config('DB_USER'),       # Se espera que esté en las variables de entorno
+        'PASSWORD': config('DB_PASSWORD'),  # Se espera que esté en las variables de entorno
+        'HOST': config('DB_HOST'),       # Se espera que esté en las variables de entorno
+        'PORT': config('DB_PORT'),       # Se espera que esté en las variables de entorno
     }
 }
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+else:
+    # Desactivar SSL para la base de datos local
+    DATABASES['default']['OPTIONS'] = {
+        'sslmode': 'disable',  # Desactivar SSL
+    }
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
