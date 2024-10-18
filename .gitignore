@@ -34,4 +34,4 @@ dist/
 *.egg
 
 # Archivos estaticos
-/staticfiles/
+staticfiles/
