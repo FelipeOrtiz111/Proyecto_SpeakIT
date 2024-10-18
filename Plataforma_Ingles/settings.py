@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import dj_database_url
+from decouple import config
 from pathlib import Path
 import os
 
@@ -91,11 +92,11 @@ WSGI_APPLICATION = 'Plataforma_Ingles.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Plataforma_Ingles',  # El nombre de tu base de datos
-        'USER': 'admin_django',          # El nombre de usuario que creaste
-        'PASSWORD': 'contrasem123',   # La contraseña del usuario
-        'HOST': 'localhost',
-        'PORT': '5432', # El puerto por defecto de PostgreSQL
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
         'OPTIONS': {
             'client_encoding': 'UTF8',
         },                

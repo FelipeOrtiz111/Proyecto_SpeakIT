@@ -12,3 +12,4 @@ six
 gunicorn
 crispy-bootstrap4
 six
+python-decouple
