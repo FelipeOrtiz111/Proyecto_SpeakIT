@@ -1,10 +1,12 @@
 django
 django-tinymce
 fontawesomefree
+psycopg2
+psycopg
 django-crispy-forms
 django-recaptcha
-psycopg2-binary
-dj-database-url
 pillow
 six
+gunicorn
 crispy-bootstrap4
+six
