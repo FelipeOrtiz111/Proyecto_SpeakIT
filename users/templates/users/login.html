@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
-<main>
+<div id="main-login">
+    {% include 'includes/messaging.html' %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -15,6 +16,7 @@
                 <button class="btn btn-outline-info" type="submit">Ingresar</button>
             </div>
         </form>
+
         <div class="border-top pt-3">
             <small class="text-muted">
                 Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
@@ -24,5 +26,5 @@
             </small>
         </div>
     </div>
-</main>
+</div>
 {% endblock content %}

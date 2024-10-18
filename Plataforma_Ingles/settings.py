@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import dj_database_url
+from decouple import config
 from pathlib import Path
 import os
 
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-45dm4d2!k2#v=95b^$6ebe&uohnj(epiill!*0%qk^4%d=x*9@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['english-platform.herokuapp.com', '127.0.0.1', 'localhost','https://git.heroku.com/english-platform.git']
 
 
 # Application definition
@@ -91,11 +92,11 @@ WSGI_APPLICATION = 'Plataforma_Ingles.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Plataforma_Ingles',  # El nombre de tu base de datos
-        'USER': 'admin_django',          # El nombre de usuario que creaste
-        'PASSWORD': 'contrasem123',   # La contraseña del usuario
-        'HOST': 'localhost',
-        'PORT': '5432', # El puerto por defecto de PostgreSQL
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
         'OPTIONS': {
             'client_encoding': 'UTF8',
         },                
@@ -138,8 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [

@@ -1,6 +1,8 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div id="main-login">
+    {% include 'includes/messaging.html' %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -21,5 +23,6 @@
             </small>
         </div>
     </div>
+</div>
 {% endblock content %}
 
