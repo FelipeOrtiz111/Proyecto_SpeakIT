@@ -6,6 +6,9 @@ psycopg
 django-crispy-forms
 django-recaptcha
 pillow
+psycopg2-binary
+dj-database-url
 six
+gunicorn
 crispy-bootstrap4
 six

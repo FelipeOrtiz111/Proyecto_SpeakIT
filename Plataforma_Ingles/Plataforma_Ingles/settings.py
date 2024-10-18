@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-45dm4d2!k2#v=95b^$6ebe&uohnj(epiill!*0%qk^4%d=x*9@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['english-platform.herokuapp.com', '127.0.0.1', 'localhost','https://git.heroku.com/english-platform.git']
 
 
 # Application definition
@@ -52,17 +53,6 @@ LOGIN_REDIRECT_URL = '/' # para que rediriga a la página principal
 LOGIN_URL = 'login'
 
 AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
-
-# Emailing settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = 'speakit.duocuc@gmail.com'
-EMAIL_HOST_USER = 'speakit.duocuc@gmail.com'
-EMAIL_HOST_PASSWORD = 'kmddtyrjvemapjxa'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-PASSOWRD_RESET_TIMOUT = 14400
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,7 +102,7 @@ DATABASES = {
     }
 }
 
-
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -148,7 +138,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'Pagina_Web_Ingles/static'),
