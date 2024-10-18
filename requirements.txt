@@ -3,6 +3,8 @@ django-tinymce
 fontawesomefree
 django-crispy-forms
 django-recaptcha
+psycopg2-binary
+dj-database-url
 pillow
 six
 crispy-bootstrap4
