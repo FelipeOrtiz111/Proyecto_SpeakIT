@@ -66,17 +66,15 @@ main .titulo-main {
 main h3{
   margin-bottom: 0 !important;
 }
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+footer {
+  padding: 0px;
   background-color: #1A1A1A;
-  height: 60px;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  padding: 0;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  position: fixed;
+  bottom:0;
 }
 
 
