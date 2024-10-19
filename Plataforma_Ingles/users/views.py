@@ -30,7 +30,7 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, "Activation link is invalid!")
 
-    return redirect('homepage')
+    return redirect('index')
 
 def activateEmail(request, user, to_email):
     mail_subject = "[SpeakIT] Activa tu cuenta de usuario."
@@ -60,7 +60,6 @@ def register(request):
             try:
                 activateEmail(request, user, form.cleaned_data.get('email'))
                 user.save()  # Guardar el usuario solo si el correo fue enviado con éxito
-                messages.success(request, f"<b>{user.username}</b>, por favor revisa tu bandeja de entrada y haz click en el enlace de activación.")
                 return redirect('login')
             except Exception as e:
                 messages.error(request, f"Hubo un error enviando el correo de activación: {e}. El registro no se ha completado.")
@@ -101,7 +100,7 @@ def custom_login(request):
 
         else:
             for error in list(form.errors.values()):
-                messages.error(request, error) 
+                messages.error(request, f"Por favor ingresa un usario y contraseña válido.") 
 
     form = UserLoginForm()
 
