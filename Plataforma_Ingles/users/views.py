@@ -30,8 +30,8 @@ def activate(request, uidb64, token):
 
         messages.success(request, "Gracias por confirmar tu email. Ahora puedes ingresar a tu cuenta.")
         return redirect('login')
-    else:
-        messages.error(request, "Link de activación inválido!")
+    ##else:
+        ##messages.error(request, "Link de activación inválido!")
 
     return redirect('index')
 
