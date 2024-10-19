@@ -55,9 +55,15 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active=False
-            user.save()
-            activateEmail(request, user, form.cleaned_data.get('email'))
-            return redirect('login')
+            
+            # Intentar enviar el correo de activación antes de guardar el usuario
+            try:
+                activateEmail(request, user, form.cleaned_data.get('email'))
+                user.save()  # Guardar el usuario solo si el correo fue enviado con éxito
+                messages.success(request, f"<b>{user.username}</b>, por favor revisa tu bandeja de entrada y haz click en el enlace de activación.")
+                return redirect('login')
+            except Exception as e:
+                messages.error(request, f"Hubo un error enviando el correo de activación: {e}. El registro no se ha completado.")
 
         else:
             for error in list(form.errors.values()):
