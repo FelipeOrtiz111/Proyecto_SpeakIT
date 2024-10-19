@@ -20,8 +20,11 @@ def activate(request, uidb64, token):
         # Decodificar el uid desde el enlace
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except:
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
+
+    print(f"UID: {uid}, Token: {token}")  # Para verificar los valores
+    print(f"User: {user}, User Active: {user.is_active if user else 'No User'}")  # Verifica el estado del usuario
 
     # Verificar si el usuario y el token son válidos
     if user is not None and account_activation_token.check_token(user, token):
