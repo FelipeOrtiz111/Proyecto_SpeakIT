@@ -16,21 +16,24 @@ from .tokens import account_activation_token
 def activate(request, uidb64, token):
     User = get_user_model()
     try:
+        # Decodificar el uid desde el enlace
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except:
+    except Exception as e:
         user = None
+        messages.error(request, f"Error al decodificar UID: {e}")
 
+    # Verificar si el usuario y el token son válidos
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
 
         messages.success(request, "Gracias por confirmar tu email. Ahora puedes ingresar a tu cuenta.")
         return redirect('login')
-    else:
-        messages.error(request, "Activation link is invalid!")
+    ##else:
+        ##messages.error(request, "Link de activación inválido!")
 
-    return redirect('homepage')
+    return redirect('index')
 
 def activateEmail(request, user, to_email):
     mail_subject = "[SpeakIT] Activa tu cuenta de usuario."
@@ -55,9 +58,10 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active=False
-            user.save()
+            user.save()  # Guardar el usuario solo si el correo fue enviado con éxito
+           
             activateEmail(request, user, form.cleaned_data.get('email'))
-            return redirect('login')
+            return redirect('login')            
 
         else:
             for error in list(form.errors.values()):
@@ -95,7 +99,7 @@ def custom_login(request):
 
         else:
             for error in list(form.errors.values()):
-                messages.error(request, error) 
+                messages.error(request, f"Por favor ingresa un usario y contraseña válido.") 
 
     form = UserLoginForm()
 
