@@ -64,7 +64,7 @@ main {
   padding-left: 20px;
   padding-bottom: 60px;
   font-size: 24px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   flex: 1;
   background-image: linear-gradient(to left, #d4d4d4, #e4e4e4, #d4d4d4, rgb(255, 255, 255));
 }
@@ -92,13 +92,14 @@ main h3{
 
 /* Side Nav */
 .sidebar {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 120px);
   width: 25%;
   display: flex;
   flex-direction: column;
   background-color: #262626;
   position: fixed;
   top: 60px;
+  max-height: calc(100vh - 120px);
   overflow-y: scroll;
 }
 
@@ -317,10 +318,10 @@ ul li a.active:before {
 
 /* Estilos del contenedor del video */
 .video-container {
-  display: none; /* Por defecto, el video está oculto */
-  width: 100%;
+  display: none;
+  width: 45vw;
   position: relative;
-  padding-top: 56.25%; /* Relación de aspecto 16:9 */
+  padding-top: 28vw;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 8px;
@@ -332,13 +333,12 @@ ul li a.active:before {
 }
 
 /* Estilo del iframe y el elemento video */
-.video-container iframe,
-.video-container video {
+.video-container iframe {
   position: absolute;
-  top: 0;
+  top: 30px;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 45vw;
+  height: 25vw;
   object-fit: cover;
   border-radius: 8px;
 }
