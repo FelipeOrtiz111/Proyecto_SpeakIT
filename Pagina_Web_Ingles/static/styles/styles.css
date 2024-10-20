@@ -160,7 +160,7 @@ hr {
 
 /* Hover del dropdown */
 .dropdown-btn:hover {
-  background: #e6e6e6;
+  background: gainsboro;
   color: #1A1A1A;
 }
 
@@ -178,24 +178,23 @@ hr {
 }
 
 .active.ing-b {
-  background-color: #6100fd;
-  color: #fff;
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 .active.ing-e {
-  background-color: #6f3ee2;
-  color: #fff;
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 .active.pru-e{
-  background-color: #9364ff;
-  color: #fff;
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 .active.sop-t{
-  background-color: #0199be;
-  color: #fff;
-  text-decoration: underline;
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 
