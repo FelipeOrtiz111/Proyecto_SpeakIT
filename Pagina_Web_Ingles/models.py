@@ -6,7 +6,8 @@ class Video(models.Model):
     descripcion = models.TextField()
     enlace = models.URLField()
     miniatura = models.URLField()
-
+    unidad = models.ForeignKey('Unidad', on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.titulo
 
