@@ -9,10 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-//var uhijdwjq;
 
-for (i = 0; i < dropdown.length; i++) {
+for (let i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
       this.classList.toggle("active");
       var dropdownContent = this.nextElementSibling;
@@ -23,11 +21,12 @@ for (i = 0; i < dropdown.length; i++) {
 function toggleDescription(element) {
   const videoSection = element.closest('.video-section');
   const videoContainer = videoSection.querySelector('.video-container');
-
   videoContainer.style.display = videoContainer.style.display === "block" ? "none" : "block";
 }
 
 const links = document.querySelectorAll('.dropdown-container a.dc-a');
+const videoSections = document.querySelectorAll('.video-section');
+const noVideoMessage = document.querySelector('.no-video');
 
 links.forEach(link => {
   link.addEventListener('click', function() {
@@ -51,7 +50,6 @@ links.forEach(link => {
       });
 
       // Muestra u oculta el mensaje "No se encuentra video"
-      const noVideoMessage = document.querySelector('.no-video');
       noVideoMessage.style.display = videoFound ? 'none' : 'block';
   });
 });
