@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
+//var uhijdwjq;
 
 for (i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
