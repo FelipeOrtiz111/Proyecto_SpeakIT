@@ -287,16 +287,28 @@ ul li a.active:before {
 
 /* CONTENEDORES DE LOS VIDEOS*/
 /* Estilos generales para la sección del video */
-.video-section {
-  display: flex;
-  align-items: center;
-  background: whitesmoke;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  margin: 5px;
+.titulo-main {
+    display: flex;
+    text-align: center;
+    justify-self: center;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    width: fit-content;
+    padding: 15px;
+    font-family: inherit;
+    font-weight: normal;
+    color: #eeeeee;
+    background: rgba(0, 0, 0, .3);
+    align-items: center;
+    min-height: 60px; /* Asegura un espacio mínimo */
+}
+
+.no-video {
+  display: none; 
+  text-align: center;
+  font-weight: bold;
+  color: #000000; 
+  margin-top: 20px;
 }
 
 /* Estilos para la sección expandida del video */
