@@ -1,33 +1,32 @@
+document.addEventListener("DOMContentLoaded", function() {
+  // Oculta todos los videos al cargar la página
+  const videoSections = document.querySelectorAll('.video-section');
+  videoSections.forEach(video => video.style.display = 'none');
+
+  // Muestra el mensaje por defecto
+  const noVideoMessage = document.querySelector('.no-video');
+  noVideoMessage.style.display = 'block';
+});
+
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 
 for (i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
   });
 }
 
-// Activa los contenedores de los videos
 function toggleDescription(element) {
-    const videoSection = element.closest('.video-section');
-    const videoContainer = videoSection.querySelector('.video-container');
-    
-    // Alterna la visualización del video
-    if (videoContainer.style.display === "block") {
-        videoContainer.style.display = "none";
-    } else {
-        videoContainer.style.display = "block";
-    }
+  const videoSection = element.closest('.video-section');
+  const videoContainer = videoSection.querySelector('.video-container');
+
+  videoContainer.style.display = videoContainer.style.display === "block" ? "none" : "block";
 }
 
 const links = document.querySelectorAll('.dropdown-container a.dc-a');
-const videoSections = document.querySelectorAll('.video-section');
 
 links.forEach(link => {
   link.addEventListener('click', function() {
@@ -40,22 +39,18 @@ links.forEach(link => {
 
       // Muestra el video correspondiente
       const selectedTitle = this.getAttribute('data-titulo');
-      let videoFound = false; // Variable para rastrear si se encontró un video
+      let videoFound = false;
 
       videoSections.forEach(video => {
           const title = video.querySelector('h3').innerText;
           if (title === selectedTitle) {
               video.style.display = 'block';
-              videoFound = true; // Se encontró un video
+              videoFound = true;
           }
       });
 
       // Muestra u oculta el mensaje "No se encuentra video"
       const noVideoMessage = document.querySelector('.no-video');
-      if (videoFound) {
-          noVideoMessage.style.display = 'none'; // Oculta el mensaje si se encontró un video
-      } else {
-          noVideoMessage.style.display = 'block'; // Muestra el mensaje si no se encontró video
-      }
+      noVideoMessage.style.display = videoFound ? 'none' : 'block';
   });
 });

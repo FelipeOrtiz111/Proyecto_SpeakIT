@@ -32,7 +32,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 31536000
 ALLOWED_HOSTS = ['english-platform.herokuapp.com', '127.0.0.1', 'localhost', 'plataforma-ingles-cdf8f3aec35e.herokuapp.com']
-ECURE_HSTS_PRELOAD = True
+SECURE_HSTS_PRELOAD = True
 
 # Application definition
 
