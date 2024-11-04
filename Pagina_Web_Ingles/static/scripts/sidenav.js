@@ -12,14 +12,6 @@ var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 //var uhijdwjq;
 
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var dropdownContent = this.nextElementSibling;
-      dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-  });
-}
-
 function toggleDescription(element) {
   const videoSection = element.closest('.video-section');
   const videoContainer = videoSection.querySelector('.video-container');
