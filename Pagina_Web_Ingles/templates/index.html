@@ -5,30 +5,30 @@
         <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-        <a class="dc-a" data-titulo="Acercamiento al Inglés." data-unidad="1">Acercamiento al Inglés.</a>
+        <a class="dc-a" data-titulo="Acercamiento al Inglés.">Acercamiento al Inglés.</a>
         <hr>
-        <a class="dc-a" data-titulo="¡Describiendo el Mundo!" data-unidad="2">¡Describiendo el Mundo!</a>
+        <a class="dc-a" data-titulo="¡Describiendo el Mundo!">¡Describiendo el Mundo!</a>
         <hr>
-        <a class="dc-a" data-titulo="Cumpleaños y Fechas." data-unidad="3">Cumpleaños y Fechas.</a>
+        <a class="dc-a" data-titulo="Cumpleaños y Fechas.">Cumpleaños y Fechas.</a>
         <hr>
-        <a class="dc-a" data-titulo="Indicaciones y Direcciones." data-unidad="4">Indicaciones y Direcciones.</a>
+        <a class="dc-a" data-titulo="Indicaciones y Direcciones.">Indicaciones y Direcciones.</a>
         <hr>
-        <a class="dc-a" data-titulo="¿Qué he Aprendido?" data-unidad="5">¿Qué he Aprendido?</a>
+        <a class="dc-a" data-titulo="¿Qué he Aprendido?">¿Qué he Aprendido?</a>
     </div>
     <hr>
     <button class="dropdown-btn ing-e">Inglés Elemental
         <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-        <a class="dc-a" data-titulo="Repaso de conocimientos previos" data-unidad="6">Repaso de conocimientos previos.</a>
+        <a class="dc-a" data-titulo="Repaso de conocimientos previos">Repaso de conocimientos previos.</a>
         <hr>
-        <a class="dc-a" data-titulo="¡El verbo To Be!" data-unidad="7">¡El verbo To Be!</a>
+        <a class="dc-a" data-titulo="¡El verbo To Be!">¡El verbo To Be!</a>
         <hr>
-        <a class="dc-a" data-titulo="Presente Continuo." data-unidad="8">Presente Continuo.</a>
+        <a class="dc-a" data-titulo="Presente Continuo.">Presente Continuo.</a>
         <hr>
-        <a class="dc-a" data-titulo="Mi rutina Diaria." data-unidad="9">Mi rutina Diaria.</a>
+        <a class="dc-a" data-titulo="Mi rutina Diaria.">Mi rutina Diaria.</a>
         <hr>
-        <a class="dc-a" data-titulo="¿Qué he Aprendido?" data-unidad="10">¿Qué he Aprendido?</a>
+        <a class="dc-a" data-titulo="¿Qué he Aprendido?">¿Qué he Aprendido?</a>
     </div>
     <hr>
     <button class="dropdown-btn pru-e">Prueba tu Conocimiento
@@ -55,12 +55,63 @@
         <a class="dc-a">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi cumque fugiat, iste ipsa vero provident.</a>
         <hr>
         <a class="dc-a">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus dolor cupiditate numquam? Cumque ab perspiciatis commodi, a voluptatum quaerat sint? Natus, optio. Ex, dignissimos quaerat.</a>
-        {% include 'includes/messaging.html' %}
     </div>
+    {% include 'includes/messaging.html' %}
 </div>
     <!-- Contenido de la Pagina-->
     <main>
         <div class="titulo-main">Videos para Repasar / Practicar</div>
-        {% include 'includes/videos_list.html' %}
+    
+        <div class="video-section" onclick="toggleDescription(this)">
+            <div class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/rFZQmXjALbU/0.jpg" alt="Miniatura del video">
+            </div>
+            <div class="video-info">
+                <h3>Acercamiento al inglés.</h3>
+                <p>Explicación detallada de todos los pronombres en inglés con ejemplos y ejercicios.</p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/rFZQmXjALbU" title="Todos los PRONOMBRES en INGLÉS explicados fácilmente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    
+        <div class="video-section" onclick="toggleDescription(this)">
+            <div class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/X9uatn1-EiE/0.jpg" alt="Miniatura del video">
+            </div>
+            <div class="video-info">
+                <h3>¡Describiendo el mundo!</h3>
+                <p>Cómo hacer una descripción personal en inglés. Incluye ejemplos y ejercicios.</p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/X9uatn1-EiE" title="Como hacer una descripción personal en INGLÉS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    
+        <div class="video-section" onclick="toggleDescription(this)">
+            <div class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/_WGqm5miv0A/0.jpg" alt="Miniatura del video">
+            </div>
+            <div class="video-info">
+                <h3>Cumpleaños y Fechas.</h3>
+                <p>Aprende a hablar sobre la fecha en inglés, con ejemplos claros y ejercicios.</p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/_WGqm5miv0A" title="LA FECHA EN INGLES" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    
+        <div class="video-section" onclick="toggleDescription(this)">
+            <div class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/NGXulBqT6p0/0.jpg" alt="Miniatura del video">
+            </div>
+            <div class="video-info">
+                <h3>Indicaciones y Direcciones.</h3>
+                <p>Cómo pedir y dar direcciones en inglés. Incluye vocabulario, ejemplos y diálogos.</p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/NGXulBqT6p0" title="Cómo pedir y dar direcciones en inglés" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
     </main>
 {% endblock %}
