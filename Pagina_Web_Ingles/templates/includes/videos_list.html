@@ -1,18 +1,57 @@
 _<!-- includes/videos_list.html -->
 <div class="video-section-container">
     {% for video in videos %}
-        <div class="video-section">
-            <div class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/{{ video.youtube_id }}/0.jpg" alt="Miniatura del video">
-            </div>
-            <div class="video-info">
-                <h3>{{ video.titulo }}</h3>
-                <p>{{ video.descripcion }}</p>
-            </div>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+    <div class="video-section" onclick="toggleDescription(this)">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/rFZQmXjALbU/0.jpg" alt="Miniatura del video">
         </div>
+        <div class="video-info">
+            <h3>Acercamiento al inglés.</h3>
+            <p>Explicación detallada de todos los pronombres en inglés con ejemplos y ejercicios.</p>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/rFZQmXjALbU" title="Todos los PRONOMBRES en INGLÉS explicados fácilmente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="video-section" onclick="toggleDescription(this)">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/X9uatn1-EiE/0.jpg" alt="Miniatura del video">
+        </div>
+        <div class="video-info">
+            <h3>¡Describiendo el mundo!</h3>
+            <p>Cómo hacer una descripción personal en inglés. Incluye ejemplos y ejercicios.</p>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/X9uatn1-EiE" title="Como hacer una descripción personal en INGLÉS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="video-section" onclick="toggleDescription(this)">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/_WGqm5miv0A/0.jpg" alt="Miniatura del video">
+        </div>
+        <div class="video-info">
+            <h3>Cumpleaños y Fechas.</h3>
+            <p>Aprende a hablar sobre la fecha en inglés, con ejemplos claros y ejercicios.</p>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/_WGqm5miv0A" title="LA FECHA EN INGLES" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="video-section" onclick="toggleDescription(this)">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/NGXulBqT6p0/0.jpg" alt="Miniatura del video">
+        </div>
+        <div class="video-info">
+            <h3>Indicaciones y Direcciones.</h3>
+            <p>Cómo pedir y dar direcciones en inglés. Incluye vocabulario, ejemplos y diálogos.</p>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/NGXulBqT6p0" title="Cómo pedir y dar direcciones en inglés" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
     {% empty %}
         <p>No hay videos disponibles para esta unidad.</p>
     {% endfor %}
