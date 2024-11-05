@@ -330,7 +330,6 @@ ul li a.active:before {
 
 /* Estilos del contenedor del video */
 .video-container {
-  display: none;
   width: 45vw;
   position: relative;
   padding-top: 28vw;
