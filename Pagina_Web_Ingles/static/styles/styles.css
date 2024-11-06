@@ -296,6 +296,11 @@ ul li a.active:before {
   transform: scaleX(1);
 }
 
+.active-link {
+  background-color: #292929; /* Cambia a tu color preferido */
+  color: #ffffff;
+}
+
 /* Definición de la animación de entrada */
 @keyframes slide-in {
   to {

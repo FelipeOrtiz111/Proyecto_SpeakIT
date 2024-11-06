@@ -29,27 +29,34 @@ const videoSections = document.querySelectorAll('.video-section');
 const noVideoMessage = document.querySelector('.no-video');
 
 links.forEach(link => {
-  link.addEventListener('click', function() {
-      // Limpia las selecciones anteriores
-      links.forEach(item => item.classList.remove('active'));
-      videoSections.forEach(video => video.style.display = 'none');
+    link.addEventListener('click', function() {
+        const selectedTitle = this.getAttribute('data-titulo');
+        
+        // Si el enlace ya está activo, lo desactiva y muestra el mensaje inicial
+        if (this.classList.contains('active-link')) {
+            this.classList.remove('active-link');
+            videoSections.forEach(video => video.style.display = 'none'); // Oculta todos los videos
+            noVideoMessage.style.display = 'block'; // Muestra el mensaje "No se encuentra video"
+        } else {
+            // Limpia las selecciones anteriores
+            links.forEach(item => item.classList.remove('active-link'));
+            videoSections.forEach(video => video.style.display = 'none');
+            
+            // Marca el enlace actual como activo
+            this.classList.add('active-link');
+            
+            // Muestra el video correspondiente
+            let videoFound = false;
+            videoSections.forEach(video => {
+                const title = video.querySelector('h3').innerText;
+                if (title === selectedTitle) {
+                    video.style.display = 'block';
+                    videoFound = true;
+                }
+            });
 
-      // Marca el enlace como activo
-      this.classList.add('active');
-
-      // Muestra el video correspondiente
-      const selectedTitle = this.getAttribute('data-titulo');
-      let videoFound = false;
-
-      videoSections.forEach(video => {
-          const title = video.querySelector('h3').innerText;
-          if (title === selectedTitle) {
-              video.style.display = 'block';
-              videoFound = true;
-          }
-      });
-
-      // Muestra u oculta el mensaje "No se encuentra video"
-      noVideoMessage.style.display = videoFound ? 'none' : 'block';
-  });
+            // Muestra u oculta el mensaje "No se encuentra video"
+            noVideoMessage.style.display = videoFound ? 'none' : 'block';
+        }
+    });
 });
