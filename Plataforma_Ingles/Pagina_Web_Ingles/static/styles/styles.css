@@ -287,18 +287,34 @@ ul li a.active:before {
 
 /* CONTENEDORES DE LOS VIDEOS*/
 /* Estilos generales para la sección del video */
-.video-section {
-  display: flex;
-  align-items: center;
-  background: whitesmoke;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  margin: 5px;
+.titulo-main {
+    display: flex;
+    text-align: center;
+    justify-self: center;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    width: fit-content;
+    padding: 15px;
+    font-family: inherit;
+    font-weight: normal;
+    color: #eeeeee;
+    background: rgba(0, 0, 0, .3);
+    align-items: center;
+    min-height: 60px;
+    max-height: 60px;
 }
 
+.no-video {
+  display: none;
+  font-size: 18px;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.video-section {
+  margin-bottom: 20px;
+}
 /* Estilos para la sección expandida del video */
 .video-section.expanded {
   display: flex;
@@ -314,7 +330,6 @@ ul li a.active:before {
 
 /* Estilos del contenedor del video */
 .video-container {
-  display: none;
   width: 45vw;
   position: relative;
   padding-top: 28vw;
