@@ -5,4 +5,6 @@ def index(request):
 
 def includes(request):
     return render(request, 'header.html')
-# Create your views here.
+
+def includes(request):
+    return render(request, 'seguimiento.html')
