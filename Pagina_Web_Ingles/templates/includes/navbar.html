@@ -1,7 +1,7 @@
 {% load static %}
 <header>
     <nav>
-        <ul>
+        <ul class="menu" data-animation="side-side">
             <li><a href="{% url 'index' %}">SpeakIT</a></li>
             <li><a href="https://research-ebsco-com.webezproxy.duoc.cl/c/pzrq6l/search/details/e2mnio7r5z?db=nlebk">Recursos</a></li>
             {% if user.is_authenticated %}

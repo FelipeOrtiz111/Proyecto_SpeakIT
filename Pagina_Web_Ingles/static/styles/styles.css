@@ -68,6 +68,7 @@ main {
 .titulo-main {
   display: flex;
   text-align: center;
+  text-decoration: underline;
   justify-self: center;
   margin-top: 24px;
   margin-bottom: 16px;
@@ -261,30 +262,28 @@ ul:hover li a {
 }
 
 ul li a:before {
-  content: '';
+  content: ’’;
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: #eca200;
-  transition: transform 0.3s;
-  transform-origin: right;
+  height: 2px;
+  background: linear-gradient(to right, #b47dcd, #e878a2, #eb85ab);
+  z-index: 1;
   transform: scaleX(0);
-  z-index: -1;
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
 }
 
-ul li a:hover:before {
-  transition: transform 0.3s;
+.menu[data-animation="side-side"] a::before {
+  transform-origin: right;
+  transition: transform 0.5s ease-in-out;
+}
+.menu[data-animation="side-side"] a:hover::before {
   transform-origin: left;
   transform: scaleX(1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.82, 0.94);
 }
-
-ul li a.active:before {
-  transform-origin: left;
-  transform: scaleX(1);
-}
-
 /* CONTENEDORES DE LOS VIDEOS*/
 /* Estilos generales para la sección del video */
 .titulo-main {
@@ -313,7 +312,7 @@ ul li a.active:before {
 }
 
 .video-section {
-  margin-bottom: 20px;
+  padding: 20px;
 }
 /* Estilos para la sección expandida del video */
 .video-section.expanded {
