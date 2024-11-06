@@ -13,33 +13,36 @@ from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 
+# Función para activar cuenta de usuario con el link de activación
 def activate(request, uidb64, token):
     User = get_user_model()
     try:
-        # Decodificar el uid desde el enlace
+        # Decodificar el UID desde el enlace recibido por email
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except Exception as e:
         user = None
         messages.error(request, f"Error al decodificar UID: {e}")
 
-    # Verificar si el usuario y el token son válidos
+    # Verificar si el usuario y el token de activación son válidos
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
+        user.is_active = True # Activa la cuenta del usuario
         user.save()
 
         messages.success(request, "Gracias por confirmar tu email. Ahora puedes ingresar a tu cuenta.")
         return redirect('login')
-    ##else:
-        ##messages.error(request, "Link de activación inválido!")
+    else:
+        messages.error(request, "Link de activación inválido!")
 
     return redirect('index')
 
+# Función para enviar el correo electrónico de activación de la cuenta
 def activateEmail(request, user, to_email):
     mail_subject = "[SpeakIT] Activa tu cuenta de usuario."
+    # Renderiza el contenido del correo utilizando una plantilla
     message = render_to_string("template_activate_account.html", {
         'user': user.username,
-        'domain': get_current_site(request).domain,
+        'domain': get_current_site(request).domain, # Obtiene el dominio actual
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
         "protocol": 'https' if request.is_secure() else 'http'
@@ -51,17 +54,18 @@ def activateEmail(request, user, to_email):
     else:
         messages.error(request, f'Ocurrió un problema enviando el correo de confirmación a {to_email}, Revisa si está escrito correctamente.')
 
+# Vista para registrar un nuevo usuario
 @user_not_authenticated
 def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active=False
+            user = form.save(commit=False) # Crea el usuario sin guardarlo aún
+            user.is_active=False # Establece el usuario como inactivo hasta la confirmación
             user.save()  # Guardar el usuario solo si el correo fue enviado con éxito
            
-            activateEmail(request, user, form.cleaned_data.get('email'))
-            return redirect('login')            
+            activateEmail(request, user, form.cleaned_data.get('email')) # Envía el correo de activación
+            return redirect('login') # Redirecciona a la página de inicio de sesión
 
         else:
             for error in list(form.errors.values()):
@@ -76,13 +80,14 @@ def register(request):
         context={"form": form}
     )
 
-
+# Vista para cerrar sesión
 @login_required
 def custom_logout(request):
     logout(request)
     messages.info(request, "Se ha cerrado la sesión.")
     return redirect("index")
 
+# Vista personalizada para iniciar sesión
 @user_not_authenticated
 def custom_login(request):
     if request.method == "POST":
@@ -109,13 +114,14 @@ def custom_login(request):
         context={"form": form}
         )
 
+# Vista para mostrar el perfil del usuario
 def perfil_view(request, username):
     if request.method == 'POST':
         pass
 
     user = get_user_model().objects.filter(username=username).first()
     if user:
-        form = UserUpdateForm(instance=user)
+        form = UserUpdateForm(instance=user) # Crea un formulario de actualización para el usuario
         return render(request, 'users/perfil.html', context={'form': form})
 
     return redirect("index")
