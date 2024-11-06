@@ -300,7 +300,7 @@ ul li a.active:after {
   transform: scaleX(1);
 }
 
-.sidebar .dc-a .clicked{
+.sidebar .dc-a.clicked{
   background-color: #292929; /* Cambia a tu color preferido */
   color: #ffffff;
 }
