@@ -283,7 +283,7 @@ ul li a:before {
   background: linear-gradient(to right, #7a32ff, #ae70ff, #cf8cfc);
   z-index: 1;
   transform: scaleX(0);
-  transform-origin: right;
+  transform-origin: left;
   transition: transform 0.5s ease-in-out;
 }
 
@@ -295,8 +295,12 @@ ul li a.active:before {
   transform-origin: left;
   transform: scaleX(1);
 }
+ul li a.active:after {
+  transform-origin: right;
+  transform: scaleX(1);
+}
 
-.active-link {
+.clicked{
   background-color: #292929; /* Cambia a tu color preferido */
   color: #ffffff;
 }

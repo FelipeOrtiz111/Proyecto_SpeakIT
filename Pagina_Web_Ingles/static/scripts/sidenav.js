@@ -18,6 +18,7 @@ for (let i = 0; i < dropdown.length; i++) {
   });
 }
 
+//Version Antigua cuando los videos se mostraban en forma de lista
 //function toggleDescription(element) {
 //  const videoSection = element.closest('.video-section');
 //  const videoContainer = videoSection.querySelector('.video-container');
@@ -29,34 +30,33 @@ const videoSections = document.querySelectorAll('.video-section');
 const noVideoMessage = document.querySelector('.no-video');
 
 links.forEach(link => {
-    link.addEventListener('click', function() {
-        const selectedTitle = this.getAttribute('data-titulo');
-        
-        // Si el enlace ya está activo, lo desactiva y muestra el mensaje inicial
-        if (this.classList.contains('active-link')) {
-            this.classList.remove('active-link');
-            videoSections.forEach(video => video.style.display = 'none'); // Oculta todos los videos
-            noVideoMessage.style.display = 'block'; // Muestra el mensaje "No se encuentra video"
-        } else {
-            // Limpia las selecciones anteriores
-            links.forEach(item => item.classList.remove('active-link'));
-            videoSections.forEach(video => video.style.display = 'none');
-            
-            // Marca el enlace actual como activo
-            this.classList.add('active-link');
-            
-            // Muestra el video correspondiente
-            let videoFound = false;
-            videoSections.forEach(video => {
-                const title = video.querySelector('h3').innerText;
-                if (title === selectedTitle) {
-                    video.style.display = 'block';
-                    videoFound = true;
-                }
-            });
+  link.addEventListener('click', function() {
+    const selectedTitle = this.getAttribute('data-titulo');
 
-            // Muestra u oculta el mensaje "No se encuentra video"
-            noVideoMessage.style.display = videoFound ? 'none' : 'block';
+    // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
+    if (this.classList.contains('clicked')) {
+      links.forEach(item => item.classList.remove('clicked'));
+      videoSections.forEach(video => video.style.display = 'none');
+      document.querySelector('.no-video').style.display = 'block';
+    } else {
+      // Alterna el estado de activación usando toggle
+      links.forEach(item => item.classList.remove('clicked'));
+      this.classList.toggle('clicked');
+
+      videoSections.forEach(video => video.style.display = 'none');
+      let videoFound = false;
+
+      videoSections.forEach(video => {
+        const title = video.querySelector('h3').innerText;
+        if (title === selectedTitle) {
+          video.style.display = 'block';
+          videoFound = true;
         }
-    });
+      });
+
+      // Muestra u oculta el mensaje "No se encuentra Video"
+      const noVideoMessage = document.querySelector('.no-video');
+      noVideoMessage.style.display = videoFound ? 'none' : 'block';
+    }
+  });
 });
