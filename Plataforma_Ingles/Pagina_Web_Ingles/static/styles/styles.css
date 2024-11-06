@@ -68,6 +68,7 @@ main {
 .titulo-main {
   display: flex;
   text-align: center;
+  text-decoration: underline;
   justify-self: center;
   margin-top: 24px;
   margin-bottom: 16px;
@@ -226,11 +227,21 @@ ul {
   width: 75%;
 }
 
+/* Animación de entrada */
 ul li {
   list-style: none;
   margin: 0 20px;
-  transition: 0.5s;
+  opacity: 0; /* Oculto inicialmente */
+  transform: translateX(-50px); /* Desplazado desde la izquierda */
+  animation: slide-in 0.5s ease forwards;
 }
+
+ul li:nth-child(1) { animation-delay: 0.1s; }
+ul li:nth-child(2) { animation-delay: 0.2s; }
+ul li:nth-child(3) { animation-delay: 0.3s; }
+ul li:nth-child(4) { animation-delay: 0.4s; }
+ul li:nth-child(5) { animation-delay: 0.5s; }
+ul li:nth-child(6) { animation-delay: 0.6s; }
 
 ul li a {
   transform: scale(1);
@@ -246,6 +257,7 @@ ul li a {
   transition: 0.1s;
 }
 
+/* Efecto de hover con desenfoque */
 ul li a:hover {
   transform: scale(1);
   opacity: 0.9;
@@ -260,23 +272,22 @@ ul:hover li a {
   color: #fff;
 }
 
+/* Subrayado en degradado */
 ul li a:before {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: #eca200;
-  transition: transform 0.3s;
-  transform-origin: right;
+  height: 3px;
+  background: linear-gradient(to right, #7a32ff, #ae70ff, #cf8cfc);
+  z-index: 1;
   transform: scaleX(0);
-  z-index: -1;
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
 }
 
 ul li a:hover:before {
-  transition: transform 0.3s;
-  transform-origin: left;
   transform: scaleX(1);
 }
 
@@ -284,7 +295,23 @@ ul li a.active:before {
   transform-origin: left;
   transform: scaleX(1);
 }
+ul li a.active:after {
+  transform-origin: right;
+  transform: scaleX(1);
+}
 
+.sidebar .dc-a.clicked{
+  background-color: #292929; /* Cambia a tu color preferido */
+  color: #ffffff;
+}
+
+/* Definición de la animación de entrada */
+@keyframes slide-in {
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Se coloca en su posición final */
+  }
+}
 /* CONTENEDORES DE LOS VIDEOS*/
 /* Estilos generales para la sección del video */
 .titulo-main {
@@ -313,7 +340,7 @@ ul li a.active:before {
 }
 
 .video-section {
-  margin-bottom: 20px;
+  padding: 20px;
 }
 /* Estilos para la sección expandida del video */
 .video-section.expanded {

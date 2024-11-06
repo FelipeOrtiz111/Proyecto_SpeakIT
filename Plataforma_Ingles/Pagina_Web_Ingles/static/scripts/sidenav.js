@@ -18,6 +18,7 @@ for (let i = 0; i < dropdown.length; i++) {
   });
 }
 
+//Version Antigua cuando los videos se mostraban en forma de lista
 //function toggleDescription(element) {
 //  const videoSection = element.closest('.video-section');
 //  const videoContainer = videoSection.querySelector('.video-container');
@@ -30,26 +31,32 @@ const noVideoMessage = document.querySelector('.no-video');
 
 links.forEach(link => {
   link.addEventListener('click', function() {
-      // Limpia las selecciones anteriores
-      links.forEach(item => item.classList.remove('active'));
+    const selectedTitle = this.getAttribute('data-titulo');
+
+    // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
+    if (this.classList.contains('clicked')) {
+      links.forEach(item => item.classList.remove('clicked'));
       videoSections.forEach(video => video.style.display = 'none');
+      document.querySelector('.no-video').style.display = 'block';
+    } else {
+      // Alterna el estado de activación usando toggle
+      links.forEach(item => item.classList.remove('clicked'));
+      this.classList.toggle('clicked');
 
-      // Marca el enlace como activo
-      this.classList.add('active');
-
-      // Muestra el video correspondiente
-      const selectedTitle = this.getAttribute('data-titulo');
+      videoSections.forEach(video => video.style.display = 'none');
       let videoFound = false;
 
       videoSections.forEach(video => {
-          const title = video.querySelector('h3').innerText;
-          if (title === selectedTitle) {
-              video.style.display = 'block';
-              videoFound = true;
-          }
+        const title = video.querySelector('h3').innerText;
+        if (title === selectedTitle) {
+          video.style.display = 'block';
+          videoFound = true;
+        }
       });
 
-      // Muestra u oculta el mensaje "No se encuentra video"
+      // Muestra u oculta el mensaje "No se encuentra Video"
+      const noVideoMessage = document.querySelector('.no-video');
       noVideoMessage.style.display = videoFound ? 'none' : 'block';
+    }
   });
 });
