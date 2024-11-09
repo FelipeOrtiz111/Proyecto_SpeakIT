@@ -1,1 +1,1 @@
-web gunicorn Proyecto_SpeakIT.wsgi --log-file -
+web gunicorn nombre_proyecto.wsgi --log-file -
