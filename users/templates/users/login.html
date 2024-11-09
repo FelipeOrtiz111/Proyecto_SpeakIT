@@ -1,0 +1,30 @@
+{% extends "header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
+<div id="main-login">
+    {% include 'includes/messaging.html' %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Iniciar sesión</legend>
+                    {{ form|crispy }}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Ingresar</button>
+            </div>
+        </form>
+
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
+            </small><br>
+            <small class="text-muted">
+                <a href="/">Olvidaste tu contraseña?</a>
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock content %}
