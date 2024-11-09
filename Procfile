@@ -1,1 +1,0 @@
-web gunicorn Proyecto_SpeakIT.wsgi --log-file -
