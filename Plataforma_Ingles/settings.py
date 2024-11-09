@@ -29,7 +29,8 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com',"https://plataforma-ingles-cdf8f3aec35e.herokuapp.com"]
+ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com',"https://plataforma-ingles-cdf8f3aec35e.herokuapp.com"\
+                 'english-platform.herokuapp.com', '127.0.0.1', 'localhost']
 
 if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
     SECURE_HSTS_PRELOAD = True
