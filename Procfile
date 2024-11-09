@@ -1,1 +1,1 @@
-web: python Plataforma_Ingles/manage.py runserver 0.0.0.0:$PORT
+web: python Plataforma_Ingles/manage.py runserver
