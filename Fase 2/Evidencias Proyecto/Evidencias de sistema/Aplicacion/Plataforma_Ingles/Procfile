@@ -1,1 +1,0 @@
-web: gunicorn Plataforma_Ingles.wsgi --log-file -
