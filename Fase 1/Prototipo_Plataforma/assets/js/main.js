@@ -12,8 +12,3 @@ for (i = 0; i < dropdown.length; i++) {
     }
   });
 }
-// Activa los contenedores de los videos
-function toggleDescription(element) {
-  const videoSection = element.closest('.video-section');
-  videoSection.classList.toggle('expanded');
-}
