@@ -27,13 +27,14 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 31536000
-ALLOWED_HOSTS = ['english-platform.herokuapp.com', '127.0.0.1', 'localhost', 'plataforma-ingles-cdf8f3aec35e.herokuapp.com']
+ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com']
 SECURE_HSTS_PRELOAD = True
-
+if not os.environ.get('DYNO'):  # Esto verifica que se está ejecutando en Heroku
+    SECURE_SSL_REDIRECT = True
+    
 # Application definition
 
 INSTALLED_APPS = [
