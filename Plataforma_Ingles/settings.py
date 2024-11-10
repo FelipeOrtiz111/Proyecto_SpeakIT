@@ -42,11 +42,11 @@ else:
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_SECONDS = 0  # Desactivar HSTS en desarrollo
     
-#if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
-#   SECURE_SSL_REDIRECT = True  # Redirige todo a HTTPS solo en Heroku
-#    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#else:
-#    SECURE_SSL_REDIRECT = False  # No redirige a HTTPS en otros entornos
+if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
+    SECURE_SSL_REDIRECT = True  # Redirige todo a HTTPS solo en Heroku
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+else:
+    SECURE_SSL_REDIRECT = False  # No redirige a HTTPS en otros entornos
 # Application definition
 
 INSTALLED_APPS = [
