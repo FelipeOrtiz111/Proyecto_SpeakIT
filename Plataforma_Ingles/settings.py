@@ -31,7 +31,6 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 
                  'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com',
-                 "https://plataforma-ingles-cdf8f3aec35e.herokuapp.com",
                  'english-platform.herokuapp.com', 
                  '127.0.0.1', 
                  'localhost']
@@ -43,10 +42,11 @@ else:
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_SECONDS = 0  # Desactivar HSTS en desarrollo
     
-if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
-    SECURE_SSL_REDIRECT = True  # Redirige todo a HTTPS solo en Heroku
-else:
-    SECURE_SSL_REDIRECT = False  # No redirige a HTTPS en otros entornos
+#if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
+#   SECURE_SSL_REDIRECT = True  # Redirige todo a HTTPS solo en Heroku
+#    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#else:
+#    SECURE_SSL_REDIRECT = False  # No redirige a HTTPS en otros entornos
 # Application definition
 
 INSTALLED_APPS = [
