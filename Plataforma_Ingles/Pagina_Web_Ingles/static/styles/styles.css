@@ -20,7 +20,7 @@ header {
 }
 
 footer {
-  height: 30px;
+  height: 45px;
   justify-content: space-around;
   padding: 0px;
   background-color: #1A1A1A;
@@ -89,14 +89,14 @@ main h3{
 
 /* Side Nav */
 .sidebar {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 105px);
   width: 25%;
   display: flex;
   flex-direction: column;
   background-color: #262626;
   position: fixed;
   top: 60px;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 105px);
   overflow-y: scroll;
 }
 
