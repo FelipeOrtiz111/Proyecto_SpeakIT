@@ -29,8 +29,12 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com',"https://plataforma-ingles-cdf8f3aec35e.herokuapp.com"\
-                 'english-platform.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 
+                 'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com',
+                 "https://plataforma-ingles-cdf8f3aec35e.herokuapp.com",
+                 'english-platform.herokuapp.com', 
+                 '127.0.0.1', 
+                 'localhost']
 
 if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
     SECURE_HSTS_PRELOAD = True
@@ -40,7 +44,7 @@ else:
     SECURE_HSTS_SECONDS = 0  # Desactivar HSTS en desarrollo
     
 if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
-    SECURE_SSL_REDIRECT = False  # Redirige todo a HTTPS solo en Heroku
+    SECURE_SSL_REDIRECT = True  # Redirige todo a HTTPS solo en Heroku
 else:
     SECURE_SSL_REDIRECT = False  # No redirige a HTTPS en otros entornos
 # Application definition
@@ -162,7 +166,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'Pagina_Web_Ingles/static'),]
 
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
