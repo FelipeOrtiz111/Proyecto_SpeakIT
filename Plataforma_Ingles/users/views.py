@@ -134,7 +134,7 @@ def password_change(request):
         form = SetPasswordForm(user, request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your password has been changed")
+            messages.success(request, "Su contraseña ha sido modificada")
             return redirect('login')
         else:
             for error in list(form.errors.values()):
@@ -165,14 +165,14 @@ def password_reset_request(request):
                         """
                         <h2>Password reset sent</h2><hr>
                         <p>
-                            We've emailed you instructions for setting your password, if an account exists with the email you entered. 
-                            You should receive them shortly.<br>If you don't receive an email, please make sure you've entered the address 
-                            you registered with, and check your spam folder.
+                            Te hemos enviado por correo electrónico las instrucciones para establecer tu contraseña, si existe una cuenta con la dirección de correo electrónico que has introducido. 
+                            Debería recibirlas en breve.<br>Si no recibe un correo electrónico, asegúrese de que ha introducido la dirección de correo electrónico 
+                            con la que se registró y compruebe su carpeta de correo no deseado.
                         </p>
                         """
                     )
                 else:
-                    messages.error(request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
+                    messages.error(request, "Problema al enviar el correo electrónico de restablecimiento de contraseña, <b>PROBLEMA DEL SERVIDOR</b>")
 
             return redirect('index')
 
@@ -196,7 +196,7 @@ def passwordResetConfirm(request, uidb64, token):
             form = SetPasswordForm(user, request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, "Your password has been set. You may go ahead and <b>log in </b> now.")
+                messages.success(request, "Su contraseña ha sido establecida. Ya puede <b>iniciar sesión </b>.")
                 return redirect('index')
             else:
                 for error in list(form.errors.values()):
@@ -205,7 +205,7 @@ def passwordResetConfirm(request, uidb64, token):
         form = SetPasswordForm(user)
         return render(request, 'password_reset_confirm.html', {'form': form})
     else:
-        messages.error(request, "Link is expired")
+        messages.error(request, "El enlace ha caducado")
 
-    messages.error(request, 'Something went wrong, redirecting back to Homepage')
+    messages.error(request, 'Algo salió mal, redirigiendo de nuevo a la página de inicio')
     return redirect("index")
