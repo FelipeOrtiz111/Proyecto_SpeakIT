@@ -26,14 +26,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-SECURE_SSL_REDIRECT = True
+DEBUG = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 31536000
-ALLOWED_HOSTS = ['english-platform.herokuapp.com', '127.0.0.1', 'localhost', 'plataforma-ingles-cdf8f3aec35e.herokuapp.com']
-SECURE_HSTS_PRELOAD = True
+ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 
+                 'www.plataforma-ingles-cdf8f3aec35e.herokuapp.com',
+                 ]
 
+if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 año de configuración HSTS
+else:
+    SECURE_HSTS_PRELOAD = False
+    SECURE_HSTS_SECONDS = 0  # Desactivar HSTS en desarrollo
+    
+if os.environ.get('DYNO'):  # Esto verifica si está en Heroku
+    SECURE_SSL_REDIRECT = True  # Redirige todo a HTTPS solo en Heroku
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+else:
+    SECURE_SSL_REDIRECT = False  # No redirige a HTTPS en otros entornos
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +58,10 @@ INSTALLED_APPS = [
     'Pagina_Web_Ingles', # <- main
     'crispy_forms',
     'crispy_bootstrap4',
+
+    'quizes',
+    'questions',
+    'results',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser' # custom user (para el registro de usuarios)
