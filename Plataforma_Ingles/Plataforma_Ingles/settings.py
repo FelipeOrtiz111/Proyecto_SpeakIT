@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = ['plataforma-ingles-cdf8f3aec35e.herokuapp.com', 
