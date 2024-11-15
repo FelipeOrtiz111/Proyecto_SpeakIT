@@ -21,7 +21,7 @@ class Quiz(models.Model):
         return f"{self.name}-{self.topic}"
     
     def get_questions(self):
-        return self.question_set.all()
+        return self.question_set.all()[:self.number_of_questions] # <- self.number_of_questions es temporal
     
     class Meta:
         verbose_name_plural = 'Quizes'

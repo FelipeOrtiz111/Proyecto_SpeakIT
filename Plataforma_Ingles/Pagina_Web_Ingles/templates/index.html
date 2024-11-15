@@ -114,7 +114,6 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe> 
-      <a href="{% url 'quizes' %}">QUIZ</a>
     </div>
   </div>
 
@@ -209,14 +208,14 @@
         Lecciones y entendimiento del presente Continuo.
       </p>
     </div>
-        <div class="video-container">
-          <iframe
-          src="https://www.youtube.com/embed/lGkxRXamy7Y" 
-          title="PRESENT CONTINUOUS (EXPLICACIÓN + PRÁCTICA) - INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS" 
-          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen
-          ></iframe>
-        </div>
+    <div class="video-container">
+      <iframe
+      src="https://www.youtube.com/embed/lGkxRXamy7Y" 
+      title="PRESENT CONTINUOUS (EXPLICACIÓN + PRÁCTICA) - INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS" 
+      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen
+      ></iframe>
+    </div>
   </div>
       
   <div class="video-section" onclick="toggleDescription(this)">
@@ -239,9 +238,9 @@
 
   <div class="video-section" onclick="toggleDescription(this)">
     <div class="video-info">
-      <h3 data-titulo="Comprensión Lectora">Comprensión Lectora.</h3>
+      <h3 data-titulo="Comprensión Lectora">¿Qué he Aprendido?</h3>
       <p>
-        Comprensión Lectora
+        Resumen Unidad.
       </p>
     </div>
     <div class="video-container">
@@ -257,21 +256,27 @@
 
   <div class="video-section" onclick="toggleDescription(this)">
     <div class="video-info">
-      <h3>Prueba tu Conocimiento</h3>
+      <h3>Comprensión Lectora.</h3>
+      <p>
+        QUIZ de comprensión lectora
+      </p>
+    </div>
+    <div class="quiz-container">
+        <p>QUIZ-CONTAINER</p>
+    </div>
+  </div>
+
+  <div class="video-section" onclick="toggleDescription(this)">
+    <div class="video-info">
+      <h3>Quiz de Unidades.</h3>
       <p>
         QUIZ.
       </p>
     </div>
-    <div class="video-container">
-      <iframe
-        src="https://www.youtube.com/embed/rFZQmXjALbU"
-        title="Todos los PRONOMBRES en INGLÉS explicados fácilmente"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe> 
-
-    <div>
+    <div class="quiz-container">
+      QUIZ LIST
+      {{obj.name}}
+    </div>
   </div>
 
 </main>
