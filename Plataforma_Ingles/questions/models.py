@@ -1,5 +1,5 @@
 from django.db import models
-from quizes.models import Quiz
+from Pagina_Web_Ingles.models import Quiz
 
 # Create your models here.
 

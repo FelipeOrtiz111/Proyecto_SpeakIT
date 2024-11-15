@@ -7,7 +7,7 @@ def includes(request):
     return render(request, 'header.html')
 
 def includes(request):
-    return render(request, 'quizz.html')
+    return render(request, 'quizes.html')
 
 def includes(request):
     return render(request, 'seguimiento.html')
