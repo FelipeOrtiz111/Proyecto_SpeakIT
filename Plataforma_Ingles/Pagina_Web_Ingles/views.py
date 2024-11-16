@@ -8,9 +8,6 @@ def index(request):
 def login_view(request):
     return render(request, 'login.html', {'navbar_color': 'header-green'})
 
-def login(request):
-    return render(request, 'login.html', {'navbar_color': 'header-green'})
-
 def includes(request):
     return render(request, 'header.html')
 
