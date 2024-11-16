@@ -7,16 +7,13 @@
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- CUSTOM CSS: Verifica si estás en la página de inicio o login -->
-    {% if request.path == '/login' %}
-        <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-    {% elif request.path == '/' %}
-        <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
-    {% else %}
-        <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
-    {% endif %}
     <!-- FONTAWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CUSTOM CSS: Verifica si estás en la página de inicio o login -->
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    {% if request.path == '/login' %}
+        <link rel="stylesheet" href="{% static 'styles/login.css' %}">        
+    {% endif %}
     <!-- FAVICON -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <title>Plataforma de Inglés - Alumnos</title>
@@ -25,14 +22,15 @@
 <body>
     {% include 'includes/navbar.html' %}
     
-    {% include 'includes/messaging.html' %}
     {% block content %}
 
     {% endblock %}
 
     {% include 'footer.html' %}
 
+    <!-- Scripts -->
     <script src="{% static 'scripts/sidenav.js' %}"></script>
+    {% block scripts %}{% endblock %}
 
 </body>
 </html>

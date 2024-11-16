@@ -451,3 +451,96 @@ ul li a.active:after {
 .quiz-button:hover {
   background: #0056b3;
 }
+
+/* Estilos específicos para los quizes */
+.quiz-container {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.quiz-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.quiz-card h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.quiz-card p {
+    color: #666;
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.quiz-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #672e90;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.quiz-button:hover {
+    background: #4a1d6a;
+    color: white;
+    text-decoration: none;
+}
+
+/* Ajustes para el contenedor de quizes */
+.quizes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 15px;
+}
+
+/* Ajuste para el sidebar en páginas de quiz */
+.quiz-detail {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Ajustes para el layout con sidebar */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    margin-left: 25%; /* Ajustado al ancho del sidebar */
+    padding: 80px 20px 60px; /* Ajustado para header y footer */
+    background-color: gainsboro;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px; /* Altura del header */
+    bottom: 45px; /* Altura del footer */
+    width: 25%;
+    background-color: #262626;
+    overflow-y: auto;
+    z-index: 100;
+}
