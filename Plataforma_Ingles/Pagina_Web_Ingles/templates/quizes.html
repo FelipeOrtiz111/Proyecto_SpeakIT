@@ -1,7 +1,42 @@
-{% load static %}
 {% extends "header.html" %}
+{% load static %}
+
 {% block content %}
+{% include 'includes/sidebar.html' %}
 
-{{obj.name}}
+<main>
+  <div class="titulo-main">Quiz: {{ obj.name }}</div>
+  
+  <div class="quiz-detail">
+    <h2>{{ obj.topic }}</h2>
+    <div class="quiz-info">
+      <p>Dificultad: {{ obj.difficulty }}</p>
+      <p>Tiempo: {{ obj.time }} minutos</p>
+      <p>Número de preguntas: {{ obj.number_of_questions }}</p>
+      <p>Puntaje para aprobar: {{ obj.required_score_to_pass }}%</p>
+    </div>
+    
+    <div class="quiz-questions">
+      {% for question in obj.get_questions %}
+        <div class="question">
+          <h3>{{ question.text }}</h3>
+          <div class="answers">
+            {% for answer in question.get_answers %}
+              <div class="answer">
+                <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                <label>{{ answer.text }}</label>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <button class="submit-quiz">Enviar Respuestas</button>
+  </div>
+</main>
+{% endblock %}
 
-{% endblock content %}
+{% block scripts %}
+<script src="{% static 'scripts/quiz.js' %}"></script>
+{% endblock %}
