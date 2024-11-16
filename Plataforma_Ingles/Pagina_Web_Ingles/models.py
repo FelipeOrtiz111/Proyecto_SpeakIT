@@ -4,9 +4,9 @@ from django.utils import timezone
 # Create your models here.
 
 DIFF_CHOICES = (
-    ('easy', 'easy'),
-    ('medium', 'medium'),
-    ('hard', 'hard'),
+    ('easy', 'fácil'),
+    ('medium', 'media'),
+    ('hard', 'difícil'),
 )
 
 class Quiz(models.Model):
