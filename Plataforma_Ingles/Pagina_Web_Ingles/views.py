@@ -3,13 +3,13 @@ from .models import Quiz
 from django.views.generic import ListView
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'navbar_color': 'header-default'})
 
 def includes(request):
-    return render(request, 'header.html')
+    return render(request, 'header.html', {'navbar_color': 'header-green'})
 
 def includes(request):
-    return render(request, 'quizes.html')
+    return render(request, 'quizes.html', {'navbar_color': 'header-red'})
 
 def includes(request):
     return render(request, 'seguimiento.html')

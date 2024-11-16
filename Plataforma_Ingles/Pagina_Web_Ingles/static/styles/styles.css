@@ -6,12 +6,26 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* Color por defecto */
+.header-default {
+  background: linear-gradient(90deg, rgba(134,0,173,1) 0%, rgba(103,46,144,1) 25%, rgba(73,12,119,1) 50%, rgba(54,1,94,1) 75%, rgba(25,1,51,1) 100%);
+}
+
+/* Color rojo para la sección de quiz */
+.header-red {
+  background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(200,0,0,1) 50%, rgba(150,0,0,1) 100%);
+}
+
+/* Color verde para la página de login */
+.header-green {
+  background: linear-gradient(90deg, rgba(0,255,0,1) 0%, rgba(0,200,0,1) 50%, rgba(0,150,0,1) 100%);
+}
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(90deg, rgba(134,0,173,1) 0%, rgba(103,46,144,1) 25%, rgba(73,12,119,1) 50%, rgba(54,1,94,1) 75%, rgba(25,1,51,1) 100%);
   height: 60px;
   z-index: 999;
   display: flex;
