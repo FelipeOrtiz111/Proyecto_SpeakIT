@@ -254,8 +254,9 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
-    <div class="video-info">
+  <!-- PRUEBA TU CONOCIMIENTO -->
+  <div class="quiz-section" onclick="toggleDescription(this)">
+    <div class="quiz-info">
       <h3>Comprensión Lectora.</h3>
       <p>
         Actividades de comprensión lectora
@@ -266,8 +267,8 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
-    <div class="video-info">      
+  <div class="quiz-section" onclick="toggleDescription(this)">
+    <div class="quiz-info">      
       <h3>Quiz de Unidades.</h3>
       
       <!-- Modal -->
@@ -294,30 +295,38 @@
       <hr>
       {% for obj in object_list %}
       <!-- Button trigger modal -->
-        <button>
+        <button
           class="btn btn-link modal-button"
           data-pk="{{obj.pk}}"
           data-quiz="{{obj.name}}"
           data-questions="{{obj.number_of_questions}}"
           data-difficulty="{{obj.difficulty}}"
           data-time="{{obj.time}}"
-          data-pass="{{obj.required_score_to_pass}}"
+          data-pass="{{obj.required_score_to_pass}}">
           {{obj.name}}
         </button>
       {% endfor %}
 
     </div>
-    <div class="quiz-container">
-      quiz list
-      <hr>
-    </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
-    <div class="video-info">
+  <div class="quiz-section" onclick="toggleDescription(this)">
+    <div class="quiz-info">
       <h3>¡Arrastra y Suelta!</h3>
       <p>
         Actividad de drag and drop
+      </p>
+    </div>
+    <div class="quiz-container">
+      actividades de arrastra y suelta.
+    </div>
+  </div>
+
+  <div class="quiz-section" onclick="toggleDescription(this)">
+    <div class="quiz-info">
+      <h3>Une los Verbos.</h3>
+      <p>
+        Actividad de unir verbos con líneas.
       </p>
     </div>
     <div class="quiz-container">
