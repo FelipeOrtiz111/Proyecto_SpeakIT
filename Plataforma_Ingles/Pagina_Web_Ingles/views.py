@@ -5,9 +5,6 @@ from django.views.generic import ListView
 def index(request):
     return render(request, 'index.html', {'navbar_color': 'header-default'})
 
-def login_view(request):
-    return render(request, 'login.html', {'navbar_color': 'header-green'})
-
 def includes(request):
     return render(request, 'header.html')
 

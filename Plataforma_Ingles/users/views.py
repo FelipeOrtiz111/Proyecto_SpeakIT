@@ -213,7 +213,7 @@ def passwordResetConfirm(request, uidb64, token):
 def index(request):
     return render(request, 'index.html', {'navbar_color': 'header-default'})
 
-def login_view(request):
+def includes(request):
     return render(request, 'login.html', {'navbar_color': 'header-green'})
 
 def includes(request):
