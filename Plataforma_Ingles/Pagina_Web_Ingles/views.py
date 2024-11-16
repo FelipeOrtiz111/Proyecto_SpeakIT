@@ -6,10 +6,10 @@ def index(request):
     return render(request, 'index.html', {'navbar_color': 'header-default'})
 
 def includes(request):
-    return render(request, 'header.html', {'navbar_color': 'header-green'})
+    return render(request, 'header.html')
 
 def includes(request):
-    return render(request, 'quizes.html', {'navbar_color': 'header-red'})
+    return render(request, 'quizes.html')
 
 def includes(request):
     return render(request, 'seguimiento.html')

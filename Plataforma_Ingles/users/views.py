@@ -209,3 +209,12 @@ def passwordResetConfirm(request, uidb64, token):
 
     messages.error(request, 'Algo salió mal, redirigiendo de nuevo a la página de inicio')
     return redirect("index")
+
+def index(request):
+    return render(request, 'index.html', {'navbar_color': 'header-default'})
+
+def includes(request):
+    return render(request, 'login.html', {'navbar_color': 'header-green'})
+
+def includes(request):
+    return render(request, 'quizes.html', {'navbar_color': 'header-red'})
