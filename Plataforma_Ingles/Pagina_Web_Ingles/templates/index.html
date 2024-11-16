@@ -260,6 +260,7 @@
   </div>
 
   <!-- PRUEBA TU CONOCIMIENTO -->
+  <!-- Quiz de Comprensión Lectora -->
   <div class="video-section" onclick="toggleDescription(this)">
     <div class="quiz-info">
       <h3>Comprensión Lectora.</h3>
@@ -272,49 +273,30 @@
     </div>
   </div>
 
-  <div class="video-section">  <!-- Quita el onclick aquí -->
+  <!-- Quiz de Unidades -->
+  <div class="video-section" onclick="toggleDescription(this)">  
     <div class="quiz-info">      
       <h3>Quiz de Unidades.</h3>
-
-      <!-- Modal -->
-      <div class="modal" id="quizModal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Debug info -->
+      <p>Pon a prueba tus conocimientos con este quiz</p>
+    </div>
+    <div class="quiz-container">
       {% if object_list %}
-        <p>Number of quizzes: {{ object_list|length }}</p>
-        {% for obj in object_list %}
-          <button
-            class="btn btn-link modal-button"
-            data-pk="{{obj.pk}}"
-            data-quiz="{{obj.name}}"
-            data-questions="{{obj.number_of_questions}}"
-            data-difficulty="{{obj.difficulty}}"
-            data-time="{{obj.time}}"
-            data-pass="{{obj.required_score_to_pass}}"
-            data-toggle="modal"
-            data-target="#quizModal">
-            {{obj.name}}
-          </button>
-        {% endfor %}
+        <div class="quizes-list">
+          {% for quiz in object_list %}
+            <div class="quiz-card">
+              <h4>{{ quiz.name }}</h4>
+              <p>Tema: {{ quiz.topic }}</p>
+              <p>Dificultad: {{ quiz.difficulty }}</p>
+              <p>Tiempo: {{ quiz.time }} minutos</p>
+              <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
+              <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
+                Comenzar Quiz
+              </a>
+            </div>
+          {% endfor %}
+        </div>
       {% else %}
-        <p>No objects found in object_list</p>
+        <p>No hay quizes disponibles en este momento.</p>
       {% endif %}
     </div>
   </div>
