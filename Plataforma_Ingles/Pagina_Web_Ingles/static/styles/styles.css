@@ -423,9 +423,7 @@ ul li a.active:after {
 
 /* USERS CSS */
 #main-login {
-  margin-top: 5.0em;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: 10%;
   height: 100vh;
 }
 
