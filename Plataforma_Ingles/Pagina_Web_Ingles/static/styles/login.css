@@ -82,6 +82,12 @@ footer {
     border-radius: 3px;
     margin-bottom: 20px;
   }
+
+  .fondo{
+    background-image: url("{% static 'images/bg-login.jpeg' %}");
+    
+  }
+
   /* Header Navigation */
 ul {
   margin: 0;
