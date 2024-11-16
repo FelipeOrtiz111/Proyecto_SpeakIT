@@ -210,7 +210,7 @@ def passwordResetConfirm(request, uidb64, token):
     messages.error(request, 'Algo salió mal, redirigiendo de nuevo a la página de inicio')
     return redirect("index")
 
-def index_view(request):
+def index(request):
     return render(request, 'index.html', {'navbar_color': 'header-default'})
 
 def login_view(request):
