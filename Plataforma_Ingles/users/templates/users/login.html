@@ -1,5 +1,6 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 <!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
 <div id="main-login">
@@ -12,7 +13,7 @@
                     {{ form|crispy }}
         </div>
             </fieldset>
-            <a src="{% static 'images/bg-login.jpeg' %}" alt="Fondo de Login">
+            <img src="{% static 'images/bg-login.jpeg' %}" alt="Fondo de Login">
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Ingresar</button>
             </div>
