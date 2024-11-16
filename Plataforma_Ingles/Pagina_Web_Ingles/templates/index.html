@@ -293,19 +293,26 @@
       </div>
       <div class="h1">Quiz List</div>
       <hr>
-      {% for obj in object_list %}
-      <!-- Button trigger modal -->
-        <button
-          class="btn btn-link modal-button"
-          data-pk="{{obj.pk}}"
-          data-quiz="{{obj.name}}"
-          data-questions="{{obj.number_of_questions}}"
-          data-difficulty="{{obj.difficulty}}"
-          data-time="{{obj.time}}"
-          data-pass="{{obj.required_score_to_pass}}">
-          {{obj.name}}
-        </button>
-      {% endfor %}
+
+      <!-- Debug info -->
+      {% if object_list %}
+        <p>Number of quizzes: {{ object_list|length }}</p>
+        {% for obj in object_list %}
+          <!-- Button trigger modal -->
+          <button
+            class="btn btn-link modal-button"
+            data-pk="{{obj.pk}}"
+            data-quiz="{{obj.name}}"
+            data-questions="{{obj.number_of_questions}}"
+            data-difficulty="{{obj.difficulty}}"
+            data-time="{{obj.time}}"
+            data-pass="{{obj.required_score_to_pass}}">
+            {{obj.name}}
+          </button>
+        {% endfor %}
+      {% else %}
+        <p>No objects found in object_list</p>
+      {% endif %}
 
     </div>
   </div>
