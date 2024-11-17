@@ -29,7 +29,13 @@
     {% include 'footer.html' %}
 
     <!-- Scripts -->
+    <!-- jQuery primero -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Luego Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Tus scripts personalizados -->
     <script src="{% static 'scripts/sidenav.js' %}"></script>
+
     {% block scripts %}{% endblock %}
 
 </body>
