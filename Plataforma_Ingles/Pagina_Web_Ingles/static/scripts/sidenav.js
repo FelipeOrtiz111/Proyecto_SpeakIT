@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
   // Oculta todos los videos al cargar la página
   const videoSections = document.querySelectorAll('.video-section');
-  videoSections.forEach(video => video.style.display = 'none');
-
-  // Muestra el mensaje por defecto
   const noVideoMessage = document.querySelector('.no-video');
-  noVideoMessage.style.display = 'block';
+
+  // Solo ejecuta el código si hay secciones de video en la página
+  if (videoSections.length > 0) {
+    videoSections.forEach(video => video.style.display = 'none');
+
+    // Muestra el mensaje por defecto solo si existe el elemento
+    if (noVideoMessage) {
+      noVideoMessage.style.display = 'block';
+    }
+  }
 });
 
 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -18,13 +24,6 @@ for (let i = 0; i < dropdown.length; i++) {
   });
 }
 
-//Version Antigua cuando los videos se mostraban en forma de lista
-//function toggleDescription(element) {
-//  const videoSection = element.closest('.video-section');
-//  const videoContainer = videoSection.querySelector('.video-container');
-//  videoContainer.style.display = videoContainer.style.display === "block" ? "none" : "block";
-//}
-
 const links = document.querySelectorAll('.dropdown-container a.dc-a');
 const videoSections = document.querySelectorAll('.video-section');
 const noVideoMessage = document.querySelector('.no-video');
@@ -32,12 +31,15 @@ const noVideoMessage = document.querySelector('.no-video');
 links.forEach(link => {
   link.addEventListener('click', function() {
     const selectedTitle = this.getAttribute('data-titulo');
+    const noVideoMessage = document.querySelector('.no-video');
 
     // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
     if (this.classList.contains('clicked')) {
       links.forEach(item => item.classList.remove('clicked'));
       videoSections.forEach(video => video.style.display = 'none');
-      document.querySelector('.no-video').style.display = 'block';
+      if (noVideoMessage) {
+        noVideoMessage.style.display = 'block';
+      }
     } else {
       // Alterna el estado de activación usando toggle
       links.forEach(item => item.classList.remove('clicked'));
@@ -55,8 +57,9 @@ links.forEach(link => {
       });
 
       // Muestra u oculta el mensaje "No se encuentra Video"
-      const noVideoMessage = document.querySelector('.no-video');
-      noVideoMessage.style.display = videoFound ? 'none' : 'block';
+      if (noVideoMessage) {
+        noVideoMessage.style.display = videoFound ? 'none' : 'block';
+      }
     }
   });
 });
