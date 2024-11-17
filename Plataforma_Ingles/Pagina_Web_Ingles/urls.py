@@ -14,6 +14,6 @@ urlpatterns = [
     path('header/', header_view, name='header'),
     path('quizes/', quizes_view, name='quizes'),
     path('seguimiento/', seguimiento_view, name='seguimiento'),
-    path('quiz/<int:pk>/', quiz_view, name='quiz-view'),
-    path('quiz/<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
+    path('<pk>/', quiz_view, name='quiz-view'),
+    path('<pk>/data/', quiz_data_view, name='quiz-data-view'),
 ]   
