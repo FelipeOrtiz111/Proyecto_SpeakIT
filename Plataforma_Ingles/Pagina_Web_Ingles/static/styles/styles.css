@@ -284,7 +284,7 @@ ul li a:before {
   z-index: 1;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 ul li a:hover:before {

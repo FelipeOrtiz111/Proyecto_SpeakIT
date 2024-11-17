@@ -3,6 +3,7 @@
 {% load static %}
 {% block content %}
 <!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
+<div class="background"></div>
 <div id="main-login">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
@@ -17,7 +18,6 @@
                         <a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a>
                     </small>
                 </div>
-                
             </fieldset>
             <div class="fondo">
                 <img src="/static/images/bg_login.jpeg" alt="Logo de Duoc UC">

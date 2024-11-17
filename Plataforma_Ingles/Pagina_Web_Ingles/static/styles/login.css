@@ -1,14 +1,23 @@
 html, body {
-    background-image: url("../images/library.jpg"); /* Ruta relativa */
-    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat;
     height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
+  .background {
+    position: absolute; /* Asegura que la capa ocupe todo el fondo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/library.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(4px); /* Difumina solo la imagen */
+    z-index: -1; /* Envía la capa al fondo */
+}
 
 .login-header {
     position: fixed;
@@ -77,8 +86,7 @@ footer {
   #main-login {
     margin-left: 30vw;
     margin-right: 30vw;
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+    margin-top: 28vh;
     height: 100vh;
   }
   
@@ -192,7 +200,7 @@ ul li a:before {
   z-index: 1;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 ul li a:hover:before {
