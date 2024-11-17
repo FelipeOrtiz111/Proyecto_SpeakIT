@@ -1,7 +1,7 @@
 console.log("Hola");
 const url = window.location.href;
 
-const quizSubmit = document.getElementById("quiz-submit");
+const quizBox = document.getElementById("quiz-box");
 
 $.ajax({
     type: 'GET',
@@ -11,8 +11,21 @@ $.ajax({
         data = response.data;
         data.forEach(el => {
             for (const [question, answers] of Object.entries(el)){
-                console.log(question)
-                console.log(answers)
+                quizBox.innerHTML += `
+                    <hr>
+                    <div class="mb-2">
+                        <b>${question}</b>
+                    </div>
+                `;
+
+                answers.forEach(answer => {
+                    quizBox.innerHTML += `
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="${question}" id="${question}-${answer}" value="${answer}">
+                            <label class="form-check-label" for="${question}-${answer}">${answer}</label>
+                        </div>
+                    `;
+                });
             }
         });
     },
