@@ -14,6 +14,9 @@
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Ingresar</button>
                 </div>
+                <small class="text-muted">
+                    <a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a>
+                </small>
             </fieldset>
             <div class="fondo">
                 <img src="/static/images/bg_login.jpeg" alt="Logo de Duoc UC">
@@ -24,9 +27,7 @@
             <small class="text-muted">
                 Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
             </small><br>
-            <small class="text-muted">
-                <a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a>
-            </small>
+            
         </div>
     </div>
 </div>
