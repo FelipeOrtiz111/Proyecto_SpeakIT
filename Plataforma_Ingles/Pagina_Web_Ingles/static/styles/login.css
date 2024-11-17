@@ -1,4 +1,5 @@
 html, body {
+    background-image: url("/images/library.jpg");
     height: 100%;
     margin: 0;
     display: flex;
@@ -182,7 +183,7 @@ ul li a:before {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(to right, #7a32ff, #ae70ff, #cf8cfc);
+  background: linear-gradient(to right, #3240ff, #7091ff, #8cbdfc);
   z-index: 1;
   transform: scaleX(0);
   transform-origin: left;
