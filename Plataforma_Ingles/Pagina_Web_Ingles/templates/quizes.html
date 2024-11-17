@@ -5,39 +5,41 @@
 {% include 'includes/sidebar.html' %}
 
 <main>
-  <div class="titulo-main">Quiz: {{ obj.name }}</div>
-
-  <div class="quiz-detail">
-    <h2>{{ obj.topic }}</h2>
-    <div class="quiz-info">
-      <p>Dificultad: {{ obj.difficulty }}</p>
-      <p>Tiempo: {{ obj.time }} minutos</p>
-      <p>Número de preguntas: {{ obj.number_of_questions }}</p>
-      <p>Puntaje para aprobar: {{ obj.required_score_to_pass }}%</p>
-    </div>
-    
-    <div class="quiz-questions">
-      {% for question in obj.get_questions %}
-        <div class="question">
-          <h3>{{ question.text }}</h3>
-          <div class="answers">
-            {% for answer in question.get_answers %}
-              <div class="answer">
-                <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
-                <label>{{ answer.text }}</label>
-              </div>
+    <div class="titulo-main">Quiz: {{ obj.name }}</div>
+    <!--  
+        <div class="quiz-detail">
+            <h2>{{ obj.topic }}</h2>
+            <div class="quiz-info">
+            <p>Dificultad: {{ obj.difficulty }}</p>
+            <p>Tiempo: {{ obj.time }} minutos</p>
+            <p>Número de preguntas: {{ obj.number_of_questions }}</p>
+            <p>Puntaje para aprobar: {{ obj.required_score_to_pass }}%</p>
+            </div>
+            
+            <div class="quiz-questions">
+            {% for question in obj.get_questions %}
+                <div class="question">
+                <h3>{{ question.text }}</h3>
+                <div class="answers">
+                    {% for answer in question.get_answers %}
+                    <div class="answer">
+                        <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                        <label>{{ answer.text }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
             {% endfor %}
-          </div>
         </div>
-      {% endfor %}
+        -->
+
+        <!-- botón para enviar -->
+        <form id="quiz-submit" class="mt-3 mb-3">
+            {% csrf_token %}
+            <div id="quiz-box"></div>
+            <button type="submit" class="btn btn-primary">Enviar Respuestas</button>
+        </form>
     </div>
-    <!-- botón para enviar -->
-    <form id="quiz-submit" class="mt-3 mb-3">
-        {% csrf_token %}
-        <div id="quiz-box"></div>
-        <button type="submit" class="btn btn-primary">Enviar Respuestas</button>
-    </form>
-  </div>
 </main>
 {% endblock %}
 
