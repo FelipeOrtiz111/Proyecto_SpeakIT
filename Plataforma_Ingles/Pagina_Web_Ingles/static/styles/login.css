@@ -1,5 +1,8 @@
 html, body {
-    background-image: url("/images/library.jpg");
+    background-image: url("../images/library.jpg"); /* Ruta relativa */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
     height: 100%;
     margin: 0;
     display: flex;
@@ -118,7 +121,9 @@ footer {
   }
 
   .fondo img{
-    border-radius: 0px 12px 0px 0px;
+    padding-top: 20px;
+    padding-right: 20px;
+    height: 300px;
   }
   /* Header Navigation */
 ul {
