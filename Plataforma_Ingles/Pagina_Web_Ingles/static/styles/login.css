@@ -71,7 +71,10 @@ footer {
   }
   
   #main-login {
-    margin: 10%;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     height: 100vh;
   }
   
@@ -96,7 +99,7 @@ footer {
   padding-top:5px !important;
 }
 
-div .form-group{
+.form-button{
   display: flex;
   align-items: center;
   justify-content: space-between;
