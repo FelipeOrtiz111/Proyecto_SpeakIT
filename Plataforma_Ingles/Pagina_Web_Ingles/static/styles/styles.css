@@ -520,6 +520,29 @@ ul li a.active:after {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.question-container {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.answers-container {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.form-check {
+  margin-bottom: 10px;
+}
+
+.quiz-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
 /* Ajustes para el layout con sidebar */
 body {
     display: flex;
