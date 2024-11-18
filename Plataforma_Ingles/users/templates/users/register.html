@@ -1,28 +1,29 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
+<div class="background"></div> <!-- Capa para el fondo difuminado -->
 <div id="main-login">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
-        <form method="POST">
+        <form method="POST" class="form-style">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">¡Ingresa ahora!</legend>
                 {{ form|crispy }}
             </fieldset>
-
-            Al registrarte, estás aceptando los Términos de Servicio y Políticas de Privacidad
-
+            <p class="terms">
+                Al registrarte, estás aceptando los <a href="#">Términos de Servicio</a> y <a href="#">Políticas de Privacidad</a>.
+            </p>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Registrarse</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Ya tienes una cuenta? <a class="ml-2" href="/login">Iniciar sesión</a>
+                ¿Ya tienes una cuenta? <a class="ml-2" href="/login">Iniciar sesión</a>
             </small>
         </div>
     </div>
 </div>
 {% endblock content %}
-

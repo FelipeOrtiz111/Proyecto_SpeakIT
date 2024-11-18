@@ -12,7 +12,9 @@
     <!-- CUSTOM CSS: Verifica si estás en la página de inicio o login -->
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
     {% if request.path == '/login' %}
-        <link rel="stylesheet" href="{% static 'styles/login.css' %}">        
+        <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    {% elif request.path == '/register' %}
+        <link rel="stylesheet" href="{% static 'styles/login.css' %}">
     {% endif %}
     <!-- FAVICON -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
