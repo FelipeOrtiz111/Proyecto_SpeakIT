@@ -8,7 +8,7 @@ if (!quizBox) {
 } else {
     $.ajax({
         type: 'GET',
-        url: `${url}data`,
+        url: `${url}data/`,
         success: function(response){
             console.log("Respuesta recibida:", response);
             const data = response.data;
@@ -76,7 +76,12 @@ const sendData = () => {
     })
 }
 
-quizForm.addEventListener("submit", e=>{
-    e.preventDefault();
-    sendData();
-})
+// Agregar verificación de existencia antes de usar quizForm
+if (quizForm) {
+    quizForm.addEventListener("submit", e => {
+        e.preventDefault();
+        sendData();
+    });
+} else {
+    console.log("Formulario de quiz no encontrado en esta página");
+}
