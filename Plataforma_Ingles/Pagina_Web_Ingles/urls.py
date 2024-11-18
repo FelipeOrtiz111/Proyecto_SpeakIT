@@ -6,7 +6,8 @@ from .views import (
     header_view,
     quizes_view,
     seguimiento_view,
-    quiz_data_view
+    quiz_data_view,
+    save_quiz_view
 )
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('seguimiento/', seguimiento_view, name='seguimiento'),
     path('<pk>/', quiz_view, name='quiz-view'),
     path('<pk>/data/', quiz_data_view, name='quiz-data-view'),
+    path('<pk>/save/', save_quiz_view, name='save-view'),
 ]   

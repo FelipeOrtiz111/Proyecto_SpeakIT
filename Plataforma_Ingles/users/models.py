@@ -24,8 +24,9 @@ class User(AbstractUser):
         ADMIN = "ADMIN", "Admin"
         STUDENT = "STUDENT", "Student"
         TEACHER = "TEACHER", "Teacher"
+        OTHER = "OTHER", "Other" # Añadido OTHER como opción
 
-    base_role = Role.OTHER
+    base_role = Role.OTHER # Ahora Role.OTHER existe
 
     role = models.CharField(max_length=50, choices=Role.choices)
 
