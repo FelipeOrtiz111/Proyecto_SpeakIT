@@ -1,4 +1,4 @@
-console.log("Hola desde quiz.js");
+//console.log("Hola desde quiz.js");
 const url = window.location.href;
 const quizBox = document.getElementById("quiz-box");
 const scoreBox = document.getElementById("score-box");
@@ -65,6 +65,9 @@ const sendData = () => {
         type: 'POST',
         url: `${url}save/`,
         data: data,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
         success: function(response){
             //console.log("Respuesta recibida:", response);
             const results = response.results;
