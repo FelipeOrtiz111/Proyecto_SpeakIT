@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from Plataforma_Ingles.results.models import Result
+from results.models import Result
 from .models import Quiz
 from django.views.generic import ListView
 from django.http import JsonResponse
