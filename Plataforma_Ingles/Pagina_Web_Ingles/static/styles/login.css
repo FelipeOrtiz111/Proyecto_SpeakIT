@@ -129,6 +129,12 @@ footer {
   justify-content: space-between;
   height: 35vh;
 }
+
+.form-style-register{
+  display: flex;
+  justify-content: space-between;
+  height: 70vh;
+}
   /* FONDO IMAGEN*/
   .fondo{
     display: flex;
