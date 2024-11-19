@@ -543,6 +543,18 @@ ul li a.active:after {
   margin-bottom: 20px;
 }
 
+.quiz-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+}
+
+.quiz-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Ajustes para el layout con sidebar */
 body {
     display: flex;

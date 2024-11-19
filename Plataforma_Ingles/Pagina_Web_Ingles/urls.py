@@ -7,7 +7,9 @@ from .views import (
     quizes_view,
     seguimiento_view,
     quiz_data_view,
-    save_quiz_view
+    save_quiz_view,
+    comprension_lectora_view,
+    quiz_unidades_view
 )
 
 urlpatterns = [
@@ -15,8 +17,11 @@ urlpatterns = [
     path('header/', header_view, name='header'),
     path('quizes/', quizes_view, name='quizes'),
     path('seguimiento/', seguimiento_view, name='seguimiento'),
-    # URLs para el quiz
+    # URLs para quizes
     path('<int:pk>/', quiz_view, name='quiz-view'),
     path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
     path('<int:pk>/save/', save_quiz_view, name='quiz-save-view'),
+    # Nuevas URLs para prueba tu conocimiento
+    path('prueba-tu-conocimiento/comprension-lectora/', comprension_lectora_view, name='comprension-lectora'),
+    path('prueba-tu-conocimiento/quiz-de-unidades/', quiz_unidades_view, name='quiz-unidades'),
 ]   

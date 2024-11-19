@@ -96,7 +96,7 @@ const sendData = () => {
                             resDiv.classList.add('bg-success');
                             resDiv.innerHTML += `<b>Contestada: ${answer}</b>`;
                         } else {
-                            resDiv.classList.add('bg-warning');
+                            resDiv.classList.add('bg-danger');
                             resDiv.innerHTML += `<b>| Correcta: ${correct}</b>`;
                             resDiv.innerHTML += `<b>| Contestada: ${answer}</b>`;
                         }
