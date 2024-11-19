@@ -1,3 +1,4 @@
+// Sidenav
 document.addEventListener("DOMContentLoaded", function() {
   // Oculta todos los videos al cargar la página
   const videoSections = document.querySelectorAll('.video-section');
@@ -11,6 +12,29 @@ document.addEventListener("DOMContentLoaded", function() {
     if (noVideoMessage) {
       noVideoMessage.style.display = 'block';
     }
+  }
+
+  // Recuperar el estado guardado
+  const returnToSection = localStorage.getItem('returnToSection');
+  const returnToContent = localStorage.getItem('returnToContent');
+
+  if (returnToSection && returnToContent) {
+    // Encontrar y hacer clic en el botón de la sección
+    const sectionButton = document.querySelector(`.${returnToSection}`);
+    if (sectionButton) {
+      sectionButton.click();
+    }
+
+    // Encontrar y hacer clic en el enlace del contenido
+    const contentLink = Array.from(document.querySelectorAll('.dc-a'))
+      .find(a => a.getAttribute('data-titulo') === returnToContent);
+    if (contentLink) {
+      contentLink.click();
+    }
+
+    // Limpiar el estado guardado
+    localStorage.removeItem('returnToSection');
+    localStorage.removeItem('returnToContent');
   }
 });
 

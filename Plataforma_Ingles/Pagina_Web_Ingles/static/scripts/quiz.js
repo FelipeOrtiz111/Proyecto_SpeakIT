@@ -32,28 +32,28 @@ const loadQuizQuestions = (data) => {
     });
 }
 
-// Modificar el AJAX inicial para mejor manejo de errores
-$.ajax({
-    type: 'GET',
-    url: `${url}data/`,
-    success: function(response){
-        quizData = response;
-        if (!response.data || response.data.length === 0) {
-            console.log("No se recibieron datos del quiz");
+// Solo hacer la llamada AJAX si estamos en una página de quiz específica
+if (quizBox && startButton) {
+    $.ajax({
+        type: 'GET',
+        url: `${url}data/`,
+        success: function(response){
+            quizData = response;
+            if (!response.data || response.data.length === 0) {
+                if (quizBox) {
+                    quizBox.innerHTML = '<p>No hay preguntas disponibles para este quiz.</p>';
+                    if (startButton) startButton.style.display = 'none';
+                }
+            }
+        },
+        error: function(error){
             if (quizBox) {
-                quizBox.innerHTML = '<p>No hay preguntas disponibles para este quiz.</p>';
+                quizBox.innerHTML = '<p>Error al cargar el quiz. Por favor, intente más tarde.</p>';
                 if (startButton) startButton.style.display = 'none';
             }
         }
-    },
-    error: function(error){
-        console.error("Error al obtener los datos del quiz:", error);
-        if (quizBox) {
-            quizBox.innerHTML = '<p>Error al cargar las preguntas del quiz. Por favor, intente más tarde.</p>';
-            if (startButton) startButton.style.display = 'none';
-        }
-    }
-});
+    });
+}
 
 // Solo agregar el event listener al botón si existe
 if (startButton) {
@@ -180,5 +180,11 @@ if (quizForm) {
         e.preventDefault();
         sendData();
     });
+}
+
+// Función para guardar el estado antes de volver
+function saveReturnState() {
+    localStorage.setItem('returnToSection', 'pru-e'); // ID del botón "Prueba tu Conocimiento"
+    localStorage.setItem('returnToContent', 'Quiz de Unidades.');
 }
 
