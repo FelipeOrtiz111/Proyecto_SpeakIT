@@ -16,7 +16,7 @@ urlpatterns = [
     path('quizes/', quizes_view, name='quizes'),
     path('seguimiento/', seguimiento_view, name='seguimiento'),
     # URLs para quizes
-    path('<int:pk>/', quiz_view, name='quiz-view'),
-    path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
-    path('<int:pk>/save/', save_quiz_view, name='quiz-save-view'),
+    path('<pk>/', quiz_view, name='quiz-view'),
+    path('<pk>/data/', quiz_data_view, name='quiz-data-view'),
+    path('<pk>/save/', save_quiz_view, name='quiz-save-view'),
 ]   

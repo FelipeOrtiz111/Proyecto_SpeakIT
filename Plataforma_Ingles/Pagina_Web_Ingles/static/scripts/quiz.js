@@ -4,6 +4,66 @@ const quizBox = document.getElementById("quiz-box");
 const scoreBox = document.getElementById("score-box");
 const resultBox = document.getElementById("result-box");
 const timerBox = document.getElementById("timer-box");
+const startButton = document.getElementById("start-quiz");
+const quizForm = document.getElementById("quiz-form");
+
+let quizData = null;
+
+// Función para cargar las preguntas
+const loadQuizQuestions = (data) => {
+    data.forEach(el => {
+        for (const [question, answers] of Object.entries(el)){
+            quizBox.innerHTML += `
+                <hr>
+                <div class="mb-2">
+                    <b>${question}</b>
+                </div>
+            `;
+
+            answers.forEach(answer => {
+                quizBox.innerHTML += `
+                    <div class="form-check">
+                        <input class="ans" type="radio" name="${question}" id="${question}-${answer}" value="${answer}">
+                        <label class="form-check-label" for="${question}-${answer}">${answer}</label>
+                    </div>
+                `;
+            });
+        }
+    });
+}
+
+// Modificar el AJAX inicial para mejor manejo de errores
+$.ajax({
+    type: 'GET',
+    url: `${url}data/`,
+    success: function(response){
+        quizData = response;
+        if (!response.data || response.data.length === 0) {
+            console.log("No se recibieron datos del quiz");
+            if (quizBox) {
+                quizBox.innerHTML = '<p>No hay preguntas disponibles para este quiz.</p>';
+                if (startButton) startButton.style.display = 'none';
+            }
+        }
+    },
+    error: function(error){
+        console.error("Error al obtener los datos del quiz:", error);
+        if (quizBox) {
+            quizBox.innerHTML = '<p>Error al cargar las preguntas del quiz. Por favor, intente más tarde.</p>';
+            if (startButton) startButton.style.display = 'none';
+        }
+    }
+});
+
+// Solo agregar el event listener al botón si existe
+if (startButton) {
+    startButton.addEventListener('click', () => {
+        startButton.style.display = 'none';
+        if (quizForm) quizForm.style.display = 'block';
+        if (quizData && quizData.data) loadQuizQuestions(quizData.data);
+        if (quizData && quizData.time) activateTimer(quizData.time);
+    });
+}
 
 const activateTimer = (time) => {
     if (time.toString().length < 2){
@@ -48,48 +108,6 @@ const activateTimer = (time) => {
     }, 1000);
 }
 
-$.ajax({
-    type: 'GET',
-    url: `${url}data/`,
-    success: function(response){
-        //console.log("Respuesta recibida:", response);
-        const data = response.data;
-        
-        if (!data || data.length === 0) {
-            console.log("No se recibieron datos del quiz");
-            quizBox.innerHTML = '<p>No hay preguntas disponibles para este quiz.</p>';
-            return;
-        }
-        
-        data.forEach(el => {
-            for (const [question, answers] of Object.entries(el)){
-                quizBox.innerHTML += `
-                    <hr>
-                    <div class="mb-2">
-                        <b>${question}</b>
-                    </div>
-                `;
-
-                answers.forEach(answer => {
-                    quizBox.innerHTML += `
-                        <div class="form-check">
-                            <input class="ans" type="radio" name="${question}" id="${question}-${answer}" value="${answer}">
-                            <label class="form-check-label" for="${question}-${answer}">${answer}</label>
-                        </div>
-                    `;
-                });
-                activateTimer(response.time);
-            }
-        });
-    },
-    error: function(error){
-        console.error("Error al obtener los datos del quiz:", error);
-        quizBox.innerHTML = '<p>Error al cargar las preguntas del quiz.</p>';
-    }
-});
-
-
-const quizForm = document.getElementById("quiz-form");
 const csrf = document.getElementsByName("csrfmiddlewaretoken");
 
 const sendData = () => {
@@ -156,8 +174,11 @@ const sendData = () => {
     })
 }
 
-quizForm.addEventListener("submit", e => {
-    e.preventDefault();
-    sendData();
-});
+// Verificar si estamos en la página de un quiz específico
+if (quizForm) {
+    quizForm.addEventListener("submit", e => {
+        e.preventDefault();
+        sendData();
+    });
+}
 
