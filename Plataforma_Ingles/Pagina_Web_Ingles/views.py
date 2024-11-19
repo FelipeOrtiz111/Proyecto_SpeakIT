@@ -63,7 +63,7 @@ def save_quiz_view(request, pk):
             quiz = Quiz.objects.get(pk=pk)
 
             # Inicializar variables
-            score = 0
+            correct_answers = 0
             multiplier = 100 / quiz.number_of_questions
             results = []
             correct_answer = None
@@ -78,21 +78,16 @@ def save_quiz_view(request, pk):
                     for a in question_answers:
                         if a_selected == a.text:
                             if a.correct:
-                                score += 1
-                                correct_answer = a.text
-                            else:
-                                score -= 1
-                        else:
-                            if a.correct:
-                                correct_answer = a.text
-                    # Guardar el resultado de la pregunta
+                                correct_answers += 1
+                            correct_answer = a.text if a.correct else None
+                        elif a.correct:
+                            correct_answer = a.text
                     results.append({str(q): {'correct_answer': correct_answer, 'answered': a_selected}})
                 else:
-                    # Guardar el resultado también si no se seleccionó ninguna respuesta
                     results.append({str(q): 'not answered'})
 
             # Calcular el puntaje final
-            score_ = score * multiplier
+            score_ = correct_answers * multiplier
             Result.objects.create(quiz=quiz, user=user, score=score_)
 
             # Retornar el resultado del quiz

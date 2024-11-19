@@ -1,4 +1,3 @@
-//console.log("Hola desde quiz.js");
 const url = window.location.href;
 const quizBox = document.getElementById("quiz-box");
 const scoreBox = document.getElementById("score-box");
@@ -132,9 +131,7 @@ const sendData = () => {
             'X-Requested-With': 'XMLHttpRequest'
         },
         success: function(response){
-            //console.log("Respuesta recibida:", response);
             const results = response.results;
-            console.log(results);
             quizForm.classList.add("not-visible");
 
             scoreBox.innerHTML = `${response.passed ? 'Aprobado' : 'Ups...'} Tu resultado es ${response.score.toFixed(2)}%`;
@@ -142,8 +139,6 @@ const sendData = () => {
             results.forEach(res=>{
                 const resDiv = document.createElement("div");
                 for (const [question, resp] of Object.entries(res)){
-                    //console.log(question, resp);
-
                     resDiv.innerHTML += question;
                     const cls = ['container', 'p-3', 'my-2', 'border', 'border-primary', 'rounded', 'h5'];
                     resDiv.classList.add(...cls);
@@ -153,16 +148,8 @@ const sendData = () => {
                         resDiv.classList.add('bg-danger');
                     } else {
                         const answer = resp['answered'];
-                        const correct = resp['correct_answer'];
-
-                        if (answer==correct){
-                            resDiv.classList.add('bg-success');
-                            resDiv.innerHTML += `<b>Contestada: ${answer}</b>`;
-                        } else {
-                            resDiv.classList.add('bg-danger');
-                            resDiv.innerHTML += `<b>| Correcta: ${correct}</b>`;
-                            resDiv.innerHTML += `<b>| Contestada: ${answer}</b>`;
-                        }
+                        resDiv.classList.add('bg-danger');
+                        resDiv.innerHTML += `<b>| Contestada: ${answer}</b>`;
                     }
                 }
                 resultBox.append(resDiv);
