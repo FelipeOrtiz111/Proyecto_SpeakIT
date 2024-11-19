@@ -18,12 +18,6 @@ def quizes_view(request):
 def seguimiento_view(request):
     return render(request, 'seguimiento.html')
 
-def comprension_lectora_view(request):
-    return render(request, 'prueba-tu-conocimiento/comprension_lectora.html')
-
-def quiz_unidades_view(request):
-    return render(request, 'prueba-tu-conocimiento/quiz_unidades.html')
-
 class QuizListView(ListView):
     model = Quiz # nombre del modelo
     template_name = 'index.html'

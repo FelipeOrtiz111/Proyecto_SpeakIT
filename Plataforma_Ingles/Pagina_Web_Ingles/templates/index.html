@@ -167,20 +167,42 @@
 
   <!-- PRUEBA TU CONOCIMIENTO -->
   <!-- Quiz de Comprensión Lectora -->
-  <div class="video-section">    
+  <div class="video-section">
     <div class="quiz-info">
-      <h3>Comprensión Lectora.</h3>
-      <p>Actividades de comprensión lectora</p>
-    </div>  
+        <h3>Comprensión Lectora.</h3>
+        <p>Actividades de comprensión lectora</p>
+    </div>
+    <div class="quiz-container">
+        Comenzar Actividad
+    </div>
   </div>
 
   <!-- Quiz de Unidades -->
   <div class="video-section">
     <div class="quiz-info">      
-      <h3>Quiz de Unidades.</h3>
-      <p>Pon a prueba tus conocimientos con estos quizes</p>
+        <h3>Quiz de Unidades.</h3>
+        <p>Pon a prueba tus conocimientos con estos quizes</p>
     </div>
-
+    <div class="quiz-container">
+        {% if object_list %}
+        <div class="quizes-list">
+            {% for quiz in object_list %}
+            <div class="quiz-card">
+                <h4>{{ quiz.name }}</h4>
+                <p>Tema: {{ quiz.topic }}</p>
+                <p>Dificultad: {{ quiz.difficulty }}</p>
+                <p>Tiempo: {{ quiz.time }} minutos</p>
+                <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
+                <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
+                Comenzar Quiz
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No hay quizes disponibles en este momento.</p>
+        {% endif %}
+    </div>
   </div>
 
   <div class="video-section" onclick="toggleDescription(this)">
