@@ -89,6 +89,13 @@ footer {
     margin-top: 28vh;
     height: 100vh;
   }
+
+  #main-register {
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 14vh;
+    height: 100vh;
+  }
   
   .content-section {
     background: #ffffff;

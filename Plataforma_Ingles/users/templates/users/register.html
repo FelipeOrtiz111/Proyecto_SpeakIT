@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <div class="background"></div> <!-- Capa para el fondo difuminado -->
-<div id="main-login">
+<div id="main-register">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
         <form method="POST" class="form-style">
@@ -11,12 +11,15 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">¡Ingresa ahora!</legend>
                 {{ form|crispy }}
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Registrarse</button>
+                    <p class="terms">
+                        Al registrarte, estás aceptando los <a href="#">Términos de Servicio</a> y <a href="#">Políticas de Privacidad</a>.
+                    </p>
+                </div>
             </fieldset>
-            <p class="terms">
-                Al registrarte, estás aceptando los <a href="#">Términos de Servicio</a> y <a href="#">Políticas de Privacidad</a>.
-            </p>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Registrarse</button>
+            <div class="fondo">
+                <img src="/static/images/bg_login.jpeg" alt="Logo de Duoc UC">
             </div>
         </form>
         <div class="border-top pt-3">
