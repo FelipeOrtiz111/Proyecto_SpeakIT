@@ -1,3 +1,19 @@
-<div class="quiz-container">
-    <p>Ejercicios de comprensión lectora</p>
-</div>
+{% extends "header.html" %} 
+{% load static %}
+
+{% block content %}
+{% include 'includes/sidebar.html' %}
+
+  <!-- Quiz de Comprensión Lectora -->
+  <div class="video-section">
+    <div class="quiz-info">
+        <h3>Comprensión Lectora.</h3>
+        <p>Actividades de comprensión lectora</p>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/quiz.js' %}"></script>
+{% endblock %}
