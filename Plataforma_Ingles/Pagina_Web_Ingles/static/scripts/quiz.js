@@ -140,16 +140,23 @@ const sendData = () => {
                 const resDiv = document.createElement("div");
                 for (const [question, resp] of Object.entries(res)){
                     resDiv.innerHTML += question;
-                    const cls = ['container', 'p-3', 'my-2', 'border', 'border-primary', 'rounded', 'h5'];
+                    const cls = ['container', 'p-3', 'my-2', 'border', 'rounded', 'h5'];
                     resDiv.classList.add(...cls);
 
                     if (resp=='not answered'){
-                        resDiv.innerHTML += '<b>No respondida</b>';
-                        resDiv.classList.add('bg-danger');
+                        resDiv.innerHTML += '<br><span class="badge bg-secondary">No respondida</span>';
+                        resDiv.classList.add('bg-light');
                     } else {
                         const answer = resp['answered'];
-                        resDiv.classList.add('bg-danger');
-                        resDiv.innerHTML += `<b>| Contestada: ${answer}</b>`;
+                        const correctAnswer = resp['correct_answer'];
+                        
+                        if (answer === correctAnswer) {
+                            resDiv.classList.add('bg-success', 'text-white');
+                            resDiv.innerHTML += `<br><span class="badge bg-white text-success">Correcta: ${answer}</span>`;
+                        } else {
+                            resDiv.classList.add('bg-danger', 'text-white');
+                            resDiv.innerHTML += `<br><span class="badge bg-white text-danger">Incorrecta: ${answer}</span>`;
+                        }
                     }
                 }
                 resultBox.append(resDiv);
