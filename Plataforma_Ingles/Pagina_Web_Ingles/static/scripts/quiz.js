@@ -110,6 +110,9 @@ const activateTimer = (time) => {
 const csrf = document.getElementsByName("csrfmiddlewaretoken");
 
 const sendData = () => {
+    const submitButton = quizForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+
     const elements = [...document.getElementsByClassName("ans")];
     const data = {}
     data['csrfmiddlewaretoken'] = csrf[0].value;
@@ -131,6 +134,10 @@ const sendData = () => {
             'X-Requested-With': 'XMLHttpRequest'
         },
         success: function(response){
+            resultBox.innerHTML = '';
+            const retryBox = document.getElementById('retry-box');
+            retryBox.innerHTML = '';
+            
             const results = response.results;
             quizForm.classList.add("not-visible");
 
@@ -152,20 +159,49 @@ const sendData = () => {
                         
                         if (answer === correctAnswer) {
                             resDiv.classList.add('bg-success', 'text-white');
-                            resDiv.innerHTML += `<br><span class="badge bg-white text-success">Correcta: ${answer}</span>`;
+                            resDiv.innerHTML += `<br><span class="badge bg-white text-success">Contestada: ${answer}</span>`;
                         } else {
                             resDiv.classList.add('bg-danger', 'text-white');
-                            resDiv.innerHTML += `<br><span class="badge bg-white text-danger">Incorrecta: ${answer}</span>`;
+                            resDiv.innerHTML += `<br><span class="badge bg-white text-danger">Contestada: ${answer}</span>`;
+                            resDiv.innerHTML += `<br><span class="badge bg-white text-success">Respuesta correcta: ${correctAnswer}</span>`;
                         }
                     }
                 }
                 resultBox.append(resDiv);
-            })
+            });
+
+            if (!response.passed) {
+                retryBox.innerHTML = `
+                    <button onclick="retryQuiz()" class="btn btn-primary">
+                        Reintentar Quiz
+                    </button>
+                `;
+            }
         },
         error: function(error){
             console.error("Error al enviar los datos del quiz:", error);
+            submitButton.disabled = false;
         }
     })
+}
+
+// Función para reiniciar el quiz
+const retryQuiz = () => {
+    quizBox.innerHTML = '';
+    scoreBox.innerHTML = '';
+    resultBox.innerHTML = '';
+    document.getElementById('retry-box').innerHTML = '';
+    
+    quizForm.classList.remove("not-visible");
+    quizForm.style.display = 'block';
+    
+    const submitButton = quizForm.querySelector('button[type="submit"]');
+    submitButton.disabled = false;
+    
+    if (quizData && quizData.data) {
+        loadQuizQuestions(quizData.data);
+        if (quizData.time) activateTimer(quizData.time);
+    }
 }
 
 // Verificar si estamos en la página de un quiz específico
