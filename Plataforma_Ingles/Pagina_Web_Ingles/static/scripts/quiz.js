@@ -8,6 +8,9 @@ const quizForm = document.getElementById("quiz-form");
 
 let quizData = null;
 
+// Agregar una variable global para el timer
+let quizTimer = null;
+
 // Función para cargar las preguntas
 const loadQuizQuestions = (data) => {
     data.forEach(el => {
@@ -76,7 +79,7 @@ const activateTimer = (time) => {
     let displaySeconds
     let displayMinutes
 
-    const timer = setInterval(() => {   
+    quizTimer = setInterval(() => {   // Guardamos la referencia del timer
         seconds--
         if (seconds < 0){
             minutes--;
@@ -97,7 +100,7 @@ const activateTimer = (time) => {
         if (minutes==0 && seconds==0){
             timerBox.innerHTML = `<b>00:00</b>`;
             setTimeout(() => {
-                clearInterval(timer);
+                clearInterval(quizTimer);
                 alert("Tiempo agotado");
                 sendData();
             }, 500);
@@ -110,6 +113,12 @@ const activateTimer = (time) => {
 const csrf = document.getElementsByName("csrfmiddlewaretoken");
 
 const sendData = () => {
+    // Detener el timer al enviar las respuestas
+    if (quizTimer) {
+        clearInterval(quizTimer);
+        quizTimer = null;
+    }
+
     const submitButton = quizForm.querySelector('button[type="submit"]');
     submitButton.disabled = true;
 
@@ -171,11 +180,19 @@ const sendData = () => {
             });
 
             if (!response.passed) {
-                retryBox.innerHTML = `
-                    <button onclick="retryQuiz()" class="btn btn-primary">
-                        Reintentar Quiz
-                    </button>
-                `;
+                if (response.attempts_left > 0) {
+                    retryBox.innerHTML = `
+                        <button onclick="retryQuiz()" class="btn btn-primary">
+                            Reintentar Quiz (${response.attempts_left} intentos restantes)
+                        </button>
+                    `;
+                } else {
+                    retryBox.innerHTML = `
+                        <div class="alert alert-warning">
+                            Has agotado todos tus intentos para este quiz.
+                        </div>
+                    `;
+                }
             }
         },
         error: function(error){

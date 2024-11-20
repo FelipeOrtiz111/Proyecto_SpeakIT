@@ -9,10 +9,17 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 
-from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm, SetPasswordForm, PasswordResetForm
+from .forms import (
+    CustomUserRegistrationForm,
+    UserLoginForm,
+    UserUpdateForm,
+    SetPasswordForm,
+    PasswordResetForm
+)
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from django.db.models.query_utils import Q
+from .models import CustomUser
 
 # Función para activar cuenta de usuario con el link de activación
 def activate(request, uidb64, token):
@@ -37,7 +44,6 @@ def activate(request, uidb64, token):
 
     return redirect('index')
 
-# Función para enviar el correo electrónico de activación de la cuenta
 def activateEmail(request, user, to_email):
     mail_subject = "[SpeakIT] Activa tu cuenta de usuario."
     # Renderiza el contenido del correo utilizando una plantilla
@@ -59,7 +65,7 @@ def activateEmail(request, user, to_email):
 @user_not_authenticated
 def register(request):
     if request.method == "POST":
-        form = UserRegistrationForm(request.POST)
+        form = CustomUserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False) # Crea el usuario sin guardarlo aún
             user.is_active=False # Establece el usuario como inactivo hasta la confirmación
@@ -73,7 +79,7 @@ def register(request):
                 messages.error(request, error)
 
     else:
-        form = UserRegistrationForm()
+        form = CustomUserRegistrationForm()
 
     return render(
         request=request,
@@ -105,26 +111,32 @@ def custom_login(request):
 
         else:
             for error in list(form.errors.values()):
-                messages.error(request, f"Por favor ingresa un usario y contraseña válido.") 
-
+                messages.error(request, "Por favor ingresa un usuario y contraseña válidos.")
+    
     form = UserLoginForm()
-
     return render(
         request=request,
         template_name="users/login.html",
         context={"form": form}
-        )
+    )
 
 # Vista para mostrar el perfil del usuario
 def perfil_view(request, username):
     if request.method == 'POST':
-        pass
+        user = request.user
+        form = UserUpdateForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado!')
+            return redirect('perfil', user.username)
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
 
     user = get_user_model().objects.filter(username=username).first()
     if user:
         form = UserUpdateForm(instance=user) # Crea un formulario de actualización para el usuario
         return render(request, 'users/perfil.html', context={'form': form})
-
     return redirect("index")
 
 @login_required
@@ -139,7 +151,7 @@ def password_change(request):
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
-                
+
     form = SetPasswordForm(user)
     return render(request, 'password_reset_confirm.html', {'form': form})
 
@@ -165,7 +177,8 @@ def password_reset_request(request):
                         """
                         <h2>Password reset sent</h2><hr>
                         <p>
-                            Te hemos enviado por correo electrónico las instrucciones para establecer tu contraseña, si existe una cuenta con la dirección de correo electrónico que has introducido. 
+                            Te hemos enviado por correo electrónico las instrucciones para establecer tu contraseña, 
+                            si existe una cuenta con la dirección de correo electrónico que has introducido. 
                             Debería recibirlas en breve.<br>Si no recibe un correo electrónico, asegúrese de que ha introducido la dirección de correo electrónico 
                             con la que se registró y compruebe su carpeta de correo no deseado.
                         </p>
@@ -173,15 +186,10 @@ def password_reset_request(request):
                     )
                 else:
                     messages.error(request, "Problema al enviar el correo electrónico de restablecimiento de contraseña, <b>PROBLEMA DEL SERVIDOR</b>")
-
             return redirect('index')
 
     form = PasswordResetForm()
-    return render(
-        request=request, 
-        template_name="password_reset.html", 
-        context={"form": form}
-        )
+    return render(request=request, template_name="password_reset.html", context={"form": form})
 
 def passwordResetConfirm(request, uidb64, token):
     User = get_user_model()
@@ -196,7 +204,7 @@ def passwordResetConfirm(request, uidb64, token):
             form = SetPasswordForm(user, request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, "Su contraseña ha sido establecida. Ya puede <b>iniciar sesión </b>.")
+                messages.success(request, "Su contraseña ha sido establecida. Ya puede <b>iniciar sesión</b>.")
                 return redirect('index')
             else:
                 for error in list(form.errors.values()):

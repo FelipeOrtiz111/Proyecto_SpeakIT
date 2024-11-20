@@ -2,10 +2,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from .models import CustomUser
 
-class UserRegistrationForm(UserCreationForm):
+class CustomUserRegistrationForm(UserCreationForm):
     username = forms.CharField(help_text='150 caracteres o menos. Letras, digitos y solo @/,/+/-/_.', required=True, label="Nombre de usuario")
     email = forms.EmailField(help_text='Debe ingresar su dirrección de correo institucional de DuocUC.', required=True, label="Correo electrónico")
+    role = forms.ChoiceField(choices=CustomUser.Role.choices, required=True, label="Rol")
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         help_text='Tu contraseña no debe ser muy parecida a tus otros datos personales.\
             <br>Tu contraseña debe contener al menos 8 caracteres.\
@@ -16,8 +18,8 @@ class UserRegistrationForm(UserCreationForm):
         help_text='Vuelve a ingresar la contraseña, para verificación.', required=True, label="Confirmar Contraseña")    
 
     class Meta:
-        model = get_user_model()
-        fields = ['username', 'email', 'password1', 'password2']
+        model = CustomUser
+        fields = ['username', 'email', 'role', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -27,7 +29,7 @@ class UserRegistrationForm(UserCreationForm):
         return email
 
     def save(self, commit=True):
-        user = super(UserRegistrationForm, self).save(commit=False)
+        user = super(CustomUserRegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
@@ -50,12 +52,12 @@ class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
     class Meta:
-        model = get_user_model()
+        model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'description']
         
 class SetPasswordForm(SetPasswordForm):
     class Meta:
-        model = get_user_model()
+        model = CustomUser
         fields = ['new_password1', 'new_password2']
         
 class PasswordResetForm(PasswordResetForm):

@@ -62,6 +62,15 @@ def save_quiz_view(request, pk):
             user = request.user
             quiz = Quiz.objects.get(pk=pk)
 
+            # Obtener el número de intentos previos
+            previous_attempts = Result.objects.filter(quiz=quiz, user=user).count()
+            
+            # Verificar si el usuario aún tiene intentos disponibles
+            if previous_attempts >= quiz.allowed_attempts:
+                return JsonResponse({
+                    'error': 'Has alcanzado el número máximo de intentos permitidos'
+                }, status=400)
+
             # Inicializar variables
             correct_answers = 0
             multiplier = 100 / quiz.number_of_questions
@@ -88,18 +97,29 @@ def save_quiz_view(request, pk):
 
             # Calcular el puntaje final
             score_ = correct_answers * multiplier
-            Result.objects.create(quiz=quiz, user=user, score=score_)
 
-            # Retornar el resultado del quiz
-            if score_ >= quiz.required_score_to_pass:
-                return JsonResponse({'passed': True, 'score': score_, 'results': results}) # Retorna True si el usuario pasó el quiz
-            else:
-                return JsonResponse({'passed': False, 'score': score_, 'results': results}) # Retorna False si el usuario no pasó el quiz
+            # Crear el resultado con el número de intento
+            Result.objects.create(
+                quiz=quiz, 
+                user=user, 
+                score=score_,
+                attempt_number=previous_attempts + 1
+            )
+
+            # Obtener intentos restantes
+            attempts_left = quiz.allowed_attempts - (previous_attempts + 1)
+
+            return JsonResponse({
+                'passed': score_ >= quiz.required_score_to_pass,
+                'score': score_,
+                'results': results,
+                'attempts_left': attempts_left
+            })
 
         return JsonResponse({'text': 'works'})
 
     except Exception as e:
-        print("Error in save_quiz_view:", str(e))  # Imprime el error específico
+        print("Error in save_quiz_view:", str(e))
         import traceback
-        print(traceback.format_exc())  # Imprime el stack trace completo
+        print(traceback.format_exc())
         return JsonResponse({'error': str(e)}, status=500)

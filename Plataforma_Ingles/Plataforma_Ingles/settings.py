@@ -48,7 +48,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-    'users', # users antes que django.contrib.admin
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'results',
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser' # custom user (para el registro de usuarios)
+AUTH_USER_MODEL = 'users.CustomUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # para que cripsy use bootstrap
 
