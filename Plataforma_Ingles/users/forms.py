@@ -30,6 +30,14 @@ class CustomUserRegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(CustomUserRegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+        
+        if user.email.endswith('@profesor.duoc.cl'):
+            user.role = CustomUser.Role.TEACHER
+        elif user.email.endswith('@duocuc.cl'):
+            user.role = CustomUser.Role.STUDENT
+        else:
+            user.role = CustomUser.Role.OTHER
+        
         if commit:
             user.save()
         return user
