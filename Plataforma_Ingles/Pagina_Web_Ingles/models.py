@@ -4,9 +4,9 @@ import random
 
 # Create your models here.
 DIFF_CHOICES = (
-    ('easy', 'fácil'),
-    ('medium', 'media'),
-    ('hard', 'difícil'),
+    ('fácil', 'fácil'),
+    ('media', 'media'),
+    ('difícil', 'difícil'),
 )
 
 class Quiz(models.Model):
