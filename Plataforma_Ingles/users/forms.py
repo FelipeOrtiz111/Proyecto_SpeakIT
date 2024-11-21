@@ -7,7 +7,6 @@ from .models import CustomUser
 class CustomUserRegistrationForm(UserCreationForm):
     username = forms.CharField(help_text='150 caracteres o menos. Letras, digitos y solo @/,/+/-/_.', required=True, label="Nombre de usuario")
     email = forms.EmailField(help_text='Debe ingresar su dirrección de correo institucional de DuocUC.', required=True, label="Correo electrónico")
-    role = forms.ChoiceField(choices=CustomUser.Role.choices, required=True, label="Rol")
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         help_text='Tu contraseña no debe ser muy parecida a tus otros datos personales.\
             <br>Tu contraseña debe contener al menos 8 caracteres.\
@@ -19,7 +18,7 @@ class CustomUserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'role', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
