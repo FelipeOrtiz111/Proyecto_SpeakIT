@@ -23,6 +23,20 @@
             </div>
         </div>
 
+        <!-- Gráficos -->
+        <div class="dashboard-row">
+            <!-- Gráfico de Progreso por Quiz -->
+            <div class="chart-card">
+                <h3>Progreso por Quiz</h3>
+                <canvas id="progressChart"></canvas>
+            </div>
+            <!-- Gráfico de Intentos por Quiz -->
+            <div class="chart-card">
+                <h3>Intentos por Quiz</h3>
+                <canvas id="attemptsChart"></canvas>
+            </div>
+        </div>
+
         <!-- Historial Detallado -->
         <div class="results-card">
             <h3>Historial de Quizes</h3>
@@ -39,20 +53,6 @@
             {% empty %}
                 <p>No has realizado ningún quiz todavía.</p>
             {% endfor %}
-        </div>
-
-        <!-- Gráficos -->
-        <div class="dashboard-row">
-            <!-- Gráfico de Progreso por Quiz -->
-            <div class="chart-card">
-                <h3>Progreso por Quiz</h3>
-                <canvas id="progressChart"></canvas>
-            </div>
-            <!-- Gráfico de Intentos por Quiz -->
-            <div class="chart-card">
-                <h3>Intentos por Quiz</h3>
-                <canvas id="attemptsChart"></canvas>
-            </div>
         </div>
     </div>
 </main>
