@@ -4,9 +4,9 @@ import random
 
 # Create your models here.
 DIFF_CHOICES = (
-    ('fácil', 'fácil'),
-    ('media', 'media'),
-    ('difícil', 'difícil'),
+    ('easy', 'Fácil'),
+    ('medium', 'Medio'),
+    ('hard', 'Difícil'),
 )
 
 class Quiz(models.Model):
@@ -15,7 +15,7 @@ class Quiz(models.Model):
     number_of_questions = models.IntegerField()
     time = models.IntegerField(help_text="duración del quiz en minutos")
     required_score_to_pass = models.IntegerField(help_text="puntaje requerido para pasar")
-    difficulty = models.CharField(max_length=6, choices=DIFF_CHOICES)
+    difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
     allowed_attempts = models.IntegerField(default=3, help_text="número de intentos permitidos")
 
     def __str__(self):
