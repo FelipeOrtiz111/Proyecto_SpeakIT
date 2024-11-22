@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.db.models import Avg, Max
 import json
-from django.utils.encoding import escapejs
 from django.core.serializers.json import DjangoJSONEncoder
 
 def index(request):
