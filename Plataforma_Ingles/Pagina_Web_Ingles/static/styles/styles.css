@@ -620,7 +620,7 @@ ul li a.active:after {
 .stat-value {
     font-size: 2.5em;
     font-weight: bold;
-    color: #672e90;
+    color: #000000;
 }
 
 .stat-label {
