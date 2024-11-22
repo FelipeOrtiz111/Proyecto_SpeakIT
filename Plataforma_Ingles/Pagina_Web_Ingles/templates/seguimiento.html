@@ -40,8 +40,6 @@
                 <p>No has realizado ningún quiz todavía.</p>
             {% endfor %}
         </div>
-        
-        <div></div>
 
         <!-- Gráficos -->
         <div class="dashboard-row">
@@ -75,7 +73,7 @@
             datasets: [{
                 label: 'Puntaje (%)',
                 data: quizData.scores, // Puntaje de cada quiz
-                borderColor: '#000000', // Color de la línea
+                borderColor: '#672e90', // Color de la línea
                 tension: 0.1, // Suavizado de la línea
                 fill: false // No rellenar el área bajo la línea
             }]
@@ -99,7 +97,7 @@
             datasets: [{
                 label: 'Número de Intentos',
                 data: Object.values(quizData.attempts),
-                backgroundColor: '#000000'
+                backgroundColor: '#4a1d6a'
             }]
         },
         options: {
