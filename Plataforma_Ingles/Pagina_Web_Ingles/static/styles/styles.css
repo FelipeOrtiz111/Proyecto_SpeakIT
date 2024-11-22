@@ -108,36 +108,22 @@ main h3{
   padding: 5px;
 }
 
-.sidebar a:hover {
-  color: #1A1A1A;
+.sidebar .dc-a {
+  display: inline-block;
+  transition: transform 0.1s ease-out, color 0.3s;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .sidebar .dc-a:hover {
-  color: #fff;
-}
-
-.sidebar .dc-a::after {
-  content: attr(data-titulo); /* Usa el atributo data para mostrar texto */
-  display: inline-block;      /* Permite que funcione `transform` */
-  transform: translateX(0);
-  transition: transform 0.1s ease-out;
-}
-
-.sidebar .dc-a:hover::after {
   transform: translateX(15px); /* Solo mueve el texto */
+  color: #fff;
 }
 
 .sidebar .dc-a.clicked {
   background-color: #292929; /* Cambia a tu color preferido */
   color: #ffffff;
-  transform: skewX(6deg);
-}
-
-.sidebar .dc-a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: relative;
-  overflow: hidden;
+  transform: skewX(6deg) translateX(15px); /* Mantiene el efecto */
 }
 
 .sidebar-item {
