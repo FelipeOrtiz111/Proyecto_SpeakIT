@@ -618,13 +618,13 @@ ul li a.active:after {
 }
 
 .stat-value {
-    font-size: 2.5em;
+    font-size: 2.2em;
     font-weight: bold;
     color: #000000;
 }
 
 .stat-label {
-    color: #666;
+    color: #000000;
     margin-top: 5px;
 }
 
@@ -654,7 +654,7 @@ ul li a.active:after {
 .quiz-stats {
     display: flex;
     gap: 20px;
-    color: #666;
+    color: #000000;
     margin-top: 5px;
 }
 
