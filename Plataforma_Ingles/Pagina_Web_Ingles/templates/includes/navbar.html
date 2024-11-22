@@ -7,7 +7,7 @@
             {% if user.is_authenticated %}
             <li><a href="{% url 'perfil' user.username %}">Mi perfil</a></li>
             <li><a href="#">Profesores</a></li>
-            <li><a href="#">Estadisticas Personales</a></li>
+            <li><a href="{% url 'seguimiento' %}">Estadisticas Personales</a></li>
             <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Iniciar sesión</a></li>

@@ -1,10 +1,15 @@
 from django.shortcuts import render
-
 from results.models import Result
 from .models import Quiz
 from django.views.generic import ListView
 from django.http import JsonResponse
 from questions.models import Question, Answer
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.db.models import Avg, Max
+import json
+from django.utils.encoding import escapejs
+from django.core.serializers.json import DjangoJSONEncoder
 
 def index(request):
     return render(request, 'index.html')
@@ -16,7 +21,49 @@ def quizes_view(request):
     return render(request, 'quizes.html')
 
 def seguimiento_view(request):
-    return render(request, 'seguimiento.html')
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
+        return redirect('login')
+    
+    # Obtener todos los resultados del usuario
+    user_results = Result.objects.filter(user=request.user).order_by('-created')
+    
+    # Calcular estadísticas generales
+    total_quizes_completed = user_results.count()
+    average_score = user_results.aggregate(Avg('score'))['score__avg'] or 0
+    
+    # Preparar datos para los gráficos
+    quiz_data = {
+        'labels': [],
+        'scores': [],
+        'attempts': {}
+    }
+    
+    # Agrupar resultados por quiz
+    quiz_results = {}
+    for result in user_results:
+        if result.quiz not in quiz_results:
+            quiz_results[result.quiz] = []
+            quiz_data['labels'].append(result.quiz.name)
+            quiz_data['attempts'][result.quiz.name] = 0
+        quiz_results[result.quiz].append(result)
+        quiz_data['attempts'][result.quiz.name] += 1
+        
+        # Tomar el mejor puntaje para cada quiz
+        if len(quiz_data['scores']) < len(quiz_data['labels']):
+            quiz_data['scores'].append(result.score)
+        else:
+            current_index = quiz_data['labels'].index(result.quiz.name)
+            quiz_data['scores'][current_index] = max(quiz_data['scores'][current_index], result.score)
+    
+    context = {
+        'quiz_results': quiz_results,
+        'total_quizes_completed': total_quizes_completed,
+        'average_score': average_score,
+        'quiz_data': json.dumps(quiz_data, cls=DjangoJSONEncoder)
+    }
+    
+    return render(request, 'seguimiento.html', context)
 
 class QuizListView(ListView):
     model = Quiz # nombre del modelo

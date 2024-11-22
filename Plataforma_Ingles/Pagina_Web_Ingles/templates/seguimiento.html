@@ -1,8 +1,114 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
+{% include 'includes/sidebar.html' %}
 
+<main>
+    <div class="titulo-main">
+        Dashboard de Progreso
+    </div>
 
+    <div class="dashboard-container">
+        <!-- Resumen General -->
+        <div class="dashboard-row">
+            <!-- Quizes Completados -->
+            <div class="stat-card">
+                <div class="stat-value">{{ total_quizes_completed }}</div>
+                <div class="stat-label">Quizes Completados</div>
+            </div>
+            <!-- Promedio General -->
+            <div class="stat-card">
+                <div class="stat-value">{{ average_score|floatformat:1 }}%</div>
+                <div class="stat-label">Promedio General</div>
+            </div>
+        </div>
 
-{% endblock content %}
+        <!-- Gráficos -->
+        <div class="dashboard-row">
+            <!-- Gráfico de Progreso por Quiz -->
+            <div class="chart-card">
+                <h3>Progreso por Quiz</h3>
+                <canvas id="progressChart"></canvas>
+            </div>
+            <!-- Gráfico de Intentos por Quiz -->
+            <div class="chart-card">
+                <h3>Intentos por Quiz</h3>
+                <canvas id="attemptsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Historial Detallado -->
+        <div class="results-card">
+            <h3>Historial de Quizes</h3>
+            {% for quiz, results in quiz_results.items %}
+                <div class="quiz-result-item">
+                    <h4>{{ quiz.name }} - {{ quiz.topic }}</h4>
+                    <div class="quiz-stats">
+                        <!-- Intentos realizados / Intentos permitidos -->
+                        <span>Intentos: {{ results|length }}/{{ quiz.allowed_attempts }}</span>
+                        <!-- Mejor puntaje -->
+                        <span>Mejor puntaje: {{ results.0.score|floatformat:1 }}%</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No has realizado ningún quiz todavía.</p>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Parsear los datos del JSON para usarlos en el gráfico
+    const quizData = JSON.parse('{{ quiz_data|escapejs }}');
+    
+    // Gráfico de Progreso
+    new Chart(document.getElementById('progressChart'), {
+        type: 'line',
+        data: {
+            labels: quizData.labels, // Nombres de los quizes
+            datasets: [{
+                label: 'Puntaje (%)',
+                data: quizData.scores, // Puntaje de cada quiz
+                borderColor: '#672e90', // Color de la línea
+                tension: 0.1, // Suavizado de la línea
+                fill: false // No rellenar el área bajo la línea
+            }]
+        },
+        options: {
+            responsive: true, // Se ajusta al tamaño de la pantalla
+            scales: {
+                y: {
+                    beginAtZero: true, // Comienza en 0
+                    max: 100 // Máximo valor en el eje y
+                }
+            }
+        }
+    });
+
+    // Gráfico de Intentos
+    new Chart(document.getElementById('attemptsChart'), {
+        type: 'bar',
+        data: {
+            labels: quizData.labels,
+            datasets: [{
+                label: 'Número de Intentos',
+                data: Object.values(quizData.attempts),
+                backgroundColor: '#4a1d6a'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stepSize: 1
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
