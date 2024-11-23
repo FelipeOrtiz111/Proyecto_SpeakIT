@@ -24,6 +24,19 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+class Section(models.Model):
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=10, unique=True)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='created_sections')
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.code} - {self.name}"
+
+    class Meta:
+        ordering = ['code']
+
 class StudentManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
@@ -37,10 +50,6 @@ class Student(CustomUser):
 
     def welcome(self):
         return "Only for students"
-
-class StudentProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    student_id = models.IntegerField(null=True, blank=True)
 
 class TeacherManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
@@ -56,16 +65,19 @@ class Teacher(CustomUser):
     def welcome(self):
         return "Only for teachers"
 
+class StudentProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete=models.SET_NULL, null=True, blank=True)
+    student_id = models.IntegerField(null=True, blank=True)
+
 class TeacherProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     teacher_id = models.IntegerField(null=True, blank=True)
 
-@receiver(post_save, sender=Student)
-def create_student_profile(sender, instance, created, **kwargs):
-    if created and instance.role == "STUDENT":
-        StudentProfile.objects.create(user=instance)
-
-@receiver(post_save, sender=Teacher)
-def create_teacher_profile(sender, instance, created, **kwargs):
-    if created and instance.role == "TEACHER":
-        TeacherProfile.objects.create(user=instance)
+@receiver(post_save, sender=CustomUser)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        if instance.role == CustomUser.Role.STUDENT:
+            StudentProfile.objects.create(user=instance)
+        elif instance.role == CustomUser.Role.TEACHER:
+            TeacherProfile.objects.create(user=instance)

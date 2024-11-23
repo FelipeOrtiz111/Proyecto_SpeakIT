@@ -8,6 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
+from .models import Section
 
 from .forms import (
     CustomUserRegistrationForm,
@@ -93,6 +94,23 @@ def custom_logout(request):
     logout(request)
     messages.info(request, "Se ha cerrado la sesión.")
     return redirect("index")
+
+@login_required
+def manage_sections(request):
+    if request.user.role != CustomUser.Role.TEACHER:
+        messages.error(request, "No tienes permisos para acceder a esta sección.")
+        return redirect('index')
+    
+    sections = Section.objects.filter(created_by=request.user)
+
+    if request.method == 'POST':
+        code = request.POST.get('code')
+        name = request.POST.get('name')
+        Section.objects.create(code=code, name=name, created_by=request.user)
+        messages.success(request, "Sección creada exitosamente.")
+        return redirect('manage_sections')
+
+    return render(request, 'users/manage_sections.html', {'sections': sections})
 
 # Vista personalizada para iniciar sesión
 @user_not_authenticated
