@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{% static 'styles/login.css' %}">
     {% elif '/register' in request.path %}
         <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-    {% elif request.path.startswith('/perfil') %}
+    {% elif '/perfil' in request.path %}
         <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
     {% endif %}
     <!-- FAVICON -->
