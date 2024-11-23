@@ -34,12 +34,16 @@ html, body {
     align-items: center;
   }
 
-.main{
-    margin-left: 30vw;
-    margin-right: 30vw;
-    margin-top: 28vh;
+  .main {
+    display: flex;
+    margin-left: 15vw;
+    margin-right: 25vw;
+    margin-top: 10vh;
     height: 100vh;
-  }
+}
+.perfil-img img{
+  height: 320px;
+}
 
 /* Header Navigation */
 ul {
@@ -137,3 +141,7 @@ ul {
       transform: translateX(0); /* Se coloca en su posición final */
     }
   }
+
+form{
+  width: 50%;
+}

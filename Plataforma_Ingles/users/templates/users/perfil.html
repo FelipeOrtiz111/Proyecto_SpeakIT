@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="main">
-    <legend class="border-bottom mb-4">Informacion del Perfil:</legend>
+    <div class="contenido-form">
+    <legend class="border-bottom mb-4">Información del Perfil</legend>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="media">
@@ -37,5 +38,9 @@
             </div>
         {% endif %}
     </form>
+</div>
+<div class="perfil-img">
+    <img src="/static/images/img_avatar.png" alt="Imagen de Perfil">
+</div>
 </div>
 {% endblock content %}
