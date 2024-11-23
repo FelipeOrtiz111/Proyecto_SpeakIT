@@ -25,8 +25,8 @@ class CustomUser(AbstractUser):
         return self.username
 
 class Section(models.Model):
-    name = models.CharField(max_length=50)
-    code = models.CharField(max_length=10, unique=True)
+    name = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=50)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='created_sections')
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
