@@ -12,9 +12,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Section)
 class SectionAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'created_by', 'created_at', 'is_active']
+    list_display = ['code', 'created_by', 'created_at', 'is_active']
     list_filter = ['created_by', 'is_active']
-    search_fields = ['code', 'name']
+    search_fields = ['code']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

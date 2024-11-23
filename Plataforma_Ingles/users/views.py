@@ -21,6 +21,7 @@ from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 from .models import CustomUser
+from django.db import IntegrityError
 
 # Función para activar cuenta de usuario con el link de activación
 def activate(request, uidb64, token):
@@ -105,9 +106,11 @@ def manage_sections(request):
 
     if request.method == 'POST':
         code = request.POST.get('code')
-        name = request.POST.get('name')
-        Section.objects.create(code=code, name=name, created_by=request.user)
-        messages.success(request, "Sección creada exitosamente.")
+        try:
+            Section.objects.create(code=code, created_by=request.user)
+            messages.success(request, "Sección creada exitosamente.")
+        except IntegrityError:
+            messages.error(request, "Ya existe una sección con ese código.")
         return redirect('manage_sections')
 
     return render(request, 'users/manage_sections.html', {'sections': sections})

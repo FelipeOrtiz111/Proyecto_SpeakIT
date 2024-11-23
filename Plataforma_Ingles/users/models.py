@@ -25,14 +25,13 @@ class CustomUser(AbstractUser):
         return self.username
 
 class Section(models.Model):
-    name = models.CharField(max_length=50)
     code = models.CharField(max_length=50, unique=True)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='created_sections')
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.code} - {self.name}"
+        return f"Sección{self.code}"
 
     class Meta:
         ordering = ['code']
