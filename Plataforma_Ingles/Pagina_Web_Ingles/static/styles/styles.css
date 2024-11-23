@@ -250,11 +250,11 @@ ul li a {
   display: flex;
   position: relative;
   align-items: center;
-  text-decoration: none;
+  text-decoration: wavy;
   height: 60px;
   padding: 0 5px;
   font-size: x-large;
-  font-family: 'Lato', 'sans-serif';
+  font-family: "Lucida Console", "Courier New", monospace;
   color: #fff;
   transition: 0.1s;
 }
@@ -555,6 +555,8 @@ ul li a.active:after {
 /* SEGUIMIENTO CSS */
 .seguimiento-container {
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .quiz-results-card {
@@ -682,3 +684,22 @@ main {
     overflow-y: auto;
     z-index: 100;
 } */
+
+.activity-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.activity-details {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.activity-details p {
+    margin: 5px 0;
+}

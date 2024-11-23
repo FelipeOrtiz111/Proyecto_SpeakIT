@@ -19,7 +19,7 @@ def header_view(request):
 def quizes_view(request):
     return render(request, 'quizes.html')
 
-def seguimiento_view(request):
+def estadisticas_view(request):
     if not request.user.is_authenticated:
         messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
         return redirect('login')
@@ -62,7 +62,7 @@ def seguimiento_view(request):
         'quiz_data': json.dumps(quiz_data, cls=DjangoJSONEncoder)
     }
     
-    return render(request, 'seguimiento.html', context)
+    return render(request, 'estadisticas.html', context)
 
 class QuizListView(ListView):
     model = Quiz # nombre del modelo
@@ -169,3 +169,17 @@ def save_quiz_view(request, pk):
         import traceback
         print(traceback.format_exc())
         return JsonResponse({'error': str(e)}, status=500)
+
+def seguimiento_view(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
+        return redirect('login')
+    
+    # Obtener todos los resultados del usuario
+    user_results = Result.objects.filter(user=request.user).order_by('-created')
+    
+    context = {
+        'user_results': user_results,
+    }
+    
+    return render(request, 'seguimiento.html', context)
