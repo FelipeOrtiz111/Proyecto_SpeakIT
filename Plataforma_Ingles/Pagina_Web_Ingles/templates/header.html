@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CUSTOM CSS: Verifica si estás en la página de inicio o login -->
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
-    {% if request.path == '/login' %}
+    {% if '/login' in request.path %}
         <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-    {% elif request.path == '/register' %}
+    {% elif '/register' in request.path %}
         <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-    {% elif request.path == '/perfil' %}
+    {% elif request.path.startswith('/perfil') %}
         <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
     {% endif %}
     <!-- FAVICON -->
