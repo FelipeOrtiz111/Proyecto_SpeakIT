@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'Pagina_Web_Ingles', # <- main
     'crispy_forms',
     'crispy_bootstrap4',
-
     'questions',
     'results',
 ]
