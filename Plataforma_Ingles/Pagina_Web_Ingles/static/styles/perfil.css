@@ -41,6 +41,12 @@ html, body {
     margin-top: 10vh;
     height: 100vh;
 }
+
+.contenido-form {
+  width: 100%;
+  padding: 0px 12px;
+}
+
 .perfil-img img{
   height: 320px;
 }
@@ -70,7 +76,9 @@ ul {
   ul li:nth-child(4) { animation-delay: 0.4s; }
   ul li:nth-child(5) { animation-delay: 0.5s; }
   ul li:nth-child(6) { animation-delay: 0.6s; }
-  
+  ul li:nth-child(7) { animation-delay: 0.7s; }
+  ul li:nth-child(8) { animation-delay: 0.8s; }
+
   ul li a {
     transform: scale(1);
     display: flex;
@@ -141,7 +149,3 @@ ul {
       transform: translateX(0); /* Se coloca en su posición final */
     }
   }
-
-form{
-  width: 50%;
-}
