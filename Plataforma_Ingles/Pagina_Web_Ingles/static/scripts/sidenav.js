@@ -93,22 +93,6 @@ links.forEach(link => {
   });
 });
 
-// Sección de Unidades
-function checkAnswer(option, feedbackId) {
-  const feedback = document.getElementById(feedbackId);
-
-  // Mostrar feedback según la respuesta seleccionada
-  if (option.value === 'correct') {
-    feedback.textContent = "¡Correcto!";
-    feedback.className = "feedback correct";
-  } else {
-    feedback.textContent = "Incorrecto";
-    feedback.className = "feedback incorrect";
-  }
-
-  feedback.style.display = "block"; // Mostrar el mensaje
-}
-
 // Función para mostrar la siguiente unidad
 function showNextUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
