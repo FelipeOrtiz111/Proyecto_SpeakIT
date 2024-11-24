@@ -123,14 +123,15 @@ function showNextUnit(unitId) {
       if (link.getAttribute('data-titulo') === nextUnit.querySelector('h3').innerText) {
         // Resalta el enlace correspondiente y aplica la animación
         link.classList.add('clicked');
-        
-        // Si quieres hacer la animación, puedes agregarla aquí (ejemplo)
-        link.style.transition = "color 0.3s ease";
-        link.style.color = "blue";  // Color cuando está activo
       } else {
         link.classList.remove('clicked');
         link.style.color = '';  // Restaura el color del enlace cuando no está activo
       }
+    });
+
+    window.scrollTo({
+      top: 0,  // Desplazarse a la parte superior
+      behavior: 'smooth'  // Animación suave
     });
   }
 }
@@ -159,6 +160,11 @@ function showPreviousUnit(unitId) {
         link.classList.remove('clicked');
         link.style.color = '';  // Restaura el color del enlace cuando no está activo
       }
+    });
+    
+    window.scrollTo({
+      top: 0,  // Desplazarse a la parte superior
+      behavior: 'smooth'  // Animación suave
     });
   }
 }
