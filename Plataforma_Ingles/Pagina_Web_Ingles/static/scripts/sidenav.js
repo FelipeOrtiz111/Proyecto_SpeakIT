@@ -87,3 +87,12 @@ links.forEach(link => {
     }
   });
 });
+
+//Seccion de Unidades
+function showAnswers() {
+  // Mostrar todos los elementos con la clase 'correct'
+  const correctAnswers = document.querySelectorAll('.correct');
+  correctAnswers.forEach(answer => {
+      answer.style.display = 'inline'; // Cambiar a inline para que se muestren
+  });
+}

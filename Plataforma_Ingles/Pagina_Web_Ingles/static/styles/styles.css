@@ -221,7 +221,7 @@ button:focus{
 }
 
 /* Header Navigation */
-ul {
+.login-header ul {
   margin: 0;
   padding: 0;
   height: 60px;
@@ -231,7 +231,7 @@ ul {
 }
 
 /* Animación de entrada */
-ul li {
+.login-header ul li {
   list-style: none;
   margin: 0 20px;
   opacity: 0; /* Oculto inicialmente */
@@ -239,7 +239,7 @@ ul li {
   animation: slide-in 0.5s ease forwards;
 }
 
-ul li:nth-child(1) { animation-delay: 0.1s; }
+.login-header ul li:nth-child(1) { animation-delay: 0.1s; }
 ul li:nth-child(2) { animation-delay: 0.2s; }
 ul li:nth-child(3) { animation-delay: 0.3s; }
 ul li:nth-child(4) { animation-delay: 0.4s; }
@@ -248,7 +248,7 @@ ul li:nth-child(6) { animation-delay: 0.6s; }
 ul li:nth-child(7) { animation-delay: 0.7s; }
 ul li:nth-child(8) { animation-delay: 0.8s; }
 
-ul li a {
+.login-header ul li a {
   transform: scale(1);
   display: flex;
   position: relative;
@@ -264,13 +264,13 @@ ul li a {
 }
 
 /* Efecto de hover con desenfoque */
-ul li a:hover {
+.login-header ul li a:hover {
   transform: scale(1);
   opacity: 0.9;
   filter: blur(2px);
 }
 
-ul:hover li a {
+.login-header ul:hover li a {
   transform: scale(1);
   opacity: 1;
   filter: blur(0);
@@ -279,7 +279,7 @@ ul:hover li a {
 }
 
 /* Subrayado en degradado */
-ul li a:before {
+.login-header ul li a:before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -293,15 +293,15 @@ ul li a:before {
   transition: transform 0.3s ease-in-out;
 }
 
-ul li a:hover:before {
+.login-header ul li a:hover:before {
   transform: scaleX(1);
 }
 
-ul li a.active:before {
+.login-header ul li a.active:before {
   transform-origin: left;
   transform: scaleX(1);
 }
-ul li a.active:after {
+.login-header ul li a.active:after {
   transform-origin: right;
   transform: scaleX(1);
 }
