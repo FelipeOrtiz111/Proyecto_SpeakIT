@@ -28,90 +28,91 @@
     </div>
     <div class="content-container">
       <!-- Contenido -->>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente explicabo asperiores, culpa distinctio tempora itaque laudantium natus laboriosam aliquam sequi officia minima numquam in eos nostrum, nobis perferendis vitae ad.
-        <br>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente explicabo asperiores, culpa distinctio tempora itaque laudantium natus laboriosam aliquam sequi officia minima numquam in eos nostrum, nobis perferendis vitae ad.
+        <br/>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, similique.
-        Cuestionario:
       </p>
+      <p>Cuestionario:</p>
       <!-- Pregunta 1 -->
       <div class="question">
-          <p>1. Ella es = _______</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')">
-                      Her is
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')">
-                      She is
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')">
-                      She was
-                  </label>
-              </li>
-          </ul>
-          <p id="q1-feedback" class="feedback"></p>
-      </div>
+        <p>1. Ella es = ____</p>
+        <ul>
+            <li>
+                <label>
+                    <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                    Her is
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                    She is
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                    She was
+                </label>
+            </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
+    </div>
 
-      <!-- Pregunta 2 -->
-      <div class="question">
-          <p>2. Él fue = _______</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')">
-                      He is
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')">
-                      He would
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')">
-                      He was
-                  </label>
-              </li>
-          </ul>
-          <p id="q2-feedback" class="feedback"></p>
-      </div>
+    <!-- Pregunta 2 -->
+    <div class="question">
+        <p>2. Él fue = ____</p>
+        <ul>
+            <li>
+                <label>
+                    <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                    He is
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                    He would
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                    He was
+                </label>
+            </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
+    </div>
 
-      <!-- Pregunta 3 -->
-      <div class="question">
-          <p>3. Ellos están = _______</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')">
-                      They will
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')">
-                      They were
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')">
-                      They are
-                  </label>
-              </li>
-          </ul>
-          <p id="q3-feedback" class="feedback"></p>
-      </div>
+    <!-- Pregunta 3 -->
+    <div class="question">
+        <p>3. Ellos están = _____</p>
+        <ul>
+            <li>
+                <label>
+                    <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                    They will
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                    They were
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                    They are
+                </label>
+            </li>
+        </ul>
+        <p id="q3-feedback" class="feedback"></p>
     </div>
   </div>
+</div>
 
   <div class="video-section" onclick="toggleDescription(this)">
     <div class="video-info">

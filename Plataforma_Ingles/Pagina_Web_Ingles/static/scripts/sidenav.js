@@ -87,19 +87,28 @@ links.forEach(link => {
     }
   });
 });
-
+let lastSelected = {};
 //Seccion de Unidades
 function checkAnswer(option, feedbackId) {
   const feedback = document.getElementById(feedbackId);
+  const questionName = option.name;
 
-  // Mostrar feedback según la respuesta seleccionada
-  if (option.value === 'correct') {
-      feedback.textContent = "¡Correcto!";
-      feedback.className = "feedback correct";
+  // Si el mismo botón ya estaba seleccionado, lo desmarca
+  if (lastSelected[questionName] === option) {
+      option.checked = false;
+      feedback.style.display = "none"; // Oculta el feedback
+      lastSelected[questionName] = null; // Resetea la selección
   } else {
-      feedback.textContent = "Incorrecto";
-      feedback.className = "feedback incorrect";
-  }
+      // Actualiza el feedback según la respuesta seleccionada
+      if (option.value === 'correct') {
+          feedback.textContent = "¡Correcto!";
+          feedback.className = "feedback correct";
+      } else {
+          feedback.textContent = "Incorrecto";
+          feedback.className = "feedback incorrect";
+      }
 
-  feedback.style.display = "block"; // Mostrar el mensaje
+      feedback.style.display = "block"; // Muestra el feedback
+      lastSelected[questionName] = option; // Guarda el botón seleccionado
+  }
 }
