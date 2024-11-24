@@ -27,7 +27,7 @@
       ></iframe> 
     </div>
     <div class="content-container">
-      <!-- Contenido -->>
+      <!-- Contenido -->
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente explicabo asperiores, culpa distinctio tempora itaque laudantium natus laboriosam aliquam sequi officia minima numquam in eos nostrum, nobis perferendis vitae ad.
         <br/>
@@ -132,18 +132,84 @@
       ></iframe>
     </div>
     <div class="content-container">
-      <ol>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ol>
-      <p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-        </ul>
-      </p>
+      <p>Cuestionario:</p>
+      <!-- Pregunta 1 -->
+      <div class="question">
+          <p>1. ¿Cómo se dice "alto" en inglés? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      Short
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      Tall
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      Kind
+                  </label>
+              </li>
+          </ul>
+          <p id="q1-feedback" class="feedback"></p>
+      </div>
+      
+      <!-- Pregunta 2 -->
+      <div class="question">
+          <p>2. ¿Cuál es un adjetivo para describir personalidad? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      Friendly
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      Hairy
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      Loud
+                  </label>
+              </li>
+          </ul>
+          <p id="q2-feedback" class="feedback"></p>
+      </div>
+      
+      <!-- Pregunta 3 -->
+      <div class="question">
+          <p>3. ¿Cómo dirías "Soy amable" en inglés? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      I am kind
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      I am short
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      I am strong
+                  </label>
+              </li>
+          </ul>
+          <p id="q3-feedback" class="feedback"></p>
+      </div>
     </div>
   </div>
 
@@ -165,18 +231,85 @@
       ></iframe>
     </div>
     <div class="content-container">
-      <ol>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ol>
-      <p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-        </ul>
-      </p>
+      <p>Cuestionario:</p>
+
+      <!-- Pregunta 1 -->
+      <div class="question">
+          <p>1. ¿Cómo dices "enero" en inglés? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      February
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      January
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      March
+                  </label>
+              </li>
+          </ul>
+          <p id="q1-feedback" class="feedback"></p>
+      </div>
+      
+      <!-- Pregunta 2 -->
+      <div class="question">
+          <p>2. ¿Cuál es el formato de fecha británico? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      25th December
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      December 25th
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      December, 25th
+                  </label>
+              </li>
+          </ul>
+          <p id="q2-feedback" class="feedback"></p>
+      </div>
+      
+      <!-- Pregunta 3 -->
+      <div class="question">
+          <p>3. ¿Cómo se dice "Mi cumpleaños es el 10 de mayo"? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      My birthday is on May 10th
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      My birthday is on 10th May
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      My birthday are on May 10th
+                  </label>
+              </li>
+          </ul>
+          <p id="q3-feedback" class="feedback"></p>
+      </div>
     </div>
   </div>
 
@@ -198,18 +331,85 @@
       ></iframe>
     </div>
     <div class="content-container">
-      <ol>
-        <li>Puntos Cardinales</li>
-        <li>Ubicaciones</li>
-        <li>Calles y Sentidos</li>
-      </ol>
-      <p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-        </ul>
-      </p>
+      <p>Cuestionario:</p>
+
+      <!-- Pregunta 1 -->
+      <div class="question">
+          <p>1. ¿Qué significa "Turn left"? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      Gira a la derecha
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      Gira a la izquierda
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+                      Ve derecho
+                  </label>
+              </li>
+          </ul>
+          <p id="q1-feedback" class="feedback"></p>
+      </div>
+      
+      <!-- Pregunta 2 -->
+      <div class="question">
+          <p>2. ¿Cómo se dice "en frente de" en inglés? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      Next to
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      Behind
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+                      Across from
+                  </label>
+              </li>
+          </ul>
+          <p id="q2-feedback" class="feedback"></p>
+      </div>
+      
+      <!-- Pregunta 3 -->
+      <div class="question">
+          <p>3. ¿Qué frase usarías para pedir direcciones? ____</p>
+          <ul>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      Can you tell me where the station is?
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      What time is it?
+                  </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+                      What is your name?
+                  </label>
+              </li>
+          </ul>
+          <p id="q3-feedback" class="feedback"></p>
+      </div>
     </div>
   </div>
 
