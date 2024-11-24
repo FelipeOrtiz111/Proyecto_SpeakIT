@@ -1,4 +1,4 @@
-{% extends "header.html" %} 
+{% extends "header.html" %}
 {% load static %}
 
 {% block content %}
@@ -9,12 +9,15 @@
   <div class="titulo-main">Sección de Contenido</div>
   <div class="no-video">No se encuentra Video</div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-1">
     <div class="video-info">
       <h3>Acercamiento al Inglés.</h3>
       <p>
-        Explicación detallada de todos los pronombres en inglés con ejemplos y
-        ejercicios.
+        En esta primera unidad, los estudiantes aprenderán sobre los pronombres
+        en inglés (personales, posesivos, reflexivos, etc.) y su uso en
+        contextos oracionales. Se proporcionan ejemplos y ejercicios prácticos
+        para asegurar que los estudiantes comprendan cómo y cuándo usar estos
+        pronombres correctamente en frases y conversaciones.
       </p>
     </div>
     <div class="video-container">
@@ -23,103 +26,120 @@
         title="Todos los PRONOMBRES en INGLÉS explicados fácilmente"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe> 
+        allowfullscreen></iframe>
     </div>
     <div class="content-container">
       <!-- Contenido -->
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente explicabo asperiores, culpa distinctio tempora itaque laudantium natus laboriosam aliquam sequi officia minima numquam in eos nostrum, nobis perferendis vitae ad.
-        <br/>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, similique.
+        El objetivo es que los estudiantes adquieran la capacidad de identificar
+        y usar correctamente los pronombres en inglés para construir oraciones
+        básicas y comprender cómo se relacionan con los sustantivos en una
+        estructura gramatical adecuada.
       </p>
       <p>Cuestionario:</p>
       <!-- Pregunta 1 -->
       <div class="question">
-        <p>1. Ella es = ____</p>
+        <p>1. ¿Cómo se dice "Ella es"?</p>
         <ul>
-            <li>
-                <label>
-                    <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                    Her is
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                    She is
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                    She was
-                </label>
-            </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Her is
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              She is
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              She was
+            </label>
+          </li>
         </ul>
         <p id="q1-feedback" class="feedback"></p>
-    </div>
+      </div>
 
-    <!-- Pregunta 2 -->
-    <div class="question">
-        <p>2. Él fue = ____</p>
+      <!-- Pregunta 2 -->
+      <div class="question">
+        <p>2. ¿Cómo se dice "Él fue"?</p>
         <ul>
-            <li>
-                <label>
-                    <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                    He is
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                    He would
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                    He was
-                </label>
-            </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              He is
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              He would
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              He was
+            </label>
+          </li>
         </ul>
         <p id="q2-feedback" class="feedback"></p>
-    </div>
+      </div>
 
-    <!-- Pregunta 3 -->
-    <div class="question">
-        <p>3. Ellos están = _____</p>
+      <!-- Pregunta 3 -->
+      <div class="question">
+        <p>3. ¿Cómo se dice "Ellos están"?</p>
         <ul>
-            <li>
-                <label>
-                    <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                    They will
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                    They were
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                    They are
-                </label>
-            </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              They will
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              They were
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="correct"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              They are
+            </label>
+          </li>
         </ul>
         <p id="q3-feedback" class="feedback"></p>
+      </div>
+      <div class="navigation-btns">
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente unidad</button>
+        <!-- Botón para la unidad anterior -->
+        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
+    </div>
     </div>
   </div>
-</div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-2">
     <div class="video-info">
       <h3>¡Describiendo el mundo!</h3>
       <p>
-        Cómo hacer una descripción personal en inglés. Incluye ejemplos y
-        ejercicios.
+        En esta unidad, los estudiantes aprenderán a describir a las personas y
+        objetos en inglés utilizando adjetivos de apariencia física y
+        personalidad. También se introducirán estructuras básicas para hacer
+        descripciones personales.
       </p>
     </div>
     <div class="video-container">
@@ -128,97 +148,117 @@
         title="Como hacer una descripción personal en INGLÉS"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+        allowfullscreen></iframe>
     </div>
     <div class="content-container">
+      <p>El objetivo de esta unidad es que los estudiantes puedan crear
+        oraciones simples para describirse a sí mismos, a otras personas y su
+        entorno, utilizando vocabulario común y estructuras gramaticales
+        correctas.</p>
       <p>Cuestionario:</p>
       <!-- Pregunta 1 -->
       <div class="question">
-          <p>1. ¿Cómo se dice "alto" en inglés? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      Short
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      Tall
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      Kind
-                  </label>
-              </li>
-          </ul>
-          <p id="q1-feedback" class="feedback"></p>
+        <p>1. ¿Cómo se dice "alto" en inglés? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Short
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Tall
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Kind
+            </label>
+          </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
       </div>
-      
+
       <!-- Pregunta 2 -->
       <div class="question">
-          <p>2. ¿Cuál es un adjetivo para describir personalidad? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      Friendly
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      Hairy
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      Loud
-                  </label>
-              </li>
-          </ul>
-          <p id="q2-feedback" class="feedback"></p>
+        <p>2. ¿Cuál es un adjetivo para describir personalidad? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              Friendly
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              Hairy
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              Loud
+            </label>
+          </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
       </div>
-      
+
       <!-- Pregunta 3 -->
       <div class="question">
-          <p>3. ¿Cómo dirías "Soy amable" en inglés? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      I am kind
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      I am short
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      I am strong
-                  </label>
-              </li>
-          </ul>
-          <p id="q3-feedback" class="feedback"></p>
+        <p>3. ¿Cómo dirías "Soy amable" en inglés?</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="correct"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              I am kind
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              I am short
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              I am strong
+            </label>
+          </li>
+        </ul>
+        <p id="q3-feedback" class="feedback"></p>
       </div>
+      <div class="navigation-btns">
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-3')">Ir a la siguiente unidad</button>
+        <!-- Botón para la unidad anterior -->
+        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
+    </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-3">
     <div class="video-info">
       <h3>Cumpleaños y Fechas.</h3>
       <p>
-        Aprende a hablar sobre la fecha en inglés, con ejemplos claros y
-        ejercicios.
+        Esta unidad enseña cómo expresar fechas, días de la semana, meses del
+        año y hablar sobre eventos importantes como cumpleaños en inglés. Se
+        introducen los formatos de fecha británico y americano, y tambien se
+        practican preguntas y respuestas sobre celebraciones.
       </p>
     </div>
     <div class="video-container">
@@ -227,98 +267,118 @@
         title="LA FECHA EN INGLES"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+        allowfullscreen></iframe>
     </div>
     <div class="content-container">
+      <p>El proposito de esta unidad es que los estudiantes sean capaces de
+        comunicar fechas importantes y planificar eventos en inglés, utilizando
+        vocabulario relacionado y practicando la estructura correcta para hablar
+        sobre días y meses.</p>
       <p>Cuestionario:</p>
 
       <!-- Pregunta 1 -->
       <div class="question">
-          <p>1. ¿Cómo dices "enero" en inglés? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      February
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      January
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      March
-                  </label>
-              </li>
-          </ul>
-          <p id="q1-feedback" class="feedback"></p>
+        <p>1. ¿Cómo dices "enero" en inglés? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              February
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              January
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              March
+            </label>
+          </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
       </div>
-      
+
       <!-- Pregunta 2 -->
       <div class="question">
-          <p>2. ¿Cuál es el formato de fecha británico? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      25th December
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      December 25th
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      December, 25th
-                  </label>
-              </li>
-          </ul>
-          <p id="q2-feedback" class="feedback"></p>
+        <p>2. ¿Cuál es el formato de fecha británico? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              25th December
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              December 25th
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              December, 25th
+            </label>
+          </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
       </div>
-      
+
       <!-- Pregunta 3 -->
       <div class="question">
-          <p>3. ¿Cómo se dice "Mi cumpleaños es el 10 de mayo"? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      My birthday is on May 10th
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      My birthday is on 10th May
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      My birthday are on May 10th
-                  </label>
-              </li>
-          </ul>
-          <p id="q3-feedback" class="feedback"></p>
+        <p>3. ¿Cómo se dice "Mi cumpleaños es el 10 de mayo"? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="correct"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              My birthday is on May 10th
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              My birthday is on 10th May
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              My birthday are on May 10th
+            </label>
+          </li>
+        </ul>
+        <p id="q3-feedback" class="feedback"></p>
       </div>
+      <div class="navigation-btns">
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-4')">Ir a la siguiente unidad</button>
+        <!-- Botón para la unidad anterior -->
+        <button onclick="showPreviousUnit('unidad-2')">Volver a la unidad anterior</button>
+    </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-4">
     <div class="video-info">
       <h3>Indicaciones y Direcciones.</h3>
       <p>
-        Cómo pedir y dar direcciones en inglés. Incluye vocabulario, ejemplos y
-        diálogos.
+        En esta unidad, los estudiantes aprenderán a pedir y dar indicaciones
+        para ubicarse en una ciudad. Se introduce el vocabulario relacionado con
+        direcciones (girar, avanzar, ubicaciones) y frases comunes para pedir
+        ayuda al buscar un lugar.
       </p>
     </div>
     <div class="video-container">
@@ -327,102 +387,125 @@
         title="Cómo pedir y dar direcciones en inglés"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+        allowfullscreen></iframe>
     </div>
     <div class="content-container">
+      <p>Los estudiantes podrán pedir y dar instrucciones claras en inglés para
+        moverse en una ciudad o encontrar un lugar, utilizando frases prácticas
+        y ubicaciones comunes.</p>
       <p>Cuestionario:</p>
 
       <!-- Pregunta 1 -->
       <div class="question">
-          <p>1. ¿Qué significa "Turn left"? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      Gira a la derecha
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      Gira a la izquierda
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
-                      Ve derecho
-                  </label>
-              </li>
-          </ul>
-          <p id="q1-feedback" class="feedback"></p>
+        <p>1. ¿Qué significa "Turn left"? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Gira a la derecha
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Gira a la izquierda
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Ve derecho
+            </label>
+          </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
       </div>
-      
+
       <!-- Pregunta 2 -->
       <div class="question">
-          <p>2. ¿Cómo se dice "en frente de" en inglés? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      Next to
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      Behind
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
-                      Across from
-                  </label>
-              </li>
-          </ul>
-          <p id="q2-feedback" class="feedback"></p>
+        <p>2. ¿Cómo se dice "en frente de" en inglés? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              Next to
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              Behind
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              Across from
+            </label>
+          </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
       </div>
-      
+
       <!-- Pregunta 3 -->
       <div class="question">
-          <p>3. ¿Qué frase usarías para pedir direcciones? ____</p>
-          <ul>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      Can you tell me where the station is?
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      What time is it?
-                  </label>
-              </li>
-              <li>
-                  <label>
-                      <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
-                      What is your name?
-                  </label>
-              </li>
-          </ul>
-          <p id="q3-feedback" class="feedback"></p>
+        <p>3. ¿Qué frase usarías para pedir direcciones? </p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="correct"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              Can you tell me where the station is?
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              What time is it?
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              What is your name?
+            </label>
+          </li>
+        </ul>
+        <p id="q3-feedback" class="feedback"></p>
       </div>
+      <div class="navigation-btns">
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('ing-elemental')">Subir al Siguiente nivel</button>
+        <!-- Botón para la unidad anterior -->
+        <button onclick="showPreviousUnit('unidad-3')">Volver a la unidad anterior</button>
+    </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="ing-elemental">
     <div class="video-info">
       <h3>Repaso de conocimientos previos.</h3>
       <p>
         Conocimientos esperados del nivel de Ingles Anterior
       </p>
+      <div class="navigation-btns">
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-5')">Ir a la siguiente unidad</button>
+        <!-- Botón para la unidad anterior -->
+        <button onclick="showPreviousUnit('unidad-4')">Volver al Nivel Anterior</button>
+    </div>
     </div>
   </div>
-    
-  <div class="video-section" onclick="toggleDescription(this)">
+
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-5">
     <div class="video-info">
       <h3 data-titulo="¡El verbo To Be!">¡El verbo To Be!</h3>
       <p>
@@ -431,12 +514,11 @@
     </div>
     <div class="video-container">
       <iframe
-        src="https://www.youtube.com/embed/O-pELo5MMkQ" 
-        title="Verb TO BE  - Verbo Ser Estar  | Lección # 2" 
-        frameborder="0" 
+        src="https://www.youtube.com/embed/O-pELo5MMkQ"
+        title="Verb TO BE  - Verbo Ser Estar  | Lección # 2"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+        allowfullscreen></iframe>
     </div>
     <div class="content-container">
       <ol>
@@ -446,15 +528,30 @@
       </ol>
       <p>
         <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex possimus hic culpa sed, totam expedita! Provident veniam enim nulla quas. Eligendi a maiores sed beatae dolores. Ratione consectetur quia temporibus?</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
+            possimus hic culpa sed, totam expedita! Provident veniam enim nulla
+            quas. Eligendi a maiores sed beatae dolores. Ratione consectetur
+            quia temporibus?</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
+            possimus hic culpa sed, totam expedita! Provident veniam enim nulla
+            quas. Eligendi a maiores sed beatae dolores. Ratione consectetur
+            quia temporibus?</li>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
+            possimus hic culpa sed, totam expedita! Provident veniam enim nulla
+            quas. Eligendi a maiores sed beatae dolores. Ratione consectetur
+            quia temporibus?</li>
         </ul>
       </p>
+      <div class="navigation-btns">
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-6')">Ir a la siguiente unidad</button>
+        <!-- Botón para la unidad anterior -->
+        <button onclick="showPreviousUnit('ing-elemental')">Volver a la unidad Anterior</button>
+    </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-6">
     <div class="video-info">
       <h3 data-titulo="Presente Continuo.">Presente Continuo.</h3>
       <p>
@@ -463,14 +560,14 @@
     </div>
     <div class="video-container">
       <iframe
-      src="https://www.youtube.com/embed/lGkxRXamy7Y" 
-      title="PRESENT CONTINUOUS (EXPLICACIÓN + PRÁCTICA) - INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS" 
-      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen
-      ></iframe>
+        src="https://www.youtube.com/embed/lGkxRXamy7Y"
+        title="PRESENT CONTINUOUS (EXPLICACIÓN + PRÁCTICA) - INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
   </div>
-      
+
   <div class="video-section" onclick="toggleDescription(this)">
     <div class="video-info">
       <h3 data-titulo="Mi rutina Diaria.">Mi rutina Diaria.</h3>
@@ -480,12 +577,11 @@
     </div>
     <div class="video-container">
       <iframe
-      src="https://www.youtube.com/embed/6j3r452hbUA" 
-      title="RUTINAS DIARIAS EN INGLÉS -DAILY ROUTINES- INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen
-      ></iframe>
+        src="https://www.youtube.com/embed/6j3r452hbUA"
+        title="RUTINAS DIARIAS EN INGLÉS -DAILY ROUTINES- INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
   </div>
 
@@ -498,12 +594,11 @@
     </div>
     <div class="video-container">
       <iframe
-      src="https://www.youtube.com/embed/6j3r452hbUA" 
-      title="RUTINAS DIARIAS EN INGLÉS -DAILY ROUTINES- INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen
-      ></iframe>
+        src="https://www.youtube.com/embed/6j3r452hbUA"
+        title="RUTINAS DIARIAS EN INGLÉS -DAILY ROUTINES- INGLÉS PARA NIÑOS CON MR.PEA - ENGLISH FOR KIDS"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
   </div>
 
@@ -511,39 +606,39 @@
   <!-- Quiz de Comprensión Lectora -->
   <div class="video-section">
     <div class="quiz-info">
-        <h3>Comprensión Lectora.</h3>
-        <p>Actividades de comprensión lectora</p>
+      <h3>Comprensión Lectora.</h3>
+      <p>Actividades de comprensión lectora</p>
     </div>
     <div class="quiz-container">
-        Comenzar Actividad
+      Comenzar Actividad
     </div>
   </div>
 
   <!-- Quiz de Unidades -->
   <div class="video-section">
-    <div class="quiz-info">      
-        <h3>Quiz de Unidades.</h3>
-        <p>Pon a prueba tus conocimientos con estos quizes</p>
+    <div class="quiz-info">
+      <h3>Quiz de Unidades.</h3>
+      <p>Pon a prueba tus conocimientos con estos quizes</p>
     </div>
     <div class="quiz-container">
-        {% if object_list %}
-        <div class="quizes-list">
-            {% for quiz in object_list %}
-            <div class="quiz-card">
-                <h4>{{ quiz.name }}</h4>
-                <p>Tema: {{ quiz.topic }}</p>
-                <p>Dificultad: {{ quiz.difficulty }}</p>
-                <p>Tiempo: {{ quiz.time }} minutos</p>
-                <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
-                <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
-                Comenzar Quiz
-                </a>
-            </div>
-            {% endfor %}
+      {% if object_list %}
+      <div class="quizes-list">
+        {% for quiz in object_list %}
+        <div class="quiz-card">
+          <h4>{{ quiz.name }}</h4>
+          <p>Tema: {{ quiz.topic }}</p>
+          <p>Dificultad: {{ quiz.difficulty }}</p>
+          <p>Tiempo: {{ quiz.time }} minutos</p>
+          <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
+          <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
+            Comenzar Quiz
+          </a>
         </div>
-        {% else %}
-        <p>No hay quizes disponibles en este momento.</p>
-        {% endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No hay quizes disponibles en este momento.</p>
+      {% endif %}
     </div>
   </div>
 

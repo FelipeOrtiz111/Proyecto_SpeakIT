@@ -112,3 +112,32 @@ function checkAnswer(option, feedbackId) {
       lastSelected[questionName] = option; // Guarda el botón seleccionado
   }
 }
+
+function showNextUnit(unitId) {
+  // Esconde todas las unidades
+  const allUnits = document.querySelectorAll('.video-section');
+  allUnits.forEach(unit => {
+      unit.style.display = 'none';
+  });
+
+  // Muestra la unidad solicitada
+  const nextUnit = document.getElementById(unitId);
+  if (nextUnit) {
+      nextUnit.style.display = 'block';
+  }
+}
+
+// Función para mostrar la unidad anterior
+function showPreviousUnit(unitId) {
+  // Esconde todas las unidades
+  const allUnits = document.querySelectorAll('.video-section');
+  allUnits.forEach(unit => {
+      unit.style.display = 'none';
+  });
+
+  // Muestra la unidad solicitada
+  const previousUnit = document.getElementById(unitId);
+  if (previousUnit) {
+      previousUnit.style.display = 'block';
+  }
+}
