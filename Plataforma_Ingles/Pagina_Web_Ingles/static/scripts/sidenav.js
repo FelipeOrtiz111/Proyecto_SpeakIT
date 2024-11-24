@@ -104,49 +104,65 @@ function checkAnswer(option, feedbackId) {
   feedback.style.display = "block"; // Mostrar el mensaje
 }
 
-// Función para mostrar la siguiente unidad
 function showNextUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
+  const links = document.querySelectorAll('.dropdown-container a.dc-a');
+
+  // Oculta todas las unidades
   allUnits.forEach(unit => {
-      unit.style.display = 'none';
+    unit.style.display = 'none';
   });
 
+  // Muestra la siguiente unidad
   const nextUnit = document.getElementById(unitId);
   if (nextUnit) {
-      nextUnit.style.display = 'block';
+    nextUnit.style.display = 'block';
+    
+    // Cambia el estilo del enlace correspondiente (similar a cuando se hace clic en un enlace)
+    links.forEach(link => {
+      if (link.getAttribute('data-titulo') === nextUnit.querySelector('h3').innerText) {
+        // Resalta el enlace correspondiente y aplica la animación
+        link.classList.add('clicked');
+        
+        // Si quieres hacer la animación, puedes agregarla aquí (ejemplo)
+        link.style.transition = "color 0.3s ease";
+        link.style.color = "blue";  // Color cuando está activo
+      } else {
+        link.classList.remove('clicked');
+        link.style.color = '';  // Restaura el color del enlace cuando no está activo
+      }
+    });
   }
 }
 
 // Función para mostrar la unidad anterior
 function showPreviousUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
+  const links = document.querySelectorAll('.dropdown-container a.dc-a');
+
+  // Oculta todas las unidades
   allUnits.forEach(unit => {
-      unit.style.display = 'none';
+    unit.style.display = 'none';
   });
 
+  // Muestra la unidad anterior
   const previousUnit = document.getElementById(unitId);
   if (previousUnit) {
-      previousUnit.style.display = 'block';
-  }
-}
-
-// Funciones para manejar los botones "Subir al siguiente nivel" y "Volver al nivel anterior"
-function showNextLevel(levelId) {
-  const allLevels = document.querySelectorAll('.video-section');
-  allLevels.forEach(level => level.style.display = 'none');
-
-  const nextLevel = document.getElementById(levelId);
-  if (nextLevel) {
-      nextLevel.style.display = 'block';
-  }
-}
-
-function showPreviousLevel(levelId) {
-  const allLevels = document.querySelectorAll('.video-section');
-  allLevels.forEach(level => level.style.display = 'none');
-
-  const previousLevel = document.getElementById(levelId);
-  if (previousLevel) {
-      previousLevel.style.display = 'block';
+    previousUnit.style.display = 'block';
+    
+    // Cambia el estilo del enlace correspondiente (similar a cuando se hace clic en un enlace)
+    links.forEach(link => {
+      if (link.getAttribute('data-titulo') === previousUnit.querySelector('h3').innerText) {
+        // Resalta el enlace correspondiente y aplica la animación
+        link.classList.add('clicked');
+        
+        // Si quieres hacer la animación, puedes agregarla aquí (ejemplo)
+        link.style.transition = "color 0.3s ease";
+        link.style.color = "blue";  // Color cuando está activo
+      } else {
+        link.classList.remove('clicked');
+        link.style.color = '';  // Restaura el color del enlace cuando no está activo
+      }
+    });
   }
 }
