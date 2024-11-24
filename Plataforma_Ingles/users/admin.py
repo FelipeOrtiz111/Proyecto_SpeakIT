@@ -4,10 +4,10 @@ from .models import CustomUser, StudentProfile, TeacherProfile, Section
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ['username', 'email', 'role', 'status']
-    list_filter = ['role', 'status']
+    list_display = ['username', 'email', 'role']
+    list_filter = ['role']
     fieldsets = UserAdmin.fieldsets + (
-        ('Additional Info', {'fields': ('role', 'status', 'description')}),
+        ('Additional Info', {'fields': ('role', 'description')}),
     )
 
 @admin.register(Section)
