@@ -6,9 +6,12 @@
 <main>
     <div class="titulo-main">
         Seguimiento de Actividades
+        {% if is_admin %}
+        <span class="badge badge-info">Vista de Administrador</span>
+        {% endif %}
     </div>
 
-    {% if is_teacher %}
+    {% if is_teacher or is_admin %}
         <div class="section-filter">
             <form method="get" class="form-inline mb-4">
                 <select name="section" class="form-control mr-2" onchange="this.form.submit()">
@@ -16,6 +19,9 @@
                     {% for section in sections %}
                         <option value="{{ section.id }}" {% if section.id|stringformat:"s" == selected_section %}selected{% endif %}>
                             {{ section.code }}
+                            {% if is_admin %}
+                                - {{ section.created_by.username }}
+                            {% endif %}
                         </option>
                     {% endfor %}
                 </select>
@@ -29,8 +35,12 @@
             <div class="activity-card">
                 <h3>{{ result.quiz.name }}</h3>
                 <div class="activity-details">
-                    {% if is_teacher %}
+                    {% if is_teacher or is_admin %}
                         <p>Estudiante: {{ result.user.username }}</p>
+                        {% if is_admin %}
+                            <p>Sección: {{ result.user.studentprofile.section.code }}</p>
+                            <p>Profesor: {{ result.user.studentprofile.section.created_by.username }}</p>
+                        {% endif %}
                     {% endif %}
                     <p>Fecha: {{ result.created|date:"d/m/Y H:i" }}</p>
                     <p>Puntaje: {{ result.score|floatformat:1 }}%</p>
@@ -39,8 +49,12 @@
             </div>
             {% endfor %}
         {% else %}
-            {% if is_teacher and not selected_section %}
-                <p>Seleccione una sección para ver los resultados.</p>
+            {% if is_teacher or is_admin %}
+                {% if not selected_section %}
+                    <p>Seleccione una sección para ver los resultados.</p>
+                {% else %}
+                    <p>No hay actividades completadas en esta sección.</p>
+                {% endif %}
             {% else %}
                 <p>No hay actividades completadas aún.</p>
             {% endif %}
