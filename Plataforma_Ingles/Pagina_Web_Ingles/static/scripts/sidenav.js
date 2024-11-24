@@ -1,3 +1,4 @@
+// Sidenav
 document.addEventListener("DOMContentLoaded", function() {
   // Oculta todos los videos al cargar la página
   const videoSections = document.querySelectorAll('.video-section');
@@ -56,12 +57,6 @@ links.forEach(link => {
     const selectedTitle = this.getAttribute('data-titulo');
     const noVideoMessage = document.querySelector('.no-video');
 
-    // Eliminar la clase 'active' de todos los enlaces
-    links.forEach(item => item.classList.remove('active'));
-
-    // Agregar la clase 'active' al enlace seleccionado
-    this.classList.add('active');
-
     // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
     if (this.classList.contains('clicked')) {
       links.forEach(item => item.classList.remove('clicked'));
@@ -93,6 +88,22 @@ links.forEach(link => {
   });
 });
 
+// Sección de Unidades
+function checkAnswer(option, feedbackId) {
+  const feedback = document.getElementById(feedbackId);
+
+  // Mostrar feedback según la respuesta seleccionada
+  if (option.value === 'correct') {
+    feedback.textContent = "¡Correcto!";
+    feedback.className = "feedback correct";
+  } else {
+    feedback.textContent = "Incorrecto";
+    feedback.className = "feedback incorrect";
+  }
+
+  feedback.style.display = "block"; // Mostrar el mensaje
+}
+
 // Función para mostrar la siguiente unidad
 function showNextUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
@@ -104,9 +115,6 @@ function showNextUnit(unitId) {
   if (nextUnit) {
       nextUnit.style.display = 'block';
   }
-
-  // Cambiar la clase 'active' del enlace correspondiente
-  setActiveLink(unitId);
 }
 
 // Función para mostrar la unidad anterior
@@ -120,9 +128,6 @@ function showPreviousUnit(unitId) {
   if (previousUnit) {
       previousUnit.style.display = 'block';
   }
-
-  // Cambiar la clase 'active' del enlace correspondiente
-  setActiveLink(unitId);
 }
 
 // Funciones para manejar los botones "Subir al siguiente nivel" y "Volver al nivel anterior"
@@ -134,9 +139,6 @@ function showNextLevel(levelId) {
   if (nextLevel) {
       nextLevel.style.display = 'block';
   }
-
-  // Cambiar la clase 'active' del enlace correspondiente
-  setActiveLink(levelId);
 }
 
 function showPreviousLevel(levelId) {
@@ -146,22 +148,5 @@ function showPreviousLevel(levelId) {
   const previousLevel = document.getElementById(levelId);
   if (previousLevel) {
       previousLevel.style.display = 'block';
-  }
-
-  // Cambiar la clase 'active' del enlace correspondiente
-  setActiveLink(levelId);
-}
-
-// Función para establecer el enlace activo según la unidad o nivel visible
-function setActiveLink(sectionId) {
-  const allLinks = document.querySelectorAll('.dropdown-container a.dc-a');
-  
-  // Eliminar 'active' de todos los enlaces
-  allLinks.forEach(link => link.classList.remove('active'));
-  
-  // Encontrar el enlace correspondiente y agregarle la clase 'active'
-  const activeLink = Array.from(allLinks).find(link => link.getAttribute('data-titulo') === sectionId);
-  if (activeLink) {
-    activeLink.classList.add('active');
   }
 }
