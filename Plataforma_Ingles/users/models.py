@@ -1,7 +1,20 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from crispy_forms import forms
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .models import Perfil
+
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['first_name', 'last_name', 'email', 'description']
+        labels = {
+            'first_name': 'Nombre',
+            'last_name': 'Apellido',
+            'email': 'Correo Electrónico',
+            'description': 'Descripción',
+        }
 
 class CustomUser(AbstractUser):
     class Role(models.TextChoices):

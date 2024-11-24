@@ -49,10 +49,12 @@ html, body {
   width: 100%;
   padding-right: 30px;
 }
-.perfil-img{
-  padding-top: 36px;
-}
 
+.perfil-img {
+  padding-top: 36px;
+  display: flex;
+  flex-direction: column;
+}
 .perfil-img img{
   height: 320px;
   border-radius: 50%;
