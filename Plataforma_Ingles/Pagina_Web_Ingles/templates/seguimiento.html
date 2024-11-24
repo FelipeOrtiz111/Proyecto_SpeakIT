@@ -8,12 +8,30 @@
         Seguimiento de Actividades
     </div>
 
+    {% if is_teacher %}
+        <div class="section-filter">
+            <form method="get" class="form-inline mb-4">
+                <select name="section" class="form-control mr-2" onchange="this.form.submit()">
+                    <option value="">Seleccionar Sección</option>
+                    {% for section in sections %}
+                        <option value="{{ section.id }}" {% if section.id|stringformat:"s" == selected_section %}selected{% endif %}>
+                            {{ section.code }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    {% endif %}
+
     <div class="seguimiento-container">
         {% if user_results %}
             {% for result in user_results %}
             <div class="activity-card">
                 <h3>{{ result.quiz.name }}</h3>
                 <div class="activity-details">
+                    {% if is_teacher %}
+                        <p>Estudiante: {{ result.user.username }}</p>
+                    {% endif %}
                     <p>Fecha: {{ result.created|date:"d/m/Y H:i" }}</p>
                     <p>Puntaje: {{ result.score|floatformat:1 }}%</p>
                     <p>Intento: {{ result.attempt_number }}/{{ result.quiz.allowed_attempts }}</p>
@@ -21,7 +39,11 @@
             </div>
             {% endfor %}
         {% else %}
-            <p>No hay actividades completadas aún.</p>
+            {% if is_teacher and not selected_section %}
+                <p>Seleccione una sección para ver los resultados.</p>
+            {% else %}
+                <p>No hay actividades completadas aún.</p>
+            {% endif %}
         {% endif %}
     </div>
 </main>

@@ -4,6 +4,8 @@ from .models import Quiz
 from django.views.generic import ListView
 from django.http import JsonResponse
 from questions.models import Question, Answer
+from users.models import StudentProfile, Section
+from results.models import Result
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.db.models import Avg, Max
@@ -175,11 +177,33 @@ def seguimiento_view(request):
         messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
         return redirect('login')
     
-    # Obtener todos los resultados del usuario
-    user_results = Result.objects.filter(user=request.user).order_by('-created')
-    
-    context = {
-        'user_results': user_results,
-    }
+    # Si es profesor, mostrar resultados de sus secciones
+    if request.user.role == 'TEACHER':
+        # Obtener las secciones creadas por el profesor
+        sections = Section.objects.filter(created_by=request.user)
+        selected_section = request.GET.get('section')
+        
+        if selected_section:
+            # Obtener los estudiantes de la sección seleccionada
+            student_profiles = StudentProfile.objects.filter(section_id=selected_section)
+            students = [profile.user for profile in student_profiles]
+            # Obtener resultados de esos estudiantes
+            user_results = Result.objects.filter(user__in=students).order_by('-created')
+        else:
+            user_results = []
+        
+        context = {
+            'user_results': user_results,
+            'sections': sections,
+            'selected_section': selected_section,
+            'is_teacher': True
+        }
+    else:
+        # Para estudiantes, mostrar solo sus resultados
+        user_results = Result.objects.filter(user=request.user).order_by('-created')
+        context = {
+            'user_results': user_results,
+            'is_teacher': False
+        }
     
     return render(request, 'seguimiento.html', context)

@@ -663,6 +663,23 @@ ul li a.active:after {
     margin-top: 5px;
 }
 
+.section-filter {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.section-filter select {
+  min-width: 200px;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Ajustes para el layout con sidebar */
 /* body {
     display: flex;

@@ -10,15 +10,8 @@ class CustomUser(AbstractUser):
         TEACHER = "TEACHER", "Teacher"
         OTHER = "OTHER", "Other"
 
-    STATUS = (
-        ('regular', 'regular'),
-        ('subscriber', 'subscriber'),
-        ('moderator', 'moderator'),
-    )
-
     email = models.EmailField(unique=True)
     description = models.TextField("Description", max_length=600, default='', blank=True)
-    status = models.CharField(max_length=100, choices=STATUS, default='regular')
     role = models.CharField(max_length=50, choices=Role.choices, default=Role.OTHER)
 
     def __str__(self):
