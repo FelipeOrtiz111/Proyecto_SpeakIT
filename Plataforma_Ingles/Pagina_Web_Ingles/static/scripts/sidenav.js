@@ -89,10 +89,17 @@ links.forEach(link => {
 });
 
 //Seccion de Unidades
-function showAnswers() {
-  // Mostrar todos los elementos con la clase 'correct'
-  const correctAnswers = document.querySelectorAll('.correct');
-  correctAnswers.forEach(answer => {
-      answer.style.display = 'inline'; // Cambiar a inline para que se muestren
-  });
+function checkAnswer(option, feedbackId) {
+  const feedback = document.getElementById(feedbackId);
+
+  // Mostrar feedback según la respuesta seleccionada
+  if (option.value === 'correct') {
+      feedback.textContent = "¡Correcto!";
+      feedback.className = "feedback correct";
+  } else {
+      feedback.textContent = "Incorrecto";
+      feedback.className = "feedback incorrect";
+  }
+
+  feedback.style.display = "block"; // Mostrar el mensaje
 }
