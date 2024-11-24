@@ -166,6 +166,8 @@ ul li:nth-child(3) { animation-delay: 0.3s; }
 ul li:nth-child(4) { animation-delay: 0.4s; }
 ul li:nth-child(5) { animation-delay: 0.5s; }
 ul li:nth-child(6) { animation-delay: 0.6s; }
+ul li:nth-child(7) { animation-delay: 0.7s; }
+ul li:nth-child(8) { animation-delay: 0.8s; }
 
 ul li a {
   transform: scale(1);
@@ -205,7 +207,7 @@ ul li a:before {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(to right, #3240ff, #7091ff, #8cbdfc);
+  background: linear-gradient(90deg, rgb(160, 59, 255) 0%, rgb(140, 0, 255) 100%);
   z-index: 1;
   transform: scaleX(0);
   transform-origin: left;
