@@ -9,9 +9,9 @@
   <div class="titulo-main">Sección de Contenido</div>
   <div class="no-video">No se encuentra Video</div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="unidad-1">
+  <div class="video-section" id="unidad-1">
     <div class="video-info">
-      <h3>Acercamiento al Inglés.</h3>
+      <h3>Acercamiento al Inglés</h3>
       <p>
         En esta primera unidad, los estudiantes aprenderán sobre los pronombres
         en inglés (personales, posesivos, reflexivos, etc.) y su uso en
@@ -43,22 +43,19 @@
         <ul>
           <li>
             <label>
-              <input type="radio" name="q1" value="incorrect"
-                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
               Her is
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q1" value="correct"
-                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              <input type="radio" name="q1" value="correct" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
               She is
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q1" value="incorrect"
-                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              <input type="radio" name="q1" value="incorrect" onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
               She was
             </label>
           </li>
@@ -72,22 +69,19 @@
         <ul>
           <li>
             <label>
-              <input type="radio" name="q2" value="incorrect"
-                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
               He is
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q2" value="incorrect"
-                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              <input type="radio" name="q2" value="incorrect" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
               He would
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q2" value="correct"
-                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              <input type="radio" name="q2" value="correct" onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
               He was
             </label>
           </li>
@@ -101,22 +95,19 @@
         <ul>
           <li>
             <label>
-              <input type="radio" name="q3" value="incorrect"
-                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
               They will
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q3" value="incorrect"
-                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              <input type="radio" name="q3" value="incorrect" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
               They were
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q3" value="correct"
-                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              <input type="radio" name="q3" value="correct" onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
               They are
             </label>
           </li>
@@ -124,15 +115,13 @@
         <p id="q3-feedback" class="feedback"></p>
       </div>
       <div class="navigation-btns">
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente unidad</button>
-        <!-- Botón para la unidad anterior -->
         <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
-    </div>
+        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente unidad</button>
+      </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="unidad-2">
+  <div class="video-section" id="unidad-2">
     <div class="video-info">
       <h3>¡Describiendo el mundo!</h3>
       <p>
@@ -243,15 +232,15 @@
         <p id="q3-feedback" class="feedback"></p>
       </div>
       <div class="navigation-btns">
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-3')">Ir a la siguiente unidad</button>
         <!-- Botón para la unidad anterior -->
         <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-3')">Ir a la siguiente unidad</button>
     </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="unidad-3">
+  <div class="video-section" id="unidad-3">
     <div class="video-info">
       <h3>Cumpleaños y Fechas.</h3>
       <p>
@@ -363,15 +352,15 @@
         <p id="q3-feedback" class="feedback"></p>
       </div>
       <div class="navigation-btns">
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-4')">Ir a la siguiente unidad</button>
         <!-- Botón para la unidad anterior -->
         <button onclick="showPreviousUnit('unidad-2')">Volver a la unidad anterior</button>
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-4')">Ir a la siguiente unidad</button>
     </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="unidad-4">
+  <div class="video-section" id="unidad-4">
     <div class="video-info">
       <h3>Indicaciones y Direcciones.</h3>
       <p>
@@ -482,30 +471,30 @@
         <p id="q3-feedback" class="feedback"></p>
       </div>
       <div class="navigation-btns">
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('ing-elemental')">Subir al Siguiente nivel</button>
         <!-- Botón para la unidad anterior -->
         <button onclick="showPreviousUnit('unidad-3')">Volver a la unidad anterior</button>
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('ing-elemental')">Subir al Siguiente nivel</button>
     </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="ing-elemental">
+  <div class="video-section" id="ing-elemental">
     <div class="video-info">
       <h3>Repaso de conocimientos previos.</h3>
       <p>
         Conocimientos esperados del nivel de Ingles Anterior
       </p>
       <div class="navigation-btns">
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-5')">Ir a la siguiente unidad</button>
         <!-- Botón para la unidad anterior -->
         <button onclick="showPreviousUnit('unidad-4')">Volver al Nivel Anterior</button>
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-5')">Ir a la siguiente unidad</button>
     </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="unidad-5">
+  <div class="video-section" id="unidad-5">
     <div class="video-info">
       <h3 data-titulo="¡El verbo To Be!">¡El verbo To Be!</h3>
       <p>
@@ -551,7 +540,7 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="unidad-6">
+  <div class="video-section" id="unidad-6">
     <div class="video-info">
       <h3 data-titulo="Presente Continuo.">Presente Continuo.</h3>
       <p>
@@ -568,7 +557,7 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section">
     <div class="video-info">
       <h3 data-titulo="Mi rutina Diaria.">Mi rutina Diaria.</h3>
       <p>
@@ -585,7 +574,7 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section">
     <div class="video-info">
       <h3 data-titulo="Comprensión Lectora">¿Qué he Aprendido?</h3>
       <p>
@@ -642,7 +631,7 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section">
     <div class="quiz-info">
       <h3>¡Arrastra y Suelta!</h3>
       <p>
@@ -654,7 +643,7 @@
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section">
     <div class="quiz-info">
       <h3>Une los Verbos.</h3>
       <p>
