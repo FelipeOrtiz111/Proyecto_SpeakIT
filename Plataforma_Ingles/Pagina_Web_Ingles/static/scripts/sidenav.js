@@ -1,4 +1,3 @@
-// Sidenav
 document.addEventListener("DOMContentLoaded", function() {
   // Oculta todos los videos al cargar la página
   const videoSections = document.querySelectorAll('.video-section');
@@ -38,17 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-var dropdown = document.getElementsByClassName("dropdown-btn");
-
-for (let i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var dropdownContent = this.nextElementSibling;
-      dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-  });
-}
-
-const links = document.querySelectorAll('.dropdown-container a.dc-a');
+// Manejador de click para los enlaces de la sidebar
+const links = document.querySelectorAll('.sidebar .dc-a');
 const videoSections = document.querySelectorAll('.video-section');
 const noVideoMessage = document.querySelector('.no-video');
 
@@ -57,9 +47,14 @@ links.forEach(link => {
     const selectedTitle = this.getAttribute('data-titulo');
     const noVideoMessage = document.querySelector('.no-video');
 
+    // Eliminar la clase 'active' de todos los enlaces
+    links.forEach(item => item.classList.remove('active'));
+
+    // Agregar la clase 'active' al enlace seleccionado
+    this.classList.add('active');
+
     // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
     if (this.classList.contains('clicked')) {
-      links.forEach(item => item.classList.remove('clicked'));
       videoSections.forEach(video => video.style.display = 'none');
       if (noVideoMessage) {
         noVideoMessage.style.display = 'block';
@@ -105,48 +100,47 @@ function checkAnswer(option, feedbackId) {
 }
 
 // Función para mostrar la siguiente unidad
-function showNextUnit(unitId) {
+function showNextUnit(unitId, button) {
   const allUnits = document.querySelectorAll('.video-section');
   allUnits.forEach(unit => {
-      unit.style.display = 'none';
+    unit.style.display = 'none';
   });
 
   const nextUnit = document.getElementById(unitId);
   if (nextUnit) {
-      nextUnit.style.display = 'block';
+    nextUnit.style.display = 'block';
+  }
+
+  // Activar el enlace correspondiente
+  const allLinks = document.querySelectorAll('.sidebar .dc-a');
+  allLinks.forEach(link => link.classList.remove('active'));
+
+  // Añadir la clase 'active' al enlace de la unidad actual
+  const currentLink = document.querySelector(`.sidebar .dc-a[data-titulo="${unitId}"]`);
+  if (currentLink) {
+    currentLink.classList.add('active');
   }
 }
 
 // Función para mostrar la unidad anterior
-function showPreviousUnit(unitId) {
+function showPreviousUnit(unitId, button) {
   const allUnits = document.querySelectorAll('.video-section');
   allUnits.forEach(unit => {
-      unit.style.display = 'none';
+    unit.style.display = 'none';
   });
 
   const previousUnit = document.getElementById(unitId);
   if (previousUnit) {
-      previousUnit.style.display = 'block';
+    previousUnit.style.display = 'block';
   }
-}
 
-// Funciones para manejar los botones "Subir al siguiente nivel" y "Volver al nivel anterior"
-function showNextLevel(levelId) {
-  const allLevels = document.querySelectorAll('.video-section');
-  allLevels.forEach(level => level.style.display = 'none');
+  // Activar el enlace correspondiente
+  const allLinks = document.querySelectorAll('.sidebar .dc-a');
+  allLinks.forEach(link => link.classList.remove('active'));
 
-  const nextLevel = document.getElementById(levelId);
-  if (nextLevel) {
-      nextLevel.style.display = 'block';
-  }
-}
-
-function showPreviousLevel(levelId) {
-  const allLevels = document.querySelectorAll('.video-section');
-  allLevels.forEach(level => level.style.display = 'none');
-
-  const previousLevel = document.getElementById(levelId);
-  if (previousLevel) {
-      previousLevel.style.display = 'block';
+  // Añadir la clase 'active' al enlace de la unidad actual
+  const currentLink = document.querySelector(`.sidebar .dc-a[data-titulo="${unitId}"]`);
+  if (currentLink) {
+    currentLink.classList.add('active');
   }
 }

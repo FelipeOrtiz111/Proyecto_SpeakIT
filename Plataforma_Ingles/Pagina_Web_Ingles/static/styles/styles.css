@@ -34,6 +34,15 @@ footer {
   align-items: center;
 }
 
+hr {
+  margin: 0;
+  height: 1px;
+  border: none;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  background-size: 100%;
+  position: relative;
+}
+
 nav {
   max-height: 60px;
   width: 100%;
@@ -129,15 +138,6 @@ main h3{
   color: #fff;
   text-decoration: none;
   font-family: 'Lato', 'sans-serif';
-}
-
-hr {
-  margin: 0;
-  height: 1px;
-  border: none;
-  background: linear-gradient(to right, transparent, #fff, transparent);
-  background-size: 100%;
-  position: relative;
 }
 
 .sidebar a{
@@ -665,31 +665,6 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   gap: 10px;
 }
 
-/* Ajustes para el layout con sidebar */
-/* body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex: 1;
-    margin-left: 25%;
-    padding: 80px 20px 60px;
-    background-color: gainsboro;
-}
-
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 60px;
-    bottom: 45px;
-    width: 25%;
-    background-color: #262626;
-    overflow-y: auto;
-    z-index: 100;
-} */
-
 .activity-card {
     background: white;
     border-radius: 8px;
@@ -768,18 +743,18 @@ main {
 }
 
 /* Estilos adicionales (opcional) para botones de "Volver" o "Siguiente" */
-.navigation-btns button:first-child {
-  background-color: #28a745;  /* Verde para el botón de "Volver" */
-}
-
-.navigation-btns button:first-child:hover {
-  background-color: #218838;  /* Cambio de color para el botón de "Volver" */
-}
-
 .navigation-btns button:last-child {
-  background-color: #ffc107;  /* Amarillo para el botón de "Siguiente" */
+  background-color: #28a745;  /* Verde para el botón de "Siguiente" */
 }
 
 .navigation-btns button:last-child:hover {
-  background-color: #e0a800;  /* Cambio de color para el botón de "Siguiente" */
+  background-color: #218838;  /* Cambio de color para el botón de "Siguiente" */
+}
+
+.navigation-btns button:first-child {
+  background-color: #ffc107;  /* Amarillo para el botón de "Volver" */
+}
+
+.navigation-btns button:first-child:hover {
+  background-color: #e0a800;  /* Cambio de color para el botón de "Volver" */
 }
