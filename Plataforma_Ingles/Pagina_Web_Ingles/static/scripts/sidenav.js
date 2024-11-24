@@ -37,8 +37,17 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// Manejador de click para los enlaces de la sidebar
-const links = document.querySelectorAll('.sidebar .dc-a');
+var dropdown = document.getElementsByClassName("dropdown-btn");
+
+for (let i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+  });
+}
+
+const links = document.querySelectorAll('.dropdown-container a.dc-a');
 const videoSections = document.querySelectorAll('.video-section');
 const noVideoMessage = document.querySelector('.no-video');
 
@@ -55,6 +64,7 @@ links.forEach(link => {
 
     // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
     if (this.classList.contains('clicked')) {
+      links.forEach(item => item.classList.remove('clicked'));
       videoSections.forEach(video => video.style.display = 'none');
       if (noVideoMessage) {
         noVideoMessage.style.display = 'block';
@@ -100,47 +110,74 @@ function checkAnswer(option, feedbackId) {
 }
 
 // Función para mostrar la siguiente unidad
-function showNextUnit(unitId, button) {
+function showNextUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
   allUnits.forEach(unit => {
-    unit.style.display = 'none';
+      unit.style.display = 'none';
   });
 
   const nextUnit = document.getElementById(unitId);
   if (nextUnit) {
-    nextUnit.style.display = 'block';
+      nextUnit.style.display = 'block';
   }
 
-  // Activar el enlace correspondiente
-  const allLinks = document.querySelectorAll('.sidebar .dc-a');
-  allLinks.forEach(link => link.classList.remove('active'));
-
-  // Añadir la clase 'active' al enlace de la unidad actual
-  const currentLink = document.querySelector(`.sidebar .dc-a[data-titulo="${unitId}"]`);
-  if (currentLink) {
-    currentLink.classList.add('active');
-  }
+  // Cambiar la clase 'active' del enlace correspondiente
+  setActiveLink(unitId);
 }
 
 // Función para mostrar la unidad anterior
-function showPreviousUnit(unitId, button) {
+function showPreviousUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
   allUnits.forEach(unit => {
-    unit.style.display = 'none';
+      unit.style.display = 'none';
   });
 
   const previousUnit = document.getElementById(unitId);
   if (previousUnit) {
-    previousUnit.style.display = 'block';
+      previousUnit.style.display = 'block';
   }
 
-  // Activar el enlace correspondiente
-  const allLinks = document.querySelectorAll('.sidebar .dc-a');
-  allLinks.forEach(link => link.classList.remove('active'));
+  // Cambiar la clase 'active' del enlace correspondiente
+  setActiveLink(unitId);
+}
 
-  // Añadir la clase 'active' al enlace de la unidad actual
-  const currentLink = document.querySelector(`.sidebar .dc-a[data-titulo="${unitId}"]`);
-  if (currentLink) {
-    currentLink.classList.add('active');
+// Funciones para manejar los botones "Subir al siguiente nivel" y "Volver al nivel anterior"
+function showNextLevel(levelId) {
+  const allLevels = document.querySelectorAll('.video-section');
+  allLevels.forEach(level => level.style.display = 'none');
+
+  const nextLevel = document.getElementById(levelId);
+  if (nextLevel) {
+      nextLevel.style.display = 'block';
+  }
+
+  // Cambiar la clase 'active' del enlace correspondiente
+  setActiveLink(levelId);
+}
+
+function showPreviousLevel(levelId) {
+  const allLevels = document.querySelectorAll('.video-section');
+  allLevels.forEach(level => level.style.display = 'none');
+
+  const previousLevel = document.getElementById(levelId);
+  if (previousLevel) {
+      previousLevel.style.display = 'block';
+  }
+
+  // Cambiar la clase 'active' del enlace correspondiente
+  setActiveLink(levelId);
+}
+
+// Función para establecer el enlace activo según la unidad o nivel visible
+function setActiveLink(sectionId) {
+  const allLinks = document.querySelectorAll('.dropdown-container a.dc-a');
+  
+  // Eliminar 'active' de todos los enlaces
+  allLinks.forEach(link => link.classList.remove('active'));
+  
+  // Encontrar el enlace correspondiente y agregarle la clase 'active'
+  const activeLink = Array.from(allLinks).find(link => link.getAttribute('data-titulo') === sectionId);
+  if (activeLink) {
+    activeLink.classList.add('active');
   }
 }
