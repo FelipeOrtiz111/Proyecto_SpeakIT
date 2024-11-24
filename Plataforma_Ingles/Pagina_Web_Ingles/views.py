@@ -177,10 +177,16 @@ def seguimiento_view(request):
         messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
         return redirect('login')
     
-    # Si es profesor, mostrar resultados de sus secciones
-    if request.user.role == 'TEACHER':
-        # Obtener las secciones creadas por el profesor
-        sections = Section.objects.filter(created_by=request.user)
+    # Si es profesor o administrador, mostrar resultados de las secciones
+    if request.user.role == 'TEACHER' or request.user.is_staff:
+        # Obtener las secciones
+        if request.user.is_staff:
+            # Para administradores, mostrar todas las secciones
+            sections = Section.objects.all()
+        else:
+            # Para profesores, mostrar solo sus secciones
+            sections = Section.objects.filter(created_by=request.user)
+            
         selected_section = request.GET.get('section')
         
         if selected_section:
@@ -196,14 +202,16 @@ def seguimiento_view(request):
             'user_results': user_results,
             'sections': sections,
             'selected_section': selected_section,
-            'is_teacher': True
+            'is_teacher': True,
+            'is_admin': request.user.is_staff
         }
     else:
         # Para estudiantes, mostrar solo sus resultados
         user_results = Result.objects.filter(user=request.user).order_by('-created')
         context = {
             'user_results': user_results,
-            'is_teacher': False
+            'is_teacher': False,
+            'is_admin': False
         }
     
     return render(request, 'seguimiento.html', context)

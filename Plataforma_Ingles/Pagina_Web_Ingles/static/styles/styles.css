@@ -724,3 +724,17 @@ main {
 .activity-details p {
     margin: 5px 0;
 }
+
+.badge-info {
+    background-color: #17a2b8;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    margin-left: 1em;
+    font-size: 0.8em;
+}
+
+.titulo-main {
+    display: flex;
+    align-items: center;
+}
