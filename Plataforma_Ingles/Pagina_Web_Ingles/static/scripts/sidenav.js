@@ -155,10 +155,6 @@ function showPreviousUnit(unitId) {
       if (link.getAttribute('data-titulo') === previousUnit.querySelector('h3').innerText) {
         // Resalta el enlace correspondiente y aplica la animación
         link.classList.add('clicked');
-        
-        // Si quieres hacer la animación, puedes agregarla aquí (ejemplo)
-        link.style.transition = "color 0.3s ease";
-        link.style.color = "blue";  // Color cuando está activo
       } else {
         link.classList.remove('clicked');
         link.style.color = '';  // Restaura el color del enlace cuando no está activo
