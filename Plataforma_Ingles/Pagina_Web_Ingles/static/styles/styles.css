@@ -734,3 +734,52 @@ main {
 .incorrect {
   color: red;
 }
+
+/* Estilos generales para los botones */
+.navigation-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+/* Estilo para cada botón */
+.navigation-btns button {
+  background-color: #007bff;  /* Azul brillante */
+  color: white;  /* Texto en blanco */
+  font-size: 16px;  /* Tamaño de fuente */
+  padding: 10px 20px;  /* Relleno (espaciado interno) */
+  border: none;  /* Eliminar el borde predeterminado */
+  border-radius: 5px;  /* Bordes redondeados */
+  cursor: pointer;  /* Cambiar el cursor al pasar sobre el botón */
+  transition: background-color 0.3s, transform 0.2s;  /* Transiciones suaves */
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+.navigation-btns button:hover {
+  background-color: #0056b3;  /* Cambio de color al pasar el mouse (azul más oscuro) */
+  transform: translateY(-2px);  /* Efecto de elevar el botón */
+}
+
+/* Estilo cuando el botón está deshabilitado */
+.navigation-btns button:disabled {
+  background-color: #ccc;  /* Color gris cuando está deshabilitado */
+  cursor: not-allowed;  /* Cursor en forma de cruz cuando está deshabilitado */
+}
+
+/* Estilos adicionales (opcional) para botones de "Volver" o "Siguiente" */
+.navigation-btns button:first-child {
+  background-color: #28a745;  /* Verde para el botón de "Volver" */
+}
+
+.navigation-btns button:first-child:hover {
+  background-color: #218838;  /* Cambio de color para el botón de "Volver" */
+}
+
+.navigation-btns button:last-child {
+  background-color: #ffc107;  /* Amarillo para el botón de "Siguiente" */
+}
+
+.navigation-btns button:last-child:hover {
+  background-color: #e0a800;  /* Cambio de color para el botón de "Siguiente" */
+}
