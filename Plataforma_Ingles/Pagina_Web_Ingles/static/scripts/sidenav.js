@@ -1,57 +1,63 @@
+// Sidenav
 document.addEventListener("DOMContentLoaded", function() {
-  // Ocultar todos los videos al cargar la página
+  // Oculta todos los videos al cargar la página
   const videoSections = document.querySelectorAll('.video-section');
   const noVideoMessage = document.querySelector('.no-video');
 
-  // Solo ejecutar si hay secciones de video
+  // Solo ejecuta el código si hay secciones de video en la página
   if (videoSections.length > 0) {
     videoSections.forEach(video => video.style.display = 'none');
 
-    // Mostrar mensaje por defecto si existe
+    // Muestra el mensaje por defecto solo si existe el elemento
     if (noVideoMessage) {
       noVideoMessage.style.display = 'block';
     }
   }
 
-  // Recuperar estado guardado y volver a la sección y contenido anterior
+  // Recuperar el estado guardado
   const returnToSection = localStorage.getItem('returnToSection');
   const returnToContent = localStorage.getItem('returnToContent');
 
   if (returnToSection && returnToContent) {
+    // Encontrar y hacer clic en el botón de la sección
     const sectionButton = document.querySelector(`.${returnToSection}`);
     if (sectionButton) {
       sectionButton.click();
     }
 
+    // Encontrar y hacer clic en el enlace del contenido
     const contentLink = Array.from(document.querySelectorAll('.dc-a'))
       .find(a => a.getAttribute('data-titulo') === returnToContent);
     if (contentLink) {
       contentLink.click();
     }
 
+    // Limpiar el estado guardado
     localStorage.removeItem('returnToSection');
     localStorage.removeItem('returnToContent');
   }
 });
 
-// Manejo de dropdowns
 var dropdown = document.getElementsByClassName("dropdown-btn");
+
 for (let i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
   });
 }
 
-// Función de navegación entre las unidades
 const links = document.querySelectorAll('.dropdown-container a.dc-a');
+const videoSections = document.querySelectorAll('.video-section');
+const noVideoMessage = document.querySelector('.no-video');
+
 links.forEach(link => {
   link.addEventListener('click', function() {
     const selectedTitle = this.getAttribute('data-titulo');
     const noVideoMessage = document.querySelector('.no-video');
 
-    // Desactivar todos los enlaces y ocultar videos si ya estaba activo
+    // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
     if (this.classList.contains('clicked')) {
       links.forEach(item => item.classList.remove('clicked'));
       videoSections.forEach(video => video.style.display = 'none');
@@ -59,6 +65,7 @@ links.forEach(link => {
         noVideoMessage.style.display = 'block';
       }
     } else {
+      // Alterna el estado de activación usando toggle
       links.forEach(item => item.classList.remove('clicked'));
       this.classList.toggle('clicked');
 
@@ -73,6 +80,7 @@ links.forEach(link => {
         }
       });
 
+      // Muestra u oculta el mensaje "No se encuentra Video"
       if (noVideoMessage) {
         noVideoMessage.style.display = videoFound ? 'none' : 'block';
       }
@@ -80,32 +88,23 @@ links.forEach(link => {
   });
 });
 
-let lastSelected = {};
-
-// Función para comprobar respuestas
+// Sección de Unidades
 function checkAnswer(option, feedbackId) {
   const feedback = document.getElementById(feedbackId);
-  const questionName = option.name;
 
-  if (lastSelected[questionName] === option) {
-      option.checked = false;
-      feedback.style.display = "none";
-      lastSelected[questionName] = null;
+  // Mostrar feedback según la respuesta seleccionada
+  if (option.value === 'correct') {
+    feedback.textContent = "¡Correcto!";
+    feedback.className = "feedback correct";
   } else {
-      if (option.value === 'correct') {
-          feedback.textContent = "¡Correcto!";
-          feedback.className = "feedback correct";
-      } else {
-          feedback.textContent = "Incorrecto";
-          feedback.className = "feedback incorrect";
-      }
-
-      feedback.style.display = "block";
-      lastSelected[questionName] = option;
+    feedback.textContent = "Incorrecto";
+    feedback.className = "feedback incorrect";
   }
+
+  feedback.style.display = "block"; // Mostrar el mensaje
 }
 
-// Función para mostrar la siguiente unidad o nivel
+// Función para mostrar la siguiente unidad
 function showNextUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
   allUnits.forEach(unit => {
@@ -118,7 +117,7 @@ function showNextUnit(unitId) {
   }
 }
 
-// Función para mostrar la unidad o nivel anterior
+// Función para mostrar la unidad anterior
 function showPreviousUnit(unitId) {
   const allUnits = document.querySelectorAll('.video-section');
   allUnits.forEach(unit => {
