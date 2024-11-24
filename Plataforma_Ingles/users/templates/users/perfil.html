@@ -3,45 +3,50 @@
 {% block content %}
 <div class="main">
     <div class="contenido-form">
-    <legend class="border-bottom mb-4">Información del Perfil</legend>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="media">
-            <div class="media-body">
-                <h2 class="account-heading">{{ form.instance.username }}
-                    <small class="text-muted">({{ form.instance.status }})</small>
-                </h2>
-                <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
-                <p class="text-secondary">{{ form.instance.email }}</p>
-                <p class="text-secondary">{{ form.instance.description }}</p>
+        <legend class="border-bottom mb-4">Información del Perfil</legend>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="media">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ form.instance.username }}
+                        <small class="text-muted">({{ form.instance.status }})</small>
+                    </h2>
+                    <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
+                    <p class="text-secondary">{{ form.instance.email }}</p>
+                    <p class="text-secondary">{{ form.instance.description }}</p>
+                </div>
             </div>
-        </div>
 
-        {% if user.username == form.instance.username %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Editar Información del Perfil</legend>
-                <div class="form-row">
-                    <div class="form-group col-md-6 mb-0">
-                        {{ form.first_name|as_crispy_field }}
+            {% if user.username == form.instance.username %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Editar Información del Perfil</legend>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            <label for="id_first_name">Nombre</label>
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            <label for="id_last_name">Apellido</label>
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
                     </div>
-                    <div class="form-group col-md-6 mb-0">
-                        {{ form.last_name|as_crispy_field }}
-                    </div>
-                </div> 
-                {{ form.email|as_crispy_field }}
-                {{ form.description|as_crispy_field }}
+                    <label for="id_email">Correo Electrónico</label>
+                    {{ form.email|as_crispy_field }}
 
-                <a href="{% url 'password_change' %}">¿Cambiar contraseña?</a>
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Actualizar</button>
-            </div>
-        {% endif %}
-    </form>
-</div>
-<div class="perfil-img">
-    <img src="/static/images/img_avatar.png" alt="Imagen de Perfil">
-    <button class="button button1">Aun No Disponible</button>
-</div>
+                    <label for="id_description">Descripción</label>
+                    {{ form.description|as_crispy_field }}
+
+                    <a href="{% url 'password_change' %}">¿Cambiar contraseña?</a>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Actualizar</button>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+    <div class="perfil-img">
+        <img src="/static/images/img_avatar.png" alt="Imagen de Perfil">
+        <button class="button button1">Aún No Disponible</button>
+    </div>
 </div>
 {% endblock content %}
