@@ -832,6 +832,67 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
+
+    <div class="content-container">
+      <h4>Pronouns</h4>
+      <div class="pronoun-list">
+        <div class="pronoun-item">
+          <span class="pronoun">I</span> - 
+          <span class="example">I am ill</span>
+          <span class="translation">(Estoy enfermo)</span>
+          <audio id="audio-i" src="{% static 'audio/i-am-ill.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-i').play()">▶️</button>
+        </div>
+
+        <div class="pronoun-item">
+          <span class="pronoun">You</span> - 
+          <span class="example">You are tall</span>
+          <span class="translation">(Tú eres alto)</span>
+          <audio id="audio-you" src="{% static 'audio/you-are-tall.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-you').play()">▶️</button>
+        </div>
+
+        <div class="pronoun-item">
+          <span class="pronoun">He</span> - 
+          <span class="example">He is handsome</span>
+          <span class="translation">(Él es guapo)</span>
+          <audio id="audio-he" src="{% static 'audio/he-is-handsome.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-he').play()">▶️</button>
+        </div>
+
+        <div class="pronoun-item">
+          <span class="pronoun">She</span> - 
+          <span class="example">She is pretty</span>
+          <span class="translation">(Ella es guapa)</span>
+          <audio id="audio-she" src="{% static 'audio/she-is-pretty.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-she').play()">▶️</button>
+        </div>
+
+        <div class="pronoun-item">
+          <span class="pronoun">It</span> - 
+          <span class="example">It is cold today</span>
+          <span class="translation">(Hoy hace frío)</span>
+          <audio id="audio-it" src="{% static 'audio/it-is-cold.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-it').play()">▶️</button>
+        </div>
+
+        <div class="pronoun-item">
+          <span class="pronoun">We</span> - 
+          <span class="example">We are tired</span>
+          <span class="translation">(Estamos cansados)</span>
+          <audio id="audio-we" src="{% static 'audio/we-are-tired.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-we').play()">▶️</button>
+        </div>
+
+        <div class="pronoun-item">
+          <span class="pronoun">They</span> - 
+          <span class="example">They are at the cinema</span>
+          <span class="translation">(Están en el cine)</span>
+          <audio id="audio-they" src="{% static 'audio/they-are-at-cinema.mp3' %}"></audio>
+          <button onclick="document.getElementById('audio-they').play()">▶️</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Quiz de Comprensión Lectora -->
