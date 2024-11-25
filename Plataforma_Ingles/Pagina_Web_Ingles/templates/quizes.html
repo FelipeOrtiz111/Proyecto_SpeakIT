@@ -21,7 +21,18 @@
                     <p><strong>Número de preguntas:</strong> {{ obj.number_of_questions }}</p>
                     <p><strong>Puntaje para aprobar:</strong> {{ obj.required_score_to_pass }}%</p>
                     <p><strong>Intentos permitidos:</strong> {{ obj.allowed_attempts }}</p>
-                    <button id="start-quiz" class="btn btn-primary">Comenzar Quiz</button>
+
+                    <div class="form-group mb-3">
+                        <label for="section-select">Seleccionar Sección:</label>
+                        <select class="form-control" id="section-select" required>
+                            <option value="">Seleccionar Sección</option>
+                            {% for section in sections %}
+                                <option value="{{ section.id }}">{{ section.code }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button id="start-quiz" class="btn btn-primary">Comenzar Quiz</button>                    
                 </div>                
             </div>
             <div class="col right-text">

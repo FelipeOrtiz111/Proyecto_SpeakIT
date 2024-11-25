@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from django.db.models import Avg, Max
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from django.views.decorators.http import require_http_methods
 
 def index(request):
     return render(request, 'index.html')
@@ -78,7 +79,20 @@ class QuizListView(ListView):
 
 def quiz_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
-    return render(request, 'quizes.html', {'obj': quiz})
+    # Obtener el perfil del estudiante si existe
+    student_profile = None
+    if hasattr(request.user, 'studentprofile'):
+        student_profile = request.user.studentprofile
+    
+    # Obtener todas las secciones disponibles
+    sections = Section.objects.all()
+    
+    context = {
+        'obj': quiz,
+        'sections': sections,
+        'student_profile': student_profile
+    }
+    return render(request, 'quizes.html', context)
 
 # Retorna los datos de las preguntas del quiz
 def quiz_data_view(request, pk):
@@ -114,7 +128,13 @@ def save_quiz_view(request, pk):
 
             user = request.user
             quiz = Quiz.objects.get(pk=pk)
-
+            
+            # Verificar que el usuario tenga una sección asignada
+            if not hasattr(user, 'studentprofile') or not user.studentprofile.section:
+                return JsonResponse({
+                    'error': 'Debes tener una sección asignada para realizar el quiz'
+                }, status=400)
+            
             # Obtener el número de intentos previos
             previous_attempts = Result.objects.filter(quiz=quiz, user=user).count()
             
@@ -225,3 +245,37 @@ def seguimiento_view(request):
         }
     
     return render(request, 'seguimiento.html', context)
+
+@require_http_methods(["POST"])
+def assign_section(request):
+    try:
+        # Obtener el ID de la sección del cuerpo de la solicitud
+        data = json.loads(request.body)
+        section_id = data.get('section_id')
+        
+        # Verificar que el ID de la sección sea válido
+        if not section_id:
+            return JsonResponse({'error': 'Section ID is required'}, status=400)
+        
+        # Buscar la sección en la base de datos
+        section = Section.objects.get(id=section_id)
+        
+        # Obtener o crear el perfil del estudiante
+        student_profile, created = StudentProfile.objects.get_or_create(
+            user=request.user,
+            defaults={'section': section}
+        )
+        
+        # Si el perfil ya existe, actualizar la sección
+        if not created:
+            student_profile.section = section
+            student_profile.save()
+        
+        # Devolver una respuesta exitosa
+        return JsonResponse({'success': True})
+    except Section.DoesNotExist:
+        # Devolver un error si la sección no existe
+        return JsonResponse({'error': 'Section not found'}, status=404)
+    except Exception as e:
+        # Devolver un error si ocurre una excepción
+        return JsonResponse({'error': str(e)}, status=500)
