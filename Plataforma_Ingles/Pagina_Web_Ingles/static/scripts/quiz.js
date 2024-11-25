@@ -16,20 +16,18 @@ const loadQuizQuestions = (data) => {
     data.forEach(el => {
         for (const [question, answers] of Object.entries(el)){
             quizBox.innerHTML += `
-                <hr>
-                <div class="mb-2">
+                <div class="quiz-question">
                     <b>${question}</b>
+                    <div class="answers-container">
+                        ${answers.map(answer => `
+                            <div class="form-check">
+                                <input class="ans" type="radio" name="${question}" id="${question}-${answer}" value="${answer}">
+                                <label class="form-check-label" for="${question}-${answer}">${answer}</label>
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             `;
-
-            answers.forEach(answer => {
-                quizBox.innerHTML += `
-                    <div class="form-check">
-                        <input class="ans" type="radio" name="${question}" id="${question}-${answer}" value="${answer}">
-                        <label class="form-check-label" for="${question}-${answer}">${answer}</label>
-                    </div>
-                `;
-            });
         }
     });
 }

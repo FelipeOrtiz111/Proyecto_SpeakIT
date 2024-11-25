@@ -515,11 +515,16 @@ button:focus{
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.quiz-detail h2 {
+  margin-top: 15px;
+}
+
 .quiz-info {
   background: #f8f9fa;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
+  font-size: 1.1rem;
 }
 
 /* Quiz Questions */
@@ -534,6 +539,72 @@ button:focus{
   padding: 15px;
   background: #f8f9fa;
   border-radius: 8px;
+}
+
+/* Estilos para las preguntas del quiz */
+.quiz-question {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.quiz-question:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.quiz-question b {
+  display: block;
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Estilos para las alternativas */
+.form-check {
+  padding: 12px 15px;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: #f8f9fa;
+}
+
+.form-check:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.form-check input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.form-check-label {
+  color: #495057;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 30px);
+}
+
+/* Estilo cuando la alternativa está seleccionada */
+.form-check input[type="radio"]:checked + .form-check-label {
+  color: #007bff;
+  font-weight: 500;
+}
+
+.form-check input[type="radio"]:checked + .form-check-label::before {
+  content: '→';
+  position: absolute;
+  left: -20px;
+  color: #007bff;
 }
 
 /*====================================  
