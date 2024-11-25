@@ -87,6 +87,11 @@ class QuizListView(ListView):
     context_object_name = 'object_list'
 
 def quiz_view(request, pk):
+    # Verificar si el usuario es profesor
+    if request.user.role == 'TEACHER' and not request.user.is_staff:
+        messages.warning(request, 'Los profesores no pueden realizar quizes.')
+        return redirect('index')
+        
     quiz = Quiz.objects.get(pk=pk)
     # Obtener el perfil del estudiante si existe
     student_profile = None

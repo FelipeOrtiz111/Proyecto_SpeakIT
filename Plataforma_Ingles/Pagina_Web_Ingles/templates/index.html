@@ -861,9 +861,15 @@
           <p>Dificultad: {{ quiz.difficulty }}</p>
           <p>Tiempo: {{ quiz.time }} minutos</p>
           <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
-          <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
-            Comenzar Quiz
-          </a>
+          {% if user.role == 'TEACHER' and not user.is_staff %}
+            <button class="quiz-button disabled" disabled title="Los profesores no pueden realizar quizes">
+                Comenzar Quiz
+            </button>
+          {% else %}
+            <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
+                Comenzar Quiz
+            </a>
+          {% endif %}
         </div>
         {% endfor %}
       </div>

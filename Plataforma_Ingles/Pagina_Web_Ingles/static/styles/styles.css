@@ -506,6 +506,27 @@ button:focus{
   text-decoration: none;
 }
 
+/* Estilos para el botón deshabilitado de quiz */
+.quiz-button.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+  border: none;
+  color: #666666;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: auto;
+}
+
+.quiz-button.disabled:hover {
+  background-color: #cccccc;
+  transform: none;
+  box-shadow: none;
+}
+
 /* Quiz Detalle */
 .quiz-detail {
   background: white;
@@ -558,7 +579,7 @@ button:focus{
 
 .quiz-question b {
   display: block;
-  font-size: 1.2em;
+  font-size: 0.8em;
   color: #333;
   margin-bottom: 15px;
   padding-bottom: 10px;
@@ -587,7 +608,7 @@ button:focus{
 
 .form-check-label {
   color: #495057;
-  font-size: 1.1em;
+  font-size: 0.7em;
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
@@ -598,13 +619,6 @@ button:focus{
 .form-check input[type="radio"]:checked + .form-check-label {
   color: #007bff;
   font-weight: 500;
-}
-
-.form-check input[type="radio"]:checked + .form-check-label::before {
-  content: '→';
-  position: absolute;
-  left: -20px;
-  color: #007bff;
 }
 
 /*====================================  
