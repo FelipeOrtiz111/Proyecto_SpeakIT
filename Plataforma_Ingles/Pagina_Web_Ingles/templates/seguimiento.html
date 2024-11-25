@@ -29,6 +29,23 @@
         </div>
     {% endif %}
 
+    {% if selected_section %}
+        <div class="dashboard-container">
+            <div class="chart-card">
+                <h3>Promedio de Puntajes por Estudiante</h3>
+                <canvas id="averageScoresChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Progreso Individual</h3>
+                <canvas id="studentProgressChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Tasa de Completitud</h3>
+                <canvas id="completionRateChart"></canvas>
+            </div>
+        </div>
+    {% endif %}
+
     <div class="seguimiento-container">
         {% if user_results %}
             {% for result in user_results %}
@@ -48,6 +65,21 @@
                 </div>
             </div>
             {% endfor %}
+            
+            <!-- Datos para el gráfico -->
+            {% if not is_teacher and not is_admin %}
+                <script id="user-results-data" type="application/json">
+                    [
+                        {% for result in user_results %}
+                            {
+                                "quiz_name": "{{ result.quiz.name }}",
+                                "score": {{ result.score }},
+                                "attempt_number": {{ result.attempt_number }}
+                            }{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                </script>
+            {% endif %}
         {% else %}
             {% if is_teacher or is_admin %}
                 {% if not selected_section %}
@@ -61,5 +93,11 @@
         {% endif %}
     </div>
 </main>
+
+{% if not is_teacher and not is_admin %}
+    <!-- Incluir Chart.js y nuestro script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'scripts/dashboard.js' %}"></script>
+{% endif %}
 
 {% endblock %}

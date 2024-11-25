@@ -32,8 +32,16 @@ def estadisticas_view(request):
         messages.warning(request, 'Esta sección es solo para estudiantes y administradores.')
         return redirect('index')
     
-    # Obtener todos los resultados del usuario
-    user_results = Result.objects.filter(user=request.user).order_by('-created')
+    # Si es administrador, permitir ver estadísticas de cualquier estudiante
+    if request.user.is_staff:
+        selected_student = request.GET.get('student')
+        if selected_student:
+            user_results = Result.objects.filter(user_id=selected_student).order_by('-created')
+        else:
+            user_results = Result.objects.filter(user=request.user).order_by('-created')
+    else:
+        # Para estudiantes, mostrar solo sus propias estadísticas
+        user_results = Result.objects.filter(user=request.user).order_by('-created')
     
     # Calcular estadísticas generales
     total_quizes_completed = user_results.count()
@@ -199,50 +207,59 @@ def save_quiz_view(request, pk):
 
 def seguimiento_view(request):
     if not request.user.is_authenticated:
-        messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
+        messages.warning(request, 'Debes iniciar sesión para ver el seguimiento.')
         return redirect('login')
     
-    # Verificar que el usuario sea profesor o admin
+    # Solo profesores y administradores pueden ver esta página
     if not (request.user.role == 'TEACHER' or request.user.is_staff):
-        messages.warning(request, 'Esta sección es solo para profesores.')
+        messages.warning(request, 'Esta sección es solo para profesores y administradores.')
         return redirect('index')
     
-    # Si es profesor o administrador, mostrar resultados de las secciones
-    if request.user.role == 'TEACHER' or request.user.is_staff:
-        # Obtener las secciones
-        if request.user.is_staff:
-            # Para administradores, mostrar todas las secciones
-            sections = Section.objects.all()
-        else:
-            # Para profesores, mostrar solo sus secciones
-            sections = Section.objects.filter(created_by=request.user)
-            
-        selected_section = request.GET.get('section')
-        
-        if selected_section:
-            # Obtener los estudiantes de la sección seleccionada
-            student_profiles = StudentProfile.objects.filter(section_id=selected_section)
-            students = [profile.user for profile in student_profiles]
-            # Obtener resultados de esos estudiantes
-            user_results = Result.objects.filter(user__in=students).order_by('-created')
-        else:
-            user_results = []
-        
-        context = {
-            'user_results': user_results,
-            'sections': sections,
-            'selected_section': selected_section,
-            'is_teacher': True,
-            'is_admin': request.user.is_staff
-        }
+    # Obtener las secciones según el rol
+    if request.user.is_staff:
+        sections = Section.objects.all()
     else:
-        # Para estudiantes, mostrar solo sus resultados
-        user_results = Result.objects.filter(user=request.user).order_by('-created')
-        context = {
-            'user_results': user_results,
-            'is_teacher': False,
-            'is_admin': False
+        sections = Section.objects.filter(created_by=request.user)
+        
+    selected_section = request.GET.get('section')
+    
+    if selected_section:
+        # Obtener los estudiantes de la sección seleccionada
+        student_profiles = StudentProfile.objects.filter(section_id=selected_section)
+        students = [profile.user for profile in student_profiles]
+        
+        # Obtener resultados y preparar datos para los gráficos
+        user_results = Result.objects.filter(user__in=students).order_by('-created')
+        
+        # Preparar datos para los gráficos
+        dashboard_data = {
+            'labels': [],
+            'average_scores': [],
+            'completion_rates': [],
+            'student_progress': {}
         }
+        
+        # Procesar datos para los gráficos
+        for student in students:
+            student_results = user_results.filter(user=student)
+            if student_results.exists():
+                avg_score = student_results.aggregate(Avg('score'))['score__avg']
+                dashboard_data['student_progress'][student.username] = {
+                    'scores': list(student_results.values_list('score', flat=True)),
+                    'average': avg_score
+                }
+    else:
+        user_results = []
+        dashboard_data = None
+    
+    context = {
+        'user_results': user_results,
+        'sections': sections,
+        'selected_section': selected_section,
+        'dashboard_data': json.dumps(dashboard_data) if dashboard_data else None,
+        'is_teacher': request.user.role == 'TEACHER',
+        'is_admin': request.user.is_staff
+    }
     
     return render(request, 'seguimiento.html', context)
 
