@@ -57,13 +57,35 @@ if (quizBox && startButton) {
     });
 }
 
-// Solo agregar el event listener al botón si existe
+// Modificar el event listener del botón start
 if (startButton) {
-    startButton.addEventListener('click', () => {
-        startButton.style.display = 'none';
-        if (quizForm) quizForm.style.display = 'block';
-        if (quizData && quizData.data) loadQuizQuestions(quizData.data);
-        if (quizData && quizData.time) activateTimer(quizData.time);
+    startButton.addEventListener('click', async (e) => {
+        e.preventDefault(); // Prevenir cualquier comportamiento por defecto
+        
+        const sectionSelect = document.getElementById('section-select');
+        if (!sectionSelect || !sectionSelect.value) {
+            alert('Por favor selecciona una sección antes de comenzar el quiz');
+            return false; // Detener la ejecución aquí
+        }
+
+        try {
+            // Asignar la sección al estudiante
+            const response = await assignSection(sectionSelect.value);
+            
+            if (response.success) {
+                // Solo si la asignación fue exitosa, comenzar el quiz
+                startButton.style.display = 'none';
+                if (quizForm) quizForm.style.display = 'block';
+                if (quizData && quizData.data) loadQuizQuestions(quizData.data);
+                if (quizData && quizData.time) activateTimer(quizData.time);
+            } else {
+                alert('Error al asignar la sección. Por favor, intenta nuevamente.');
+                return false;
+            }
+        } catch (error) {
+            alert('Error al asignar la sección. Por favor, intenta nuevamente.');
+            return false;
+        }
     });
 }
 
@@ -262,38 +284,42 @@ const asignarSeccion = async (sectionId) => {
             }, 
             body: JSON.stringify({ section_id: sectionId }) // Enviar el ID de la sección como datos
         });
+
+        const data = await response.json();
+
         // Verifica si la respuesta es exitosa
         if (response.ok) {
             throw new Error('Error al asignar la sección');
         }
-        // Devuelve la respuesta como JSON
-        return await response.json();
+        return data;
     } catch (error) {
         console.error('Error:', error);
         throw error;
     }
 };
 
-// Modificar el botón de inicio del quiz para asignar la sección
-if (startButton) {
-    startButton.addEventListener('click', async () => {
-        const sectionSelect = document.getElementById('section-select');
-        if (!sectionSelect.value) {
-            alert('Debes seleccionar una sección antes de comenzar el quiz');
-            return;
+// Función para asignar sección al estudiante
+const assignSection = async (sectionId) => {
+    try {
+        const response = await fetch('/assign-section/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf[0].value,
+            },
+            body: JSON.stringify({ section_id: sectionId })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Error al asignar sección');
         }
-
-        try {
-            // Asignar la sección
-            await asignarSeccion(sectionSelect.value);
-            // Comenzar el quiz
-            startButton.style.display = 'none';
-            if (quizForm) quizForm.style.display = 'block';
-            if (quizData && quizData.data) loadQuizQuestions(quizData.data);
-            if (quizData && quizData.time) activateTimer(quizData.time);
-        } catch (error) {
-            alert('Error al asignar la sección. Intente nuevamente.');
-        }
-    });
-}
+        
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
 
