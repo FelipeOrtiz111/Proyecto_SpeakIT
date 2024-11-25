@@ -128,11 +128,6 @@ function showNextUnit(unitId) {
         link.style.color = '';  // Restaura el color del enlace cuando no está activo
       }
     });
-
-    window.scrollTo({
-      top: 0,  // Desplazarse a la parte superior
-      behavior: 'smooth'  // Animación suave
-    });
   }
 }
 
@@ -160,11 +155,6 @@ function showPreviousUnit(unitId) {
         link.classList.remove('clicked');
         link.style.color = '';  // Restaura el color del enlace cuando no está activo
       }
-    });
-    
-    window.scrollTo({
-      top: 0,  // Desplazarse a la parte superior
-      behavior: 'smooth'  // Animación suave
     });
   }
 }
