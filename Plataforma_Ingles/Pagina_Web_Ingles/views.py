@@ -4,7 +4,7 @@ from .models import Quiz
 from django.views.generic import ListView
 from django.http import JsonResponse
 from questions.models import Question, Answer
-from users.models import StudentProfile, Section
+from users.models import StudentProfile, Section, CustomUser
 from results.models import Result
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -13,6 +13,7 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.models import User
+
 def index(request):
     return render(request, 'index.html')
 
@@ -210,7 +211,6 @@ def seguimiento_view(request):
         messages.warning(request, 'Debes iniciar sesión para ver el seguimiento.')
         return redirect('login')
     
-    # Solo profesores y administradores pueden ver esta página
     if not (request.user.role == 'TEACHER' or request.user.is_staff):
         messages.warning(request, 'Esta sección es solo para profesores y administradores.')
         return redirect('index')
@@ -228,14 +228,14 @@ def seguimiento_view(request):
     dashboard_data = None
     
     if selected_section:
-        # Obtener estudiantes de la sección seleccionada
-        section_students = User.objects.filter(
+        # Obtener estudiantes de la sección seleccionada usando CustomUser
+        section_students = CustomUser.objects.filter(
             studentprofile__section_id=selected_section
         ).order_by('username')
         
         # Filtrar resultados
         if selected_student:
-            students = [User.objects.get(id=selected_student)]
+            students = [CustomUser.objects.get(id=selected_student)]
         else:
             students = section_students
             
@@ -269,9 +269,6 @@ def seguimiento_view(request):
                     'average': avg_score,
                     'completion_rate': completion_rate
                 }
-    else:
-        user_results = []
-        dashboard_data = None
     
     context = {
         'user_results': user_results,
