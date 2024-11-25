@@ -37,102 +37,108 @@
         estructura gramatical adecuada.
       </p>
       <p>Cuestionario:</p>
+  
       <!-- Pregunta 1 -->
       <div class="question">
         <p>1. ¿Cómo se dice "Ella es"?</p>
         <ul>
           <li>
             <label>
-              <input type="radio" name="q1" value="incorrect"
-                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              <input type="radio" name="q1-u1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-u1-feedback')" data-question="q1-u1">
               Her is
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q1" value="correct"
-                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              <input type="radio" name="q1-u2" value="correct"
+                onclick="checkAnswer(this, 'q1-u2-feedback')" data-question="q1-u2">
               She is
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q1" value="incorrect"
-                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              <input type="radio" name="q1-u3" value="incorrect"
+                onclick="checkAnswer(this, 'q1-u3-feedback')" data-question="q1-u3">
               She was
             </label>
           </li>
         </ul>
-        <p id="q1-feedback" class="feedback"></p>
+        <p id="q1-u1-feedback" class="feedback"></p>
+        <p id="q1-u2-feedback" class="feedback"></p>
+        <p id="q1-u3-feedback" class="feedback"></p>
       </div>
-
+  
       <!-- Pregunta 2 -->
       <div class="question">
         <p>2. ¿Cómo se dice "Él fue"?</p>
         <ul>
           <li>
             <label>
-              <input type="radio" name="q2" value="incorrect"
-                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              <input type="radio" name="q2-u1" value="incorrect"
+                onclick="checkAnswer(this, 'q2-u1-feedback')" data-question="q2-u1">
               He is
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q2" value="incorrect"
-                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              <input type="radio" name="q2-u2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-u2-feedback')" data-question="q2-u2">
               He would
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q2" value="correct"
-                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              <input type="radio" name="q2-u3" value="correct"
+                onclick="checkAnswer(this, 'q2-u3-feedback')" data-question="q2-u3">
               He was
             </label>
           </li>
         </ul>
-        <p id="q2-feedback" class="feedback"></p>
+        <p id="q2-u1-feedback" class="feedback"></p>
+        <p id="q2-u2-feedback" class="feedback"></p>
+        <p id="q2-u3-feedback" class="feedback"></p>
       </div>
-
+  
       <!-- Pregunta 3 -->
       <div class="question">
         <p>3. ¿Cómo se dice "Ellos están"?</p>
         <ul>
           <li>
             <label>
-              <input type="radio" name="q3" value="incorrect"
-                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              <input type="radio" name="q3-u1" value="incorrect"
+                onclick="checkAnswer(this, 'q3-u1-feedback')" data-question="q3-u1">
               They will
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q3" value="incorrect"
-                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              <input type="radio" name="q3-u2" value="incorrect"
+                onclick="checkAnswer(this, 'q3-u2-feedback')" data-question="q3-u2">
               They were
             </label>
           </li>
           <li>
             <label>
-              <input type="radio" name="q3" value="correct"
-                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              <input type="radio" name="q3-u3" value="correct"
+                onclick="checkAnswer(this, 'q3-u3-feedback')" data-question="q3-u3">
               They are
             </label>
           </li>
         </ul>
-        <p id="q3-feedback" class="feedback"></p>
+        <p id="q3-u1-feedback" class="feedback"></p>
+        <p id="q3-u2-feedback" class="feedback"></p>
+        <p id="q3-u3-feedback" class="feedback"></p>
       </div>
       <div class="navigation-btns">
         <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad
-          anterior</button>
+        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
         <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente
-          unidad</button>
+        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente unidad</button>
       </div>
     </div>
   </div>
+  
 
   <div class="video-section" onclick="toggleDescription(this)" id="unidad-2">
     <div class="video-info">
