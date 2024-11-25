@@ -125,10 +125,12 @@
       </div>
       <div class="navigation-btns">
         <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
+        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad
+          anterior</button>
         <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente unidad</button>
-    </div>
+        <button onclick="showNextUnit('unidad-2')">Ir a la siguiente
+          unidad</button>
+      </div>
     </div>
   </div>
 
@@ -244,10 +246,12 @@
       </div>
       <div class="navigation-btns">
         <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
+        <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad
+          anterior</button>
         <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-3')">Ir a la siguiente unidad</button>
-    </div>
+        <button onclick="showNextUnit('unidad-3')">Ir a la siguiente
+          unidad</button>
+      </div>
     </div>
   </div>
 
@@ -364,10 +368,12 @@
       </div>
       <div class="navigation-btns">
         <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('unidad-2')">Volver a la unidad anterior</button>
+        <button onclick="showPreviousUnit('unidad-2')">Volver a la unidad
+          anterior</button>
         <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-4')">Ir a la siguiente unidad</button>
-    </div>
+        <button onclick="showNextUnit('unidad-4')">Ir a la siguiente
+          unidad</button>
+      </div>
     </div>
   </div>
 
@@ -483,33 +489,43 @@
       </div>
       <div class="navigation-btns">
         <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('unidad-3')">Volver a la unidad anterior</button>
+        <button onclick="showPreviousUnit('unidad-3')">Volver a la unidad
+          anterior</button>
         <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('ing-elemental')">Subir al Siguiente nivel</button>
-    </div>
+        <button onclick="showNextUnit('ing-elemental')">Subir al Siguiente
+          nivel</button>
+      </div>
     </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)" id="ing-elemental">
+  <div class="video-section" onclick="toggleDescription(this)"
+    id="ing-elemental">
     <div class="video-info">
       <h3>Repaso de conocimientos previos.</h3>
       <p>
         Conocimientos esperados del nivel de Ingles Anterior
       </p>
-      <div class="navigation-btns">
-        <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('unidad-4')">Volver al Nivel Anterior</button>
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-5')">Ir a la siguiente unidad</button>
+      <div class="content-container">
+        <div class="navigation-btns">
+          <!-- Botón para la unidad anterior -->
+          <button onclick="showPreviousUnit('unidad-4')">Volver al Nivel
+            Anterior</button>
+          <!-- Botón para la siguiente unidad -->
+          <button onclick="showNextUnit('unidad-5')">Ir a la siguiente
+            unidad</button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="video-section" onclick="toggleDescription(this)" id="unidad-5">
     <div class="video-info">
-      <h3 data-titulo="¡El verbo To Be!">¡El verbo To Be!</h3>
+      <h3>¡El verbo To Be!</h3>
       <p>
-        Lecciones y entendimiento del verbo to be.
+        Esta unidad enseña cómo utilizar el verbo *to be* (ser o estar) en
+        inglés, con ejemplos prácticos y explicaciones claras. Aprenderás cómo
+        formular oraciones afirmativas, negativas y preguntas, así como su uso
+        en diferentes contextos.
       </p>
     </div>
     <div class="video-container">
@@ -521,33 +537,110 @@
         allowfullscreen></iframe>
     </div>
     <div class="content-container">
-      <ol>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ol>
       <p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
-            possimus hic culpa sed, totam expedita! Provident veniam enim nulla
-            quas. Eligendi a maiores sed beatae dolores. Ratione consectetur
-            quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
-            possimus hic culpa sed, totam expedita! Provident veniam enim nulla
-            quas. Eligendi a maiores sed beatae dolores. Ratione consectetur
-            quia temporibus?</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
-            possimus hic culpa sed, totam expedita! Provident veniam enim nulla
-            quas. Eligendi a maiores sed beatae dolores. Ratione consectetur
-            quia temporibus?</li>
-        </ul>
+        El objetivo de esta unidad es que los estudiantes comprendan y utilicen
+        correctamente el verbo *to be* en sus diferentes formas, tanto en
+        presente como en pasado, para comunicarse efectivamente en inglés.
       </p>
+      <p>Cuestionario:</p>
+
+      <!-- Pregunta 1 -->
+      <div class="question">
+        <p>1. ¿Cuál es la forma correcta del verbo *to be* para "He" en
+          presente?</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Is
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Are
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Am
+            </label>
+          </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="question">
+        <p>2. ¿Cómo se dice "Ellos están felices" en inglés?</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              They is happy
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              They are happy
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              They am happy
+            </label>
+          </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="question">
+        <p>3. ¿Cómo formulas una pregunta con el verbo *to be*? Selecciona la
+          opción correcta.</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              She are a teacher?
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="incorrect"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              Are she teacher?
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="correct"
+                onclick="checkAnswer(this, 'q3-feedback')" data-question="q3">
+              Is she a teacher?
+            </label>
+          </li>
+        </ul>
+        <p id="q3-feedback" class="feedback"></p>
+      </div>
+
       <div class="navigation-btns">
-        <!-- Botón para la siguiente unidad -->
-        <button onclick="showNextUnit('unidad-6')">Ir a la siguiente unidad</button>
         <!-- Botón para la unidad anterior -->
-        <button onclick="showPreviousUnit('ing-elemental')">Volver a la unidad Anterior</button>
-    </div>
+        <button onclick="showPreviousUnit('unidad-4')">Volver a la unidad
+          anterior</button>
+        <!-- Botón para la siguiente unidad -->
+        <button onclick="showNextUnit('unidad-6')">Ir a la siguiente
+          unidad</button>
+      </div>
     </div>
   </div>
 
@@ -555,7 +648,9 @@
     <div class="video-info">
       <h3 data-titulo="Presente Continuo.">Presente Continuo.</h3>
       <p>
-        Lecciones y entendimiento del presente Continuo.
+        En esta unidad aprenderás cómo usar el presente continuo para describir
+        acciones que están ocurriendo en este momento. Incluye ejemplos
+        prácticos y ejercicios interactivos.
       </p>
     </div>
     <div class="video-container">
@@ -566,13 +661,87 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
+    <div class="content-container">
+      <p>
+        Objetivo: Los estudiantes aprenderán a formar oraciones en presente
+        continuo y a utilizarlo en conversaciones para describir acciones
+        actuales.
+      </p>
+      <p>Cuestionario:</p>
+
+      <!-- Pregunta 1 -->
+      <div class="question">
+        <p>1. ¿Cómo se forma el presente continuo?</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Verbo "to be" + verbo con terminación "-ing"
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Verbo en pasado + verbo con terminación "-ed"
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              Verbo "to have" + verbo base
+            </label>
+          </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="question">
+        <p>2. Traduce: "Ella está corriendo en el parque."</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              She runs in the park.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              She is running in the park.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              She running in the park.
+            </label>
+          </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
+      </div>
+
+      <div class="navigation-btns">
+        <button onclick="showPreviousUnit('unidad-5')">Volver a la unidad
+          anterior</button>
+        <button onclick="showNextUnit('unidad-7')">Ir a la siguiente
+          unidad</button>
+      </div>
+    </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-7">
     <div class="video-info">
       <h3 data-titulo="Mi rutina Diaria.">Mi rutina Diaria.</h3>
       <p>
-        Lecciones y ejemplos de una rutina Diaria.
+        Aprende a describir tu rutina diaria en inglés utilizando vocabulario y
+        estructuras comunes.
       </p>
     </div>
     <div class="video-container">
@@ -583,9 +752,81 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
+    <div class="content-container">
+      <p>
+        Es importante esta unidad porque le permite a los estudiantes
+        identificar como se compone una rutina diaria y su uso para comunicar
+        acciones que realizan habitualmente.
+      </p>
+      <p>Cuestionario:</p>
+
+      <!-- Pregunta 1 -->
+      <div class="question">
+        <p>1. ¿Cómo se dice "Yo me levanto a las 7:00 am" en inglés?</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="correct"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              I wake up at 7:00 am.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              I am wake up at 7:00 am.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="incorrect"
+                onclick="checkAnswer(this, 'q1-feedback')" data-question="q1">
+              I waking up at 7:00 am.
+            </label>
+          </li>
+        </ul>
+        <p id="q1-feedback" class="feedback"></p>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="question">
+        <p>2. Traduce: "Nosotros cenamos a las 8:00 pm."</p>
+        <ul>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              We eating dinner at 8:00 pm.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="correct"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              We have dinner at 8:00 pm.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="incorrect"
+                onclick="checkAnswer(this, 'q2-feedback')" data-question="q2">
+              We has dinner at 8:00 pm.
+            </label>
+          </li>
+        </ul>
+        <p id="q2-feedback" class="feedback"></p>
+      </div>
+      <div class="navigation-btns">
+        <button onclick="showPreviousUnit('unidad-6')">Volver a la unidad
+          anterior</button>
+        <button onclick="showNextUnit('unidad-8')">Ir a la siguiente
+          unidad</button>
+      </div>
+    </div>
   </div>
 
-  <div class="video-section" onclick="toggleDescription(this)">
+  <div class="video-section" onclick="toggleDescription(this)" id="unidad-8">
     <div class="video-info">
       <h3 data-titulo="Comprensión Lectora">¿Qué he Aprendido?</h3>
       <p>
@@ -602,7 +843,6 @@
     </div>
   </div>
 
-  <!-- PRUEBA TU CONOCIMIENTO -->
   <!-- Quiz de Comprensión Lectora -->
   <div class="video-section">
     <div class="quiz-info">
