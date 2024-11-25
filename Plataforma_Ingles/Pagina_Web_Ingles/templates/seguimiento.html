@@ -26,6 +26,17 @@
                         </option>
                     {% endfor %}
                 </select>
+
+                {% if selected_section %}
+                    <select name="student" class="form-control mr-2" onchange="this.form.submit()">
+                        <option value="">Todos los Estudiantes</option>
+                        {% for student in section_students %}
+                            <option value="{{ student.id }}" {% if student.id|stringformat:"s" == selected_student %}selected{% endif %}>
+                                {{ student.username }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
             </form>
         </div>
     {% endif %}
@@ -37,7 +48,7 @@
                 <canvas id="averageScoresChart"></canvas>
             </div>
             <div class="chart-card">
-                <h3>Progreso Individual</h3>
+                <h3>Progreso Individual General</h3>
                 <canvas id="studentProgressChart"></canvas>
             </div>
             <div class="chart-card">
@@ -58,8 +69,8 @@
         {% if user_results %}
             {% for result in user_results %}
             <div class="activity-card">
-                <h3>{{ result.quiz.name }}</h3>
                 <div class="activity-details">
+                    <p class="quiz-name">{{ result.quiz.name }}</p>
                     {% if is_teacher or is_admin %}
                         <p>Estudiante: {{ result.user.username }}</p>
                         {% if is_admin %}

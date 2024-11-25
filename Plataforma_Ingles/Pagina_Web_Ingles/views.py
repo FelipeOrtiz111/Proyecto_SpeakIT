@@ -12,7 +12,7 @@ from django.db.models import Avg, Max
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.decorators.http import require_http_methods
-
+from django.contrib.auth.models import User
 def index(request):
     return render(request, 'index.html')
 
@@ -222,14 +222,27 @@ def seguimiento_view(request):
         sections = Section.objects.filter(created_by=request.user)
         
     selected_section = request.GET.get('section')
+    selected_student = request.GET.get('student')
+    section_students = []
+    user_results = []
+    dashboard_data = None
     
     if selected_section:
-        # Obtener los estudiantes de la sección seleccionada
-        student_profiles = StudentProfile.objects.filter(section_id=selected_section)
-        students = [profile.user for profile in student_profiles]
+        # Obtener estudiantes de la sección seleccionada
+        section_students = User.objects.filter(
+            studentprofile__section_id=selected_section
+        ).order_by('username')
         
-        # Obtener resultados y preparar datos para los gráficos
-        user_results = Result.objects.filter(user__in=students).order_by('-created')
+        # Filtrar resultados
+        if selected_student:
+            students = [User.objects.get(id=selected_student)]
+        else:
+            students = section_students
+            
+        # Obtener resultados
+        user_results = Result.objects.filter(
+            user__in=students
+        ).order_by('-created')
         
         # Preparar datos para los gráficos
         dashboard_data = {
@@ -263,7 +276,9 @@ def seguimiento_view(request):
     context = {
         'user_results': user_results,
         'sections': sections,
+        'section_students': section_students,
         'selected_section': selected_section,
+        'selected_student': selected_student,
         'dashboard_data': json.dumps(dashboard_data) if dashboard_data else None,
         'is_teacher': request.user.role == 'TEACHER',
         'is_admin': request.user.is_staff
