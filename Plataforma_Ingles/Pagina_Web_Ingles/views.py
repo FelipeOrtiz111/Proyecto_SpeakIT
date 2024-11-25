@@ -249,33 +249,37 @@ def seguimiento_view(request):
 @require_http_methods(["POST"])
 def assign_section(request):
     try:
-        # Obtener el ID de la sección del cuerpo de la solicitud
+        # Verificar que el usuario esté autenticado
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'Usuario no autenticado'}, status=401)
+
         data = json.loads(request.body)
         section_id = data.get('section_id')
         
-        # Verificar que el ID de la sección sea válido
         if not section_id:
-            return JsonResponse({'error': 'Section ID is required'}, status=400)
+            return JsonResponse({'error': 'Se requiere ID de sección'}, status=400)
         
-        # Buscar la sección en la base de datos
-        section = Section.objects.get(id=section_id)
+        try:
+            section = Section.objects.get(id=section_id)
+        except Section.DoesNotExist:
+            return JsonResponse({'error': 'Sección no encontrada'}, status=404)
         
         # Obtener o crear el perfil del estudiante
         student_profile, created = StudentProfile.objects.get_or_create(
-            user=request.user,
-            defaults={'section': section}
+            user=request.user
         )
         
-        # Si el perfil ya existe, actualizar la sección
-        if not created:
-            student_profile.section = section
-            student_profile.save()
+        # Actualizar la sección
+        student_profile.section = section
+        student_profile.save()
         
-        # Devolver una respuesta exitosa
-        return JsonResponse({'success': True})
-    except Section.DoesNotExist:
-        # Devolver un error si la sección no existe
-        return JsonResponse({'error': 'Section not found'}, status=404)
+        return JsonResponse({
+            'success': True,
+            'message': 'Sección asignada correctamente'
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Datos JSON inválidos'}, status=400)
     except Exception as e:
-        # Devolver un error si ocurre una excepción
+        print(f"Error en assign_section: {str(e)}")  # Para debugging
         return JsonResponse({'error': str(e)}, status=500)

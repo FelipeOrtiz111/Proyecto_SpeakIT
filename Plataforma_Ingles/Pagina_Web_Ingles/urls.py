@@ -18,7 +18,7 @@ urlpatterns = [
     path('quizes/', quizes_view, name='quizes'),
     path('estadisticas/', estadisticas_view, name='estadisticas'),
     path('seguimiento/', seguimiento_view, name='seguimiento'),
-    path('asignar-seccion/', assign_section, name='assign-section'),
+    path('assign-section/', assign_section, name='assign-section'),
     # URLs para quizes
     path('<pk>/', quiz_view, name='quiz-view'),
     path('<pk>/data/', quiz_data_view, name='quiz-data-view'),

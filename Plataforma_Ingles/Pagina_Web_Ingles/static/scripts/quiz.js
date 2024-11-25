@@ -60,30 +60,26 @@ if (quizBox && startButton) {
 // Modificar el event listener del botón start
 if (startButton) {
     startButton.addEventListener('click', async (e) => {
-        e.preventDefault(); // Prevenir cualquier comportamiento por defecto
+        e.preventDefault();
         
         const sectionSelect = document.getElementById('section-select');
         if (!sectionSelect || !sectionSelect.value) {
             alert('Por favor selecciona una sección antes de comenzar el quiz');
-            return false; // Detener la ejecución aquí
+            return false;
         }
 
         try {
-            // Asignar la sección al estudiante
             const response = await assignSection(sectionSelect.value);
             
-            if (response.success) {
-                // Solo si la asignación fue exitosa, comenzar el quiz
-                startButton.style.display = 'none';
-                if (quizForm) quizForm.style.display = 'block';
-                if (quizData && quizData.data) loadQuizQuestions(quizData.data);
-                if (quizData && quizData.time) activateTimer(quizData.time);
-            } else {
-                alert('Error al asignar la sección. Por favor, intenta nuevamente.');
-                return false;
-            }
+            // Si llegamos aquí, la asignación fue exitosa
+            startButton.style.display = 'none';
+            if (quizForm) quizForm.style.display = 'block';
+            if (quizData && quizData.data) loadQuizQuestions(quizData.data);
+            if (quizData && quizData.time) activateTimer(quizData.time);
+            
         } catch (error) {
             alert('Error al asignar la sección. Por favor, intenta nuevamente.');
+            console.error('Error detallado:', error);
             return false;
         }
     });
@@ -306,17 +302,18 @@ const assignSection = async (sectionId) => {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrf[0].value,
+                'X-Requested-With': 'XMLHttpRequest'
             },
             body: JSON.stringify({ section_id: sectionId })
         });
         
         const data = await response.json();
         
-        if (!response.ok) {
+        if (response.ok) {
+            return data;  // Retornamos los datos si la respuesta es exitosa
+        } else {
             throw new Error(data.error || 'Error al asignar sección');
         }
-        
-        return data;
     } catch (error) {
         console.error('Error:', error);
         throw error;
