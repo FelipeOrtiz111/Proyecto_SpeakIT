@@ -250,3 +250,50 @@ const finishQuiz = () => {
     window.location.href = '/';
 }
 
+// Función para seleccionar la sección
+const asignarSeccion = async (sectionId) => {
+    try {
+        // Hace una solicitud POST a la URL de asignación de sección
+        const response = await fetch('/asignar-seccion/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf[0].value, // Token CSRF para proteger la solicitud
+            }, 
+            body: JSON.stringify({ section_id: sectionId }) // Enviar el ID de la sección como datos
+        });
+        // Verifica si la respuesta es exitosa
+        if (response.ok) {
+            throw new Error('Error al asignar la sección');
+        }
+        // Devuelve la respuesta como JSON
+        return await response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
+// Modificar el botón de inicio del quiz para asignar la sección
+if (startButton) {
+    startButton.addEventListener('click', async () => {
+        const sectionSelect = document.getElementById('section-select');
+        if (!sectionSelect.value) {
+            alert('Debes seleccionar una sección antes de comenzar el quiz');
+            return;
+        }
+
+        try {
+            // Asignar la sección
+            await asignarSeccion(sectionSelect.value);
+            // Comenzar el quiz
+            startButton.style.display = 'none';
+            if (quizForm) quizForm.style.display = 'block';
+            if (quizData && quizData.data) loadQuizQuestions(quizData.data);
+            if (quizData && quizData.time) activateTimer(quizData.time);
+        } catch (error) {
+            alert('Error al asignar la sección. Intente nuevamente.');
+        }
+    });
+}
+
