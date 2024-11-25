@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             labels: Array.from({ length: Math.max(...students.map(s => dashboardData.student_progress[s].scores.length)) }, (_, i) => `Intento ${i + 1}`),
             datasets: students.map(student => ({
                 label: student,
-                data: [...dashboardData.student_progress[student].scores].reverse(),
+                data: dashboardData.student_progress[student].scores,
                 borderColor: getRandomColor(),
                 fill: false
             }))
