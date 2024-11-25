@@ -45,6 +45,13 @@
                 <canvas id="completionRateChart"></canvas>
             </div>
         </div>
+        
+        <!-- Para pasar los datos al JavaScript -->
+        {% if dashboard_data %}
+            <script id="dashboard-data" type="application/json">
+                {{ dashboard_data|safe }}
+            </script>
+        {% endif %}
     {% endif %}
 
     <div class="seguimiento-container">

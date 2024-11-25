@@ -233,20 +233,28 @@ def seguimiento_view(request):
         
         # Preparar datos para los gráficos
         dashboard_data = {
-            'labels': [],
-            'average_scores': [],
-            'completion_rates': [],
-            'student_progress': {}
+            'student_progress': {},
+            'completion_rates': {}
         }
         
-        # Procesar datos para los gráficos
+        # Obtener todos los quizzes disponibles
+        all_quizzes = Quiz.objects.all()
+        total_quizzes = all_quizzes.count()
+        
         for student in students:
             student_results = user_results.filter(user=student)
             if student_results.exists():
+                # Datos de progreso existentes
                 avg_score = student_results.aggregate(Avg('score'))['score__avg']
+                
+                # Calcular tasa de completitud
+                completed_quizzes = student_results.values('quiz').distinct().count()
+                completion_rate = (completed_quizzes / total_quizzes) * 100 if total_quizzes > 0 else 0
+                
                 dashboard_data['student_progress'][student.username] = {
                     'scores': list(student_results.values_list('score', flat=True)),
-                    'average': avg_score
+                    'average': avg_score,
+                    'completion_rate': completion_rate
                 }
     else:
         user_results = []
