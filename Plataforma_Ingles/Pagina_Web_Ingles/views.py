@@ -26,6 +26,11 @@ def estadisticas_view(request):
         messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
         return redirect('login')
     
+    # Verificar que el usuario sea estudiante o admin
+    if request.user.role == 'TEACHER' and not request.user.is_staff:
+        messages.warning(request, 'Esta sección es solo para estudiantes y administradores.')
+        return redirect('index')
+    
     # Obtener todos los resultados del usuario
     user_results = Result.objects.filter(user=request.user).order_by('-created')
     
@@ -176,6 +181,11 @@ def seguimiento_view(request):
     if not request.user.is_authenticated:
         messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
         return redirect('login')
+    
+    # Verificar que el usuario sea profesor o admin
+    if not (request.user.role == 'TEACHER' or request.user.is_staff):
+        messages.warning(request, 'Esta sección es solo para profesores.')
+        return redirect('index')
     
     # Si es profesor o administrador, mostrar resultados de las secciones
     if request.user.role == 'TEACHER' or request.user.is_staff:

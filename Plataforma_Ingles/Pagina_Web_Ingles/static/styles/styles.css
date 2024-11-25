@@ -691,6 +691,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
     border-radius: 4px;
     margin-left: 1em;
     font-size: 0.8em;
+    text-decoration: none;
 }
 
 .question {

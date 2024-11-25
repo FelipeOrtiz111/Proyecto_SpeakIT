@@ -6,11 +6,11 @@
 
 <main>
     <div class="titulo-main">
-        <a href="{% url 'index' %}" class="btn btn-secondary" onclick="saveReturnState()">← Volver</a>
-        Quiz: {{ obj.name }}
+        {{ obj.name }}
     </div>
     
     <div class="quiz-detail">
+        <a href="{% url 'index' %}" class="btn btn-secondary" onclick="saveReturnState()">← Volver</a>
         <h2>{{ obj.topic }}</h2>
 
         <div class="row">
@@ -20,6 +20,7 @@
                     <p><strong>Tiempo:</strong> {{ obj.time }} minutos</p>
                     <p><strong>Número de preguntas:</strong> {{ obj.number_of_questions }}</p>
                     <p><strong>Puntaje para aprobar:</strong> {{ obj.required_score_to_pass }}%</p>
+                    <p><strong>Intentos permitidos:</strong> {{ obj.allowed_attempts }}</p>
                     <button id="start-quiz" class="btn btn-primary">Comenzar Quiz</button>
                 </div>                
             </div>

@@ -193,6 +193,13 @@ const sendData = () => {
                         </div>
                     `;
                 }
+            } else {
+                // Si el alumno aprobó, mostrar el botón de finalizar
+                retryBox.innerHTML = `
+                    <button onclick="finishQuiz()" class="btn btn-success">
+                        Finalizar Quiz
+                    </button>
+                `;
             }
         },
         error: function(error){
@@ -233,5 +240,13 @@ if (quizForm) {
 function saveReturnState() {
     localStorage.setItem('returnToSection', 'pru-e'); // ID del botón "Prueba tu Conocimiento"
     localStorage.setItem('returnToContent', 'Quiz de Unidades.');
+}
+
+// Agregar esta nueva función para finalizar el quiz
+const finishQuiz = () => {
+    // Guardar el estado antes de volver
+    saveReturnState();
+    // Redirigir al índice
+    window.location.href = '/';
 }
 
