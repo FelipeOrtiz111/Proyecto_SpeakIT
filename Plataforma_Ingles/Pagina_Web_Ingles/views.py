@@ -252,7 +252,7 @@ def seguimiento_view(request):
                 completion_rate = (completed_quizzes / total_quizzes) * 100 if total_quizzes > 0 else 0
                 
                 dashboard_data['student_progress'][student.username] = {
-                    'scores': list(student_results.values_list('score', flat=True)),
+                    'scores': list(student_results.values_list('score', flat=True))[::-1],
                     'average': avg_score,
                     'completion_rate': completion_rate
                 }
