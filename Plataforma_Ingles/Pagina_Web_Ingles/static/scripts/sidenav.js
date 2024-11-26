@@ -114,6 +114,16 @@ function showNextUnit(unitId) {
   const nextUnit = document.getElementById(unitId);
   if (nextUnit) {
       nextUnit.style.display = 'block';
+      
+      // Encontrar y activar el enlace correspondiente
+      const title = nextUnit.querySelector('h3').innerText;
+      const correspondingLink = Array.from(links)
+        .find(link => link.getAttribute('data-titulo') === title);
+      
+      if (correspondingLink) {
+          links.forEach(link => link.classList.remove('clicked'));
+          correspondingLink.classList.add('clicked');
+      }
   }
 }
 
@@ -123,10 +133,20 @@ function showPreviousUnit(unitId) {
   allUnits.forEach(unit => {
       unit.style.display = 'none';
   });
-
+  
   const previousUnit = document.getElementById(unitId);
   if (previousUnit) {
       previousUnit.style.display = 'block';
+      
+      // Encontrar y activar el enlace correspondiente
+      const title = previousUnit.querySelector('h3').innerText;
+      const correspondingLink = Array.from(links)
+        .find(link => link.getAttribute('data-titulo') === title);
+      
+      if (correspondingLink) {
+          links.forEach(link => link.classList.remove('clicked'));
+          correspondingLink.classList.add('clicked');
+      }
   }
 }
 
@@ -138,6 +158,28 @@ function showNextLevel(levelId) {
   const nextLevel = document.getElementById(levelId);
   if (nextLevel) {
       nextLevel.style.display = 'block';
+      
+      // Encontrar y activar el enlace correspondiente
+      const title = nextLevel.querySelector('h3').innerText;
+      const correspondingLink = Array.from(links)
+        .find(link => link.getAttribute('data-titulo') === title);
+      
+      if (correspondingLink) {
+          links.forEach(link => link.classList.remove('clicked'));
+          correspondingLink.classList.add('clicked');
+          
+          // Encontrar el dropdown-btn padre
+          const parentDropdown = correspondingLink.closest('.dropdown-container')
+            .previousElementSibling;
+          
+          // Si el dropdown no está expandido, expandirlo
+          if (parentDropdown && !parentDropdown.classList.contains('active')) {
+              parentDropdown.click();
+          }
+          
+          // Hacer scroll hacia arriba suavemente
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
   }
 }
 
@@ -148,5 +190,28 @@ function showPreviousLevel(levelId) {
   const previousLevel = document.getElementById(levelId);
   if (previousLevel) {
       previousLevel.style.display = 'block';
+      
+      // Encontrar y activar el enlace correspondiente
+      const title = previousLevel.querySelector('h3').innerText;
+      const correspondingLink = Array.from(links)
+        .find(link => link.getAttribute('data-titulo') === title);
+      
+      if (correspondingLink) {
+          links.forEach(link => link.classList.remove('clicked'));
+          correspondingLink.classList.add('clicked');
+          
+          // Encontrar el dropdown-btn padre
+          const parentDropdown = correspondingLink.closest('.dropdown-container')
+            .previousElementSibling;
+          
+          // Si el dropdown no está expandido, expandirlo
+          if (parentDropdown && !parentDropdown.classList.contains('active')) {
+              parentDropdown.click();
+          }
+          
+          // Hacer scroll hacia arriba suavemente
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
   }
 }
+
