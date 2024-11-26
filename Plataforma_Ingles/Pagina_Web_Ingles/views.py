@@ -5,7 +5,6 @@ from django.views.generic import ListView
 from django.http import JsonResponse
 from questions.models import Question, Answer
 from users.models import StudentProfile, Section, CustomUser
-from results.models import Result
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.db.models import Avg, Max
@@ -28,36 +27,75 @@ def quizes_view(request):
 
 @login_required
 def estadisticas_view(request):
-    """Vista de estadísticas accesible para todos los usuarios autenticados"""
-    context = {}
-    return render(request, 'estadisticas.html', context)
+    try:
+        user_results = Result.objects.filter(user=request.user).select_related('quiz')
+        
+        total_quizes_completed = user_results.count()
+        average_score = user_results.aggregate(Avg('score'))['score__avg'] or 0
+        
+        quiz_results = {}
+        for result in user_results:
+            if result.quiz not in quiz_results:
+                quiz_results[result.quiz] = []
+            quiz_results[result.quiz].append(result)
+        
+        for quiz in quiz_results:
+            quiz_results[quiz].sort(key=lambda x: x.score, reverse=True)
+        
+        quiz_data = {
+            'labels': [],
+            'scores': [],
+            'attempts': {}
+        }
+        
+        for quiz, results in quiz_results.items():
+            quiz_data['labels'].append(quiz.name)
+            quiz_data['scores'].append(results[0].score)
+            quiz_data['attempts'][quiz.name] = len(results)
+        
+        context = {
+            'total_quizes_completed': total_quizes_completed,
+            'average_score': average_score,
+            'quiz_results': quiz_results,
+            'quiz_data': json.dumps(quiz_data)
+        }
+        
+        return render(request, 'estadisticas.html', context)
+    except Exception as e:
+        messages.error(request, f'Error al cargar las estadísticas: {str(e)}')
+        return redirect('index')
 
 class QuizListView(LoginRequiredMixin, ListView):
     model = Quiz
     template_name = 'index.html'
     context_object_name = 'quizes'
 
+@login_required
 def quiz_view(request, pk):
     # Verificar si el usuario es profesor
     if request.user.role == 'TEACHER' and not request.user.is_staff:
         messages.warning(request, 'Los profesores no pueden realizar quizes.')
         return redirect('index')
+    
+    try:
+        quiz = Quiz.objects.get(pk=pk)
+        # Obtener el perfil del estudiante si existe
+        student_profile = None
+        if hasattr(request.user, 'studentprofile'):
+            student_profile = request.user.studentprofile
         
-    quiz = Quiz.objects.get(pk=pk)
-    # Obtener el perfil del estudiante si existe
-    student_profile = None
-    if hasattr(request.user, 'studentprofile'):
-        student_profile = request.user.studentprofile
-    
-    # Obtener todas las secciones disponibles
-    sections = Section.objects.all()
-    
-    context = {
-        'obj': quiz,
-        'sections': sections,
-        'student_profile': student_profile
-    }
-    return render(request, 'quizes.html', context)
+        # Obtener todas las secciones disponibles
+        sections = Section.objects.all()
+        
+        context = {
+            'obj': quiz,
+            'sections': sections,
+            'student_profile': student_profile
+        }
+        return render(request, 'quizes.html', context)
+    except Quiz.DoesNotExist:
+        messages.error(request, 'El quiz solicitado no existe.')
+        return redirect('index')
 
 # Retorna los datos de las preguntas del quiz
 def quiz_data_view(request, pk):
@@ -219,17 +257,23 @@ def seguimiento_view(request):
 
 def prepare_dashboard_data(results):
     student_progress = {}
+    total_quizes = Quiz.objects.count()
     
     for result in results:
         username = result.user.username
         if username not in student_progress:
             student_progress[username] = {
                 'scores': [],
-                'average': 0
+                'average': 0,
+                'completion_rate': 0
             }
         
         student_progress[username]['scores'].append(float(result.score))
         student_progress[username]['average'] = sum(student_progress[username]['scores']) / len(student_progress[username]['scores'])
+        
+        # Calcular tasa de completitud
+        completed_quizes = len(set(result.quiz.id for result in results.filter(user__username=username)))
+        student_progress[username]['completion_rate'] = (completed_quizes / total_quizes * 100) if total_quizes > 0 else 0
     
     return {'student_progress': student_progress}
 
