@@ -1,0 +1,132 @@
+{% extends "header.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% include 'includes/sidebar.html' %}
+
+<main>
+    <div class="titulo-main">
+        Seguimiento de Actividades
+        {% if is_admin %}
+        <span class="badge badge-info">Vista de Administrador</span>
+        {% endif %}
+    </div>
+
+    {% if is_teacher or is_admin %}
+        <div class="section-filter">
+            <form method="get" class="form-inline mb-4">
+                <select name="section" class="form-control mr-2" onchange="this.form.submit()">
+                    <option value="">Seleccionar Sección</option>
+                    {% for section in sections %}
+                        <option value="{{ section.id }}" {% if section.id|stringformat:"s" == selected_section %}selected{% endif %}>
+                            {{ section.code }}
+                            {% if is_admin %}
+                                - {{ section.created_by.username }}
+                            {% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                {% if selected_section %}
+                    <select name="student" class="form-control mr-2" onchange="this.form.submit()">
+                        <option value="">Todos los Estudiantes</option>
+                        {% for student in section_students %}
+                            <option value="{{ student.id }}" {% if student.id|stringformat:"s" == selected_student %}selected{% endif %}>
+                                {{ student.username }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </form>
+        </div>
+    {% endif %}
+
+    {% if selected_section %}
+        <div class="dashboard-container">
+            <div class="chart-card">
+                <h3>Promedio de Puntajes por Estudiante</h3>
+                <canvas id="averageScoresChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Progreso Individual General</h3>
+                <canvas id="studentProgressChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Tasa de Completitud</h3>
+                <canvas id="completionRateChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Para pasar los datos al JavaScript -->
+        {% if dashboard_data %}
+            <script id="dashboard-data" type="application/json">
+                {{ dashboard_data|safe }}
+            </script>
+        {% endif %}
+    {% endif %}
+
+    <div class="seguimiento-container">
+        {% if user_results %}
+            {% regroup user_results by quiz.name as quiz_list %}
+            <div class="seguimiento-quiz-results-grid">
+                {% for quiz in quiz_list %}
+                    <div class="seguimiento-quiz-column">
+                        <h3 class="seguimiento-quiz-name">{{ quiz.grouper }}</h3>
+                        {% for result in quiz.list %}
+                            <div class="activity-card">
+                                <div class="activity-details">
+                                    {% if is_teacher or is_admin %}
+                                        <p>Estudiante: {{ result.user.username }}</p>
+                                        {% if is_admin %}
+                                            <p>Sección: {{ result.user.studentprofile.section.code }}</p>
+                                            <p>Profesor: {{ result.user.studentprofile.section.created_by.username }}</p>
+                                        {% endif %}
+                                    {% endif %}
+                                    <p>Fecha: {{ result.created|date:"d/m/Y H:i" }}</p>
+                                    <p>Puntaje: {{ result.score|floatformat:1 }}%</p>
+                                    <p>Intento: {{ result.attempt_number }}/{{ result.quiz.allowed_attempts }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Datos para el gráfico -->
+            {% if not is_teacher and not is_admin %}
+                <script id="user-results-data" type="application/json">
+                    [
+                        {% for result in user_results %}
+                            {
+                                "quiz_name": "{{ result.quiz.name }}",
+                                "score": {{ result.score }},
+                                "attempt_number": {{ result.attempt_number }}
+                            }{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                </script>
+            {% endif %}
+        {% else %}
+            {% if is_teacher or is_admin %}
+                {% if not selected_section %}
+                    <p>Seleccione una sección para ver los resultados.</p>
+                {% else %}
+                    <p>No hay actividades completadas en esta sección.</p>
+                {% endif %}
+            {% else %}
+                <p>No hay actividades completadas aún.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</main>
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% if is_teacher or is_admin %}
+        <script src="{% static 'scripts/teacher-dashboard.js' %}"></script>
+    {% else %}
+        <script src="{% static 'scripts/dashboard.js' %}"></script>
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

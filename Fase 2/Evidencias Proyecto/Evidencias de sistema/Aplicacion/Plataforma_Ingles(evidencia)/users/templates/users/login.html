@@ -1,0 +1,35 @@
+{% extends "header.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
+<div class="background"></div>
+<div id="main-login">
+    {% include 'includes/messaging.html' %}
+    <div class="content-section">
+        <form method="POST" class="form-style">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Iniciar sesión</legend>
+                    {{ form|crispy }}
+                <div class="form-button">
+                    <button class="btn btn-outline-info" type="submit">Ingresar</button>
+                    <small class="text-muted">
+                        <a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a>
+                    </small>
+                </div>
+            </fieldset>
+            <div class="fondo">
+                <img src="/static/images/bg_login.jpeg" alt="Logo de Duoc UC">
+            </div>
+        </form>
+
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
+            </small><br>
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}
