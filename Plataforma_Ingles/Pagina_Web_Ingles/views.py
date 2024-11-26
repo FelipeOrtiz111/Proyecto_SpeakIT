@@ -164,11 +164,74 @@ def save_quiz_view(request, pk):
 
 @login_required
 def seguimiento_view(request):
-    """Vista de seguimiento solo para profesores"""
-    if not request.user.role == 'TEACHER':
+    """Vista de seguimiento para profesores y administradores"""
+    if not (request.user.role == 'TEACHER' or request.user.is_staff):
         return redirect('login')
-    context = {}
+    
+    # Obtener secciones según el rol
+    if request.user.is_staff:
+        sections = Section.objects.all()
+    else:
+        sections = Section.objects.filter(created_by=request.user)
+    
+    # Obtener sección seleccionada
+    selected_section = request.GET.get('section')
+    selected_student = request.GET.get('student')
+    
+    # Inicializar variables
+    section_students = []
+    user_results = []
+    dashboard_data = None
+    
+    if selected_section:
+        # Obtener estudiantes de la sección seleccionada
+        section_students = CustomUser.objects.filter(
+            studentprofile__section_id=selected_section,
+            role='STUDENT'
+        )
+        
+        # Construir query para resultados
+        results_query = Result.objects.select_related('user', 'quiz')
+        if selected_student:
+            results_query = results_query.filter(user_id=selected_student)
+        else:
+            results_query = results_query.filter(
+                user__studentprofile__section_id=selected_section
+            )
+        
+        user_results = results_query.order_by('-created')
+        
+        # Preparar datos para el dashboard
+        dashboard_data = prepare_dashboard_data(user_results)
+    
+    context = {
+        'sections': sections,
+        'selected_section': selected_section,
+        'section_students': section_students,
+        'selected_student': selected_student,
+        'user_results': user_results,
+        'dashboard_data': json.dumps(dashboard_data) if dashboard_data else None,
+        'is_admin': request.user.is_staff,
+        'is_teacher': request.user.role == 'TEACHER'
+    }
+    
     return render(request, 'seguimiento.html', context)
+
+def prepare_dashboard_data(results):
+    student_progress = {}
+    
+    for result in results:
+        username = result.user.username
+        if username not in student_progress:
+            student_progress[username] = {
+                'scores': [],
+                'average': 0
+            }
+        
+        student_progress[username]['scores'].append(float(result.score))
+        student_progress[username]['average'] = sum(student_progress[username]['scores']) / len(student_progress[username]['scores'])
+    
+    return {'student_progress': student_progress}
 
 @require_http_methods(["POST"])
 def assign_section(request):
