@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new Chart(progressCtx, {
         type: 'line',
         data: {
-            labels: Array.from({ length: Math.max(...students.map(s => dashboardData.student_progress[s].scores.length)) }, (_, i) => `Resultado ${i + 1}`),
+            labels: Array.from({ length: Math.max(...students.map(s => dashboardData.student_progress[s].scores.length)) }, (_, i) => `Intento ${i + 1}`),
             datasets: students.map(student => ({
                 label: student,
                 data: dashboardData.student_progress[student].scores,
