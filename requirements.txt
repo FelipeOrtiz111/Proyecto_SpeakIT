@@ -14,3 +14,4 @@ crispy-bootstrap4
 six
 python-decouple
 whitenoise
+selenium
