@@ -67,12 +67,12 @@
 
     <div class="seguimiento-container">
         {% if user_results %}
-            {% regroup user_results by quiz.name as quiz_list %}
             <div class="seguimiento-quiz-results-grid">
-                {% for quiz in quiz_list %}
+                {% regroup user_results by quiz as quiz_list %}
+                {% for quiz_group in quiz_list %}
                     <div class="seguimiento-quiz-column">
-                        <h3 class="seguimiento-quiz-name">{{ quiz.grouper }}</h3>
-                        {% for result in quiz.list %}
+                        <h3 class="seguimiento-quiz-name">{{ quiz_group.grouper.name }}</h3>
+                        {% for result in quiz_group.list %}
                             <div class="activity-card">
                                 <div class="activity-details">
                                     {% if is_teacher or is_admin %}
@@ -84,7 +84,7 @@
                                     {% endif %}
                                     <p>Fecha: {{ result.created|date:"d/m/Y H:i" }}</p>
                                     <p>Puntaje: {{ result.score|floatformat:1 }}%</p>
-                                    <p>Intento: {{ result.attempt_number }}/{{ result.quiz.allowed_attempts }}</p>
+                                    <p>Intento: {{ result.attempt_number }}/{{ quiz_group.grouper.allowed_attempts }}</p>
                                 </div>
                             </div>
                         {% endfor %}
