@@ -197,7 +197,7 @@ def password_reset_request(request):
                 if email.send():
                     messages.success(request,
                         """
-                        <h2>Password reset sent</h2><hr>
+                        <h2>Restablecimiento de contraseña enviado</h2><hr>
                         <p>
                             Te hemos enviado por correo electrónico las instrucciones para establecer tu contraseña, 
                             si existe una cuenta con la dirección de correo electrónico que has introducido. 
