@@ -68,11 +68,10 @@
     <div class="seguimiento-container">
         {% if user_results %}
             <div class="seguimiento-quiz-results-grid">
-                {% regroup user_results by quiz as quiz_list %}
-                {% for quiz_group in quiz_list %}
+                {% for quiz, results in user_results.items %}
                     <div class="seguimiento-quiz-column">
-                        <h3 class="seguimiento-quiz-name">{{ quiz_group.grouper.name }}</h3>
-                        {% for result in quiz_group.list %}
+                        <h3 class="seguimiento-quiz-name">{{ quiz.name }}</h3>
+                        {% for result in results %}
                             <div class="activity-card">
                                 <div class="activity-details">
                                     {% if is_teacher or is_admin %}
@@ -84,28 +83,13 @@
                                     {% endif %}
                                     <p>Fecha: {{ result.created|date:"d/m/Y H:i" }}</p>
                                     <p>Puntaje: {{ result.score|floatformat:1 }}%</p>
-                                    <p>Intento: {{ result.attempt_number }}/{{ quiz_group.grouper.allowed_attempts }}</p>
+                                    <p>Intento: {{ result.attempt_number }}/{{ quiz.allowed_attempts }}</p>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
                 {% endfor %}
             </div>
-            
-            <!-- Datos para el gráfico -->
-            {% if not is_teacher and not is_admin %}
-                <script id="user-results-data" type="application/json">
-                    [
-                        {% for result in user_results %}
-                            {
-                                "quiz_name": "{{ result.quiz.name }}",
-                                "score": {{ result.score }},
-                                "attempt_number": {{ result.attempt_number }}
-                            }{% if not forloop.last %},{% endif %}
-                        {% endfor %}
-                    ]
-                </script>
-            {% endif %}
         {% else %}
             {% if is_teacher or is_admin %}
                 {% if not selected_section %}

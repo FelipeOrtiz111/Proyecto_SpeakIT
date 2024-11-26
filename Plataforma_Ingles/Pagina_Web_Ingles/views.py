@@ -237,10 +237,21 @@ def seguimiento_view(request):
                 user__studentprofile__section_id=selected_section
             )
         
-        user_results = results_query.order_by('-created')
+        # Agrupar resultados por quiz
+        quiz_results = {}
+        for result in results_query:
+            if result.quiz not in quiz_results:
+                quiz_results[result.quiz] = []
+            quiz_results[result.quiz].append(result)
+        
+        # Ordenar resultados por fecha
+        for quiz in quiz_results:
+            quiz_results[quiz].sort(key=lambda x: x.created, reverse=True)
+        
+        user_results = quiz_results
         
         # Preparar datos para el dashboard
-        dashboard_data = prepare_dashboard_data(user_results)
+        dashboard_data = prepare_dashboard_data(results_query)
     
     context = {
         'sections': sections,
