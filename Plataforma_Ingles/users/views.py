@@ -142,6 +142,7 @@ def custom_login(request):
     )
 
 # Vista para mostrar el perfil del usuario
+@login_required
 def perfil_view(request, username):
     if request.method == 'POST':
         user = request.user

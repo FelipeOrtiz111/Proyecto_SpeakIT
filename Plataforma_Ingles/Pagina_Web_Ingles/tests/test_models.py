@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from users.models import CustomUser, Section, StudentProfile, TeacherProfile
 from questions.models import Quiz, Question, Answer
-from results.models import QuizResult
 
 class UserModelTest(TestCase):
     def setUp(self):
@@ -24,18 +23,28 @@ class UserModelTest(TestCase):
 
 class QuizModelTest(TestCase):
     def setUp(self):
+        self.User = get_user_model()
+        self.user = self.User.objects.create_user(
+            username='testuser',
+            email='test@duocuc.cl',
+            password='testpass123',
+            is_active=True
+        )
+        
         self.quiz = Quiz.objects.create(
             name='Test Quiz',
             topic='Grammar',
             number_of_questions=10,
             time=30,
             required_score_to_pass=70,
-            difficulty='medium'
+            difficulty='medium',
+            allowed_attempts=3
         )
 
     def test_quiz_str(self):
         """Test the string representation of quiz"""
-        self.assertEqual(str(self.quiz), 'Test Quiz')
+        expected_str = f"{self.quiz.name}-{self.quiz.topic}"
+        self.assertEqual(str(self.quiz), expected_str)
 
     def test_quiz_questions_relationship(self):
         """Test quiz-question relationship"""

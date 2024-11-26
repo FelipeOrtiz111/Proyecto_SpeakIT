@@ -13,6 +13,8 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     return render(request, 'index.html')
@@ -20,71 +22,20 @@ def index(request):
 def header_view(request):
     return render(request, 'header.html')
 
+@login_required
 def quizes_view(request):
     return render(request, 'quizes.html')
 
+@login_required
 def estadisticas_view(request):
-    if not request.user.is_authenticated:
-        messages.warning(request, 'Debes iniciar sesión para ver tu seguimiento.')
-        return redirect('login')
-    
-    # Verificar que el usuario sea estudiante o admin
-    if request.user.role == 'TEACHER' and not request.user.is_staff:
-        messages.warning(request, 'Esta sección es solo para estudiantes y administradores.')
-        return redirect('index')
-    
-    # Si es administrador, permitir ver estadísticas de cualquier estudiante
-    if request.user.is_staff:
-        selected_student = request.GET.get('student')
-        if selected_student:
-            user_results = Result.objects.filter(user_id=selected_student).order_by('-created')
-        else:
-            user_results = Result.objects.filter(user=request.user).order_by('-created')
-    else:
-        # Para estudiantes, mostrar solo sus propias estadísticas
-        user_results = Result.objects.filter(user=request.user).order_by('-created')
-    
-    # Calcular estadísticas generales
-    total_quizes_completed = user_results.count()
-    average_score = user_results.aggregate(Avg('score'))['score__avg'] or 0
-    
-    # Preparar datos para los gráficos
-    quiz_data = {
-        'labels': [],
-        'scores': [],
-        'attempts': {}
-    }
-    
-    # Agrupar resultados por quiz
-    quiz_results = {}
-    for result in user_results:
-        if result.quiz not in quiz_results:
-            quiz_results[result.quiz] = []
-            quiz_data['labels'].append(result.quiz.name)
-            quiz_data['attempts'][result.quiz.name] = 0
-        quiz_results[result.quiz].append(result)
-        quiz_data['attempts'][result.quiz.name] += 1
-        
-        # Tomar el mejor puntaje para cada quiz
-        if len(quiz_data['scores']) < len(quiz_data['labels']):
-            quiz_data['scores'].append(result.score)
-        else:
-            current_index = quiz_data['labels'].index(result.quiz.name)
-            quiz_data['scores'][current_index] = max(quiz_data['scores'][current_index], result.score)
-    
-    context = {
-        'quiz_results': quiz_results,
-        'total_quizes_completed': total_quizes_completed,
-        'average_score': average_score,
-        'quiz_data': json.dumps(quiz_data, cls=DjangoJSONEncoder)
-    }
-    
+    """Vista de estadísticas accesible para todos los usuarios autenticados"""
+    context = {}
     return render(request, 'estadisticas.html', context)
 
-class QuizListView(ListView):
-    model = Quiz # nombre del modelo
+class QuizListView(LoginRequiredMixin, ListView):
+    model = Quiz
     template_name = 'index.html'
-    context_object_name = 'object_list'
+    context_object_name = 'quizes'
 
 def quiz_view(request, pk):
     # Verificar si el usuario es profesor
@@ -211,81 +162,12 @@ def save_quiz_view(request, pk):
         print(traceback.format_exc())
         return JsonResponse({'error': str(e)}, status=500)
 
+@login_required
 def seguimiento_view(request):
-    if not request.user.is_authenticated:
-        messages.warning(request, 'Debes iniciar sesión para ver el seguimiento.')
+    """Vista de seguimiento solo para profesores"""
+    if not request.user.role == 'TEACHER':
         return redirect('login')
-    
-    if not (request.user.role == 'TEACHER' or request.user.is_staff):
-        messages.warning(request, 'Esta sección es solo para profesores y administradores.')
-        return redirect('index')
-    
-    # Obtener las secciones según el rol
-    if request.user.is_staff:
-        sections = Section.objects.all()
-    else:
-        sections = Section.objects.filter(created_by=request.user)
-        
-    selected_section = request.GET.get('section')
-    selected_student = request.GET.get('student')
-    section_students = []
-    user_results = []
-    dashboard_data = None
-    
-    if selected_section:
-        # Obtener estudiantes de la sección seleccionada usando CustomUser
-        section_students = CustomUser.objects.filter(
-            studentprofile__section_id=selected_section
-        ).order_by('username')
-        
-        # Filtrar resultados
-        if selected_student:
-            students = [CustomUser.objects.get(id=selected_student)]
-        else:
-            students = section_students
-            
-        # Obtener resultados
-        user_results = Result.objects.filter(
-            user__in=students
-        ).order_by('-created')
-        
-        # Preparar datos para los gráficos
-        dashboard_data = {
-            'student_progress': {},
-            'completion_rates': {}
-        }
-        
-        # Obtener todos los quizzes disponibles
-        all_quizzes = Quiz.objects.all()
-        total_quizzes = all_quizzes.count()
-        
-        for student in students:
-            student_results = user_results.filter(user=student)
-            if student_results.exists():
-                # Datos de progreso existentes
-                avg_score = student_results.aggregate(Avg('score'))['score__avg']
-                
-                # Calcular tasa de completitud
-                completed_quizzes = student_results.values('quiz').distinct().count()
-                completion_rate = (completed_quizzes / total_quizzes) * 100 if total_quizzes > 0 else 0
-                
-                dashboard_data['student_progress'][student.username] = {
-                    'scores': list(student_results.values_list('score', flat=True))[::-1],
-                    'average': avg_score,
-                    'completion_rate': completion_rate
-                }
-    
-    context = {
-        'user_results': user_results,
-        'sections': sections,
-        'section_students': section_students,
-        'selected_section': selected_section,
-        'selected_student': selected_student,
-        'dashboard_data': json.dumps(dashboard_data) if dashboard_data else None,
-        'is_teacher': request.user.role == 'TEACHER',
-        'is_admin': request.user.is_staff
-    }
-    
+    context = {}
     return render(request, 'seguimiento.html', context)
 
 @require_http_methods(["POST"])
