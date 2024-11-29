@@ -65,8 +65,8 @@
           </li>
         </ul>
         <p id="u1-q1-feedback" class="feedback"></p>
-      </div>
-  
+        </div>
+
       <!-- Pregunta 2 -->
       <div class="question">
         <p>2. ¿Cómo se dice "Él fue"?</p>
@@ -92,10 +92,10 @@
               He was
             </label>
           </li>
-        </ul>
+          </ul>
         <p id="u1-q2-feedback" class="feedback"></p>
-      </div>
-  
+        </div>
+
       <!-- Pregunta 3 -->
       <div class="question">
         <p>3. ¿Cómo se dice "Ellos están"?</p>
@@ -121,9 +121,9 @@
               They are
             </label>
           </li>
-        </ul>
+          </ul>
         <p id="u1-q3-feedback" class="feedback"></p>
-      </div>
+        </div>
       <div class="navigation-btns">
         <!-- Botón para la unidad anterior -->
         <button onclick="showPreviousUnit('unidad-1')">Volver a la unidad anterior</button>
@@ -834,6 +834,8 @@
     </div>
 
     <div class="content-container">
+      <h2>Listening</h2>
+      
       <h4>Pronouns</h4>
       <div class="pronoun-list">
         <div class="pronoun-item">
@@ -931,7 +933,11 @@
       <h4>Dates</h4>
       <div class="dates-section">
         <div class="weekdays">
-          <h5>Days of the Week:</h5>
+          <h5>
+            Days of the Week:
+            <audio id="audio-days" src="{% static 'audio/dates/days-of-the-week.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-days').play()">▶️</button>
+          </h5>
           <ul>
             <li><span class="day">Monday</span> <span class="translation">(lunes)</span></li>
             <li><span class="day">Tuesday</span> <span class="translation">(martes)</span></li>
@@ -944,7 +950,11 @@
         </div>
 
         <div class="months">
-          <h5>Months of the Year:</h5>
+          <h5>
+            Months of the Year:
+            <audio id="audio-months" src="{% static 'audio/dates/months.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-months').play()">▶️</button>
+          </h5>
           <ul>
             <li><span class="month">January</span> <span class="translation">(enero)</span></li>
             <li><span class="month">February</span> <span class="translation">(febrero)</span></li>
@@ -966,6 +976,70 @@
           <span class="translation">(Mi cumpleaños es el 1 de enero)</span>
           <audio id="audio-birthday" src="{% static 'audio/dates/my-birthday.mp3' %}"></audio>
           <button onclick="document.getElementById('audio-birthday').play()">▶️</button>
+        </div>
+      </div>
+
+      <h4>
+        Directions
+        <audio id="audio-directions" src="{% static 'audio/directions/directions.mp3' %}"></audio>
+        <button onclick="document.getElementById('audio-directions').play()">▶️</button>
+      </h4>
+      <div class="directions-section">
+        <div class="direction-list">
+          <div class="direction-item">
+            <span class="direction">Straight ahead</span>
+            <span class="translation">(Todo recto)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Turn left</span>
+            <span class="translation">(Girar a la izquierda)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Turn right</span>
+            <span class="translation">(Girar a la derecha)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Go straight</span>
+            <span class="translation">(Ir todo recto)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Go back</span>
+            <span class="translation">(Retroceder)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Next to</span>
+            <span class="translation">(Al lado de)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Opposite</span>
+            <span class="translation">(Enfrente)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">At the end of</span>
+            <span class="translation">(Al final de)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Behind</span>
+            <span class="translation">(Detrás)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">In front of</span>
+            <span class="translation">(Delante de)</span>
+          </div>
+
+          <div class="direction-item">
+            <span class="direction">Between</span>
+            <span class="translation">(Entre)</span>
+          </div>
         </div>
       </div>
     </div>
