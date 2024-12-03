@@ -1,9 +1,8 @@
 {% load static %}
-<body>
-    <div class="loading-screen">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p>Cargando...</p>
-        </div>
+<div class="loading-screen">
+    <div class="loading-content">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="loading-logo">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Cargando...</div>
     </div>
-</body> 
+</div> 
