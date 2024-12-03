@@ -37,6 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             else window.addEventListener('load', resolve);
         }),
         // Tiempo mínimo de carga
-        new Promise(resolve => setTimeout(resolve, 500))
+        new Promise(resolve => setTimeout(resolve, 750))
     ]).then(showContent);
 }); 
