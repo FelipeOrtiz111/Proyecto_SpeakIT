@@ -6,11 +6,13 @@ html, body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     overflow-x: hidden;
     overflow-y: hidden;
-    visibility: hidden;
+    visibility: visible;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
 }
 
 body.content-loaded {
-    visibility: visible;
+    opacity: 1;
 }
 
 .background {
@@ -335,4 +337,29 @@ body {
 
 .fondo img.loaded {
   opacity: 1;
+}
+
+/* Loader overlay */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out;
+}
+
+.loader-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Opcional: agregar un spinner o logo mientras carga */
+.loader-content {
+    text-align: center;
 }
