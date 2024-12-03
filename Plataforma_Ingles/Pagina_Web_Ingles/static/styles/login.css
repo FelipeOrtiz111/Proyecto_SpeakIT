@@ -1,181 +1,179 @@
 html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    overflow-x: hidden;
-    overflow-y: hidden;
-    visibility: visible;
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  overflow-x: hidden;
+  overflow-y: hidden;
+  visibility: hidden;
 }
 
 body.content-loaded {
-    opacity: 1;
+  visibility: visible;
 }
 
 .background {
-    position: fixed;
-    top: 0;
-    left: -10px;
-    width: 102%;
-    height: 100%;
-    background-image: url("../images/library.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(6px);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
+  position: fixed;
+  top: 0;
+  left: -10px;
+  width: 102%;
+  height: 100%;
+  background-image: url("../images/library.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(6px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
 }
 
 body.content-loaded .background {
-    opacity: 1;
+  opacity: 1;
 }
 
 .login-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(90deg, rgba(134,0,173,1) 0%, rgba(103,46,144,1) 25%, rgba(73,12,119,1) 50%, rgba(54,1,94,1) 75%, rgba(25,1,51,1) 100%);
-    height: 60px;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    padding: 0;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(134,0,173,1) 0%, rgba(103,46,144,1) 25%, rgba(73,12,119,1) 50%, rgba(54,1,94,1) 75%, rgba(25,1,51,1) 100%);
+  height: 60px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
 footer {
-    height: 45px;
-    justify-content: space-around;
-    padding: 0px;
-    background-color: #1A1A1A;
-    color: #666;
-    text-align: center;
-    margin: auto;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-  }
-  
-  nav {
-    max-height: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  nav a{
-    display: flex;
-  }
-  nav a img{
-    scale: 75%;
-    align-items: center;
-    display: flex;
-  }
-  nav a[href*="https://www.duoc.cl/alumnos/ava-blackboard/"] {  
-    align-items: end;
-  }
-  
-  main {
-    display: grid;
-    margin-left: 24%;
-    padding-right: 1%;
-    margin-top: 60px;
-    padding-left: 20px;
-    padding-bottom: 60px;
-    font-size: 24px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    flex: 1;
-    background-color: gainsboro;
-  }
-  
-  #main-login {
-    margin-left: 30vw;
-    margin-right: 30vw;
-    margin-top: 28vh;
-    height: auto;
-    min-height: 0;
-    opacity: 0;
-  }
+  height: 45px;
+  justify-content: space-around;
+  padding: 0px;
+  background-color: #1A1A1A;
+  color: #666;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
 
-  #main-register {
-    margin-left: 20vw;
-    margin-right: 20vw;
-    margin-top: 14vh;
-    height: 100vh;
-  }
-  
-  .content-section {
-    background: #ffffff;
-    padding: 0px 0px 5px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 12px;
-  }
+nav {
+  max-height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+nav a{
+  display: flex;
+}
+nav a img{
+  scale: 75%;
+  align-items: center;
+  display: flex;
+}
+nav a[href*="https://www.duoc.cl/alumnos/ava-blackboard/"] {  
+  align-items: end;
+}
 
-  .form-group{
-    margin-bottom: 1rem;
-    width: 100%;
-    padding-right: 10px;
-  }
+main {
+  display: grid;
+  margin-left: 24%;
+  padding-right: 1%;
+  margin-top: 60px;
+  padding-left: 20px;
+  padding-bottom: 60px;
+  font-size: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  flex: 1;
+  background-color: gainsboro;
+}
+
+#main-login {
+  margin-left: 30vw;
+  margin-right: 30vw;
+  margin-top: 28vh;
+  height: auto;
+  min-height: 0;
+  opacity: 0;
+}
+
+#main-register {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-top: 14vh;
+  height: 100vh;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 0px 0px 5px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+}
+
+.form-group{
+  margin-bottom: 1rem;
+  width: 100%;
+  padding-right: 10px;
+}
 
 .mb-4{
-  padding: 10px 0px 0px 20px;
+padding: 10px 0px 0px 20px;
 }
 
 .pt-3{
-  padding-top:5px !important;
+padding-top:5px !important;
 }
 
 .form-button{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+display: flex;
+align-items: center;
+justify-content: space-between;
 }
 
 .form-style{
-  display: flex;
-  justify-content: space-between;
-  height: 35vh;
+display: flex;
+justify-content: space-between;
+height: 35vh;
 }
 
 .form-style-register{
-  display: flex;
-  justify-content: space-between;
-  height: 70vh;
+display: flex;
+justify-content: space-between;
+height: 70vh;
 }
-  /* FONDO IMAGEN*/
-  .fondo{
-    display: flex;
-    height: 100%;
-    margin: 0;
-    align-items: center;
-  }
-
-  .fondo img{
-    height: 320px;
-  }
-  /* Header Navigation */
-ul {
-  margin: 0;
-  padding: 0;
-  height: 60px;
+/* FONDO IMAGEN*/
+.fondo{
   display: flex;
-  justify-content: space-evenly;
-  width: 75%;
+  height: 100%;
+  margin: 0;
+  align-items: center;
+}
+
+.fondo img{
+  height: 320px;
+}
+/* Header Navigation */
+ul {
+margin: 0;
+padding: 0;
+height: 60px;
+display: flex;
+justify-content: space-evenly;
+width: 75%;
 }
 
 /* Animación de entrada */
 ul li {
-  list-style: none;
-  margin: 0 20px;
-  opacity: 0; /* Oculto inicialmente */
-  transform: translateX(-50px); /* Desplazado desde la izquierda */
-  animation: slide-in 0.5s ease forwards;
+list-style: none;
+margin: 0 20px;
+opacity: 0; /* Oculto inicialmente */
+transform: translateX(-50px); /* Desplazado desde la izquierda */
+animation: slide-in 0.5s ease forwards;
 }
 
 ul li:nth-child(1) { animation-delay: 0.1s; }
@@ -188,193 +186,153 @@ ul li:nth-child(7) { animation-delay: 0.7s; }
 ul li:nth-child(8) { animation-delay: 0.8s; }
 
 ul li a {
-  transform: scale(1);
-  display: flex;
-  position: relative;
-  align-items: center;
-  height: 60px;
-  padding: 0 5px;
-  font-size: x-large;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: lighter;
-  text-shadow: #000000 2px 3px 3px;
-  color: #fff;
-  transition: 0.1s;
+transform: scale(1);
+display: flex;
+position: relative;
+align-items: center;
+height: 60px;
+padding: 0 5px;
+font-size: x-large;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+font-weight: lighter;
+text-shadow: #000000 2px 3px 3px;
+color: #fff;
+transition: 0.1s;
 }
 
 /* Efecto de hover con desenfoque */
 ul li a:hover {
-  transform: scale(1);
-  opacity: 0.9;
-  filter: blur(2px);
+transform: scale(1);
+opacity: 0.9;
+filter: blur(2px);
 }
 
 ul:hover li a {
-  transform: scale(1);
-  opacity: 1;
-  filter: blur(0);
-  text-decoration: none;
-  color: #fff;
+transform: scale(1);
+opacity: 1;
+filter: blur(0);
+text-decoration: none;
+color: #fff;
 }
 
 /* Subrayado en degradado */
 ul li a:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, rgb(160, 59, 255) 0%, rgb(140, 0, 255) 100%);
-  z-index: 1;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease-in-out;
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 3px;
+background: linear-gradient(90deg, rgb(160, 59, 255) 0%, rgb(140, 0, 255) 100%);
+z-index: 1;
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.3s ease-in-out;
 }
 
 ul li a:hover:before {
-  transform: scaleX(1);
+transform: scaleX(1);
 }
 
 ul li a.active:before {
-  transform-origin: left;
-  transform: scaleX(1);
+transform-origin: left;
+transform: scaleX(1);
 }
 ul li a.active:after {
-  transform-origin: right;
-  transform: scaleX(1);
+transform-origin: right;
+transform: scaleX(1);
 }
 
 .sidebar .dc-a.clicked{
-  background-color: #292929; /* Cambia a tu color preferido */
-  color: #ffffff;
+background-color: #292929; /* Cambia a tu color preferido */
+color: #ffffff;
 }
 
 /* Definición de la animación de entrada */
 @keyframes slide-in {
-  to {
-    opacity: 1;
-    transform: translateX(0); /* Se coloca en su posición final */
-  }
+to {
+  opacity: 1;
+  transform: translateX(0); /* Se coloca en su posición final */
+}
 }
 
 /* Animaciones de fade in */
 .fade-in {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-in forwards;
+opacity: 0;
+animation: fadeIn 0.8s ease-in forwards;
 }
 
 .fade-in-delayed {
-  opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
-  animation-delay: 0.3s;
+opacity: 0;
+animation: fadeIn 1s ease-in forwards;
+animation-delay: 0.3s;
 }
 
 @keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(10px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
+from {
+    opacity: 0;
+    transform: translateY(10px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
 }
 
 /* Restaurar el scroll vertical después de la animación */
 @keyframes enableScroll {
-  to {
-      overflow-y: auto;
-  }
+to {
+    overflow-y: auto;
+}
 }
 
 body {
-  animation: enableScroll 0s 1s forwards; /* Habilitar scroll después de 1s */
+animation: enableScroll 0s 1s forwards; /* Habilitar scroll después de 1s */
 }
 
 /* Asegurarse de que el contenido no sea visible antes de la animación */
 #main-login {
-  opacity: 0;
+opacity: 0;
 }
 
 .background {
-  opacity: 0;
+opacity: 0;
 }
 
 /* Estilos adicionales para suavizar la transición */
 .content-section {
-  transition: all 0.3s ease;
+transition: all 0.3s ease;
 }
 
 .form-style {
-  transition: all 0.3s ease;
+transition: all 0.3s ease;
 }
 
 /* Opcional: animación para los elementos del formulario */
 .form-group {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-in forwards;
-  animation-delay: 0.6s;
+opacity: 0;
+animation: fadeIn 0.8s ease-in forwards;
+animation-delay: 0.6s;
 }
 
 .form-button {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-in forwards;
-  animation-delay: 0.8s;
+opacity: 0;
+animation: fadeIn 0.8s ease-in forwards;
+animation-delay: 0.8s;
 }
 
 .border-top {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-in forwards;
-  animation-delay: 1s;
+opacity: 0;
+animation: fadeIn 0.8s ease-in forwards;
+animation-delay: 1s;
 }
 
 /* Asegurarse de que las imágenes no se muestren hasta que estén cargadas */
 .fondo img {
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
+opacity: 0;
+transition: opacity 0.5s ease-in;
 }
 
 .fondo img.loaded {
-  opacity: 1;
-}
-
-/* Loader overlay */
-.loader-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s ease-out;
-}
-
-.loader-overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-content {
-    text-align: center;
-}
-
-.loader-content img {
-    opacity: 1;
-    width: 100px;
-    height: auto;
-}
-
-/* Asegurar que el contenido principal esté visible pero con opacidad 0 */
-body {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-}
-
-body.content-loaded {
-    opacity: 1;
+opacity: 1;
 }

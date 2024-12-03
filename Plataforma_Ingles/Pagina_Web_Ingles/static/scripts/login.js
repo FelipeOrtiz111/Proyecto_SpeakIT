@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Manejar la carga de imágenes
     // Ocultar todo el contenido inicialmente
     document.body.style.visibility = 'hidden';
     
