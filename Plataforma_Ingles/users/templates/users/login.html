@@ -42,15 +42,14 @@
                 </div>
             </fieldset>
             <div class="fondo">
-                <img src="/static/images/bg_login.jpeg" alt="Logo de Duoc UC">
+                <img src="{% static 'images/bg_login.jpeg' %}" alt="Logo de Duoc UC">
             </div>
         </form>
 
         <div class="border-top pt-3">
             <small class="text-muted">
                 Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
-            </small><br>
-            
+            </small>
         </div>
     </div>
 </div>
