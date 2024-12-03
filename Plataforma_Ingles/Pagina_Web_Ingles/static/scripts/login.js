@@ -43,4 +43,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-});
+}); 
