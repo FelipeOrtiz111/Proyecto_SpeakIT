@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Manejar la carga de imágenes
-    // Ocultar todo el contenido inicialmente
-    document.body.style.visibility = 'hidden';
+    // Crear el overlay de carga
+    const loadingScreen = document.createElement('div');
+    loadingScreen.className = 'loading-screen';
+    
+    // Agregar el contenido del loading
+    loadingScreen.innerHTML = `
+        <div class="loading-content">
+            <img src="/static/images/logo.png" alt="Logo" class="loading-logo">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Cargando...</div>
+        </div>
+    `;
+    
+    // Agregar al body
+    document.body.appendChild(loadingScreen);
     
     // Precargar la imagen de fondo
     const bgImage = new Image();
@@ -9,8 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Función para mostrar todo el contenido
     function showContent() {
-        document.body.style.visibility = 'visible';
-        document.body.classList.add('content-loaded');
+        // Primero desvanecemos el loading screen
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.remove();
+            // Luego mostramos el contenido
+            document.body.style.visibility = 'visible';
+            document.body.classList.add('content-loaded');
+        }, 500);
     }
     
     // Esperar a que la imagen de fondo y todos los recursos estén cargados

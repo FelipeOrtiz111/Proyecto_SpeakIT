@@ -10,6 +10,7 @@
     <!-- FONTAWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CUSTOM CSS: Verifica si estás en la página de inicio o login -->
+    <link rel="stylesheet" href="{% static 'styles/loading.css' %}">
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
     {% if '/login' in request.path %}
         <link rel="stylesheet" href="{% static 'styles/login.css' %}">
@@ -45,6 +46,7 @@
     <!-- Tus scripts personalizados -->
     <script src="{% static 'scripts/sidenav.js' %}"></script>
     <script src="{% static 'scripts/login.js' %}"></script>
+    <script src="{% static 'scripts/loading.js' %}"></script>
     {% block scripts %}{% endblock %}
 
 </body>
