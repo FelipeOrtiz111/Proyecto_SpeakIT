@@ -1,33 +1,55 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Crear y agregar el overlay de carga
-    const loaderOverlay = document.createElement('div');
-    loaderOverlay.className = 'loader-overlay';
-    loaderOverlay.innerHTML = `
-        <div class="loader-content">
-            <img src="/static/images/logo.png" alt="Loading..." style="width: 100px;">
-        </div>
-    `;
-    document.body.insertBefore(loaderOverlay, document.body.firstChild);
-    
-    // Función para mostrar el contenido
-    function showContent() {
-        console.log('Contenido cargado, iniciando transición');
-        document.body.style.visibility = 'visible';
-        loaderOverlay.classList.add('fade-out');
-        
-        // Remover el overlay después de la transición
-        setTimeout(() => {
-            loaderOverlay.remove();
-            document.body.classList.add('content-loaded');
-        }, 500);
-    }
-
-    // Asegurarnos de que el contenido esté oculto inicialmente
+    // Ocultar todo el contenido inicialmente
     document.body.style.visibility = 'hidden';
     
-    // Pequeño retraso para asegurar que el overlay se muestre
-    window.addEventListener('load', () => {
-        console.log('Ventana cargada completamente');
-        setTimeout(showContent, 500);
+    // Precargar la imagen de fondo
+    const bgImage = new Image();
+    bgImage.src = '/static/images/library.jpg';
+    
+    // Función para mostrar todo el contenido
+    function showContent() {
+        // Primero hacemos visible el body pero con opacidad 0
+        document.body.style.visibility = 'visible';
+        document.body.style.opacity = '0';
+        
+        // Pequeño retraso para asegurar que la transición funcione
+        setTimeout(() => {
+            document.body.classList.add('content-loaded');
+            document.body.style.opacity = '1';
+        }, 50);
+    }
+    
+    // Esperar a que la imagen de fondo y todos los recursos estén cargados
+    Promise.all([
+        // Esperar a que la imagen de fondo cargue
+        new Promise(resolve => {
+            if (bgImage.complete) {
+                resolve();
+            } else {
+                bgImage.onload = resolve;
+            }
+        }),
+        // Esperar a que el documento esté completamente cargado
+        new Promise(resolve => {
+            if (document.readyState === 'complete') {
+                resolve();
+            } else {
+                window.addEventListener('load', resolve);
+            }
+        }),
+        // Dar un pequeño tiempo mínimo de carga
+        new Promise(resolve => setTimeout(resolve, 300))
+    ]).then(showContent);
+    
+    // Manejar la carga de otras imágenes
+    const images = document.querySelectorAll('.fondo img');
+    images.forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                img.classList.add('loaded');
+            });
+        }
     });
-}); 
+});
