@@ -4,8 +4,11 @@ html, body {
     display: flex;
     flex-direction: column;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  }
-  .background {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.background {
     position: fixed;
     top: 0;
     left: -10px;
@@ -82,7 +85,9 @@ footer {
     margin-left: 30vw;
     margin-right: 30vw;
     margin-top: 28vh;
-    height: 100vh;
+    height: auto;
+    min-height: 0;
+    opacity: 0;
   }
 
   #main-register {
@@ -255,12 +260,23 @@ ul li a.active:after {
 @keyframes fadeIn {
   from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(10px);
   }
   to {
       opacity: 1;
       transform: translateY(0);
   }
+}
+
+/* Restaurar el scroll vertical después de la animación */
+@keyframes enableScroll {
+  to {
+      overflow-y: auto;
+  }
+}
+
+body {
+  animation: enableScroll 0s 1s forwards; /* Habilitar scroll después de 1s */
 }
 
 /* Asegurarse de que el contenido no sea visible antes de la animación */
