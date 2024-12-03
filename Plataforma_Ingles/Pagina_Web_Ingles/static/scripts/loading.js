@@ -1,25 +1,42 @@
+document.documentElement.classList.add('preload');
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Crear el overlay de carga
-    const loadingScreen = document.createElement('div');
-    loadingScreen.className = 'loading-screen';
+    const loadingScreen = document.querySelector('.loading-screen');
+    const mainLogin = document.getElementById('main-login');
+    const background = document.querySelector('.background');
     
-    // Agregar el contenido del loading
-    loadingScreen.innerHTML = `
-        <div class="loading-content">
-            <img src="/static/images/logo.png" alt="Logo" class="loading-logo">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Cargando...</div>
-        </div>
-    `;
-    
-    // Agregar al body
-    document.body.appendChild(loadingScreen);
-    
-    // Remover la pantalla de carga cuando todo esté listo
-    window.addEventListener('load', function() {
+    function showContent() {
+        document.documentElement.classList.remove('preload');
         loadingScreen.classList.add('fade-out');
+        
         setTimeout(() => {
             loadingScreen.remove();
-        }, 500); // tiempo que dura la transición
-    });
+            document.body.style.visibility = 'visible';
+            document.body.classList.add('content-loaded');
+            
+            // Iniciar animaciones específicas del login si estamos en esa página
+            if (mainLogin && background) {
+                background.classList.add('fade-in');
+                mainLogin.classList.add('fade-in-delayed');
+                
+                // Animar elementos del formulario si existen
+                const formElements = document.querySelectorAll('.form-group, .form-button, .border-top');
+                formElements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                    }, index * 200); // Retraso escalonado para cada elemento
+                });
+            }
+        }, 500);
+    }
+    
+    // Esperar a que todos los recursos estén cargados
+    Promise.all([
+        new Promise(resolve => {
+            if (document.readyState === 'complete') resolve();
+            else window.addEventListener('load', resolve);
+        }),
+        // Tiempo mínimo de carga
+        new Promise(resolve => setTimeout(resolve, 500))
+    ]).then(showContent);
 }); 

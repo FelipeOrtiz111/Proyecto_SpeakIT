@@ -2,31 +2,11 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block extra_head %}
-<style>
-    /* Ocultar el contenido inmediatamente */
-    body {
-        visibility: hidden;
-    }
-    .preload * {
-        transition: none !important;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<!-- Pantalla de carga -->
-<div class="loading-screen">
-    <div class="loading-content">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" class="loading-logo">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Cargando...</div>
-    </div>
-</div>
+{% include 'includes/loading.html' %}
 
-<!-- Contenido del login -->
-<div class="background fade-in"></div>
-<div id="main-login" class="fade-in-delayed">
+<div class="background"></div>
+<div id="main-login">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
         <form method="POST" class="form-style">
