@@ -1,31 +1,43 @@
+// Asegurarnos de que el contenido esté oculto inicialmente
+document.documentElement.classList.add('preload');
+document.body.style.visibility = 'hidden';
+
 document.addEventListener('DOMContentLoaded', function() {
     const loadingScreen = document.querySelector('.loading-screen');
     const mainLogin = document.getElementById('main-login');
     const background = document.querySelector('.background');
     
+    // Asegurarnos de que el loading sea visible inicialmente
+    if (loadingScreen) {
+        loadingScreen.style.display = 'flex';
+        loadingScreen.style.opacity = '1';
+    }
+    
     function showContent() {
-        document.documentElement.classList.remove('preload');
-        loadingScreen.classList.add('fade-out');
-        
-        setTimeout(() => {
-            loadingScreen.remove();
-            document.body.style.visibility = 'visible';
-            document.body.classList.add('content-loaded');
+        if (loadingScreen) {
+            document.documentElement.classList.remove('preload');
+            loadingScreen.classList.add('fade-out');
             
-            // Iniciar animaciones específicas del login si estamos en esa página
-            if (mainLogin && background) {
-                background.classList.add('fade-in');
-                mainLogin.classList.add('fade-in-delayed');
+            setTimeout(() => {
+                loadingScreen.remove();
+                document.body.style.visibility = 'visible';
+                document.body.classList.add('content-loaded');
                 
-                // Animar elementos del formulario si existen
-                const formElements = document.querySelectorAll('.form-group, .form-button, .border-top');
-                formElements.forEach((element, index) => {
-                    setTimeout(() => {
-                        element.style.opacity = '1';
-                    }, index * 200); // Retraso escalonado para cada elemento
-                });
-            }
-        }, 500);
+                // Iniciar animaciones específicas del login si estamos en esa página
+                if (mainLogin && background) {
+                    background.classList.add('fade-in');
+                    mainLogin.classList.add('fade-in-delayed');
+                    
+                    // Animar elementos del formulario si existen
+                    const formElements = document.querySelectorAll('.form-group, .form-button, .border-top');
+                    formElements.forEach((element, index) => {
+                        setTimeout(() => {
+                            element.style.opacity = '1';
+                        }, index * 200);
+                    });
+                }
+            }, 500);
+        }
     }
     
     // Esperar a que todos los recursos estén cargados
