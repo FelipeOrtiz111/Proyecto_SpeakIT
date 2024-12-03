@@ -1,11 +1,17 @@
-body {
-    visibility: hidden;
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    overflow-x: hidden;
+    overflow-y: hidden;
+    visibility: visible;
     opacity: 0;
-    transition: opacity 0.8s ease-in;
+    transition: opacity 0.5s ease-in;
 }
 
 body.content-loaded {
-    visibility: visible;
     opacity: 1;
 }
 
@@ -26,22 +32,6 @@ body.content-loaded {
 }
 
 body.content-loaded .background {
-    opacity: 1;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    overflow-x: hidden;
-    overflow-y: hidden;
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-}
-
-body.content-loaded {
     opacity: 1;
 }
 
@@ -356,38 +346,35 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: white;
+    background: #fff;
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
+    transition: all 0.5s ease-out;
 }
 
 .loader-overlay.fade-out {
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
 }
 
 .loader-content {
     text-align: center;
 }
 
-/* Asegurarnos de que el body tenga un fondo mientras está oculto */
+.loader-content img {
+    opacity: 1;
+    width: 100px;
+    height: auto;
+}
+
+/* Asegurar que el contenido principal esté visible pero con opacidad 0 */
 body {
-    background-color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
 }
 
 body.content-loaded {
-    animation: fadeIn 0.5s ease-in forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    opacity: 1;
 }

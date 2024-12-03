@@ -8,15 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Función para mostrar todo el contenido
     function showContent() {
-        // Primero hacemos visible el body pero con opacidad 0
         document.body.style.visibility = 'visible';
-        document.body.style.opacity = '0';
-        
-        // Pequeño retraso para asegurar que la transición funcione
-        setTimeout(() => {
-            document.body.classList.add('content-loaded');
-            document.body.style.opacity = '1';
-        }, 50);
+        document.body.classList.add('content-loaded');
     }
     
     // Esperar a que la imagen de fondo y todos los recursos estén cargados
@@ -36,9 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 window.addEventListener('load', resolve);
             }
-        }),
-        // Dar un pequeño tiempo mínimo de carga
-        new Promise(resolve => setTimeout(resolve, 300))
+        })
     ]).then(showContent);
     
     // Manejar la carga de otras imágenes
