@@ -1,6 +1,11 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/loading.css' %}">
+{% endblock %}
+
 {% block content %}
 <!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
 <div class="background fade-in"></div>
@@ -28,7 +33,12 @@
             <small class="text-muted">
                 Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
             </small><br>
+            
         </div>
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'scripts/loading.js' %}"></script>
+{% endblock %}

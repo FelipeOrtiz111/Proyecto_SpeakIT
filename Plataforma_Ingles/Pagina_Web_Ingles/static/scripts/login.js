@@ -1,3 +1,6 @@
+// Agregar clase preload inmediatamente
+document.documentElement.classList.add('preload');
+
 document.addEventListener('DOMContentLoaded', function() {
     // Crear el overlay de carga
     const loadingScreen = document.createElement('div');
@@ -21,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Función para mostrar todo el contenido
     function showContent() {
+        // Remover la clase preload para permitir transiciones
+        document.documentElement.classList.remove('preload');
+        
         // Primero desvanecemos el loading screen
         loadingScreen.classList.add('fade-out');
         setTimeout(() => {
@@ -48,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 window.addEventListener('load', resolve);
             }
-        })
+        }),
+        // Dar un pequeño tiempo mínimo para asegurar que el loading se muestre
+        new Promise(resolve => setTimeout(resolve, 300))
     ]).then(showContent);
     
     // Manejar la carga de otras imágenes
