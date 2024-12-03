@@ -4,58 +4,30 @@ document.addEventListener('DOMContentLoaded', function() {
     loaderOverlay.className = 'loader-overlay';
     loaderOverlay.innerHTML = `
         <div class="loader-content">
-            <img src="/static/images/logo.png" alt="Loading..." style="width: 100px; opacity: 1;">
+            <img src="{% static 'images/logo.png' %}" alt="Loading..." style="width: 100px;">
         </div>
     `;
-    document.body.appendChild(loaderOverlay);
-    
-    // Precargar la imagen de fondo y el logo
-    const bgImage = new Image();
-    bgImage.src = '/static/images/library.jpg';
-    
-    const logoImage = new Image();
-    logoImage.src = '/static/images/logo.png';
+    document.body.insertBefore(loaderOverlay, document.body.firstChild);
     
     // Función para mostrar el contenido
     function showContent() {
-        // Primero desvanecemos el overlay
+        console.log('Contenido cargado, iniciando transición');
         loaderOverlay.classList.add('fade-out');
-        
-        // Después de que se desvanezca el overlay, mostramos el contenido
-        setTimeout(() => {
-            document.body.classList.add('content-loaded');
-            // Remover el overlay después de la animación
-            setTimeout(() => {
-                loaderOverlay.remove();
-            }, 500);
-        }, 500);
+        document.body.classList.add('content-loaded');
     }
     
-    // Esperar a que todo esté cargado
-    Promise.all([
-        // Esperar a que la imagen de fondo cargue
-        new Promise(resolve => {
-            if (bgImage.complete) {
-                resolve();
-            } else {
-                bgImage.onload = resolve;
-            }
-        }),
-        // Esperar a que el logo cargue
-        new Promise(resolve => {
-            if (logoImage.complete) {
-                resolve();
-            } else {
-                logoImage.onload = resolve;
-            }
-        }),
-        // Esperar a que el documento esté completamente cargado
-        new Promise(resolve => {
-            if (document.readyState === 'complete') {
-                resolve();
-            } else {
-                window.addEventListener('load', resolve);
-            }
-        })
-    ]).then(showContent);
+    // Pequeño retraso para asegurar que el overlay se muestre
+    setTimeout(() => {
+        // Esperar a que las imágenes estén cargadas
+        Promise.all(
+            Array.from(document.images)
+                .filter(img => !img.complete)
+                .map(img => new Promise(resolve => {
+                    img.onload = img.onerror = resolve;
+                }))
+        ).then(() => {
+            console.log('Todas las imágenes cargadas');
+            showContent();
+        });
+    }, 500);
 }); 
