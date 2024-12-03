@@ -3,8 +3,8 @@
 {% load static %}
 {% block content %}
 <!-- PARA CUALQUIER CAMBIO DE CSS RECUERDA LOS 60px de Margin al Header-->
-<div class="background"></div>
-<div id="main-login">
+<div class="background fade-in"></div>
+<div id="main-login" class="fade-in-delayed">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
         <form method="POST" class="form-style">
@@ -28,7 +28,6 @@
             <small class="text-muted">
                 Crear una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrate ahora!</a>
             </small><br>
-            
         </div>
     </div>
 </div>

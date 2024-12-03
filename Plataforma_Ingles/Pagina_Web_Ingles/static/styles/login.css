@@ -239,3 +239,73 @@ ul li a.active:after {
     transform: translateX(0); /* Se coloca en su posición final */
   }
 }
+
+/* Animaciones de fade in */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in forwards;
+}
+
+.fade-in-delayed {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Asegurarse de que el contenido no sea visible antes de la animación */
+#main-login {
+  opacity: 0;
+}
+
+.background {
+  opacity: 0;
+}
+
+/* Estilos adicionales para suavizar la transición */
+.content-section {
+  transition: all 0.3s ease;
+}
+
+.form-style {
+  transition: all 0.3s ease;
+}
+
+/* Opcional: animación para los elementos del formulario */
+.form-group {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in forwards;
+  animation-delay: 0.6s;
+}
+
+.form-button {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in forwards;
+  animation-delay: 0.8s;
+}
+
+.border-top {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in forwards;
+  animation-delay: 1s;
+}
+
+/* Asegurarse de que las imágenes no se muestren hasta que estén cargadas */
+.fondo img {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.fondo img.loaded {
+  opacity: 1;
+}
