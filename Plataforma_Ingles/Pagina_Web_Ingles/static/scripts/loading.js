@@ -1,25 +1,32 @@
+document.documentElement.classList.add('preload');
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Crear el overlay de carga
-    const loadingScreen = document.createElement('div');
-    loadingScreen.className = 'loading-screen';
+    const loadingScreen = document.querySelector('.loading-screen');
     
-    // Agregar el contenido del loading
-    loadingScreen.innerHTML = `
-        <div class="loading-content">
-            <img src="/static/images/logo.png" alt="Logo" class="loading-logo">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Cargando...</div>
-        </div>
-    `;
-    
-    // Agregar al body
-    document.body.appendChild(loadingScreen);
-    
-    // Remover la pantalla de carga cuando todo esté listo
-    window.addEventListener('load', function() {
-        loadingScreen.classList.add('fade-out');
-        setTimeout(() => {
-            loadingScreen.remove();
-        }, 500); // tiempo que dura la transición
-    });
+    if (loadingScreen) {
+        // Asegurarnos que el loading sea visible inicialmente
+        loadingScreen.style.display = 'flex';
+        loadingScreen.style.opacity = '1';
+        
+        function showContent() {
+            document.documentElement.classList.remove('preload');
+            loadingScreen.classList.add('fade-out');
+            
+            setTimeout(() => {
+                loadingScreen.remove();
+                document.body.style.visibility = 'visible';
+                document.body.classList.add('content-loaded');
+            }, 500);
+        }
+        
+        // Esperar a que todos los recursos estén cargados
+        Promise.all([
+            new Promise(resolve => {
+                if (document.readyState === 'complete') resolve();
+                else window.addEventListener('load', resolve);
+            }),
+            // Tiempo mínimo de carga
+            new Promise(resolve => setTimeout(resolve, 1000))
+        ]).then(showContent);
+    }
 }); 

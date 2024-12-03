@@ -16,13 +16,7 @@
 
 {% block content %}
 <!-- Pantalla de carga -->
-<div class="loading-screen">
-    <div class="loading-content">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" class="loading-logo">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Cargando...</div>
-    </div>
-</div>
+{% include 'includes/loading.html' %}
 
 <!-- Contenido del login -->
 <div class="background fade-in"></div>
@@ -33,7 +27,7 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Iniciar sesión</legend>
-                    {{ form|crispy }}
+                {{ form|crispy }}
                 <div class="form-button">
                     <button class="btn btn-outline-info" type="submit">Ingresar</button>
                     <small class="text-muted">
