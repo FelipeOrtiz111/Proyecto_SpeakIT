@@ -12,27 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para mostrar el contenido
     function showContent() {
         console.log('Contenido cargado, iniciando transición');
+        document.body.style.visibility = 'visible';
         loaderOverlay.classList.add('fade-out');
-        document.body.classList.add('content-loaded');
         
         // Remover el overlay después de la transición
         setTimeout(() => {
             loaderOverlay.remove();
+            document.body.classList.add('content-loaded');
         }, 500);
     }
+
+    // Asegurarnos de que el contenido esté oculto inicialmente
+    document.body.style.visibility = 'hidden';
     
     // Pequeño retraso para asegurar que el overlay se muestre
-    setTimeout(() => {
-        // Esperar a que las imágenes estén cargadas
-        Promise.all(
-            Array.from(document.images)
-                .filter(img => !img.complete)
-                .map(img => new Promise(resolve => {
-                    img.onload = img.onerror = resolve;
-                }))
-        ).then(() => {
-            console.log('Todas las imágenes cargadas');
-            showContent();
-        });
-    }, 500);
+    window.addEventListener('load', () => {
+        console.log('Ventana cargada completamente');
+        setTimeout(showContent, 500);
+    });
 }); 
