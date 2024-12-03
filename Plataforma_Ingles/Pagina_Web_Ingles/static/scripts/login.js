@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loaderOverlay.className = 'loader-overlay';
     loaderOverlay.innerHTML = `
         <div class="loader-content">
-            <img src="{% static 'images/logo.png' %}" alt="Loading..." style="width: 100px;">
+            <img src="/static/images/logo.png" alt="Loading..." style="width: 100px;">
         </div>
     `;
     document.body.insertBefore(loaderOverlay, document.body.firstChild);
@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Contenido cargado, iniciando transición');
         loaderOverlay.classList.add('fade-out');
         document.body.classList.add('content-loaded');
+        
+        // Remover el overlay después de la transición
+        setTimeout(() => {
+            loaderOverlay.remove();
+        }, 500);
     }
     
     // Pequeño retraso para asegurar que el overlay se muestre
