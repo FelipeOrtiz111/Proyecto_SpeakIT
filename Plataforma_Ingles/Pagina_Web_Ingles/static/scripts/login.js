@@ -4,14 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
     loaderOverlay.className = 'loader-overlay';
     loaderOverlay.innerHTML = `
         <div class="loader-content">
-            <img src="/static/images/logo.png" alt="Loading..." style="width: 100px;">
+            <img src="/static/images/logo.png" alt="Loading..." style="width: 100px; opacity: 1;">
         </div>
     `;
     document.body.appendChild(loaderOverlay);
     
-    // Precargar la imagen de fondo
+    // Precargar la imagen de fondo y el logo
     const bgImage = new Image();
     bgImage.src = '/static/images/library.jpg';
+    
+    const logoImage = new Image();
+    logoImage.src = '/static/images/logo.png';
     
     // Función para mostrar el contenido
     function showContent() {
@@ -38,6 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 bgImage.onload = resolve;
             }
         }),
+        // Esperar a que el logo cargue
+        new Promise(resolve => {
+            if (logoImage.complete) {
+                resolve();
+            } else {
+                logoImage.onload = resolve;
+            }
+        }),
         // Esperar a que el documento esté completamente cargado
         new Promise(resolve => {
             if (document.readyState === 'complete') {
@@ -45,20 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 window.addEventListener('load', resolve);
             }
-        }),
-        // Dar un mínimo de tiempo para la animación
-        new Promise(resolve => setTimeout(resolve, 500))
+        })
     ]).then(showContent);
-    
-    // Manejar la carga de otras imágenes
-    const images = document.querySelectorAll('.fondo img');
-    images.forEach(img => {
-        if (img.complete) {
-            img.classList.add('loaded');
-        } else {
-            img.addEventListener('load', function() {
-                img.classList.add('loaded');
-            });
-        }
-    });
 }); 

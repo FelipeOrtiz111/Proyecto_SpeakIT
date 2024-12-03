@@ -351,15 +351,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease-out;
+    transition: all 0.5s ease-out;
 }
 
 .loader-overlay.fade-out {
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
 }
 
-/* Opcional: agregar un spinner o logo mientras carga */
 .loader-content {
     text-align: center;
+}
+
+.loader-content img {
+    opacity: 1;
+    width: 100px;
+    height: auto;
+}
+
+/* Asegurar que el contenido principal esté visible pero con opacidad 0 */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+body.content-loaded {
+    opacity: 1;
 }
