@@ -7,6 +7,13 @@ html, body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+header {
+  background: linear-gradient(90deg, rgb(0 16 255) 0%, rgb(2 18 180) 25%, rgb(1 24 149) 50%, rgb(0 15 79) 75%, rgb(0 0 0) 100%);
+}
+
+.login-header ul li a:before {
+  background: linear-gradient(90deg, rgb(0 230 255) 0%, rgb(0 76 255) 100%);}
+
 /* Pantalla de carga */
 .loading-screen {
     position: fixed;
@@ -14,7 +21,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, rgba(134,0,173,1) 0%, rgba(103,46,144,1) 25%, rgba(73,12,119,1) 50%, rgba(54,1,94,1) 75%, rgba(25,1,51,1) 100%);
+    background: linear-gradient(90deg, rgb(0 16 255) 0%, rgb(2 18 180) 25%, rgb(1 24 149) 50%, rgb(0 15 79) 75%, rgb(0 0 0) 100%);
     z-index: 9999;
     display: flex;
     justify-content: center;
@@ -41,7 +48,7 @@ html, body {
     width: 50px;
     height: 50px;
     border: 5px solid #f3f3f3;
-    border-top: 5px solid #672e90;
+    border-top: 5px solid #0432ff;
     border-radius: 50%;
     margin: 20px auto;
     animation: spin 1s linear infinite;

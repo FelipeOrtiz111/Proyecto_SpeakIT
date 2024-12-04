@@ -165,7 +165,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, rgb(0 230 255) 0%, rgb(0 76 255) 100%);
+  background: linear-gradient(90deg, rgb(172, 71, 255) 0%, rgb(104, 0, 201) 100%);
   z-index: 1;
   transform: scaleX(0);
   transform-origin: left;
@@ -889,6 +889,54 @@ button:focus{
 .navigation-btns button:first-child:hover {
   background-color: #e0a800;  /* Cambio de color para el botón de "Volver" */
 }
+/*====================================  
+  Pantalla de carga
+======================================*/
+/* Texto de carga */
+/* Pantalla de carga */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(128, 128, 128) 0%, rgb(90, 90, 90) 25%, rgb(53, 53, 53) 50%, rgb(36, 36, 36) 75%, rgb(0 0 0) 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.loading-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #672e90;
+  border-radius: 50%;
+  margin: 20px auto;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
 
 /*====================================  
   ANIMACIONES
@@ -900,6 +948,12 @@ button:focus{
     opacity: 1;
     transform: translateX(0); /* Se coloca en su posición final */
   }
+}
+
+/* Animación de rotación para el loading */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /*====================================  
