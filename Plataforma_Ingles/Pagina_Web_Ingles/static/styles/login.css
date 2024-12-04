@@ -12,7 +12,7 @@ header {
 }
 
 .login-header ul li a:before {
-  background: linear-gradient(90deg, rgb(0 230 255) 0%, rgb(0 76 255) 100%);}
+  background: linear-gradient(90deg, rgb(0, 204, 255) 0%, rgb(0 76 255) 100%);}
 
 /* Pantalla de carga */
 .loading-screen {
@@ -21,7 +21,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, rgb(0 16 255) 0%, rgb(2 18 180) 25%, rgb(1 24 149) 50%, rgb(0 15 79) 75%, rgb(0 0 0) 100%);
+    background-color: #00039b;
     z-index: 9999;
     display: flex;
     justify-content: center;
