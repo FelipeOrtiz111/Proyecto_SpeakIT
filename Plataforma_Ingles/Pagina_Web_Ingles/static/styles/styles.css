@@ -198,13 +198,14 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   width: 25%;
   display: flex;
   flex-direction: column;
-  background-color: #262626;
+  background-color: #1a1a1a;
   position: fixed;
   top: 60px;
   max-height: calc(100vh - 105px);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   transition: width 0.3s ease, transform 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
 }
 
 .sidebar.minimized {
@@ -238,15 +239,19 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
 
 /* Side Nav Items */
 .sidebar .dc-a {
-  display: inline-block;
-  transition: transform 0.1s ease-out, color 0.3s;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  display: block;
+  padding: 12px 15px;
+  color: #b3b3b3;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
 }
 
 .sidebar .dc-a:hover {
-  transform: translateX(15px); /* Solo mueve el texto */
+  background-color: #2d2d2d;
   color: #fff;
+  transform: translateX(5px);
+  border-left-color: #672e90;
 }
 
 .sidebar .dc-a.clicked {
@@ -307,24 +312,20 @@ main h3{
   DROPDOWN
 ======================================*/
 .dropdown-btn {
-  padding: 8px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-  border: none;
-  background: #1A1A1A;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
+  padding: 12px 15px;
+  font-size: 16px;
+  color: #fff;
+  background: #262626;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Contenedor con dropdown */
 .dropdown-container {
-  display: none;
-  list-style: none;
-  background-color: #262626;
+  background-color: #1f1f1f;
+  padding: 5px 0;
 }
 
 .dropdown-container.show {
@@ -343,8 +344,8 @@ main h3{
 
 /* Hover del dropdown */
 .dropdown-btn:hover {
-  background: gainsboro;
-  color: #1A1A1A;
+  background: #333;
+  color: #fff;
 }
 
 .active.ing-b {
