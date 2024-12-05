@@ -120,10 +120,10 @@ header {
   }
   
   #main-register {
-    margin-left: 20vw;
-    margin-right: 20vw;
-    margin-top: 14vh;
-    height: 100vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
+    margin-top: 10vh;
+    height: auto;
   }
 
 /* Imagen del formulario */
@@ -132,11 +132,14 @@ header {
     height: 100%;
     margin: 0;
     align-items: center;
+    width: 40%;
 }
 
 .fondo img {
-    height: 320px;
-    opacity: 1;
+    max-width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
 }
 
 /* Animaciones de fade in */
@@ -159,5 +162,218 @@ header {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Estilos para enlaces y efectos hover */
+.content-section a {
+    position: relative;
+    color: #0432ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.content-section a:hover {
+    color: #7091ff;
+}
+
+.content-section a:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #3240ff, #7091ff, #8cbdfc);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.content-section a:hover:before {
+    transform: scaleX(1);
+}
+
+/* Mejoras para el formulario de registro */
+.form-style-register {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    padding: 20px;
+}
+
+.form-style-register legend {
+    color: #333;
+    font-size: 1.5em;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.form-style-register .btn-outline-info {
+    background: linear-gradient(90deg, #3240ff, #7091ff);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-style-register .btn-outline-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-style-register fieldset {
+    width: 60%;
+    padding-right: 20px;
+}
+
+/* Animación de entrada mejorada */
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.content-section {
+    animation: slide-in 0.5s ease forwards;
+}
+
+/* Ajustes responsivos mejorados */
+@media (max-width: 1400px) {
+    #main-login {
+        margin-left: 25vw;
+        margin-right: 25vw;
+        margin-top: 20vh;
+    }
+    
+    #main-register {
+        margin-left: 20vw;
+        margin-right: 20vw;
+    }
+}
+
+@media (max-width: 1200px) {
+    #main-login {
+        margin-left: 20vw;
+        margin-right: 20vw;
+        margin-top: 15vh;
+    }
+    
+    #main-register {
+        margin-left: 15vw;
+        margin-right: 15vw;
+    }
+
+    .loading-logo {
+        width: 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    #main-login {
+        margin-left: 15vw;
+        margin-right: 15vw;
+    }
+
+    .form-style {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .fondo {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .fondo img {
+        max-height: 250px;
+    }
+
+    .form-button {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-login, #main-register {
+        margin-left: 10vw;
+        margin-right: 10vw;
+        margin-top: 10vh;
+    }
+    
+    .form-style-register, .form-style {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .form-style-register fieldset,
+    .fondo {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .content-section {
+        padding: 0px 10px 5px 10px;
+    }
+
+    .loading-logo {
+        width: 150px;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 4px;
+    }
+}
+
+@media (max-width: 576px) {
+    #main-login, #main-register {
+        margin-left: 5vw;
+        margin-right: 5vw;
+        margin-top: 5vh;
+    }
+
+    .form-style-register legend,
+    .form-style legend {
+        font-size: 1.2em;
+    }
+
+    .loading-text {
+        font-size: 1em;
+    }
+
+    .form-button {
+        width: 100%;
+    }
+
+    .btn-outline-info {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Ajustes para dispositivos muy pequeños */
+@media (max-width: 360px) {
+    .content-section {
+        padding: 0px 5px 5px 5px;
+    }
+
+    .form-style-register, .form-style {
+        padding: 10px;
+    }
+
+    .loading-logo {
+        width: 120px;
     }
 }
