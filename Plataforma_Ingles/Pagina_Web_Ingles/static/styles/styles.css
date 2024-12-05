@@ -210,33 +210,36 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   transition: width 0.3s ease;
   z-index: 1;
   white-space: nowrap;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar.minimized {
   width: 50px;
-  overflow: hidden;
 }
 
 .sidebar.minimized .dropdown-container,
-.sidebar.minimized .dropdown-btn span,
+.sidebar.minimized .dropdown-btn,
 .sidebar.minimized hr {
   display: none;
 }
 
+.sidebar.minimized .sidebar-toggle {
+  width: 100%;
+}
+
+.sidebar.minimized .sidebar-toggle button {
+  transform: rotate(180deg);
+}
+
 /* Botón toggle fuera del sidebar */
 .sidebar-toggle {
-  position: fixed;
-  left: 0;
-  top: 70px;
-  width: 50px;
+  position: relative;
   padding: 10px;
-  background: linear-gradient(180deg, #2d1f3f 0%, #1a1a1a 100%);
+  background: linear-gradient(90deg, #2d1f3f 0%, #1a1a1a 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 2;
+  height: 40px;
 }
 
 .sidebar-toggle button {
@@ -244,7 +247,6 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   border: none;
   color: #b3b3b3;
   cursor: pointer;
-  padding: 8px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -254,10 +256,10 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   transition: all 0.3s ease;
 }
 
-.sidebar-toggle button:hover {
-  background-color: rgba(103, 46, 144, 0.3);
+.sidebar-toggle:hover button {
   color: #fff;
   transform: scale(1.1);
+  background: rgba(103, 46, 144, 0.3);
 }
 
 .sidebar-toggle h4 {
@@ -357,12 +359,42 @@ main h3{
 .dropdown-btn {
   padding: 12px 15px;
   font-size: 16px;
-  color: #fff;
-  background: #262626;
-  border-bottom: 1px solid #333;
+  color: #b3b3b3;
+  background: linear-gradient(90deg, #2d1f3f 0%, #1a1a1a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover del dropdown */
+.dropdown-btn:hover {
+  background: linear-gradient(90deg, rgba(103, 46, 144, 0.2) 0%, rgba(103, 46, 144, 0.1) 100%);
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.dropdown-btn:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #9c45d9 0%, #672e90 100%);
+}
+
+/* Estados activos de los dropdowns */
+.active.ing-b,
+.active.ing-e,
+.active.pru-e,
+.active.sop-t {
+  background: linear-gradient(90deg, rgba(103, 46, 144, 0.3) 0%, rgba(103, 46, 144, 0.2) 100%);
+  color: #fff;
+  border-left: 4px solid #9c45d9;
 }
 
 /* Contenedor con dropdown */
@@ -383,32 +415,6 @@ main h3{
 .fa-caret-down {
   float: right;
   padding-right: 8px;
-}
-
-/* Hover del dropdown */
-.dropdown-btn:hover {
-  background: #333;
-  color: #fff;
-}
-
-.active.ing-b {
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-.active.ing-e {
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-.active.pru-e{
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-.active.sop-t{
-  background-color: #e6e6e6;
-  color: #000;
 }
 
 /* Enmarcado del boton luego de hacer click*/
@@ -931,7 +937,7 @@ button:focus{
 .navigation-btns button {
   background-color: #007bff;  /* Azul brillante */
   color: white;  /* Texto en blanco */
-  font-size: 16px;  /* Tamaño de fuente */
+  font-size: 16px;  /* Tama��o de fuente */
   padding: 10px 20px;  /* Relleno (espaciado interno) */
   border: none;  /* Eliminar el borde predeterminado */
   border-radius: 5px;  /* Bordes redondeados */

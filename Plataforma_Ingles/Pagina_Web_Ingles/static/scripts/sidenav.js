@@ -9,26 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
             e.stopPropagation();
             sidebar.classList.toggle('minimized');
             mainContent.classList.toggle('expanded');
-            
-            // Añadir efecto hover al botón minimizado
-            if (sidebar.classList.contains('minimized')) {
-                this.title = "Expandir menú";
-            } else {
-                this.title = "Contraer menú";
-            }
-        });
-
-        // Añadir efecto hover
-        sidebarToggle.addEventListener('mouseenter', function() {
-            if (sidebar.classList.contains('minimized')) {
-                this.style.transform = 'scale(1.1)';
-            }
-        });
-
-        sidebarToggle.addEventListener('mouseleave', function() {
-            if (sidebar.classList.contains('minimized')) {
-                this.style.transform = 'scale(1)';
-            }
         });
     }
 
@@ -45,51 +25,24 @@ document.addEventListener("DOMContentLoaded", function() {
     const videoSections = document.querySelectorAll('.video-section');
     const noVideoMessage = document.querySelector('.no-video');
 
-    // Solo ejecuta el código si hay secciones de video en la página
     if (videoSections.length > 0) {
         videoSections.forEach(video => video.style.display = 'none');
-        
-        // Muestra el mensaje por defecto solo si existe el elemento
         if (noVideoMessage) {
             noVideoMessage.style.display = 'block';
         }
     }
 
-    // Recuperar el estado guardado
-    const returnToSection = localStorage.getItem('returnToSection');
-    const returnToContent = localStorage.getItem('returnToContent');
-
-    if (returnToSection && returnToContent) {
-        // Encontrar y hacer clic en el botón de la sección
-        const sectionButton = document.querySelector(`.${returnToSection}`);
-        if (sectionButton) {
-            sectionButton.click();
-        }
-
-        // Encontrar y hacer clic en el enlace del contenido
-        const contentLink = Array.from(document.querySelectorAll('.dc-a'))
-            .find(a => a.getAttribute('data-titulo') === returnToContent);
-        if (contentLink) {
-            contentLink.click();
-        }
-
-        // Limpiar el estado guardado
-        localStorage.removeItem('returnToSection');
-        localStorage.removeItem('returnToContent');
-    }
-
     // Desplegar todos los menús al cargar la página
     var dropdownBtns = document.getElementsByClassName("dropdown-btn");
     for (let btn of dropdownBtns) {
-        // Añadir la clase active y mostrar el contenido
         btn.classList.add("active");
         var dropdownContent = btn.nextElementSibling;
         dropdownContent.style.display = "block";
     }
 });
 
+// Manejo de los dropdowns
 var dropdown = document.getElementsByClassName("dropdown-btn");
-
 for (let i = 0; i < dropdown.length; i++) {
     dropdown[i].addEventListener("click", function() {
         this.classList.toggle("active");
