@@ -113,6 +113,19 @@ header {
     justify-content: space-between;
 }
 
+.form-style-register{
+    display: flex;
+    justify-content: space-between;
+    height: 70vh;
+  }
+  
+  #main-register {
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 14vh;
+    height: 100vh;
+  }
+
 /* Imagen del formulario */
 .fondo {
     display: flex;

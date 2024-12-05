@@ -2,7 +2,10 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<div class="background"></div> <!-- Capa para el fondo difuminado -->
+<!-- Pantalla de carga -->
+{% include 'includes/loading.html' %}
+
+<div class="background fade-in-delayed"></div> <!-- Capa para el fondo difuminado -->
 <div id="main-register">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
