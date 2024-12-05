@@ -32,12 +32,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Desplegar solo los menús de Inglés Básico y Elemental al cargar la página
+    // Cerrar todos los dropdowns primero
     var dropdownBtns = document.getElementsByClassName("dropdown-btn");
     for (let btn of dropdownBtns) {
-        if (!btn.classList.contains('pru-e') && !btn.classList.contains('sop-t')) {
-            btn.classList.add("active");
-            var dropdownContent = btn.nextElementSibling;
+        btn.classList.remove("active");
+        var dropdownContent = btn.nextElementSibling;
+        if (dropdownContent) {
+            dropdownContent.style.display = "none";
+        }
+    }
+
+    // Abrir solo Inglés Básico por defecto
+    var inglesBasico = document.querySelector('.ing-b');
+    if (inglesBasico) {
+        inglesBasico.classList.add('active');
+        var dropdownContent = inglesBasico.nextElementSibling;
+        if (dropdownContent) {
             dropdownContent.style.display = "block";
         }
     }
@@ -49,7 +59,11 @@ for (let i = 0; i < dropdown.length; i++) {
     dropdown[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var dropdownContent = this.nextElementSibling;
-        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
     });
 }
 
