@@ -92,7 +92,7 @@ links.forEach(link => {
                 }
             });
 
-            // Muestra u oculta el mensaje "No se encuentra Video"
+            // Muestra u oculta el contenido de la pagina
             if (noVideoMessage) {
                 noVideoMessage.style.display = videoFound ? 'none' : 'block';
             }

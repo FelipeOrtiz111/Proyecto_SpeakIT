@@ -238,7 +238,9 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
 
 .sidebar-toggle h4 {
   margin: 0;
+  font-weight: 100;
 }
+
 .sidebar-toggle button {
   background: none;
   border: none;
@@ -309,8 +311,8 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   outline: none;
 }
 
-.sop-t + .dropdown-container,
-.pru-e + .dropdown-container {
+.dropdown-container.pru-e,
+.dropdown-container.sop-t {
     display: none;
 }
 /*====================================
