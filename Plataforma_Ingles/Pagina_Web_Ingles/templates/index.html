@@ -977,7 +977,7 @@
             <audio id="audio-days" src="{% static 'audio/dates/days-of-the-week.mp3' %}"></audio>
             <button onclick="document.getElementById('audio-days').play()">▶️</button>
           </h5>
-          <ul>
+          <ol>
             <li><span class="day">Monday</span> <span class="translation">(lunes)</span></li>
             <li><span class="day">Tuesday</span> <span class="translation">(martes)</span></li>
             <li><span class="day">Wednesday</span> <span class="translation">(miércoles)</span></li>
@@ -985,7 +985,7 @@
             <li><span class="day">Friday</span> <span class="translation">(viernes)</span></li>
             <li><span class="day">Saturday</span> <span class="translation">(sábado)</span></li>
             <li><span class="day">Sunday</span> <span class="translation">(domingo)</span></li>
-          </ul>
+          </ol>
         </div>
 
         <div class="months">
@@ -995,18 +995,20 @@
             <button onclick="document.getElementById('audio-months').play()">▶️</button>
           </h5>
           <ul>
-            <li><span class="month">January</span> <span class="translation">(enero)</span></li>
-            <li><span class="month">February</span> <span class="translation">(febrero)</span></li>
-            <li><span class="month">March</span> <span class="translation">(marzo)</span></li>
-            <li><span class="month">April</span> <span class="translation">(abril)</span></li>
-            <li><span class="month">May</span> <span class="translation">(mayo)</span></li>
-            <li><span class="month">June</span> <span class="translation">(junio)</span></li>
-            <li><span class="month">July</span> <span class="translation">(julio)</span></li>
-            <li><span class="month">August</span> <span class="translation">(agosto)</span></li>
-            <li><span class="month">September</span> <span class="translation">(septiembre)</span></li>
-            <li><span class="month">October</span> <span class="translation">(octubre)</span></li>
-            <li><span class="month">November</span> <span class="translation">(noviembre)</span></li>
-            <li><span class="month">December</span> <span class="translation">(diciembre)</span></li>
+            <ol>
+                <li><span class="month">January</span> <span class="translation">(enero)</span></li>
+                <li><span class="month">February</span> <span class="translation">(febrero)</span></li>
+                <li><span class="month">March</span> <span class="translation">(marzo)</span></li>
+                <li><span class="month">April</span> <span class="translation">(abril)</span></li>
+                <li><span class="month">May</span> <span class="translation">(mayo)</span></li>
+                <li><span class="month">June</span> <span class="translation">(junio)</span></li>
+                <li><span class="month">July</span> <span class="translation">(julio)</span></li>
+                <li><span class="month">August</span> <span class="translation">(agosto)</span></li>
+                <li><span class="month">September</span> <span class="translation">(septiembre)</span></li>
+                <li><span class="month">October</span> <span class="translation">(octubre)</span></li>
+                <li><span class="month">November</span> <span class="translation">(noviembre)</span></li>
+                <li><span class="month">December</span> <span class="translation">(diciembre)</span></li>
+            </ol>
           </ul>
         </div>
 
@@ -1024,61 +1026,63 @@
         <button onclick="document.getElementById('audio-directions').play()">▶️</button>
       </h4>
       <div class="directions-section">
-        <div class="direction-list">
-          <div class="direction-item">
+        <ul class="direction-list">
+          <li class="direction-item">
             <span class="direction">Straight ahead</span>
             <span class="translation">(Todo recto)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Turn left</span>
             <span class="translation">(Girar a la izquierda)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Turn right</span>
             <span class="translation">(Girar a la derecha)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Go straight</span>
             <span class="translation">(Ir todo recto)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Go back</span>
             <span class="translation">(Retroceder)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Next to</span>
             <span class="translation">(Al lado de)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Opposite</span>
             <span class="translation">(Enfrente)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">At the end of</span>
             <span class="translation">(Al final de)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Behind</span>
             <span class="translation">(Detrás)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">In front of</span>
             <span class="translation">(Delante de)</span>
-          </div>
+          </li>
 
-          <div class="direction-item">
+          <li class="direction-item">
             <span class="direction">Between</span>
             <span class="translation">(Entre)</span>
-          </div>
+          </li>
+        </ul>
+      </div>
         </div>
       </div>
     </div>
@@ -1219,13 +1223,13 @@
                 <li>Identifica el tipo de problema (técnico, contenido, acceso)</li>
                 <li>Toma capturas de pantalla si es posible</li>
                 <li>Describe detalladamente el problema</li>
-                <li>Envía el reporte a soporte@speakit.com</li>
+                <li>Envía el reporte a ...</li>
             </ol>
         </div>
         <div class="contact-info">
             <h5>Información de Contacto:</h5>
-            <p>Email: soporte@speakit.com</p>
-            <p>Horario de atención: Lunes a Viernes, 9:00 - 18:00</p>
+            <p>Email: Por definir</p>
+            <p>Horario de atención: Por definir</p>
         </div>
     </div>
   </div>
