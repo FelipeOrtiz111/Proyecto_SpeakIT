@@ -54,10 +54,8 @@ footer {
 
 main {
   display: grid;
-  margin-left: 24%;
-  padding-right: 1%;
+  margin-left: 26%;
   margin-top: 60px;
-  padding-left: 20px;
   margin-bottom: 45px;
   font-size: 24px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -208,7 +206,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   max-height: calc(100vh - 105px);
   overflow-y: auto;
   overflow-x: hidden;
-  transition: width 0.3s ease;
+  transition: height 0.3s ease, width 0.4s ease-in-out 0.4s;
   z-index: 1000;
   white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
 }

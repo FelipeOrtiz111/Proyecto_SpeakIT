@@ -32,12 +32,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Desplegar todos los menús al cargar la página
+    // Desplegar solo los menús de Inglés Básico y Elemental al cargar la página
     var dropdownBtns = document.getElementsByClassName("dropdown-btn");
     for (let btn of dropdownBtns) {
-        btn.classList.add("active");
-        var dropdownContent = btn.nextElementSibling;
-        dropdownContent.style.display = "block";
+        if (!btn.classList.contains('pru-e') && !btn.classList.contains('sop-t')) {
+            btn.classList.add("active");
+            var dropdownContent = btn.nextElementSibling;
+            dropdownContent.style.display = "block";
+        }
     }
 });
 
