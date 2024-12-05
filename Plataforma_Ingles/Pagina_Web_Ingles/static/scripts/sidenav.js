@@ -6,9 +6,29 @@ document.addEventListener("DOMContentLoaded", function() {
     // Mejorar el manejo del toggle
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evitar que el clic se propague
+            e.stopPropagation();
             sidebar.classList.toggle('minimized');
             mainContent.classList.toggle('expanded');
+            
+            // Añadir efecto hover al botón minimizado
+            if (sidebar.classList.contains('minimized')) {
+                this.title = "Expandir menú";
+            } else {
+                this.title = "Contraer menú";
+            }
+        });
+
+        // Añadir efecto hover
+        sidebarToggle.addEventListener('mouseenter', function() {
+            if (sidebar.classList.contains('minimized')) {
+                this.style.transform = 'scale(1.1)';
+            }
+        });
+
+        sidebarToggle.addEventListener('mouseleave', function() {
+            if (sidebar.classList.contains('minimized')) {
+                this.style.transform = 'scale(1)';
+            }
         });
     }
 

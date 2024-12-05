@@ -204,53 +204,58 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   max-height: calc(100vh - 105px);
   overflow-y: auto;
   overflow-x: hidden;
-  transition: width 0.3s ease;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-  white-space: nowrap;
+  transition: all 0.3s ease;
+  z-index: 1000;
 }
 
 .sidebar.minimized {
-  width: 50px;
-  overflow: hidden;
+  width: 40px;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .sidebar.minimized .dropdown-container,
-.sidebar.minimized .dropdown-btn span,
-.sidebar.minimized hr,
-.sidebar.minimized .sidebar-toggle h4 {
+.sidebar.minimized .dropdown-btn,
+.sidebar.minimized hr {
   display: none;
 }
 
 .sidebar-toggle {
-  padding: 10px;
-  text-align: right;
+  position: relative;
+  padding: 5px;
+  background-color: transparent;
+}
+
+.sidebar.minimized .sidebar-toggle {
+  position: fixed;
+  left: 10px;
+  top: 70px;
   background-color: #1a1a1a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sidebar-toggle button {
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 8px;
-  width: 30px;
-  height: 30px;
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease, transform 0.3s ease;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
 }
 
-.sidebar-toggle button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.sidebar.minimized .sidebar-toggle:hover {
+  background-color: #2d2d2d;
+  transform: scale(1.1);
+}
+
+.sidebar.minimized .sidebar-toggle h4 {
+  display: none;
 }
 
 .sidebar.minimized .sidebar-toggle button {
+  padding: 0;
+  width: 100%;
+  height: 100%;
   transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
 
 /* Side Nav Items */
