@@ -1,9 +1,6 @@
 /*====================================
   ELEMENTOS BASE 
 ======================================*/
-body.content-loaded {
-  background-color: gainsboro;
-}
 
 html, body {
   height: 100%;
@@ -11,6 +8,7 @@ html, body {
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: gainsboro;
 }
 
 hr {
@@ -54,7 +52,7 @@ footer {
 
 main {
   display: grid;
-  margin-left: 26%;
+  margin-left: 25%;
   margin-top: 60px;
   margin-bottom: 45px;
   font-size: 24px;
@@ -171,7 +169,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, rgb(172, 71, 255) 0%, rgb(104, 0, 201) 100%);
+  background: linear-gradient(90deg, rgb(229 6 255) 0%, rgb(133 0 220) 100%);
   z-index: 1;
   transform: scaleX(0);
   transform-origin: left;
@@ -207,6 +205,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    transition: width 0.3s ease, height 0.3s ease 0.3s;
 }
 
 /* Contenedor de los dropdowns */
@@ -1065,7 +1064,7 @@ button:focus{
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(#a100c8, #62007a);
+  background-image: radial-gradient(#8400b8, #58007a);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -1091,8 +1090,8 @@ button:focus{
 .loading-spinner {
   width: 60px;
   height: 60px;
-  border: 6px solid #ffe291;
-  border-top: 6px solid #ffc012;
+  border: 6px solid #ffffff;
+  border-top: 6px solid #7700ff;
   border-radius: 50%;
   margin: 20px auto;
   animation: spin 1s linear infinite;
