@@ -55,6 +55,7 @@ links.forEach(link => {
     link.addEventListener('click', function() {
         const selectedTitle = this.getAttribute('data-titulo');
         const noVideoMessage = document.querySelector('.no-video');
+        const tituloMain = document.querySelector('.titulo-main');
 
         // Desactiva todos los enlaces y oculta todos los videos si el enlace ya estaba activo
         if (this.classList.contains('clicked')) {
@@ -62,6 +63,10 @@ links.forEach(link => {
             videoSections.forEach(video => video.style.display = 'none');
             if (noVideoMessage) {
                 noVideoMessage.style.display = 'block';
+            }
+            // Restaurar título por defecto
+            if (tituloMain) {
+                tituloMain.textContent = 'SpeakIT';
             }
         } else {
             // Alterna el estado de activación usando toggle
@@ -76,6 +81,10 @@ links.forEach(link => {
                 if (title === selectedTitle) {
                     video.style.display = 'block';
                     videoFound = true;
+                    // Actualizar título principal
+                    if (tituloMain) {
+                        tituloMain.textContent = title;
+                    }
                 }
             });
 
@@ -106,6 +115,8 @@ function checkAnswer(option, feedbackId) {
 // Función para mostrar la siguiente unidad
 function showNextUnit(unitId) {
     const allUnits = document.querySelectorAll('.video-section');
+    const tituloMain = document.querySelector('.titulo-main');
+    
     allUnits.forEach(unit => {
         unit.style.display = 'none';
     });
@@ -113,9 +124,14 @@ function showNextUnit(unitId) {
     const nextUnit = document.getElementById(unitId);
     if (nextUnit) {
         nextUnit.style.display = 'block';
+        const title = nextUnit.querySelector('h3').innerText;
+        
+        // Actualizar título principal
+        if (tituloMain) {
+            tituloMain.textContent = title;
+        }
         
         // Encontrar y activar el enlace correspondiente
-        const title = nextUnit.querySelector('h3').innerText;
         const correspondingLink = Array.from(links)
             .find(link => link.getAttribute('data-titulo') === title);
         
@@ -129,6 +145,8 @@ function showNextUnit(unitId) {
 // Función para mostrar la unidad anterior
 function showPreviousUnit(unitId) {
     const allUnits = document.querySelectorAll('.video-section');
+    const tituloMain = document.querySelector('.titulo-main');
+    
     allUnits.forEach(unit => {
         unit.style.display = 'none';
     });
@@ -136,9 +154,14 @@ function showPreviousUnit(unitId) {
     const previousUnit = document.getElementById(unitId);
     if (previousUnit) {
         previousUnit.style.display = 'block';
+        const title = previousUnit.querySelector('h3').innerText;
+        
+        // Actualizar título principal
+        if (tituloMain) {
+            tituloMain.textContent = title;
+        }
         
         // Encontrar y activar el enlace correspondiente
-        const title = previousUnit.querySelector('h3').innerText;
         const correspondingLink = Array.from(links)
             .find(link => link.getAttribute('data-titulo') === title);
         
