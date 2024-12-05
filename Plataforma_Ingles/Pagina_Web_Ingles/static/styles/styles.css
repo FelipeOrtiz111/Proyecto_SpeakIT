@@ -208,7 +208,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   max-height: calc(100vh - 105px);
   overflow-y: auto;
   overflow-x: hidden;
-  transition: width 0.3s ease, background-color 0.3s ease;
+  transition: width 0.3s ease;
   z-index: 1000;
   white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
 }
@@ -251,13 +251,11 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: background-color 0.2s ease, transform 0.3s ease;
 }
 
 .sidebar-toggle button:hover {
-  transform: scale(1.1);
-  background: rgba(103, 46, 144, 0.3);
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar.minimized .sidebar-toggle button {
@@ -272,27 +270,19 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   font-size: 16px;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .sidebar .dc-a:hover {
-  background: linear-gradient(90deg, rgba(103, 46, 144, 0.2) 0%, rgba(103, 46, 144, 0.1) 100%);
+  background-color: #2d2d2d;
   color: #fff;
-  border-left-color: #9c45d9;
+  transform: translateX(5px);
+  border-left-color: #672e90;
 }
 
 .sidebar .dc-a.clicked {
   background-color: #292929; /* Cambia a tu color preferido */
   color: #ffffff;
   transform: skewX(3deg) translateX(15px); /* Mantiene el efecto */
-}
-
-.sidebar .dc-a.active {
-  background: linear-gradient(90deg, rgba(103, 46, 144, 0.3) 0%, rgba(103, 46, 144, 0.2) 100%);
-  color: #fff;
-  border-left: 4px solid #9c45d9;
 }
 
 .sidebar-item {
