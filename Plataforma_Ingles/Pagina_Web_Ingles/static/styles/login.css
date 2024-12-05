@@ -96,21 +96,46 @@ header {
 }
 
 .form-style {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
-    height: 35vh;
+    height: auto;
+    padding: 20px;
 }
 
-.form-group {
-    margin-bottom: 1rem;
-    width: 100%;
-    padding-right: 10px;
+.form-style legend {
+    color: #333;
+    font-size: 1.5em;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.form-style .btn-outline-info {
+    background: linear-gradient(90deg, #3240ff, #7091ff);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-style .btn-outline-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-style fieldset {
+    width: 60%;
+    padding-right: 20px;
 }
 
 .form-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 20px;
+    gap: 15px;
 }
 
 .form-style-register{
@@ -284,8 +309,22 @@ header {
     }
 
     .form-style {
-        height: auto;
         flex-direction: column;
+        height: auto;
+    }
+
+    .form-style fieldset {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .form-button {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-outline-info {
+        width: 100%;
     }
 
     .fondo {
@@ -308,7 +347,7 @@ header {
     #main-login, #main-register {
         margin-left: 10vw;
         margin-right: 10vw;
-        margin-top: 10vh;
+        margin-top: 15vh;
     }
     
     .form-style-register, .form-style {
@@ -341,7 +380,7 @@ header {
     #main-login, #main-register {
         margin-left: 5vw;
         margin-right: 5vw;
-        margin-top: 5vh;
+        margin-top: 10vh;
     }
 
     .form-style-register legend,
