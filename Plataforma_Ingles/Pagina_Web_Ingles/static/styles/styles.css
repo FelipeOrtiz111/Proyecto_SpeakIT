@@ -201,7 +201,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   width: 25%;
   display: flex;
   flex-direction: column;
-  background-color: #1a1a1a;
+  background: linear-gradient(180deg, #2d1f3f 0%, #1a1a1a 100%);
   position: fixed;
   top: 60px;
   max-height: calc(100vh - 105px);
@@ -210,6 +210,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   transition: width 0.3s ease;
   z-index: 1;
   white-space: nowrap;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar.minimized {
@@ -230,17 +231,18 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   top: 70px;
   width: 50px;
   padding: 10px;
-  background-color: #1a1a1a;
+  background: linear-gradient(180deg, #2d1f3f 0%, #1a1a1a 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 3;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-toggle button {
   background: none;
   border: none;
-  color: #fff;
+  color: #b3b3b3;
   cursor: pointer;
   padding: 8px;
   width: 30px;
@@ -249,11 +251,13 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .sidebar-toggle button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(103, 46, 144, 0.3);
+  color: #fff;
+  transform: scale(1.1);
 }
 
 .sidebar-toggle h4 {
@@ -272,13 +276,25 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   font-size: 16px;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
 .sidebar .dc-a:hover {
-  background-color: #2d2d2d;
+  background: linear-gradient(90deg, rgba(103, 46, 144, 0.2) 0%, rgba(103, 46, 144, 0.1) 100%);
   color: #fff;
   transform: translateX(5px);
-  border-left-color: #672e90;
+  border-left-color: #9c45d9;
+}
+
+.sidebar .dc-a:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #9c45d9 0%, #672e90 100%);
 }
 
 .sidebar .dc-a.clicked {
@@ -1161,4 +1177,11 @@ button:focus{
         flex-direction: column;
         text-align: center;
     }
+}
+
+/* Estilo activo para los items */
+.sidebar .dc-a.active {
+    background: linear-gradient(90deg, rgba(103, 46, 144, 0.3) 0%, rgba(103, 46, 144, 0.1) 100%);
+    color: #fff;
+    border-left-color: #9c45d9;
 }
