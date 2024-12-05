@@ -3,14 +3,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('main');
 
-    sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('minimized');
-        mainContent.classList.toggle('expanded');
-    });
+    // Mejorar el manejo del toggle
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evitar que el clic se propague
+            sidebar.classList.toggle('minimized');
+            mainContent.classList.toggle('expanded');
+        });
+    }
 
     // Manejar clics en el sidebar cuando está minimizado
     sidebar.addEventListener('click', function(e) {
-        if (sidebar.classList.contains('minimized') && e.target !== sidebarToggle) {
+        if (sidebar.classList.contains('minimized') && 
+            !e.target.closest('.sidebar-toggle')) {
             sidebar.classList.remove('minimized');
             mainContent.classList.remove('expanded');
         }
@@ -51,6 +56,15 @@ document.addEventListener("DOMContentLoaded", function() {
         // Limpiar el estado guardado
         localStorage.removeItem('returnToSection');
         localStorage.removeItem('returnToContent');
+    }
+
+    // Desplegar todos los menús al cargar la página
+    var dropdownBtns = document.getElementsByClassName("dropdown-btn");
+    for (let btn of dropdownBtns) {
+        // Añadir la clase active y mostrar el contenido
+        btn.classList.add("active");
+        var dropdownContent = btn.nextElementSibling;
+        dropdownContent.style.display = "block";
     }
 });
 
