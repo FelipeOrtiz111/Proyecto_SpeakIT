@@ -206,9 +206,27 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   max-height: calc(100vh - 105px);
   overflow-y: auto;
   overflow-x: hidden;
-  transition: height 0.3s ease, width 0.4s ease-in-out 0.4s;
+  transition: width 0.3s, height 0.3s ease-in-out 0.3s;
   z-index: 1000;
   white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
+}
+
+/* Estilo personalizado para la scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #672e90;
+  border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #4a1d6a;
 }
 
 .sidebar.minimized {
