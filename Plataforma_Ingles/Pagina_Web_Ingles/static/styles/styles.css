@@ -60,6 +60,11 @@ main {
   flex: 1;
   background-color: gainsboro;
   overflow-y: scroll;
+  transition: margin-left 0.3s ease;
+}
+
+main.expanded {
+  margin-left: 50px;
 }
 
 /*====================================
@@ -199,6 +204,36 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   max-height: calc(100vh - 105px);
   overflow-y: scroll;
   overflow-x: hidden;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar.minimized {
+  width: 50px;
+  overflow: hidden;
+}
+
+.sidebar.minimized .dropdown-container,
+.sidebar.minimized .dropdown-btn span {
+  display: none;
+}
+
+.sidebar-toggle {
+  padding: 10px;
+  text-align: right;
+  background-color: #1a1a1a;
+}
+
+.sidebar-toggle button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.minimized .sidebar-toggle button i {
+  transform: rotate(180deg);
 }
 
 /* Side Nav Items */
@@ -960,6 +995,26 @@ button:focus{
 @media (max-width: 768px) {
   .dashboard-container {
       grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+      width: 100%;
+      transform: translateX(-100%);
+  }
+
+  .sidebar.minimized {
+      transform: translateX(0);
+      width: 50px;
+  }
+
+  main {
+      margin-left: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+
+  main.expanded {
+      margin-left: 50px;
   }
 }
 

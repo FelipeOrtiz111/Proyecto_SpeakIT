@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('main');
+
+    sidebarToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('minimized');
+        mainContent.classList.toggle('expanded');
+    });
+
+    // Manejar clics en el sidebar cuando está minimizado
+    sidebar.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('minimized') && e.target !== sidebarToggle) {
+            sidebar.classList.remove('minimized');
+            mainContent.classList.remove('expanded');
+        }
+    });
+
     // Oculta todos los videos al cargar la página
     const videoSections = document.querySelectorAll('.video-section');
     const noVideoMessage = document.querySelector('.no-video');
