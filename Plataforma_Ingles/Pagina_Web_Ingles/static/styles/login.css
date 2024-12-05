@@ -90,15 +90,16 @@ header {
 /* Estilos del formulario */
 .content-section {
     background: #ffffff;
-    padding: 0px 0px 5px 20px;
+    padding: 0px 5px 5px 5px;
     border: 1px solid #dddddd;
     border-radius: 12px;
+    box-shadow: 12px 12px 2px rgba(0, 0, 0, 0.3);
+    animation: slide-in 0.5s ease forwards;
 }
 
 .form-style {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     height: auto;
@@ -150,7 +151,13 @@ header {
     margin-top: 10vh;
     height: auto;
   }
+  .border-top {
+    border-top: 0px !important;
+}
 
+.pt-3, .py-3 {
+    padding-top: 5px;
+}
 /* Imagen del formulario */
 .fondo {
     display: flex;
@@ -267,10 +274,6 @@ header {
     }
 }
 
-.content-section {
-    animation: slide-in 0.5s ease forwards;
-}
-
 /* Ajustes responsivos mejorados */
 @media (max-width: 1400px) {
     #main-login {
@@ -362,7 +365,7 @@ header {
     }
 
     .content-section {
-        padding: 0px 10px 5px 10px;
+        padding: 5px 10px 5px 10px;
     }
 
     .loading-logo {
@@ -405,7 +408,7 @@ header {
 /* Ajustes para dispositivos muy pequeños */
 @media (max-width: 360px) {
     .content-section {
-        padding: 0px 5px 5px 5px;
+        padding: 5px 5px 5px 5px;
     }
 
     .form-style-register, .form-style {
