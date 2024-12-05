@@ -93,7 +93,7 @@ header {
     padding: 0px 5px 5px 5px;
     border: 1px solid #dddddd;
     border-radius: 12px;
-    box-shadow: 12px 12px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 12px 12px 3px rgba(0, 0, 0, 0.3);
     animation: slide-in 0.5s ease forwards;
 }
 
@@ -230,7 +230,6 @@ header {
 .form-style-register {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     height: auto;
