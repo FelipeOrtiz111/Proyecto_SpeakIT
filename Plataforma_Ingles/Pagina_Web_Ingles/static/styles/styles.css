@@ -209,7 +209,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   overflow-x: hidden;
   transition: width 0.3s ease;
   z-index: 1;
-  white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
+  white-space: nowrap;
 }
 
 .sidebar.minimized {
@@ -219,26 +219,22 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
 
 .sidebar.minimized .dropdown-container,
 .sidebar.minimized .dropdown-btn span,
-.sidebar.minimized hr,
-.sidebar.minimized .sidebar-toggle h4 {
+.sidebar.minimized hr {
   display: none;
 }
 
+/* Botón toggle fuera del sidebar */
 .sidebar-toggle {
+  position: fixed;
+  left: 0;
+  top: 70px;
+  width: 50px;
   padding: 10px;
-  text-align: right;
   background-color: #1a1a1a;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  color: white;
-  position: relative;
   z-index: 3;
-}
-
-.sidebar-toggle h4 {
-  margin: 0px;
-  font-weight: normal;
 }
 
 .sidebar-toggle button {
@@ -260,7 +256,11 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.sidebar.minimized .sidebar-toggle button {
+.sidebar-toggle h4 {
+  display: none;
+}
+
+.sidebar.minimized + .sidebar-toggle button {
   transform: rotate(180deg);
 }
 
@@ -1037,12 +1037,12 @@ button:focus{
 
   main {
       margin-left: 0;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 60px;
   }
 
   main.expanded {
-      margin-left: 50px;
+      margin-left: 0;
+      padding-left: 60px;
   }
 }
 
