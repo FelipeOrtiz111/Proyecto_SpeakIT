@@ -935,24 +935,90 @@ button:focus{
 
 /* Filtros y Formularios */
 .section-filter {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  margin-bottom: 2rem;
-}
-
-.section-filter select {
-  margin-right: 1rem;
-  min-width: 200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
 }
 
 .form-inline {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
+.form-control {
+  padding: 12px 20px;
+  font-size: 1em;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 250px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+
+.form-control:hover {
+  border-color: #672e90;
+  box-shadow: 0 2px 8px rgba(103, 46, 144, 0.1);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #672e90;
+  box-shadow: 0 0 0 3px rgba(103, 46, 144, 0.2);
+}
+
+/* Badge de administrador */
+.badge-info {
+  background: linear-gradient(45deg, #672e90, #8b3dbe);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: normal;
+  margin-left: 10px;
+  box-shadow: 0 2px 4px rgba(103, 46, 144, 0.2);
+}
+
+/* Mensaje cuando no hay sección seleccionada */
+.section-filter + p {
+  text-align: center;
+  color: #666;
+  font-size: 1.1em;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .section-filter {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .form-control {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
 
 /* Tabla y Etiquetas */
 .table {
@@ -1064,7 +1130,7 @@ button:focus{
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(#7000e3, #4f009f);
+  background-image: radial-gradient(#7400c2, #600097);
   z-index: 9999;
   display: flex;
   justify-content: center;
