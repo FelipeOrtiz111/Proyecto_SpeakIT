@@ -61,13 +61,10 @@ main {
   background-color: gainsboro;
   overflow-y: scroll;
   transition: margin-left 0.3s ease;
-  position: relative;
-  z-index: 2;
 }
 
 main.expanded {
-  margin-left: 0;
-  padding-left: 60px;
+  margin-left: 60px;
 }
 
 /*====================================
@@ -201,72 +198,58 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   width: 25%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, #2d1f3f 0%, #1a1a1a 100%);
+  background-color: #1a1a1a;
   position: fixed;
   top: 60px;
   max-height: calc(100vh - 105px);
   overflow-y: auto;
   overflow-x: hidden;
   transition: width 0.3s ease;
-  z-index: 1;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
   white-space: nowrap;
 }
 
 .sidebar.minimized {
   width: 50px;
+  overflow: hidden;
 }
 
 .sidebar.minimized .dropdown-container,
-.sidebar.minimized .dropdown-btn,
-.sidebar.minimized hr {
+.sidebar.minimized .dropdown-btn span,
+.sidebar.minimized hr,
+.sidebar.minimized .sidebar-toggle h4 {
   display: none;
 }
 
-.sidebar.minimized .sidebar-toggle {
-  width: 100%;
-}
-
-.sidebar.minimized .sidebar-toggle button {
-  transform: rotate(180deg);
-}
-
-/* Botón toggle fuera del sidebar */
 .sidebar-toggle {
-  position: relative;
   padding: 10px;
-  background: linear-gradient(90deg, #2d1f3f 0%, #1a1a1a 100%);
+  text-align: right;
+  background-color: #1a1a1a;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  z-index: 2;
-  height: 40px;
 }
 
 .sidebar-toggle button {
   background: none;
   border: none;
-  color: #b3b3b3;
+  color: #fff;
   cursor: pointer;
+  padding: 8px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease, transform 0.3s ease;
 }
 
-.sidebar-toggle:hover button {
-  color: #fff;
-  transform: scale(1.1);
-  background: rgba(103, 46, 144, 0.3);
+.sidebar-toggle button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.sidebar-toggle h4 {
-  display: none;
-}
-
-.sidebar.minimized + .sidebar-toggle button {
+.sidebar.minimized .sidebar-toggle button {
   transform: rotate(180deg);
 }
 
@@ -278,25 +261,13 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   font-size: 16px;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
-  position: relative;
-  overflow: hidden;
 }
 
 .sidebar .dc-a:hover {
-  background: linear-gradient(90deg, rgba(103, 46, 144, 0.2) 0%, rgba(103, 46, 144, 0.1) 100%);
+  background-color: #2d2d2d;
   color: #fff;
   transform: translateX(5px);
-  border-left-color: #9c45d9;
-}
-
-.sidebar .dc-a:hover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, #9c45d9 0%, #672e90 100%);
+  border-left-color: #672e90;
 }
 
 .sidebar .dc-a.clicked {
@@ -359,42 +330,12 @@ main h3{
 .dropdown-btn {
   padding: 12px 15px;
   font-size: 16px;
-  color: #b3b3b3;
-  background: linear-gradient(90deg, #2d1f3f 0%, #1a1a1a 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  background: #262626;
+  border-bottom: 1px solid #333;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hover del dropdown */
-.dropdown-btn:hover {
-  background: linear-gradient(90deg, rgba(103, 46, 144, 0.2) 0%, rgba(103, 46, 144, 0.1) 100%);
-  color: #fff;
-  transform: translateX(5px);
-}
-
-.dropdown-btn:hover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, #9c45d9 0%, #672e90 100%);
-}
-
-/* Estados activos de los dropdowns */
-.active.ing-b,
-.active.ing-e,
-.active.pru-e,
-.active.sop-t {
-  background: linear-gradient(90deg, rgba(103, 46, 144, 0.3) 0%, rgba(103, 46, 144, 0.2) 100%);
-  color: #fff;
-  border-left: 4px solid #9c45d9;
 }
 
 /* Contenedor con dropdown */
@@ -415,6 +356,32 @@ main h3{
 .fa-caret-down {
   float: right;
   padding-right: 8px;
+}
+
+/* Hover del dropdown */
+.dropdown-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.active.ing-b {
+  background-color: #e6e6e6;
+  color: #000;
+}
+
+.active.ing-e {
+  background-color: #e6e6e6;
+  color: #000;
+}
+
+.active.pru-e{
+  background-color: #e6e6e6;
+  color: #000;
+}
+
+.active.sop-t{
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 /* Enmarcado del boton luego de hacer click*/
@@ -937,7 +904,7 @@ button:focus{
 .navigation-btns button {
   background-color: #007bff;  /* Azul brillante */
   color: white;  /* Texto en blanco */
-  font-size: 16px;  /* Tama��o de fuente */
+  font-size: 16px;  /* Tamaño de fuente */
   padding: 10px 20px;  /* Relleno (espaciado interno) */
   border: none;  /* Eliminar el borde predeterminado */
   border-radius: 5px;  /* Bordes redondeados */
@@ -1059,12 +1026,12 @@ button:focus{
 
   main {
       margin-left: 0;
-      padding-left: 60px;
+      padding-left: 10px;
+      padding-right: 10px;
   }
 
   main.expanded {
-      margin-left: 0;
-      padding-left: 60px;
+      margin-left: 50px;
   }
 }
 
@@ -1183,11 +1150,4 @@ button:focus{
         flex-direction: column;
         text-align: center;
     }
-}
-
-/* Estilo activo para los items */
-.sidebar .dc-a.active {
-    background: linear-gradient(90deg, rgba(103, 46, 144, 0.3) 0%, rgba(103, 46, 144, 0.1) 100%);
-    color: #fff;
-    border-left-color: #9c45d9;
 }
