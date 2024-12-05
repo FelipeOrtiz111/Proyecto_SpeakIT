@@ -343,66 +343,140 @@ main h3{
   DROPDOWN
 ======================================*/
 .dropdown-btn {
-  padding: 12px 15px;
-  font-size: 16px;
-  color: #fff;
-  background: #262626;
-  border-bottom: 1px solid #333;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 15px 20px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(to right, #262626, #1a1a1a);
+    border: none;
+    border-left: 4px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Contenedor con dropdown */
+/* Efecto hover */
+.dropdown-btn:hover {
+    background: linear-gradient(to right, #333, #262626);
+    border-left: 4px solid #672e90;
+    padding-left: 25px;
+}
+
+/* Estilo para el ícono */
+.dropdown-btn i {
+    transition: transform 0.3s ease;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* Rotación del ícono cuando está activo */
+.dropdown-btn.active i {
+    transform: rotate(-180deg);
+}
+
+/* Estados activos específicos */
+.active.ing-b {
+    background: linear-gradient(to right, #672e90, #4a1d6a);
+    border-left: 4px solid #fff;
+    color: #fff;
+}
+
+.active.ing-e {
+    background: linear-gradient(to right, #672e90, #4a1d6a);
+    border-left: 4px solid #fff;
+    color: #fff;
+}
+
+.active.pru-e {
+    background: linear-gradient(to right, #672e90, #4a1d6a);
+    border-left: 4px solid #fff;
+    color: #fff;
+}
+
+.active.sop-t {
+    background: linear-gradient(to right, #672e90, #4a1d6a);
+    border-left: 4px solid #fff;
+    color: #fff;
+}
+
+/* Efecto ripple al hacer click */
+.dropdown-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.dropdown-btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+/* Contenedor del dropdown con transición suave */
 .dropdown-container {
-  background-color: #1f1f1f;
-  padding: 5px 0;
+    background-color: #1f1f1f;
+    padding: 5px 0;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+/* Separador entre elementos del dropdown */
+.dropdown-container hr {
+    margin: 5px 15px;
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.dropdown-container {
+    display: none;
 }
 
 .dropdown-container.show {
-  display: block;
+    display: block;
 }
 
 .dropdown-container li {
-  margin: 0;
-  padding: 5px;
+    margin: 0;
+    padding: 5px;
 }
 
 .fa-caret-down {
-  float: right;
-  padding-right: 8px;
+    float: right;
+    padding-right: 8px;
 }
 
 /* Hover del dropdown */
 .dropdown-btn:hover {
-  background: #333;
-  color: #fff;
-}
-
-.active.ing-b {
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-.active.ing-e {
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-.active.pru-e{
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-.active.sop-t{
-  background-color: #e6e6e6;
-  color: #000;
+    background: #333;
+    color: #fff;
 }
 
 /* Enmarcado del boton luego de hacer click*/
 button:focus{
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 /*====================================
