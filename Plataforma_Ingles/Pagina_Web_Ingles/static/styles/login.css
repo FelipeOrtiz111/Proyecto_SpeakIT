@@ -96,8 +96,7 @@ header {
     border-radius: 12px;
     box-shadow: 12px 12px 3px rgba(0, 0, 0, 0.3);
     animation: slide-in 0.5s ease forwards;
-    overflow-y: scroll;
-    height: 70%;
+    height: auto;
 }
 
 .form-style {
@@ -143,7 +142,8 @@ header {
 }
 
 .pt-3, .py-3 {
-    padding: 0px 0px 0px 20px;
+    padding-top: 0px !important;
+    padding-left: 10px;
 }
 /* Imagen del formulario */
 .fondo {
