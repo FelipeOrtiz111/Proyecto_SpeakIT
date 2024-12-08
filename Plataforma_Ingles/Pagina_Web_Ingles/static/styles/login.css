@@ -1,6 +1,7 @@
 /* Estilos básicos */
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -77,14 +78,14 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     filter: blur(6px);
-    z-index: -1;
 }
 
-#main-login {
-    margin-left: 30vw;
-    margin-right: 30vw;
-    margin-top: 28vh;
-    height: auto;
+#main-login, #main-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 /* Estilos del formulario */
@@ -95,6 +96,8 @@ header {
     border-radius: 12px;
     box-shadow: 12px 12px 3px rgba(0, 0, 0, 0.3);
     animation: slide-in 0.5s ease forwards;
+    overflow-y: scroll;
+    height: 70%;
 }
 
 .form-style {
@@ -139,24 +142,8 @@ header {
     gap: 15px;
 }
 
-.form-style-register{
-    display: flex;
-    justify-content: space-between;
-    height: 70vh;
-  }
-  
-  #main-register {
-    margin-left: 25vw;
-    margin-right: 25vw;
-    margin-top: 10vh;
-    height: auto;
-  }
-  .border-top {
-    border-top: 0px !important;
-}
-
 .pt-3, .py-3 {
-    padding-top: 5px;
+    padding: 0px 0px 0px 20px;
 }
 /* Imagen del formulario */
 .fondo {
@@ -233,7 +220,7 @@ header {
     display: flex;
     justify-content: space-between;
     height: auto;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
 }
 
 .form-style-register legend {
