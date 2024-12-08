@@ -64,24 +64,29 @@
 {% block scripts %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener el campo de rol de usuario (asumiendo que existe en el formulario)
-    const roleField = document.querySelector('[name="role"]');
+    const usernameField = document.querySelector('[name="username"]');
     const sectionGroup = document.getElementById('section-group');
 
-    function toggleSectionVisibility() {
-        // Mostrar selector de sección solo si el usuario es estudiante
-        if (roleField.value === 'STUDENT') {
-            sectionGroup.style.display = 'block';
-            document.getElementById('section-select').required = true;
-        } else {
-            sectionGroup.style.display = 'none';
-            document.getElementById('section-select').required = false;
+    usernameField.addEventListener('change', async function() {
+        const username = this.value;
+        if (username) {
+            try {
+                const response = await fetch(`/check-user-role/?username=${username}`);
+                const data = await response.json();
+                
+                if (data.role === 'STUDENT') {
+                    sectionGroup.style.display = 'block';
+                    document.getElementById('section-select').required = true;
+                } else {
+                    sectionGroup.style.display = 'none';
+                    document.getElementById('section-select').required = false;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                sectionGroup.style.display = 'none';
+            }
         }
-    }
-
-    // Ejecutar al cargar y cuando cambie el rol
-    toggleSectionVisibility();
-    roleField.addEventListener('change', toggleSectionVisibility);
+    });
 });
 </script>
 {% endblock %}

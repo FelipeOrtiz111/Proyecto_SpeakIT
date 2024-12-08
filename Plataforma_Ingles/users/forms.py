@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetP
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from .models import CustomUser
+from django.db.models import Q
 
 # Formulario de Registro de Usuario
 class CustomUserRegistrationForm(UserCreationForm):
@@ -74,6 +75,23 @@ class UserLoginForm(AuthenticationForm):
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
         label="Contraseña"
     )
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        
+        if username and password:
+            # Intentar obtener el usuario por nombre de usuario o email
+            try:
+                user = CustomUser.objects.get(Q(username=username) | Q(email=username))
+                if user and user.check_password(password):
+                    # Agregar el rol del usuario a los datos limpiados
+                    self.cleaned_data['user_role'] = user.role
+                    return self.cleaned_data
+            except CustomUser.DoesNotExist:
+                pass
+        
+        raise forms.ValidationError("Usuario o contraseña inválidos")
 
 # Formulario de Actualización de Usuario
 class UserUpdateForm(forms.ModelForm):

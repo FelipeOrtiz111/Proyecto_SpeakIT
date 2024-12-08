@@ -8,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
-from .models import Section
+from .models import Section, StudentProfile
 
 from .forms import (
     CustomUserRegistrationForm,
@@ -22,6 +22,7 @@ from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 from .models import CustomUser
 from django.db import IntegrityError
+from django.http import JsonResponse
 
 # Función para activar cuenta de usuario con el link de activación
 def activate(request, uidb64, token):
@@ -131,36 +132,45 @@ def custom_login(request):
     if request.method == "POST":
         form = UserLoginForm(request=request, data=request.POST)
         if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password"],
-            )
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            
             if user is not None:
-                # Si es estudiante, verificar la sección
+                # Verificar si es estudiante y necesita seleccionar sección
                 if user.role == CustomUser.Role.STUDENT:
                     section_id = request.POST.get('section')
                     if not section_id:
                         messages.error(request, "Por favor seleccione una sección")
                         sections = Section.objects.all()
-                        return render(request, "users/login.html", {"form": form, "sections": sections})
+                        return render(
+                            request=request,
+                            template_name="users/login.html",
+                            context={"form": form, "sections": sections, "is_student": True}
+                        )
                     
-                    # Guardar la sección en la sesión
-                    request.session['student_section'] = section_id
-
+                    # Actualizar el perfil del estudiante con la sección seleccionada
+                    student_profile = StudentProfile.objects.get(user=user)
+                    student_profile.section_id = section_id
+                    student_profile.save()
+                    
                 login(request, user)
                 messages.success(request, f"Hola <b>{user.username}</b>! Has iniciado sesión")
                 return redirect("index")
         else:
             for error in list(form.errors.values()):
-                messages.error(request, "Por favor ingresa un usuario y contraseña válidos.")
+                messages.error(request, error)
     
     form = UserLoginForm()
-    # Obtener las secciones solo si se necesitan mostrar
+    # Obtener las secciones disponibles
     sections = Section.objects.all()
     return render(
         request=request,
         template_name="users/login.html",
-        context={"form": form, "sections": sections}
+        context={
+            "form": form,
+            "sections": sections,
+        }
     )
 
 # Vista para mostrar el perfil del usuario
@@ -261,3 +271,11 @@ def passwordResetConfirm(request, uidb64, token):
 
     messages.error(request, 'Algo salió mal, redirigiendo de nuevo a la página de inicio')
     return redirect("index")
+
+def check_user_role(request):
+    username = request.GET.get('username')
+    try:
+        user = CustomUser.objects.get(Q(username=username) | Q(email=username))
+        return JsonResponse({'role': user.role})
+    except CustomUser.DoesNotExist:
+        return JsonResponse({'role': None})
