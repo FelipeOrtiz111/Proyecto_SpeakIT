@@ -13,6 +13,9 @@
                 </h2>
                 <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
                 <p class="text-secondary">{{ form.instance.email }}</p>
+                {% if form.instance.role == 'STUDENT' and form.instance.studentprofile.section %}
+                    <p class="text-secondary">Sección: {{ form.instance.studentprofile.section.code }}</p>
+                {% endif %}
                 <p class="text-secondary">{{ form.instance.description }}</p>
             </div>
         </div>
@@ -29,6 +32,14 @@
                     </div>
                 </div> 
                 {{ form.email|as_crispy_field }}
+                {% if user.role == 'STUDENT' %}
+                    <div class="form-group">
+                        <label for="section">Sección</label>
+                        <input type="text" name="section" id="section" class="form-control" 
+                               value="{{ user.studentprofile.section.code|default:'' }}" 
+                               placeholder="Ingrese el código de su sección">
+                    </div>
+                {% endif %}
                 {{ form.description|as_crispy_field }}
 
                 <a href="{% url 'password_change' %}">¿Cambiar contraseña?</a>
