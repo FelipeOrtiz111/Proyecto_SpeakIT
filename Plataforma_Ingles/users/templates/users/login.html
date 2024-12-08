@@ -32,7 +32,7 @@
                 <!-- Agregar selector de sección solo para estudiantes -->
                 <div class="form-group" id="section-group" style="display: none;">
                     <label for="section-select">Seleccionar Sección:</label>
-                    <select class="form-control" id="section-select" name="section" required>
+                    <select class="form-control" id="section-select" name="section">
                         <option value="">Seleccionar Sección</option>
                         {% for section in sections %}
                             <option value="{{ section.id }}">{{ section.code }}</option>
@@ -66,25 +66,40 @@
 document.addEventListener('DOMContentLoaded', function() {
     const usernameField = document.querySelector('[name="username"]');
     const sectionGroup = document.getElementById('section-group');
+    const sectionSelect = document.getElementById('section-select');
+    const form = document.querySelector('form');
 
-    usernameField.addEventListener('change', async function() {
+    async function checkUserRole(username) {
+        try {
+            const response = await fetch(`/users/check-user-role/?username=${username}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            
+            if (data.role === 'STUDENT') {
+                sectionGroup.style.display = 'block';
+                sectionSelect.required = true;
+            } else {
+                sectionGroup.style.display = 'none';
+                sectionSelect.required = false;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            sectionGroup.style.display = 'none';
+            sectionSelect.required = false;
+        }
+    }
+
+    usernameField.addEventListener('change', function() {
         const username = this.value;
         if (username) {
-            try {
-                const response = await fetch(`/check-user-role/?username=${username}`);
-                const data = await response.json();
-                
-                if (data.role === 'STUDENT') {
-                    sectionGroup.style.display = 'block';
-                    document.getElementById('section-select').required = true;
-                } else {
-                    sectionGroup.style.display = 'none';
-                    document.getElementById('section-select').required = false;
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                sectionGroup.style.display = 'none';
-            }
+            checkUserRole(username);
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        if (sectionGroup.style.display === 'block' && !sectionSelect.value) {
+            e.preventDefault();
+            alert('Por favor seleccione una sección');
         }
     });
 });
