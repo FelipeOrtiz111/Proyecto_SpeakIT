@@ -29,15 +29,10 @@
                 <legend class="border-bottom mb-4">Iniciar sesión</legend>
                 {{ form|crispy }}
                 
-                <!-- Agregar selector de sección solo para estudiantes -->
-                <div class="form-group" id="section-group" style="display: none;">
-                    <label for="section-select">Seleccionar Sección:</label>
-                    <select class="form-control" id="section-select" name="section">
-                        <option value="">Seleccionar Sección</option>
-                        {% for section in sections %}
-                            <option value="{{ section.id }}">{{ section.code }}</option>
-                        {% endfor %}
-                    </select>
+                <!-- Campo de sección opcional para todos los usuarios -->
+                <div class="form-group">
+                    <label for="section-input">Sección (opcional):</label>
+                    <input type="text" class="form-control" id="section-input" name="section" placeholder="Ingrese su sección">
                 </div>
 
                 <div class="form-button">
@@ -62,46 +57,5 @@
 {% endblock content %}
 
 {% block scripts %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const usernameField = document.querySelector('[name="username"]');
-    const sectionGroup = document.getElementById('section-group');
-    const sectionSelect = document.getElementById('section-select');
-    const form = document.querySelector('form');
 
-    async function checkUserRole(username) {
-        try {
-            const response = await fetch(`/users/check-user-role/?username=${username}`);
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.json();
-            
-            if (data.role === 'STUDENT') {
-                sectionGroup.style.display = 'block';
-                sectionSelect.required = true;
-            } else {
-                sectionGroup.style.display = 'none';
-                sectionSelect.required = false;
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            sectionGroup.style.display = 'none';
-            sectionSelect.required = false;
-        }
-    }
-
-    usernameField.addEventListener('change', function() {
-        const username = this.value;
-        if (username) {
-            checkUserRole(username);
-        }
-    });
-
-    form.addEventListener('submit', function(e) {
-        if (sectionGroup.style.display === 'block' && !sectionSelect.value) {
-            e.preventDefault();
-            alert('Por favor seleccione una sección');
-        }
-    });
-});
-</script>
 {% endblock %}

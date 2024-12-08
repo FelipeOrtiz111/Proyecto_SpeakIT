@@ -68,11 +68,19 @@ class CustomUserRegistrationForm(UserCreationForm):
 # Formulario de Inicio de Sesión
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de usuario o correo Duoc'}),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Nombre de usuario o correo Duoc',
+            'autocomplete': 'off'
+        }),
         label="Usuario o Correo Institucional"
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Contraseña',
+            'autocomplete': 'new-password'
+        }),
         label="Contraseña"
     )
 

@@ -136,32 +136,25 @@ def custom_login(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             try:
-                # Intentar obtener el usuario primero
+                # Intentar obtener el usuario
                 user = CustomUser.objects.get(Q(username=username) | Q(email=username))
-                
-                # Si es estudiante, verificar la sección
-                if user.role == CustomUser.Role.STUDENT:
-                    section_id = request.POST.get('section')
-                    if not section_id:
-                        messages.error(request, "Por favor seleccione una sección")
-                        sections = Section.objects.all()
-                        return render(
-                            request=request,
-                            template_name="users/login.html",
-                            context={"form": form, "sections": sections}
-                        )
                 
                 # Intentar autenticar
                 user = authenticate(username=user.username, password=password)
                 if user is not None:
                     login(request, user)
                     
-                    # Si es estudiante, guardar la sección
-                    if user.role == CustomUser.Role.STUDENT:
-                        section_id = request.POST.get('section')
-                        student_profile = StudentProfile.objects.get(user=user)
-                        student_profile.section_id = section_id
-                        student_profile.save()
+                    # Guardar la sección si se proporcionó una
+                    section_code = request.POST.get('section')
+                    if section_code:
+                        if hasattr(user, 'studentprofile'):
+                            # Obtener o crear la sección
+                            section, created = Section.objects.get_or_create(
+                                code=section_code,
+                                defaults={'created_by': user}
+                            )
+                            user.studentprofile.section = section
+                            user.studentprofile.save()
                     
                     messages.success(request, f"Hola <b>{user.username}</b>! Has iniciado sesión")
                     return redirect("index")
@@ -173,11 +166,10 @@ def custom_login(request):
             messages.error(request, "Por favor ingrese un usuario y contraseña válidos")
     
     form = UserLoginForm()
-    sections = Section.objects.all()
     return render(
         request=request,
         template_name="users/login.html",
-        context={"form": form, "sections": sections}
+        context={"form": form}
     )
 
 # Vista para mostrar el perfil del usuario
@@ -278,13 +270,3 @@ def passwordResetConfirm(request, uidb64, token):
 
     messages.error(request, 'Algo salió mal, redirigiendo de nuevo a la página de inicio')
     return redirect("index")
-
-@csrf_exempt
-def check_user_role(request):
-    username = request.GET.get('username')
-    try:
-        # Buscar por username o email
-        user = CustomUser.objects.get(Q(username=username) | Q(email=username))
-        return JsonResponse({'role': user.role})
-    except CustomUser.DoesNotExist:
-        return JsonResponse({'role': None})
