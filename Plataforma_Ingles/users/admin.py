@@ -12,20 +12,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Section)
 class SectionAdmin(admin.ModelAdmin):
-    list_display = ['code', 'created_by', 'created_at', 'is_active']
-    list_filter = ['created_by', 'is_active']
+    list_display = ['code']
+    list_filter = ['is_active']
     search_fields = ['code']
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        if not request.user.is_superuser and request.user.role != 'TEACHER':
-            qs = qs.filter(created_by=request.user)
-        return qs
-    
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'created_by':
-            kwargs['queryset'] = CustomUser.objects.filter(role='TEACHER')
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(StudentProfile)

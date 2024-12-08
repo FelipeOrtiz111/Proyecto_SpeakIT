@@ -123,12 +123,12 @@ def manage_sections(request):
         section = Section.objects.get(id=section_id)
         sections = [section]  # Solo mostrar la sección del estudiante
     else:
-        sections = Section.objects.filter(created_by=request.user)
+        sections = Section.objects.all()  # Mostrar todas las secciones para profesores
 
     if request.method == 'POST':
         code = request.POST.get('code')
         try:
-            Section.objects.create(code=code, created_by=request.user)
+            Section.objects.create(code=code)  # Eliminado el created_by
             messages.success(request, "Sección creada exitosamente.")
         except IntegrityError:
             messages.error(request, "Ya existe una sección con ese código.")
@@ -176,6 +176,23 @@ def perfil_view(request, username):
         form = UserUpdateForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
+            
+            # Manejar la actualización de la sección para estudiantes
+            if user.role == CustomUser.Role.STUDENT:
+                section_code = request.POST.get('section')
+                if section_code:
+                    # Obtener o crear la sección sin created_by
+                    section, created = Section.objects.get_or_create(
+                        code=section_code
+                    )
+                    # Actualizar la sección del estudiante
+                    user.studentprofile.section = section
+                    user.studentprofile.save()
+                elif user.studentprofile.section:
+                    # Si el campo está vacío y tenía una sección, la removemos
+                    user.studentprofile.section = None
+                    user.studentprofile.save()
+            
             messages.success(request, 'Tu perfil ha sido actualizado!')
             return redirect('perfil', user.username)
         else:
@@ -184,7 +201,7 @@ def perfil_view(request, username):
 
     user = get_user_model().objects.filter(username=username).first()
     if user:
-        form = UserUpdateForm(instance=user) # Crea un formulario de actualización para el usuario
+        form = UserUpdateForm(instance=user)
         return render(request, 'users/perfil.html', context={'form': form})
     return redirect("index")
 
