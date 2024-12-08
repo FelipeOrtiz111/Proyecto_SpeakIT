@@ -28,6 +28,18 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Iniciar sesión</legend>
                 {{ form|crispy }}
+                
+                <!-- Agregar selector de sección solo para estudiantes -->
+                <div class="form-group" id="section-group" style="display: none;">
+                    <label for="section-select">Seleccionar Sección:</label>
+                    <select class="form-control" id="section-select" name="section" required>
+                        <option value="">Seleccionar Sección</option>
+                        {% for section in sections %}
+                            <option value="{{ section.id }}">{{ section.code }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
                 <div class="form-button">
                     <button class="btn btn-outline-info" type="submit">Ingresar</button>
                     <small class="text-muted">
@@ -48,3 +60,28 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener el campo de rol de usuario (asumiendo que existe en el formulario)
+    const roleField = document.querySelector('[name="role"]');
+    const sectionGroup = document.getElementById('section-group');
+
+    function toggleSectionVisibility() {
+        // Mostrar selector de sección solo si el usuario es estudiante
+        if (roleField.value === 'STUDENT') {
+            sectionGroup.style.display = 'block';
+            document.getElementById('section-select').required = true;
+        } else {
+            sectionGroup.style.display = 'none';
+            document.getElementById('section-select').required = false;
+        }
+    }
+
+    // Ejecutar al cargar y cuando cambie el rol
+    toggleSectionVisibility();
+    roleField.addEventListener('change', toggleSectionVisibility);
+});
+</script>
+{% endblock %}

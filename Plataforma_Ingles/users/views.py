@@ -102,7 +102,17 @@ def manage_sections(request):
         messages.error(request, "No tienes permisos para acceder a esta sección.")
         return redirect('index')
     
-    sections = Section.objects.filter(created_by=request.user)
+    # Si es estudiante, obtener la sección de la sesión
+    if request.user.role == CustomUser.Role.STUDENT:
+        section_id = request.session.get('student_section')
+        if not section_id:
+            messages.error(request, "No se ha seleccionado una sección")
+            return redirect('login')
+        
+        section = Section.objects.get(id=section_id)
+        sections = [section]  # Solo mostrar la sección del estudiante
+    else:
+        sections = Section.objects.filter(created_by=request.user)
 
     if request.method == 'POST':
         code = request.POST.get('code')
@@ -126,19 +136,31 @@ def custom_login(request):
                 password=form.cleaned_data["password"],
             )
             if user is not None:
+                # Si es estudiante, verificar la sección
+                if user.role == CustomUser.Role.STUDENT:
+                    section_id = request.POST.get('section')
+                    if not section_id:
+                        messages.error(request, "Por favor seleccione una sección")
+                        sections = Section.objects.all()
+                        return render(request, "users/login.html", {"form": form, "sections": sections})
+                    
+                    # Guardar la sección en la sesión
+                    request.session['student_section'] = section_id
+
                 login(request, user)
                 messages.success(request, f"Hola <b>{user.username}</b>! Has iniciado sesión")
                 return redirect("index")
-
         else:
             for error in list(form.errors.values()):
                 messages.error(request, "Por favor ingresa un usuario y contraseña válidos.")
     
     form = UserLoginForm()
+    # Obtener las secciones solo si se necesitan mostrar
+    sections = Section.objects.all()
     return render(
         request=request,
         template_name="users/login.html",
-        context={"form": form}
+        context={"form": form, "sections": sections}
     )
 
 # Vista para mostrar el perfil del usuario
