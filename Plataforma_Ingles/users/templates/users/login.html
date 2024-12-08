@@ -28,13 +28,6 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Iniciar sesión</legend>
                 {{ form|crispy }}
-                
-                <!-- Campo de sección opcional para todos los usuarios -->
-                <div class="form-group">
-                    <label for="section-input">Sección (opcional):</label>
-                    <input type="text" class="form-control" id="section-input" name="section" placeholder="Ingrese su sección">
-                </div>
-
                 <div class="form-button">
                     <button class="btn btn-outline-info" type="submit">Ingresar</button>
                     <small class="text-muted">

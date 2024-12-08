@@ -419,26 +419,3 @@ header {
     }
 }
 
-/* estilos específicos para los inputs del formulario de login */
-.form-style input[type="text"],
-.form-style input[type="password"],
-.form-style input[type="email"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 8px 12px;
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 14px;
-    background-color: #fff;
-}
-
-.form-style input[type="text"]:focus,
-.form-style input[type="password"]:focus,
-.form-style input[type="email"]:focus {
-    outline: none;
-    border-color: #3240ff;
-    box-shadow: 0 0 0 2px rgba(50, 64, 255, 0.2);
-}

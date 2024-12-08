@@ -71,23 +71,32 @@ def register(request):
     if request.method == "POST":
         form = CustomUserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False) # Crea el usuario sin guardarlo aún
-            user.is_active=False # Establece el usuario como inactivo hasta la confirmación
-            user.save()  # Guardar el usuario solo si el correo fue enviado con éxito
-           
-            activateEmail(request, user, form.cleaned_data.get('email')) # Envía el correo de activación
-            return redirect('login') # Redirecciona a la página de inicio de sesión
-
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            
+            # Manejar la sección si se proporcionó una
+            section_code = request.POST.get('section')
+            if section_code:
+                section, created = Section.objects.get_or_create(
+                    code=section_code,
+                    defaults={'created_by': user}
+                )
+                if hasattr(user, 'studentprofile'):
+                    user.studentprofile.section = section
+                    user.studentprofile.save()
+            
+            activateEmail(request, user, form.cleaned_data.get('email'))
+            return redirect('login')
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
-
     else:
         form = CustomUserRegistrationForm()
 
     return render(
         request=request,
-        template_name = "users/register.html",
+        template_name="users/register.html",
         context={"form": form}
     )
 
@@ -138,24 +147,11 @@ def custom_login(request):
             try:
                 # Intentar obtener el usuario
                 user = CustomUser.objects.get(Q(username=username) | Q(email=username))
-                
                 # Intentar autenticar
                 user = authenticate(username=user.username, password=password)
                 if user is not None:
-                    login(request, user)
-                    
+                    login(request, user)                    
                     # Guardar la sección si se proporcionó una
-                    section_code = request.POST.get('section')
-                    if section_code:
-                        if hasattr(user, 'studentprofile'):
-                            # Obtener o crear la sección
-                            section, created = Section.objects.get_or_create(
-                                code=section_code,
-                                defaults={'created_by': user}
-                            )
-                            user.studentprofile.section = section
-                            user.studentprofile.save()
-                    
                     messages.success(request, f"Hola <b>{user.username}</b>! Has iniciado sesión")
                     return redirect("index")
                 else:
