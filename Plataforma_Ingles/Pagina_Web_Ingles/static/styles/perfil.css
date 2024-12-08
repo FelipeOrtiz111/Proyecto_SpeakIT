@@ -343,3 +343,56 @@ html, body {
       max-height: calc(100vh - 120px);
     }
   }
+
+  /* perfil de usuario - botón para modificar sección */
+  .section-info {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  .section-info .btn-outline-primary {
+    font-size: 0.8em;
+    padding: 2px 8px;
+    margin-left: 10px;
+  }
+
+  .section-edit-form {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+  }
+
+  .section-edit-form .form-control {
+    margin-bottom: 10px;
+  }
+
+  .section-edit-form .btn {
+    margin-right: 5px;
+  }
+
+  #edit-section-btn {
+    transition: all 0.3s ease;
+  }
+
+  #edit-section-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .section-edit-form {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }

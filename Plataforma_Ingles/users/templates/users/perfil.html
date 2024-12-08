@@ -13,8 +13,28 @@
                 </h2>
                 <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
                 <p class="text-secondary">{{ form.instance.email }}</p>
-                {% if form.instance.role == 'STUDENT' and form.instance.studentprofile.section %}
-                    <p class="text-secondary">Sección: {{ form.instance.studentprofile.section.code }}</p>
+                {% if form.instance.role == 'STUDENT' %}
+                    <div class="section-info">
+                        <p class="text-secondary">Sección: 
+                            <span id="section-display">
+                                {{ form.instance.studentprofile.section.code|default:'Sin sección asignada' }}
+                            </span>
+                        </p>
+                        {% if user.username == form.instance.username %}
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="edit-section-btn">
+                                Modificar sección
+                            </button>
+                            <div class="section-edit-form" style="display: none;">
+                                <input type="text" name="section" id="section" class="form-control" 
+                                       value="{{ user.studentprofile.section.code|default:'' }}" 
+                                       placeholder="Ingrese el código de su sección">
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-sm btn-success" id="save-section-btn">Guardar</button>
+                                    <button type="button" class="btn btn-sm btn-secondary" id="cancel-section-btn">Cancelar</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
                 {% endif %}
                 <p class="text-secondary">{{ form.instance.description }}</p>
             </div>
@@ -32,16 +52,7 @@
                     </div>
                 </div> 
                 {{ form.email|as_crispy_field }}
-                {% if user.role == 'STUDENT' %}
-                    <div class="form-group">
-                        <label for="section">Sección</label>
-                        <input type="text" name="section" id="section" class="form-control" 
-                               value="{{ user.studentprofile.section.code|default:'' }}" 
-                               placeholder="Ingrese el código de su sección">
-                    </div>
-                {% endif %}
                 {{ form.description|as_crispy_field }}
-
                 <a href="{% url 'password_change' %}">¿Cambiar contraseña?</a>
             </fieldset>
             <div class="form-group">
@@ -55,4 +66,44 @@
     <button class="button button1">Aún No Disponible</button>
 </div>
 </div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const editBtn = document.getElementById('edit-section-btn');
+    const sectionForm = document.querySelector('.section-edit-form');
+    const saveBtn = document.getElementById('save-section-btn');
+    const cancelBtn = document.getElementById('cancel-section-btn');
+    const sectionDisplay = document.getElementById('section-display');
+    const sectionInput = document.getElementById('section');
+    
+    if (editBtn) {
+        editBtn.addEventListener('click', function() {
+            editBtn.style.display = 'none';
+            sectionForm.style.display = 'block';
+        });
+    }
+    
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            sectionForm.style.display = 'none';
+            editBtn.style.display = 'inline-block';
+            // Restaurar el valor original
+            sectionInput.value = sectionDisplay.textContent.trim();
+        });
+    }
+    
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            const newSection = sectionInput.value.trim();
+            // Actualizar el display
+            sectionDisplay.textContent = newSection || 'Sin sección asignada';
+            sectionForm.style.display = 'none';
+            editBtn.style.display = 'inline-block';
+            // El valor se enviará cuando se envíe el formulario
+        });
+    }
+});
+</script>
+{% endblock %}
 {% endblock content %}
