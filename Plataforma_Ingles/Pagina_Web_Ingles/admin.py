@@ -7,3 +7,4 @@ class QuizAdmin(admin.ModelAdmin):
     list_filter = ['difficulty', 'is_active', 'sections']
     search_fields = ['name', 'topic']
     filter_horizontal = ['sections']
+
