@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 
 class CustomUser(AbstractUser):
     class Role(models.TextChoices):
@@ -18,9 +20,29 @@ class CustomUser(AbstractUser):
         return self.username
 
 class Section(models.Model):
-    code = models.CharField(max_length=50, unique=True)
+    code = models.CharField(
+        max_length=50, 
+        unique=True,
+        validators=[
+            RegexValidator(
+                regex=r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$',
+                message='El formato debe ser "INU1234 - 123X" o "INI1234 - 123X" donde 1234 y 123 son números y X es una letra',
+            )
+        ]
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
+
+    def clean(self):
+        if self.code:
+            # Normalizar el formato
+            parts = self.code.replace(' ', '').split('-')
+            if len(parts) == 2:
+                self.code = f"{parts[0]} - {parts[1]}"
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Sección {self.code}"

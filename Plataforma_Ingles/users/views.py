@@ -24,6 +24,8 @@ from .models import CustomUser
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import re
+from django.core.exceptions import ValidationError
 
 # Función para activar cuenta de usuario con el link de activación
 def activate(request, uidb64, token):
@@ -75,16 +77,30 @@ def register(request):
             user.is_active = False
             user.save()
             
-            # Manejar la sección si se proporcionó una
+            # Validar y manejar la sección
             section_code = request.POST.get('section')
-            if section_code:
-                section, created = Section.objects.get_or_create(
-                    code=section_code,
-                    defaults={'created_by': user}
-                )
-                if hasattr(user, 'studentprofile'):
-                    user.studentprofile.section = section
-                    user.studentprofile.save()
+            if section_code and user.role == CustomUser.Role.STUDENT:
+                # Validar formato
+                if not re.match(r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$', section_code):
+                    messages.error(request, "Formato de sección inválido. Debe ser 'INU1234 - 123X' o 'INI1234 - 123X' donde 1234 y 123 son números y X es una letra.")
+                    user.delete()  # Eliminar usuario si la sección es inválida
+                    return render(request, "users/register.html", {"form": form})
+                
+                try:
+                    # Normalizar el formato
+                    parts = section_code.replace(' ', '').split('-')
+                    formatted_code = f"{parts[0]} - {parts[1]}"
+                    
+                    section, created = Section.objects.get_or_create(
+                        code=formatted_code
+                    )
+                    if hasattr(user, 'studentprofile'):
+                        user.studentprofile.section = section
+                        user.studentprofile.save()
+                except ValidationError as e:
+                    messages.error(request, f"Error en la sección: {e}")
+                    user.delete()
+                    return render(request, "users/register.html", {"form": form})
             
             activateEmail(request, user, form.cleaned_data.get('email'))
             return redirect('login')
@@ -131,7 +147,7 @@ def manage_sections(request):
             Section.objects.create(code=code)  # Eliminado el created_by
             messages.success(request, "Sección creada exitosamente.")
         except IntegrityError:
-            messages.error(request, "Ya existe una sección con ese código.")
+            messages.error(request, "Ya existe una sección con ese c��digo.")
         return redirect('manage_sections')
 
     return render(request, 'users/manage_sections.html', {'sections': sections})

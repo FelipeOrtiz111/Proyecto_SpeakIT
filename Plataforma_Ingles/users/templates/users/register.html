@@ -16,7 +16,16 @@
                 {{ form|crispy }}
                 <div class="form-group">
                     <label for="section-input">Sección (para alumnos):</label>
-                    <input type="text" class="form-control" id="section-input" name="section" placeholder="Ingrese su sección">
+                    <input type="text" 
+                           class="form-control" 
+                           id="section-input" 
+                           name="section" 
+                           placeholder="Ejemplo: INI3111 - 001D"
+                           pattern="IN[UI]\d{4}\s*-\s*\d{3}[A-Z]"
+                           title="El formato debe ser 'INU1234 - 123X' o 'INI1234 - 123X' donde 1234 y 123 son números y X es una letra">
+                    <small class="form-text text-muted">
+                        Formato requerido: INU1234 - 123X o INI1234 - 123X (ejemplo: INI3111 - 001D)
+                    </small>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Registrarse</button>
@@ -36,4 +45,28 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sectionInput = document.getElementById('section-input');
+    const sectionRegex = /^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$/;
+
+    sectionInput.addEventListener('input', function() {
+        const value = this.value;
+        if (value && !sectionRegex.test(value)) {
+            this.setCustomValidity('El formato debe ser "INU1234 - 123X" o "INI1234 - 123X" donde 1234 y 123 son números y X es una letra');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    // Formatear automáticamente mientras se escribe
+    sectionInput.addEventListener('blur', function() {
+        if (sectionRegex.test(this.value)) {
+            const parts = this.value.replace(' ', '').split('-');
+            this.value = `${parts[0]} - ${parts[1]}`;
+        }
+    });
+});
+</script>
 {% endblock content %}
