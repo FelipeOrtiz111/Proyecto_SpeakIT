@@ -77,28 +77,42 @@ def register(request):
             user.is_active = False
             user.save()
             
-            # Validar y manejar la sección
+            # Validar y manejar la sección solo si es estudiante
             section_code = request.POST.get('section')
             if section_code and user.role == CustomUser.Role.STUDENT:
                 # Validar formato
                 if not re.match(r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$', section_code):
-                    messages.error(request, "Formato de sección inválido. Debe ser 'INU1234 - 123X' o 'INI1234 - 123X' donde 1234 y 123 son números y X es una letra.")
-                    user.delete()  # Eliminar usuario si la sección es inválida
+                    messages.error(request, "Formato de sección inválido. Debe ser 'INU1234-123X' o 'INI1234-123X' donde 1234 y 123 son números y X es una letra.")
+                    user.delete()
                     return render(request, "users/register.html", {"form": form})
                 
                 try:
-                    # Normalizar el formato
+                    # Normalizar el formato de la sección
                     parts = section_code.replace(' ', '').split('-')
                     formatted_code = f"{parts[0]} - {parts[1]}"
                     
+                    # Obtener o crear la sección
                     section, created = Section.objects.get_or_create(
-                        code=formatted_code
+                        code=formatted_code,
+                        defaults={'is_active': True}
                     )
-                    if hasattr(user, 'studentprofile'):
-                        user.studentprofile.section = section
-                        user.studentprofile.save()
+
+                    # Asignar la sección al perfil del estudiante
+                    student_profile = StudentProfile.objects.get(user=user)
+                    student_profile.section = section
+                    student_profile.save()
+
+                    if created:
+                        messages.success(request, f"Se ha creado una nueva sección: {formatted_code}")
+                    else:
+                        messages.info(request, f"Te has unido a la sección existente: {formatted_code}")
+
                 except ValidationError as e:
                     messages.error(request, f"Error en la sección: {e}")
+                    user.delete()
+                    return render(request, "users/register.html", {"form": form})
+                except Exception as e:
+                    messages.error(request, f"Error al procesar la sección: {str(e)}")
                     user.delete()
                     return render(request, "users/register.html", {"form": form})
             
@@ -107,14 +121,9 @@ def register(request):
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
-    else:
-        form = CustomUserRegistrationForm()
 
-    return render(
-        request=request,
-        template_name="users/register.html",
-        context={"form": form}
-    )
+    form = CustomUserRegistrationForm()
+    return render(request, "users/register.html", {"form": form})
 
 # Vista para cerrar sesión
 @login_required
@@ -126,31 +135,31 @@ def custom_logout(request):
 @login_required
 def manage_sections(request):
     if request.user.role != CustomUser.Role.TEACHER:
-        messages.error(request, "No tienes permisos para acceder a esta sección.")
+        messages.error(request, "No tienes permiso para acceder a esta página.")
         return redirect('index')
     
-    # Si es estudiante, obtener la sección de la sesión
-    if request.user.role == CustomUser.Role.STUDENT:
-        section_id = request.session.get('student_section')
-        if not section_id:
-            messages.error(request, "No se ha seleccionado una sección")
-            return redirect('login')
-        
-        section = Section.objects.get(id=section_id)
-        sections = [section]  # Solo mostrar la sección del estudiante
-    else:
-        sections = Section.objects.all()  # Mostrar todas las secciones para profesores
+    sections = Section.objects.all().prefetch_related('students__user')
+    section_data = []
+    
+    for section in sections:
+        students = section.students.all()
+        quiz_results = {}
+        for quiz in section.quizzes.all():
+            # Aquí agregar la lógica para obtener los resultados de los quizzes por sección
 
-    if request.method == 'POST':
-        code = request.POST.get('code')
-        try:
-            Section.objects.create(code=code)  # Eliminado el created_by
-            messages.success(request, "Sección creada exitosamente.")
-        except IntegrityError:
-            messages.error(request, "Ya existe una sección con ese c��digo.")
-        return redirect('manage_sections')
-
-    return render(request, 'users/manage_sections.html', {'sections': sections})
+            
+            pass
+            
+        section_data.append({
+            'section': section,
+            'student_count': students.count(),
+            'students': students,
+            'quiz_results': quiz_results
+        })
+    
+    return render(request, 'users/manage_sections.html', {
+        'section_data': section_data
+    })
 
 # Vista personalizada para iniciar sesión
 @user_not_authenticated

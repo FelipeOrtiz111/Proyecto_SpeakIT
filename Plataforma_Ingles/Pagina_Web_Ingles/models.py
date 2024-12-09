@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from users.models import Section
 import random
 
 # Create your models here.
@@ -17,6 +18,8 @@ class Quiz(models.Model):
     required_score_to_pass = models.IntegerField(help_text="puntaje requerido para pasar")
     difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
     allowed_attempts = models.IntegerField(default=3, help_text="número de intentos permitidos")
+    sections = models.ManyToManyField(Section, related_name='quizzes', blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name}-{self.topic}"

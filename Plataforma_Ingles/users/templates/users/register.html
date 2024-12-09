@@ -23,7 +23,7 @@
                                name="section" 
                                placeholder="Ejemplo: INI3111 - 001D"
                                pattern="IN[UI]\d{4}\s*-\s*\d{3}[A-Z]"
-                               title="El formato debe ser 'INU1234 - 123X' o 'INI1234 - 123X' donde 1234 y 123 son números y X es una letra">
+                               title="El formato debe ser 'INU1234-123X' o 'INI1234-123X' donde 1234 y 123 son números y X es una letra">
                         <button type="button" 
                                 class="btn btn-link ml-2" 
                                 data-toggle="modal" 
@@ -32,7 +32,7 @@
                         </button>
                     </div>
                     <small class="form-text text-muted">
-                        Formato requerido: INU1234 - 123X o INI1234 - 123X (ejemplo: INI3111 - 001D)
+                        Formato requerido: INU1234-123X o INI1234-123X (ejemplo: INI3111-001D)
                     </small>
                 </div>
                 <div class="form-group">
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     sectionInput.addEventListener('input', function() {
         const value = this.value;
         if (value && !sectionRegex.test(value)) {
-            this.setCustomValidity('El formato debe ser "INU1234 - 123X" o "INI1234 - 123X" donde 1234 y 123 son números y X es una letra');
+            this.setCustomValidity('El formato debe ser "INU1234-123X" o "INI1234-123X" donde 1234 y 123 son números y X es una letra');
         } else {
             this.setCustomValidity('');
         }

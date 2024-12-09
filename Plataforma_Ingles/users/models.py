@@ -26,7 +26,7 @@ class Section(models.Model):
         validators=[
             RegexValidator(
                 regex=r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$',
-                message='El formato debe ser "INU1234 - 123X" o "INI1234 - 123X" donde 1234 y 123 son números y X es una letra',
+                message='El formato debe ser "INU1234-123X" o "INI1234-123X" donde 1234 y 123 son números y X es una letra',
             )
         ]
     )
@@ -35,7 +35,6 @@ class Section(models.Model):
 
     def clean(self):
         if self.code:
-            # Normalizar el formato
             parts = self.code.replace(' ', '').split('-')
             if len(parts) == 2:
                 self.code = f"{parts[0]} - {parts[1]}"
@@ -49,6 +48,8 @@ class Section(models.Model):
 
     class Meta:
         ordering = ['code']
+        verbose_name = "Sección"
+        verbose_name_plural = "Secciones"
 
 class StudentManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
@@ -80,8 +81,21 @@ class Teacher(CustomUser):
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    section = models.ForeignKey(Section, on_delete=models.SET_NULL, null=True, blank=True)
+    section = models.ForeignKey(
+        Section, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='students'
+    )
     student_id = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.section.code if self.section else 'Sin sección'}"
+
+    class Meta:
+        verbose_name = "Perfil de Estudiante"
+        verbose_name_plural = "Perfiles de Estudiantes"
 
 class TeacherProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

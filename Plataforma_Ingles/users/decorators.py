@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.contrib import messages
 
 def user_not_authenticated(function=None, redirect_url='/'):
     """
@@ -18,3 +19,12 @@ def user_not_authenticated(function=None, redirect_url='/'):
         return decorator(function)
 
     return decorator
+
+def section_required(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated and hasattr(request.user, 'studentprofile'):
+            if not request.user.studentprofile.section:
+                messages.error(request, "Debes pertenecer a una sección para acceder a los quizzes.")
+                return redirect('perfil', request.user.username)
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
