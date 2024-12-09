@@ -408,3 +408,31 @@ header {
     }
 }
 
+/* Estilos para el modal de ayuda en el formulario de registro - Secciones */
+.btn-link {
+    color: #C20000;
+    padding: 0 5px;
+}
+
+.btn-link:hover {
+    color: #8B0000;
+}
+
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, rgb(194, 0, 0) 0%, rgb(144, 46, 46) 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-header .close {
+    color: white;
+}
+
+.modal-body img {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
