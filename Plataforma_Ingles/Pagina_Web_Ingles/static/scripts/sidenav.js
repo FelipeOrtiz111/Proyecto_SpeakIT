@@ -15,10 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Evitar que se abra el sidebar al hacer clic en cualquier parte excepto el botón
     document.body.addEventListener('click', function(e) {
         if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            if (!sidebar.classList.contains('minimized')) {
-                sidebar.classList.add('minimized');
-                mainContent.classList.add('expanded');
-            }
+            sidebar.classList.remove('minimized');
+            mainContent.classList.remove('expanded');
         }
     });
 
@@ -28,10 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener('click', function() {
             const nextUnitId = this.getAttribute('data-next-unit-id');
             showNextUnit(nextUnitId);
-            if (sidebar.classList.contains('minimized')) {
-                sidebar.classList.remove('minimized');
-                mainContent.classList.remove('expanded');
-            }
         });
     });
 
@@ -41,10 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener('click', function() {
             const prevUnitId = this.getAttribute('data-prev-unit-id');
             showPreviousUnit(prevUnitId);
-            if (sidebar.classList.contains('minimized')) {
-                sidebar.classList.remove('minimized');
-                mainContent.classList.remove('expanded');
-            }
         });
     });
 
