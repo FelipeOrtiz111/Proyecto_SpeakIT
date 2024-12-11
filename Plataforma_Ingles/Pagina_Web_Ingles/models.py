@@ -10,9 +10,14 @@ DIFF_CHOICES = (
     ('hard', 'Difícil'),
 )
 
+LEVEL_CHOICES = (
+    ('basic', 'Básico'),
+    ('elementary', 'Elemental'),
+)
+
 class Quiz(models.Model):
     name = models.CharField(max_length=120)
-    topic = models.CharField(max_length=120)
+    level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
     number_of_questions = models.IntegerField()
     time = models.IntegerField(help_text="duración del quiz en minutos")
     required_score_to_pass = models.IntegerField(help_text="puntaje requerido para pasar")
@@ -22,7 +27,7 @@ class Quiz(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.name}-{self.topic}"
+        return f"{self.name}-{self.level}"
     
     def get_questions(self):
         questions = list(self.question_set.all())
