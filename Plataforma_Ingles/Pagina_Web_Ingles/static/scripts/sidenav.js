@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('main');
 
-    // Mejorar el manejo del toggle
+    // Manejar el toggle del sidebar
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -12,13 +12,40 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Manejar clics en el sidebar cuando está minimizado
-    sidebar.addEventListener('click', function(e) {
-        if (sidebar.classList.contains('minimized') && 
-            !e.target.closest('.sidebar-toggle')) {
-            sidebar.classList.remove('minimized');
-            mainContent.classList.remove('expanded');
+    // Evitar que se abra el sidebar al hacer clic en cualquier parte excepto el botón
+    document.body.addEventListener('click', function(e) {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            if (!sidebar.classList.contains('minimized')) {
+                sidebar.classList.add('minimized');
+                mainContent.classList.add('expanded');
+            }
         }
+    });
+
+    // Botón para mostrar la siguiente unidad
+    const nextButtons = document.querySelectorAll('.next-unit-btn');
+    nextButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const nextUnitId = this.getAttribute('data-next-unit-id');
+            showNextUnit(nextUnitId);
+            if (sidebar.classList.contains('minimized')) {
+                sidebar.classList.remove('minimized');
+                mainContent.classList.remove('expanded');
+            }
+        });
+    });
+
+    // Botón para mostrar la unidad anterior
+    const prevButtons = document.querySelectorAll('.prev-unit-btn');
+    prevButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const prevUnitId = this.getAttribute('data-prev-unit-id');
+            showPreviousUnit(prevUnitId);
+            if (sidebar.classList.contains('minimized')) {
+                sidebar.classList.remove('minimized');
+                mainContent.classList.remove('expanded');
+            }
+        });
     });
 
     // Oculta todos los videos al cargar la página
@@ -213,7 +240,8 @@ function showPreviousUnit(unitId) {
 
 // Funciones para manejar los botones "Subir al siguiente nivel" y "Volver al nivel anterior"
 function showNextLevel(levelId) {
-    const allLevels = document.querySelectorAll('.video-section');
+    const allLevels = document.querySelector
+
     allLevels.forEach(level => level.style.display = 'none');
 
     const nextLevel = document.getElementById(levelId);
