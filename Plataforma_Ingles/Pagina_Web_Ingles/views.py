@@ -210,7 +210,7 @@ def seguimiento_view(request):
     if request.user.is_staff:
         sections = Section.objects.all()
     else:
-        sections = Section.objects.filter(created_by=request.user)
+        sections = Section.objects.all()
     
     # Obtener sección seleccionada
     selected_section = request.GET.get('section')

@@ -75,7 +75,6 @@
                                         <p>Estudiante: {{ result.user.username }}</p>
                                         {% if is_admin %}
                                             <p>Sección: {{ result.user.studentprofile.section.code }}</p>
-                                            <p>Profesor: {{ result.user.studentprofile.section.created_by.username }}</p>
                                         {% endif %}
                                     {% endif %}
                                     <p>Fecha: {{ result.created|date:"d/m/Y H:i" }}</p>

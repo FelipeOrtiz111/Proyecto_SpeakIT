@@ -42,10 +42,8 @@ class SectionModelTests(TestCase):
     def test_create_section(self):
         section = Section.objects.create(
             code='SEC001',
-            created_by=self.user
         )
         self.assertEqual(section.code, 'SEC001')
-        self.assertEqual(section.created_by, self.user)
         self.assertTrue(section.is_active)
 
 class ProfileTests(TestCase):
