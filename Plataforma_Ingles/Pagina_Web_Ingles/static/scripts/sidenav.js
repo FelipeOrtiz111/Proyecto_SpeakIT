@@ -68,21 +68,37 @@ document.addEventListener("DOMContentLoaded", function() {
             dropdownContent.style.display = "block";
         }
     }
-});
 
-// Manejo de los dropdowns
-var dropdown = document.getElementsByClassName("dropdown-btn");
-for (let i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-        } else {
-            dropdownContent.style.display = "block";
+    // Manejar los botones dropdown
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    for (var i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function(e) {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+            e.stopPropagation(); // Evitar que el click se propague
+        });
+    }
+
+    // Asegurarse de que los enlaces dentro del sidebar sean clickeables
+    var sidebarLinks = document.querySelectorAll('.sidenav a');
+    sidebarLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evitar que el click se propague al contenedor padre
+        });
+    });
+
+    // Prevenir que los clicks en los enlaces del sidebar activen otros eventos
+    document.querySelector('.sidenav').addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            e.stopPropagation();
         }
     });
-}
+});
 
 const links = document.querySelectorAll('.dropdown-container a.dc-a');
 const videoSections = document.querySelectorAll('.video-section');

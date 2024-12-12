@@ -106,6 +106,7 @@
 
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'scripts/sidebar.js' %}"></script>
     {% if is_teacher or is_admin %}
         <script src="{% static 'scripts/teacher-dashboard.js' %}"></script>
     {% else %}

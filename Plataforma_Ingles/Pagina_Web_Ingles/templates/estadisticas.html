@@ -1,5 +1,6 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 {% include 'includes/sidebar.html' %}
 
@@ -61,6 +62,7 @@
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'scripts/sidebar.js' %}"></script>
 <script>
     // Parsear los datos del JSON para usarlos en el gráfico
     const quizData = JSON.parse('{{ quiz_data|escapejs }}');
@@ -110,33 +112,5 @@
             }
         }
     });
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtener todos los botones dropdown
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-
-    // Asegurarse de que los enlaces dentro del sidebar sean clickeables
-    var sidebarLinks = document.querySelectorAll('.sidenav a');
-    sidebarLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evitar que el click se propague al botón dropdown
-        });
-    });
-});
 </script>
 {% endblock %}

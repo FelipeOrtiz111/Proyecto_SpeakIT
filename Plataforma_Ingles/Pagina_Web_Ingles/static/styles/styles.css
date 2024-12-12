@@ -206,6 +206,7 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
     display: flex;
     flex-direction: column;
     transition: width 0s ease, height 0.1s 0.3s;
+    pointer-events: auto;
 }
 
 /* Contenedor de los dropdowns */
@@ -213,6 +214,9 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
     display: none;
     background-color: #1f1f1f;
     padding: 5px 0;
+    pointer-events: auto;
+    position: relative; /* Asegura que el contenedor esté por encima */
+    z-index: 1001; /* Mayor que el contenedor padre */
 }
 
 /* Asegurarse que el contenido dentro del sidebar sea scrolleable */
@@ -335,6 +339,9 @@ ul li:nth-child(8) { animation-delay: 0.8s; }
   text-align: left;
   cursor: pointer;
   outline: none;
+  pointer-events: auto;
+  position: relative; /* Asegura que los enlaces estén por encima */
+  z-index: 1001; /* Mayor que el contenedor padre */
 }
 
 .dropdown-container.pru-e,
@@ -519,7 +526,13 @@ button:focus{
 
 .video-section {
   padding: 20px;
+  pointer-events: none; /* Deshabilita eventos en el contenedor */
 }
+
+.video-section * {
+  pointer-events: auto; /* Rehabilita eventos en los elementos hijos */
+}
+
 /* Estilos para la sección expandida del video */
 .video-section.expanded {
   display: flex;
