@@ -76,6 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const sectionDisplay = document.getElementById('section-display');
     const sectionInput = document.getElementById('section');
     
+    // Función para formatear la sección
+    function formatSection(value) {
+        // Eliminar todos los espacios
+        return value.replace(/\s+/g, '');
+    }
+    
     if (editBtn) {
         editBtn.addEventListener('click', function() {
             editBtn.style.display = 'none';
@@ -85,7 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (saveBtn) {
         saveBtn.addEventListener('click', function() {
-            const newSection = sectionInput.value.trim();
+            const newSection = formatSection(sectionInput.value);
+            
+            // Validar formato antes de enviar
+            const sectionRegex = /^IN[UI]\d{4}-\d{3}[A-Z]$/;
+            if (!sectionRegex.test(newSection)) {
+                alert('Formato de sección inválido. Debe ser del tipo INU4101-004D');
+                return;
+            }
             
             fetch('/users/update_section/', {
                 method: 'POST',
@@ -95,19 +108,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: `section=${encodeURIComponent(newSection)}`
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     sectionDisplay.textContent = data.section_code;
                     sectionForm.style.display = 'none';
                     editBtn.style.display = 'inline-block';
-                    // Mostrar mensaje de éxito
                     alert(data.message);
                 } else {
-                    throw new Error(data.error);
+                    throw new Error(data.error || 'Error desconocido');
                 }
             })
             .catch(error => {
+                console.error('Error:', error);
                 alert('Error al actualizar la sección: ' + error.message);
             });
         });
@@ -117,8 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
         cancelBtn.addEventListener('click', function() {
             sectionForm.style.display = 'none';
             editBtn.style.display = 'inline-block';
-            // Restaurar el valor original
-            sectionInput.value = sectionDisplay.textContent.trim();
+            sectionInput.value = formatSection(sectionDisplay.textContent);
+        });
+    }
+    
+    // Formatear input mientras el usuario escribe
+    if (sectionInput) {
+        sectionInput.addEventListener('input', function() {
+            this.value = formatSection(this.value);
         });
     }
 });

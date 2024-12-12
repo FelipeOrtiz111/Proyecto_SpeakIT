@@ -332,28 +332,31 @@ def update_section(request):
         if not section_code:
             return JsonResponse({'error': 'Código de sección requerido'}, status=400)
         
-        # Normalizar el formato de la sección
-        parts = section_code.replace(' ', '').split('-')
-        formatted_code = f"{parts[0]} - {parts[1]}"
+        # Eliminar espacios y normalizar el formato
+        section_code = section_code.replace(' ', '')
         
         # Validar formato
-        if not re.match(r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$', formatted_code):
-            return JsonResponse({'error': 'Formato de sección inválido'}, status=400)
+        if not re.match(r'^IN[UI]\d{4}-\d{3}[A-Z]$', section_code):
+            return JsonResponse({'error': 'Formato de sección inválido. Debe ser del tipo INU4101-004D'}, status=400)
         
         # Obtener o crear la sección
-        section, created = Section.objects.get_or_create(
-            code=formatted_code,
-            defaults={'is_active': True}
-        )
+        try:
+            section = Section.objects.get(code=section_code)
+        except Section.DoesNotExist:
+            section = Section.objects.create(
+                code=section_code,
+                is_active=True
+            )
         
         # Actualizar el perfil del estudiante
         StudentProfile.objects.filter(user=request.user).update(section=section)
         
         return JsonResponse({
             'success': True,
-            'message': f'Sección actualizada a {formatted_code}',
-            'section_code': formatted_code
+            'message': f'Sección actualizada a {section_code}',
+            'section_code': section_code
         })
         
     except Exception as e:
+        print(f"Error en update_section: {str(e)}")  # Para debugging
         return JsonResponse({'error': str(e)}, status=500)
