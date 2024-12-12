@@ -5,7 +5,7 @@
 <!-- Pantalla de carga -->
 {% include 'includes/loading.html' %}
 
-<div class="background fade-in-delayed"></div> <!-- Capa para el fondo difuminado -->
+<div class="background fade-in-delayed"></div>
 <div id="main-register">
     {% include 'includes/messaging.html' %}
     <div class="content-section">
@@ -13,8 +13,15 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">¡Ingresa ahora!</legend>
-                {{ form|crispy }}
-                <div class="form-group">
+                <!-- Campos del formulario -->
+                {{ form.email|as_crispy_field }}
+                {{ form.first_name|as_crispy_field }}
+                {{ form.last_name|as_crispy_field }}
+                {{ form.password1|as_crispy_field }}
+                {{ form.password2|as_crispy_field }}
+                
+                <!-- Campo de sección (solo visible para estudiantes) -->
+                <div class="form-group" id="section-group">
                     <label for="section-input">Sección (para alumnos):</label>
                     <div class="d-flex align-items-center">
                         <input type="text" 
@@ -23,7 +30,7 @@
                                name="section" 
                                placeholder="Ejemplo: INI3111 - 001D"
                                pattern="IN[UI]\d{4}\s*-\s*\d{3}[A-Z]"
-                               title="El formato debe ser 'INU1234-123X' o 'INI1234-123X' donde 1234 y 123 son números y X es una letra">
+                               title="El formato debe ser 'INU1234-123D' o 'INI1234-123D'">
                         <button type="button" 
                                 class="btn btn-link ml-2" 
                                 data-toggle="modal" 
@@ -32,9 +39,10 @@
                         </button>
                     </div>
                     <small class="form-text text-muted">
-                        Formato requerido: INU1234-123X o INI1234-123X (ejemplo: INI3111-001D)
+                        Formato requerido: INU1234-123D o INI1234-123D (ejemplo: INI3111-001D)
                     </small>
                 </div>
+                
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Registrarse</button>
                     <p class="terms">
@@ -81,12 +89,31 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const sectionInput = document.getElementById('section-input');
+    const sectionGroup = document.getElementById('section-group');
+    const emailInput = document.querySelector('input[name="email"]');
+    
+    // Función para mostrar/ocultar el campo de sección según el dominio del email
+    function toggleSectionField() {
+        const email = emailInput.value;
+        if (email.endsWith('@duocuc.cl')) {
+            sectionGroup.style.display = 'block';
+            sectionInput.required = true;
+        } else {
+            sectionGroup.style.display = 'none';
+            sectionInput.required = false;
+            sectionInput.value = '';
+        }
+    }
+    
+    // Escuchar cambios en el email
+    emailInput.addEventListener('input', toggleSectionField);
+    
+    // Validación de formato de sección
     const sectionRegex = /^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$/;
-
     sectionInput.addEventListener('input', function() {
         const value = this.value;
         if (value && !sectionRegex.test(value)) {
-            this.setCustomValidity('El formato debe ser "INU1234-123X" o "INI1234-123X" donde 1234 y 123 son números y X es una letra');
+            this.setCustomValidity('El formato debe ser "INU1234-123D" o "INI1234-123D"');
         } else {
             this.setCustomValidity('');
         }
@@ -99,6 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
             this.value = `${parts[0]} - ${parts[1]}`;
         }
     });
+    
+    // Inicializar el estado del campo de sección
+    toggleSectionField();
 });
 </script>
 {% endblock content %}

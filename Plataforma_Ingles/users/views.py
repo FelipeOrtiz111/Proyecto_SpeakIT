@@ -75,6 +75,8 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
+            # Generar username desde el email
+            user.username = user.generate_username_from_email()
             user.save()
             
             # Validar y manejar la sección solo si es estudiante
@@ -116,7 +118,9 @@ def register(request):
                     user.delete()
                     return render(request, "users/register.html", {"form": form})
             
+            # Enviar email de activación e informar al usuario su nombre de usuario
             activateEmail(request, user, form.cleaned_data.get('email'))
+            messages.info(request, f"Tu nombre de usuario será: {user.username}")
             return redirect('login')
         else:
             for error in list(form.errors.values()):

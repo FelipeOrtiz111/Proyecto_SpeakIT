@@ -19,6 +19,19 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    def generate_username_from_email(self):
+        email_prefix = self.email.split('@')[0]
+        base_username = email_prefix
+        
+        # Verificar si el username ya existe
+        counter = 1
+        username = base_username
+        while CustomUser.objects.filter(username=username).exists():
+            username = f"{base_username}{counter}"
+            counter += 1
+        
+        return username
+
 class Section(models.Model):
     code = models.CharField(
         max_length=50, 

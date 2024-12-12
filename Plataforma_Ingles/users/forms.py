@@ -2,20 +2,23 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from .models import CustomUser
+from .models import CustomUser, StudentProfile
 from django.db.models import Q
 
 # Formulario de Registro de Usuario
 class CustomUserRegistrationForm(UserCreationForm):
-    username = forms.CharField(
-        help_text='150 caracteres o menos. Letras, dígitos y solo @/./+/-/_ permitidos.',
-        required=True,
-        label="Nombre de usuario"
-    )
     email = forms.EmailField(
         help_text='Debe ingresar su dirección de correo institucional de DuocUC.',
         required=True,
         label="Correo electrónico"
+    )
+    first_name = forms.CharField(
+        required=True,
+        label="Nombre"
+    )
+    last_name = forms.CharField(
+        required=True,
+        label="Apellido"
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
@@ -35,10 +38,11 @@ class CustomUserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2']
-        labels = {
-            'username': 'Nombre de usuario',
+        fields = ['email', 'first_name', 'last_name', 'password1', 'password2']
+        labels = {            
             'email': 'Correo Electrónico',
+            'first_name': 'Nombre',
+            'last_name': 'Apellido',
             'password1': 'Contraseña',
             'password2': 'Confirmar Contraseña',
         }
@@ -48,21 +52,31 @@ class CustomUserRegistrationForm(UserCreationForm):
         dominio_permitido = ['duocuc.cl', 'profesor.duoc.cl']  # Dominios permitidos
         if not any(email.endswith(f"@{dominio}") for dominio in dominio_permitido):
             raise ValidationError(f'Debes ingresar tu correo institucional.')
+        if CustomUser.objects.filter(email=email).exists():
+            raise ValidationError('Este correo electrónico ya está registrado.')
         return email
 
     def save(self, commit=True):
         user = super(CustomUserRegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        
+        # Generar username desde el email
+        user.username = user.generate_username_from_email()
         
         if user.email.endswith('@profesor.duoc.cl'):
             user.role = CustomUser.Role.TEACHER
         elif user.email.endswith('@duocuc.cl'):
             user.role = CustomUser.Role.STUDENT
-        else:
-            user.role = CustomUser.Role.OTHER
         
         if commit:
             user.save()
+            # Crear perfil y asignar sección
+            if user.role == CustomUser.Role.STUDENT:
+                StudentProfile.objects.filter(user=user).update(
+                    section=self.cleaned_data['section']
+                )
         return user
 
 # Formulario de Inicio de Sesión
