@@ -20,9 +20,6 @@
                     {% for section in sections %}
                         <option value="{{ section.id }}" {% if section.id|stringformat:"s" == selected_section %}selected{% endif %}>
                             {{ section.code }}
-                            {% if is_admin %}
-                                - {{ section.created_by.username }}
-                            {% endif %}
                         </option>
                     {% endfor %}
                 </select>
