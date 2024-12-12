@@ -52,7 +52,6 @@
                     </div>
                 </div> 
                 {{ form.email|as_crispy_field }}
-                {{ form.description|as_crispy_field }}
                 <a href="{% url 'password_change' %}">¿Cambiar contraseña?</a>
             </fieldset>
             <div class="form-group">
@@ -84,23 +83,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            const newSection = sectionInput.value.trim();
+            
+            fetch('/users/update_section/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: `section=${encodeURIComponent(newSection)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    sectionDisplay.textContent = data.section_code;
+                    sectionForm.style.display = 'none';
+                    editBtn.style.display = 'inline-block';
+                    // Mostrar mensaje de éxito
+                    alert(data.message);
+                } else {
+                    throw new Error(data.error);
+                }
+            })
+            .catch(error => {
+                alert('Error al actualizar la sección: ' + error.message);
+            });
+        });
+    }
+    
     if (cancelBtn) {
         cancelBtn.addEventListener('click', function() {
             sectionForm.style.display = 'none';
             editBtn.style.display = 'inline-block';
             // Restaurar el valor original
             sectionInput.value = sectionDisplay.textContent.trim();
-        });
-    }
-    
-    if (saveBtn) {
-        saveBtn.addEventListener('click', function() {
-            const newSection = sectionInput.value.trim();
-            // Actualizar el display
-            sectionDisplay.textContent = newSection || 'Sin sección asignada';
-            sectionForm.style.display = 'none';
-            editBtn.style.display = 'inline-block';
-            // El valor se enviará cuando se envíe el formulario
         });
     }
 });

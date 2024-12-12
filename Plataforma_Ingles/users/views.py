@@ -26,6 +26,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import re
 from django.core.exceptions import ValidationError
+from django.views.decorators.http import require_http_methods
 
 # Función para activar cuenta de usuario con el link de activación
 def activate(request, uidb64, token):
@@ -63,7 +64,7 @@ def activateEmail(request, user, to_email):
     email = EmailMessage(mail_subject, message, from_email='speakit.duocuc@gmail.com', to=[to_email])
     if email.send():
         messages.success(request, f'<b>{user}</b>, por favor ve a la bandeja de entrada de tu email <b>{to_email}</b> \
-                     y haz click en el link de confirmación para completar tu registro. <b>Nota:</b> Revisa tu carpeta de spam')
+                     y haz click en el link de confirmación para completar tu registro. De lo contrario, no podrás iniciar sesión. <b>Nota:</b> Revisa tu carpeta de spam')
     else:
         messages.error(request, f'Ocurrió un problema enviando el correo de confirmación a {to_email}, Revisa si está escrito correctamente.')
 
@@ -84,7 +85,7 @@ def register(request):
             if section_code and user.role == CustomUser.Role.STUDENT:
                 # Validar formato
                 if not re.match(r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$', section_code):
-                    messages.error(request, "Formato de sección inválido. Debe ser 'INU1234-123X' o 'INI1234-123X' donde 1234 y 123 son números y X es una letra.")
+                    messages.error(request, "Formato de sección inválido. Debe ser 'INU1234-123D' o 'INI1234-123D'.")
                     user.delete()
                     return render(request, "users/register.html", {"form": form})
                 
@@ -107,7 +108,7 @@ def register(request):
                     if created:
                         messages.success(request, f"Se ha creado una nueva sección: {formatted_code}")
                     else:
-                        messages.info(request, f"Te has unido a la sección existente: {formatted_code}")
+                        messages.info(request, f"Te has unido a la sección: {formatted_code}")
 
                 except ValidationError as e:
                     messages.error(request, f"Error en la sección: {e}")
@@ -203,30 +204,37 @@ def perfil_view(request, username):
     if request.method == 'POST':
         user = request.user
         form = UserUpdateForm(request.POST, instance=user)
+        
         if form.is_valid():
             form.save()
             
-            # Manejar la actualización de la sección para estudiantes
-            if user.role == CustomUser.Role.STUDENT:
-                section_code = request.POST.get('section')
-                if section_code:
-                    # Obtener o crear la sección sin created_by
+            # Manejar la actualización de la sección
+            section_code = request.POST.get('section')
+            if section_code and user.role == CustomUser.Role.STUDENT:
+                try:
+                    # Normalizar el formato de la sección
+                    section_code = section_code.strip()
+                    if '-' in section_code:
+                        parts = section_code.split('-')
+                        formatted_code = f"{parts[0].strip()} - {parts[1].strip()}"
+                    else:
+                        formatted_code = section_code
+
+                    # Obtener o crear la sección
                     section, created = Section.objects.get_or_create(
-                        code=section_code
+                        code=formatted_code,
+                        defaults={'is_active': True}
                     )
+
                     # Actualizar la sección del estudiante
-                    user.studentprofile.section = section
-                    user.studentprofile.save()
-                elif user.studentprofile.section:
-                    # Si el campo está vacío y tenía una sección, la removemos
-                    user.studentprofile.section = None
-                    user.studentprofile.save()
+                    StudentProfile.objects.filter(user=user).update(section=section)
+                    
+                    messages.success(request, f'Sección actualizada a {formatted_code}')
+                except Exception as e:
+                    messages.error(request, f'Error al actualizar la sección: {str(e)}')
             
-            messages.success(request, 'Tu perfil ha sido actualizado!')
+            messages.success(request, '¡Tu perfil ha sido actualizado!')
             return redirect('perfil', user.username)
-        else:
-            for error in list(form.errors.values()):
-                messages.error(request, error)
 
     user = get_user_model().objects.filter(username=username).first()
     if user:
@@ -312,3 +320,40 @@ def passwordResetConfirm(request, uidb64, token):
 
     messages.error(request, 'Algo salió mal, redirigiendo de nuevo a la página de inicio')
     return redirect("index")
+
+@require_http_methods(["POST"])
+@login_required
+def update_section(request):
+    try:
+        if request.user.role != CustomUser.Role.STUDENT:
+            return JsonResponse({'error': 'Solo los estudiantes pueden cambiar de sección'}, status=403)
+        
+        section_code = request.POST.get('section')
+        if not section_code:
+            return JsonResponse({'error': 'Código de sección requerido'}, status=400)
+        
+        # Normalizar el formato de la sección
+        parts = section_code.replace(' ', '').split('-')
+        formatted_code = f"{parts[0]} - {parts[1]}"
+        
+        # Validar formato
+        if not re.match(r'^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$', formatted_code):
+            return JsonResponse({'error': 'Formato de sección inválido'}, status=400)
+        
+        # Obtener o crear la sección
+        section, created = Section.objects.get_or_create(
+            code=formatted_code,
+            defaults={'is_active': True}
+        )
+        
+        # Actualizar el perfil del estudiante
+        StudentProfile.objects.filter(user=request.user).update(section=section)
+        
+        return JsonResponse({
+            'success': True,
+            'message': f'Sección actualizada a {formatted_code}',
+            'section_code': formatted_code
+        })
+        
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
