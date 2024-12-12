@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Función para formatear la sección
     function formatSection(value) {
-        // Eliminar todos los espacios
         return value.replace(/\s+/g, '');
     }
     
@@ -100,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            fetch('/users/update_section/', {
+            // Usar URL relativa
+            fetch('/users/update_section', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -110,7 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    if (response.status === 404) {
+                        throw new Error('URL no encontrada. Por favor, contacte al administrador.');
+                    }
+                    throw new Error(`Error del servidor: ${response.status}`);
                 }
                 return response.json();
             })
