@@ -962,21 +962,23 @@ button:focus{
 /* Filtros y Formularios */
 .section-filter {
   margin: 20px 0;
-  padding: 15px;
   background-color: #f8f9fa;
   border-radius: 5px;
-  margin-bottom: 2rem;
-}
-
-.section-filter select {
-  margin-right: 1rem;
-  min-width: 200px;
+  text-align: center;
+  justify-self: center;
+  margin-bottom: 16px;
+  width: fit-content;
+  padding: 15px;
+  font-family: inherit;
+  font-weight: normal;
+  color: #eeeeee;
 }
 
 .form-inline {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin: 0 !important;
 }
 
 
