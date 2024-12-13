@@ -76,7 +76,6 @@ main.expanded {
   flex: 1;
   background-color: gainsboro;
   overflow-y: scroll;
-  transition: margin-left 0.3s ease;
 }
 
 
