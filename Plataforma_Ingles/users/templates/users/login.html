@@ -21,7 +21,9 @@
 <!-- Contenido del login -->
 <div class="background fade-in"></div>
 <div id="main-login" class="fade-in-delayed">
-    {% include 'includes/messaging.html' %}
+    <div class="message-alerts">   
+    {% include 'includes/messaging.html' %}        
+    </div>
     <div class="content-section">
         <form method="POST" class="form-style">
             {% csrf_token %}

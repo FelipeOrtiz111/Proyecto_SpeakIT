@@ -210,6 +210,11 @@ header {
     transition: transform 0.3s ease-in-out;
 }
 
+.message-alerts {
+    position: absolute;
+    left: 30px;
+    width: 30%;
+}
 .content-section a:hover:before {
     transform: scaleX(1);
 }
@@ -263,40 +268,11 @@ header {
 }
 
 /* Ajustes responsivos mejorados */
-@media (max-width: 1400px) {
-    #main-login {
-        margin-left: 25vw;
-        margin-right: 25vw;
-        margin-top: 20vh;
-    }
-    
-    #main-register {
-        margin-left: 20vw;
-        margin-right: 20vw;
-    }
-}
-
-@media (max-width: 1200px) {
-    #main-login {
-        margin-left: 20vw;
-        margin-right: 20vw;
-        margin-top: 15vh;
-    }
-    
-    #main-register {
-        margin-left: 15vw;
-        margin-right: 15vw;
-    }
-
-    .loading-logo {
-        width: 200px;
-    }
-}
 
 @media (max-width: 992px) {
     #main-login {
-        margin-left: 15vw;
-        margin-right: 15vw;
+        margin-left: 10vw;
+        margin-right: 10vw;
     }
 
     .form-style {
