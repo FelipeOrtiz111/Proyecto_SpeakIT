@@ -648,42 +648,129 @@
       <h4>Dates</h4>
       <div class="dates-section">
         <div class="weekdays">
-          <h5>
-            Days of the Week:
-            <audio id="audio-days" src="{% static 'audio/dates/days-of-the-week.mp3' %}"></audio>
-            <button onclick="document.getElementById('audio-days').play()">▶️</button>
-          </h5>
+          <h5>Days of the Week:</h5>
           <ol>
-            <li><span class="day">Monday</span> <span class="translation">(lunes)</span></li>
-            <li><span class="day">Tuesday</span> <span class="translation">(martes)</span></li>
-            <li><span class="day">Wednesday</span> <span class="translation">(miércoles)</span></li>
-            <li><span class="day">Thursday</span> <span class="translation">(jueves)</span></li>
-            <li><span class="day">Friday</span> <span class="translation">(viernes)</span></li>
-            <li><span class="day">Saturday</span> <span class="translation">(sábado)</span></li>
-            <li><span class="day">Sunday</span> <span class="translation">(domingo)</span></li>
+            <li>
+              <span class="day">Monday</span> 
+              <span class="translation">(lunes)</span>
+              <audio id="audio-monday" src="{% static 'audio/dates/monday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-monday').play()">▶️</button>
+            </li>
+            <li>
+              <span class="day">Tuesday</span> 
+              <span class="translation">(martes)</span>
+              <audio id="audio-tuesday" src="{% static 'audio/dates/tuesday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-tuesday').play()">▶️</button>
+            </li>
+            <li>
+              <span class="day">Wednesday</span> 
+              <span class="translation">(miércoles)</span>
+              <audio id="audio-wednesday" src="{% static 'audio/dates/wednesday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-wednesday').play()">▶️</button>
+            </li>
+            <li>
+              <span class="day">Thursday</span> 
+              <span class="translation">(jueves)</span>
+              <audio id="audio-thursday" src="{% static 'audio/dates/thursday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-thursday').play()">▶️</button>
+            </li>
+            <li>
+              <span class="day">Friday</span> 
+              <span class="translation">(viernes)</span>
+              <audio id="audio-friday" src="{% static 'audio/dates/friday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-friday').play()">▶️</button>
+            </li>
+            <li>
+              <span class="day">Saturday</span> 
+              <span class="translation">(sábado)</span>
+              <audio id="audio-saturday" src="{% static 'audio/dates/saturday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-saturday').play()">▶️</button>
+            </li>
+            <li>
+              <span class="day">Sunday</span> 
+              <span class="translation">(domingo)</span>
+              <audio id="audio-sunday" src="{% static 'audio/dates/sunday.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-sunday').play()">▶️</button>
+            </li>
           </ol>
         </div>
 
         <div class="months">
-          <h5>
-            Months of the Year:
-            <audio id="audio-months" src="{% static 'audio/dates/months.mp3' %}"></audio>
-            <button onclick="document.getElementById('audio-months').play()">▶️</button>
-          </h5>
-            <ol>
-                <li><span class="month">January</span> <span class="translation">(enero)</span></li>
-                <li><span class="month">February</span> <span class="translation">(febrero)</span></li>
-                <li><span class="month">March</span> <span class="translation">(marzo)</span></li>
-                <li><span class="month">April</span> <span class="translation">(abril)</span></li>
-                <li><span class="month">May</span> <span class="translation">(mayo)</span></li>
-                <li><span class="month">June</span> <span class="translation">(junio)</span></li>
-                <li><span class="month">July</span> <span class="translation">(julio)</span></li>
-                <li><span class="month">August</span> <span class="translation">(agosto)</span></li>
-                <li><span class="month">September</span> <span class="translation">(septiembre)</span></li>
-                <li><span class="month">October</span> <span class="translation">(octubre)</span></li>
-                <li><span class="month">November</span> <span class="translation">(noviembre)</span></li>
-                <li><span class="month">December</span> <span class="translation">(diciembre)</span></li>
-            </ol>
+          <h5>Months of the Year:</h5>
+          <ol>
+            <li>
+              <span class="month">January</span> 
+              <span class="translation">(enero)</span>
+              <audio id="audio-january" src="{% static 'audio/dates/january.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-january').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">February</span> 
+              <span class="translation">(febrero)</span>
+              <audio id="audio-february" src="{% static 'audio/dates/february.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-february').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">March</span> 
+              <span class="translation">(marzo)</span>
+              <audio id="audio-march" src="{% static 'audio/dates/march.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-march').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">April</span> 
+              <span class="translation">(abril)</span>
+              <audio id="audio-april" src="{% static 'audio/dates/april.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-april').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">May</span> 
+              <span class="translation">(mayo)</span>
+              <audio id="audio-may" src="{% static 'audio/dates/may.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-may').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">June</span> 
+              <span class="translation">(junio)</span>
+              <audio id="audio-june" src="{% static 'audio/dates/june.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-june').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">July</span> 
+              <span class="translation">(julio)</span>
+              <audio id="audio-july" src="{% static 'audio/dates/july.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-july').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">August</span> 
+              <span class="translation">(agosto)</span>
+              <audio id="audio-august" src="{% static 'audio/dates/august.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-august').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">September</span> 
+              <span class="translation">(septiembre)</span>
+              <audio id="audio-september" src="{% static 'audio/dates/september.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-september').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">October</span> 
+              <span class="translation">(octubre)</span>
+              <audio id="audio-october" src="{% static 'audio/dates/october.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-october').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">November</span> 
+              <span class="translation">(noviembre)</span>
+              <audio id="audio-november" src="{% static 'audio/dates/november.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-november').play()">▶️</button>
+            </li>
+            <li>
+              <span class="month">December</span> 
+              <span class="translation">(diciembre)</span>
+              <audio id="audio-december" src="{% static 'audio/dates/december.mp3' %}"></audio>
+              <button onclick="document.getElementById('audio-december').play()">▶️</button>
+            </li>
+          </ol>
         </div>
 
         <div class="example-date">
@@ -694,66 +781,84 @@
         </div>
       </div>
 
-      <h4>
-        Directions
-        <audio id="audio-directions" src="{% static 'audio/directions/directions.mp3' %}"></audio>
-        <button onclick="document.getElementById('audio-directions').play()">▶️</button>
-      </h4>
+      <h4>Directions</h4>
       <div class="directions-section">
         <ul class="direction-list">
           <li class="direction-item">
             <span class="direction">Straight ahead</span>
             <span class="translation">(Todo recto)</span>
+            <audio id="audio-straight-ahead" src="{% static 'audio/directions/straight-ahead.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-straight-ahead').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Turn left</span>
             <span class="translation">(Girar a la izquierda)</span>
+            <audio id="audio-turn-left" src="{% static 'audio/directions/turn-left.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-turn-left').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Turn right</span>
             <span class="translation">(Girar a la derecha)</span>
+            <audio id="audio-turn-right" src="{% static 'audio/directions/turn-right.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-turn-right').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Go straight</span>
             <span class="translation">(Ir todo recto)</span>
+            <audio id="audio-go-straight" src="{% static 'audio/directions/go-straight.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-go-straight').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Go back</span>
             <span class="translation">(Retroceder)</span>
+            <audio id="audio-go-back" src="{% static 'audio/directions/go-back.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-go-back').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Next to</span>
             <span class="translation">(Al lado de)</span>
+            <audio id="audio-next-to" src="{% static 'audio/directions/next-to.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-next-to').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Opposite</span>
             <span class="translation">(Enfrente)</span>
+            <audio id="audio-opposite" src="{% static 'audio/directions/opposite.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-opposite').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">At the end of</span>
             <span class="translation">(Al final de)</span>
+            <audio id="audio-at-end" src="{% static 'audio/directions/at-the-end-of.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-at-end').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Behind</span>
             <span class="translation">(Detrás)</span>
+            <audio id="audio-behind" src="{% static 'audio/directions/behind.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-behind').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">In front of</span>
             <span class="translation">(Delante de)</span>
+            <audio id="audio-in-front" src="{% static 'audio/directions/in-front-of.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-in-front').play()">▶️</button>
           </li>
 
           <li class="direction-item">
             <span class="direction">Between</span>
             <span class="translation">(Entre)</span>
+            <audio id="audio-between" src="{% static 'audio/directions/between.mp3' %}"></audio>
+            <button onclick="document.getElementById('audio-between').play()">▶️</button>
           </li>
         </ul>
       </div>
