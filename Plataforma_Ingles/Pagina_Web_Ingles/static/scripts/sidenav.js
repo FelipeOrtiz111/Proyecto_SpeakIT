@@ -3,22 +3,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('main');
 
-    // Manejar el toggle del sidebar
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            sidebar.classList.toggle('minimized');
-            mainContent.classList.toggle('expanded');
-        });
-    }
-
-    // Evitar que se abra el sidebar al hacer clic en cualquier parte excepto el botón
-    document.body.addEventListener('click', function(e) {
-        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            sidebar.classList.remove('minimized');
-            mainContent.classList.remove('expanded');
-        }
+// Manejar el toggle del sidebar
+if (sidebarToggle) {
+    sidebarToggle.addEventListener('click', function (e) {
+        e.stopPropagation(); // Evita que el evento se propague al body
+        sidebar.classList.toggle('minimized');
+        mainContent.classList.toggle('expanded');
     });
+}
+
+// Prevenir interacciones que afecten al estado del sidebar fuera de su botón
+document.body.addEventListener('click', function (e) {
+    // Solo actúa si el clic ocurre fuera del sidebar y del botón toggle
+    if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        // No hacer nada, el sidebar permanece en su estado actual
+    }
+});
 
     // Botón para mostrar la siguiente unidad
     const nextButtons = document.querySelectorAll('.next-unit-btn');
