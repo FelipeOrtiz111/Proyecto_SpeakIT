@@ -211,9 +211,8 @@ header {
 }
 
 .message-alerts {
-    position: absolute;
-    left: 30px;
-    width: 30%;
+    width: auto;
+    max-width: 80%;
 }
 .content-section a:hover:before {
     transform: scaleX(1);
