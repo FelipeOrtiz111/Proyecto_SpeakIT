@@ -1,0 +1,16 @@
+{% extends "header.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+  <h2>Questions</h2>
+  <a href="{% url 'question_create' %}">Add Question</a>
+  <ul>
+    {% for question in questions %}
+      <li>
+        {{ question.text }}
+        <a href="{% url 'answer_create' question.id %}">Add Answer</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
