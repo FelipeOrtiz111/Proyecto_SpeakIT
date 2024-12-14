@@ -6,15 +6,15 @@ from django.http import JsonResponse
 from questions.models import Question, Answer
 from users.models import StudentProfile, Section, CustomUser
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.db.models import Avg, Max
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .forms import QuizForm, QuestionForm, AnswerForm
 def index(request):
     return render(request, 'index.html')
 
@@ -325,3 +325,56 @@ def assign_section(request):
     except Exception as e:
         print(f"Error en assign_section: {str(e)}")  # Para debugging
         return JsonResponse({'error': str(e)}, status=500)
+
+@login_required
+def teacher_crud_view(request):
+    if request.user.role != 'TEACHER':
+        return redirect('index')
+
+    quizzes = Quiz.objects.all()
+    context = {
+        'quizzes': quizzes,
+        'quiz_form': QuizForm(),
+        'question_form': QuestionForm(),
+        'answer_form': AnswerForm(),
+    }
+    return render(request, 'teacher-crud.html', context)
+
+@require_POST
+@login_required
+def add_quiz(request):
+    form = QuizForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Quiz agregado correctamente.')
+    else:
+        messages.error(request, 'Error al agregar quiz.')
+    return redirect('teacher-crud')
+
+@require_POST
+@login_required
+def add_question(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    form = QuestionForm(request.POST)
+    if form.is_valid():
+        question = form.save(commit=False)
+        question.quiz = quiz
+        question.save()
+        messages.success(request, 'Pregunta agregada correctamente.')
+    else:
+        messages.error(request, 'Error al agregar pregunta.')
+    return redirect('teacher-crud')
+
+@require_POST
+@login_required
+def add_answer(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    form = AnswerForm(request.POST)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.question = question
+        answer.save()
+        messages.success(request, 'Respuesta agregada correctamente.')
+    else:
+        messages.error(request, 'Error al agregar respuesta.')
+    return redirect('teacher-crud')

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Manage Quizzes</h2>
+
+<form method="post" action="{% url 'add-quiz' %}">
+    {% csrf_token %}
+    {{ quiz_form.as_p }}
+    <button type="submit">AgregarQuiz</button>
+</form>
+
+<h3>Quizzes Existentes</h3>
+<ul>
+    {% for quiz in quizzes %}
+        <li>{{ quiz.name }} - {{ quiz.level }}
+            <!-- Add buttons for edit and delete -->
+            <form method="post" action="{% url 'add-question' quiz.id %}">
+                {% csrf_token %}
+                {{ question_form.as_p }}
+                <button type="submit">Agregar Pregunta</button>
+            </form>
+            <ul>
+                {% for question in quiz.question_set.all %}
+                    <li>{{ question.text }}
+                        <form method="post" action="{% url 'add-answer' question.id %}">
+                            {% csrf_token %}
+                            {{ answer_form.as_p }}
+                            <button type="submit">Agregar Respuesta</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

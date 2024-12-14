@@ -10,6 +10,10 @@ from .views import (
     save_quiz_view,
     seguimiento_view,
     assign_section,
+    teacher_crud_view,
+    add_quiz,
+    add_question,
+    add_answer,
 )
 
 urlpatterns = [
@@ -23,4 +27,8 @@ urlpatterns = [
     path('<pk>/', quiz_view, name='quiz-view'),
     path('<pk>/data/', quiz_data_view, name='quiz-data-view'),
     path('<pk>/save/', save_quiz_view, name='quiz-save-view'),
+    path('teacher-crud/', teacher_crud_view, name='teacher-crud'),
+    path('add-quiz/', add_quiz, name='add-quiz'),
+    path('add-question/<int:quiz_id>/', add_question, name='add-question'),
+    path('add-answer/<int:question_id>/', add_answer, name='add-answer'),
 ]   
