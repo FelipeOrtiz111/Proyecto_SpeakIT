@@ -51,62 +51,12 @@
         </table>
     </div>
 
-    <!-- New Section for Managing Questions -->
-    <h2 class="mb-4">Gestionar Preguntas</h2>
-    <button class="btn btn-primary mb-3" onclick="toggleAddQuestionForm()">Agregar Pregunta</button>
-
-    <!-- Add Question Form -->
-    <div id="add-question-form" class="card mb-4" style="display: none;">
-        <div class="card-body">
-            <form method="post" action="{% url 'add-question' quiz.id %}" class="form-style-teacher-crud">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Agregar una nueva Pregunta</legend>
-                    {{ question_form.as_p }}
-                    <button type="submit" class="btn btn-success">Enviar</button>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-
-    <!-- Existing Questions Table -->
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Texto de la Pregunta</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for question in questions %}
-                <tr>
-                    <td>{{ question.text }}</td>
-                    <td>
-                        <!-- Edit and Delete buttons -->
-                        <a href="{% url 'edit-question' question.id %}" class="btn btn-warning btn-sm">Editar</a>
-                        <form method="post" action="{% url 'delete-question' question.id %}" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta pregunta?');">Eliminar</button>
-                        </form>
-                        <a href="{% url 'add-answer' question.id %}" class="btn btn-info btn-sm">Agregar Respuesta</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
 
 </div>
 
 <script>
     function toggleAddQuizForm() {
         var form = document.getElementById('add-quiz-form');
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function toggleAddQuestionForm() {
-        var form = document.getElementById('add-question-form');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
 
