@@ -353,47 +353,6 @@ def add_quiz(request):
         messages.error(request, 'Error al agregar quiz.')
     return redirect('teacher-crud')
 
-@require_POST
-@login_required
-def add_question(request, quiz_id):
-    quiz = get_object_or_404(Quiz, id=quiz_id)
-    form = QuestionForm(request.POST)
-    if form.is_valid():
-        question = form.save(commit=False)
-        question.quiz = quiz
-        question.save()
-        messages.success(request, 'Pregunta agregada correctamente.')
-    else:
-        messages.error(request, 'Error al agregar pregunta.')
-    return redirect('teacher-crud')
-
-@require_POST
-@login_required
-def add_answer(request, question_id):
-    question = get_object_or_404(Question, id=question_id)
-    form = AnswerForm(request.POST)
-    if form.is_valid():
-        answer = form.save(commit=False)
-        answer.question = question
-        answer.save()
-        messages.success(request, 'Respuesta agregada correctamente.')
-    else:
-        messages.error(request, 'Error al agregar respuesta.')
-    return redirect('teacher-crud')
-
-@login_required
-def edit_question(request, question_id):
-    question = get_object_or_404(Question, id=question_id)
-    if request.method == 'POST':
-        form = QuestionForm(request.POST, instance=question)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Pregunta actualizada correctamente.')
-            return redirect('teacher-crud')
-    else:
-        form = QuestionForm(instance=question)
-    return render(request, 'edit_question.html', {'form': form})
-
 @login_required
 def edit_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
@@ -416,3 +375,52 @@ def delete_quiz(request, quiz_id):
         return redirect('teacher-crud')
     return render(request, 'confirm_delete.html', {'quiz': quiz})
 
+@require_POST
+@login_required
+def add_question(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    form = QuestionForm(request.POST)
+    if form.is_valid():
+        question = form.save(commit=False)
+        question.quiz = quiz
+        question.save()
+        messages.success(request, 'Pregunta agregada correctamente.')
+    else:
+        messages.error(request, 'Error al agregar pregunta.')
+    return redirect('teacher-crud')
+
+@login_required
+def edit_question(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Pregunta actualizada correctamente.')
+            return redirect('teacher-crud')
+    else:
+        form = QuestionForm(instance=question)
+    return render(request, 'edit_question.html', {'form': form})
+
+@login_required
+def delete_question (request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    if request.method == 'POST':
+        question.delete()
+        messages.success(request, 'Pregunta eliminada correctamente.')
+        return redirect('teacher-crud')
+    return render(request, 'confirm_delete.html', {'question': question})
+
+@require_POST
+@login_required
+def add_answer(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    form = AnswerForm(request.POST)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.question = question
+        answer.save()
+        messages.success(request, 'Respuesta agregada correctamente.')
+    else:
+        messages.error(request, 'Error al agregar respuesta.')
+    return redirect('teacher-crud')
