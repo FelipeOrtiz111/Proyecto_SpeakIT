@@ -382,6 +382,19 @@ def add_answer(request, question_id):
     return redirect('teacher-crud')
 
 @login_required
+def edit_question(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Pregunta actualizada correctamente.')
+            return redirect('teacher-crud')
+    else:
+        form = QuestionForm(instance=question)
+    return render(request, 'edit_question.html', {'form': form})
+
+@login_required
 def edit_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
     if request.method == 'POST':
