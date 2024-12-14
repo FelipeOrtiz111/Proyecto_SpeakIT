@@ -37,7 +37,7 @@ class QuizModelTest(TestCase):
             number_of_questions=10,
             time=30,
             required_score_to_pass=70,
-            difficulty='medio',
+            difficulty='medium',
             allowed_attempts=3
         )
 

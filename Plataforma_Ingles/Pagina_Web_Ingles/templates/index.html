@@ -1433,6 +1433,7 @@
         {% for quiz in object_list %}
         <div class="quiz-card">
           <h4>{{ quiz.name }}</h4>
+          <p>Tema: {{ quiz.topic }}</p>
           <p>Dificultad: {{ quiz.difficulty }}</p>
           <p>Tiempo: {{ quiz.time }} minutos</p>
           <p>Número de preguntas: {{ quiz.number_of_questions }}</p>

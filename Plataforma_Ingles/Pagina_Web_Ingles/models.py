@@ -5,14 +5,14 @@ import random
 
 # Create your models here.
 DIFF_CHOICES = (
-    ('fácil', 'Fácil'),
-    ('medio', 'Medio'),
-    ('difícil', 'Difícil'),
+    ('easy', 'Fácil'),
+    ('medium', 'Medio'),
+    ('hard', 'Difícil'),
 )
 
 LEVEL_CHOICES = (
-    ('básico', 'Básico'),
-    ('elemental', 'Elemental'),
+    ('basic', 'Básico'),
+    ('elementary', 'Elemental'),
 )
 
 class Quiz(models.Model):
