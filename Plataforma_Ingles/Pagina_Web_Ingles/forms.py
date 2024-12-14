@@ -4,14 +4,14 @@ from questions.models import Quiz, Question, Answer
 class QuizForm(forms.ModelForm):
     class Meta:
         model = Quiz
-        fields = ['Nombre', 'Nivel', 'Numero_de_preguntas', 'Tiempo', 'Puntaje_requerido', 'Dificultad', 'Intentos_permitidos']
+        fields = ['name', 'level', 'number_of_questions', 'time', 'required_score_to_pass', 'difficulty', 'allowed_attempts']
 
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['Texto']
+        fields = ['text']
 
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
-        fields = ['Texto', 'Correcto']
+        fields = ['text', 'correct']
