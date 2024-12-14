@@ -4,12 +4,12 @@
 
 {% block content %}
   <h2>Questions</h2>
-  <a href="{% url 'question_create' %}">Add Question</a>
+  <a href="{% url '' %}">Add Question</a>
   <ul>
     {% for question in questions %}
       <li>
         {{ question.text }}
-        <a href="{% url 'answer_create' question.id %}">Add Answer</a>
+        <a href="{% url ''  %}">Add Answer</a>
       </li>
     {% endfor %}
   </ul>
