@@ -4,14 +4,18 @@
 
 {% block content %}
 
-<div class="main-seguimiento">
-    <h2>Editar Quiz</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar Cambios</button>
-    </form>
-
+<div class="container mt-5">
+    <h2 class="mb-4">Editar Quiz</h2>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                <a href="{% url 'teacher-crud' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

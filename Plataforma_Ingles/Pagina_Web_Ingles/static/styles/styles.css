@@ -1342,3 +1342,11 @@ button:focus{
   transform: scale(1.1);
   color: #0056b3;
 }
+
+/*====================================  
+  TEACHER CRUD
+======================================*/
+.containter-teacher-crud {
+  margin-top: 80px;
+  display: block;
+}
