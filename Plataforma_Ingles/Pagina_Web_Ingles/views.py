@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import QuizForm, QuestionForm, AnswerForm
+
 def index(request):
     return render(request, 'index.html')
 
@@ -321,9 +322,15 @@ def assign_section(request):
         print(f"Error en assign_section: {str(e)}")  # Para debugging
         return JsonResponse({'error': str(e)}, status=500)
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 @login_required
 def teacher_crud_view(request):
+    logger.debug("Accediendo a teacher_crud_view")
     if request.user.role != 'TEACHER':
+        logger.debug("Redirigiendo a index porque el usuario no es un profesor")
         return redirect('index')
 
     quizzes = Quiz.objects.all()
@@ -373,3 +380,25 @@ def add_answer(request, question_id):
     else:
         messages.error(request, 'Error al agregar respuesta.')
     return redirect('teacher-crud')
+
+@login_required
+def edit_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    if request.method == 'POST':
+        form = QuizForm(request.POST, instance=quiz)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Quiz actualizado correctamente.')
+            return redirect('teacher-crud')
+    else:
+        form = QuizForm(instance=quiz)
+    return render(request, 'edit_quiz.html', {'form': form})
+
+@login_required
+def delete_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    if request.method == 'POST':
+        quiz.delete()
+        messages.success(request, 'Quiz eliminado correctamente.')
+        return redirect('teacher-crud')
+    return render(request, 'confirm_delete.html', {'quiz': quiz})

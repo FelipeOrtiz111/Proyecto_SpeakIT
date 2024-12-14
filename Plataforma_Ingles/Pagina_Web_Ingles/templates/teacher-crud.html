@@ -3,37 +3,58 @@
 {% load static %}
 
 {% block content %}
-<h2>Manage Quizzes</h2>
+<div class="main-seguimiento">
+    <h2>Manage Quizzes</h2>
 
-<form method="post" action="{% url 'add-quiz' %}">
-    {% csrf_token %}
-    {{ quiz_form.as_p }}
-    <button type="submit">AgregarQuiz</button>
-</form>
+    <!-- Button to toggle the add quiz form -->
+    <button onclick="toggleAddQuizForm()">Agregar Quiz</button>
 
-<h3>Quizzes Existentes</h3>
-<ul>
-    {% for quiz in quizzes %}
-        <li>{{ quiz.name }} - {{ quiz.level }}
-            <!-- Add buttons for edit and delete -->
-            <form method="post" action="{% url 'add-question' quiz.id %}">
-                {% csrf_token %}
-                {{ question_form.as_p }}
-                <button type="submit">Agregar Pregunta</button>
-            </form>
-            <ul>
-                {% for question in quiz.question_set.all %}
-                    <li>{{ question.text }}
-                        <form method="post" action="{% url 'add-answer' question.id %}">
-                            {% csrf_token %}
-                            {{ answer_form.as_p }}
-                            <button type="submit">Agregar Respuesta</button>
-                        </form>
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-</ul>
+    <!-- Add Quiz Form -->
+    <div id="add-quiz-form" style="display: none;">
+        <form method="post" action="{% url 'add-quiz' %}">
+            {% csrf_token %}
+            {{ quiz_form.as_p }}
+            <button type="submit">Agregar Quiz</button>
+        </form>
+    </div>
+
+    <!-- Existing Quizzes Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Quiz</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.name }}</td>
+                <td>
+                    <!-- Edit and Delete buttons -->
+                    <a href="{% url 'edit-quiz' quiz.id %}">Editar</a>
+                    <form method="post" action="{% url 'delete-quiz' quiz.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este quiz?');">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function toggleAddQuizForm() {
+            var form = document.getElementById('add-quiz-form');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+    </script>
+
+</div>
+
 
 {% endblock %}
