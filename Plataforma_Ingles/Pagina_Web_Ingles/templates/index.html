@@ -1442,7 +1442,7 @@
                 Comenzar Quiz
             </button>
           {% else %}
-            <a href="{% url 'quiz-view' quiz.pk %}" class="quiz-button">
+            <a href="{% url 'quiz-view' quiz.id %}" class="quiz-button">
                 Comenzar Quiz
             </a>
           {% endif %}

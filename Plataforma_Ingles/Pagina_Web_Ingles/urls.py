@@ -23,12 +23,13 @@ urlpatterns = [
     path('estadisticas/', estadisticas_view, name='estadisticas'),
     path('seguimiento/', seguimiento_view, name='seguimiento'),
     path('assign-section/', assign_section, name='assign-section'),
-    # URLs para quizes
-    path('<pk>/', quiz_view, name='quiz-view'),
-    path('<pk>/data/', quiz_data_view, name='quiz-data-view'),
-    path('<pk>/save/', save_quiz_view, name='quiz-save-view'),
+    # CRUD de quizes
     path('teacher-crud/', teacher_crud_view, name='teacher-crud'),
     path('add-quiz/', add_quiz, name='add-quiz'),
     path('add-question/<int:quiz_id>/', add_question, name='add-question'),
     path('add-answer/<int:question_id>/', add_answer, name='add-answer'),
+    # URLs para quizes
+    path('<int:pk>/', quiz_view, name='quiz-view'),
+    path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
+    path('<int:pk>/save/', save_quiz_view, name='quiz-save-view'),
 ]   
