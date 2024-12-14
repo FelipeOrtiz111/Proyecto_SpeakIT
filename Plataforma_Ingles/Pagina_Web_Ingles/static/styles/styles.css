@@ -1387,3 +1387,11 @@ button:focus{
   padding-right: 20px;
   margin-bottom: 0;
 }
+
+/* Selecciona todos los <p> dentro del formulario con el ID 'add-quiz-form' */
+#add-quiz-form .form-style-register p {
+  /* Aquí puedes agregar los estilos que desees */
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+}
