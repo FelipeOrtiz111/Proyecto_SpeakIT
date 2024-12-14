@@ -16,6 +16,11 @@ from .views import (
     add_answer,
     edit_quiz,
     delete_quiz,
+    question_list,
+    question_create,
+    question_update,
+    question_delete,
+    answer_create,
 )
 
 urlpatterns = [
@@ -36,4 +41,9 @@ urlpatterns = [
     path('<int:pk>/', quiz_view, name='quiz-view'),
     path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
     path('<int:pk>/save/', save_quiz_view, name='quiz-save-view'),
+    path('questions/', views.question_list, name='question_list'),
+    path('questions/add/', views.question_create, name='question_create'),
+    path('questions/<int:pk>/update/', views.question_update, name='question_update'),
+    path('questions/<int:pk>/delete/', views.question_delete, name='question_delete'),
+    path('questions/<int:question_id>/add-answer/', views.answer_create, name='answer_create'),
 ]   

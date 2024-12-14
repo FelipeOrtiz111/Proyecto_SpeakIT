@@ -58,7 +58,7 @@
     <!-- Add Question Form -->
     <div id="add-question-form" class="card mb-4" style="display: none;">
         <div class="card-body">
-            <form method="post" action="{% url 'question_create' %}" class="form-style-teacher-crud">
+            <form method="post" action="{% url 'add-question' quiz.id %}" class="form-style-teacher-crud">
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Agregar una nueva Pregunta</legend>
