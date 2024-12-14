@@ -1398,7 +1398,9 @@ button:focus{
   width: fit-content;  
 }
 
-.form-control {
+.form-style-teacher-crud input, 
+.form-style-teacher-crud select, 
+.form-style-teacher-crud textarea {
   display: block;
   width: 100%;
   height: calc(1.5em + .75rem + 2px);
@@ -1412,15 +1414,4 @@ button:focus{
   border: 1px solid #ced4da;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-
-.form-style-register input, 
-.form-style-register select, 
-.form-style-register textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
