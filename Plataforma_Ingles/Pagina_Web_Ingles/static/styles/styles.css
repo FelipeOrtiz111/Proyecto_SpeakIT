@@ -1348,6 +1348,7 @@ button:focus{
 ======================================*/
 .container-teacher-crud {
   margin-top: 80px;
+  margin-bottom: 20px;
   display: block;
   margin-left: 10%;
   margin-right: 10%;
@@ -1390,12 +1391,12 @@ button:focus{
 
 /* Selecciona todos los <p> dentro del formulario con el ID 'add-quiz-form' */
 #add-quiz-form .form-style-teacher-crud p {
-  /* Aquí puedes agregar los estilos que desees */
+  margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
   color: #333;
   display: grid;
-  width: fit-content;  
+  width: auto;  
 }
 
 .form-style-teacher-crud input, 
