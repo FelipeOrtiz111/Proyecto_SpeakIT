@@ -32,7 +32,7 @@ class ViewsTest(TestCase):
             number_of_questions=10,
             time=30,
             required_score_to_pass=70,
-            difficulty='medium'
+            difficulty='medio'
         )
 
     def test_index_view(self):

@@ -1352,3 +1352,39 @@ button:focus{
   margin-left: 10%;
   margin-right: 10%;
 }
+
+/* Mejoras para el formulario de registro */
+.form-style-teacher-crud {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  padding: 20px 20px 0px 20px !important;
+}
+
+.form-style-teacher-crud legend {
+  color: #333;
+  font-size: 1.5em;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.form-style-teacher-crud .btn-outline-info {
+  background: linear-gradient(90deg, #3240ff, #7091ff);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-style-teacher-crud .btn-outline-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-style-teacher-crud fieldset {
+  width: 60%;
+  padding-right: 20px;
+  margin-bottom: 0;
+}

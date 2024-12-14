@@ -18,7 +18,7 @@ class QuizResultTests(TestCase):
             number_of_questions=10,
             time=30,
             required_score_to_pass=70,
-            difficulty='medium'
+            difficulty='medio'
         )
         
     def test_create_quiz_result(self):
