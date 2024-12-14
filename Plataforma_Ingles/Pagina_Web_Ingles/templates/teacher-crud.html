@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<div class="containter-teacher-crud">
+<div class="container-teacher-crud">
     <h2 class="mb-4">Gestionar Quizzes</h2>
 
     <!-- Button to toggle the add quiz form -->
@@ -14,8 +14,11 @@
         <div class="card-body">
             <form method="post" action="{% url 'add-quiz' %}">
                 {% csrf_token %}
-                {{ quiz_form.as_p }}
-                <button type="submit" class="btn btn-success">Enviar</button>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Agregar un nuevo Quiz</legend>
+                    {{ quiz_form.as_p }}
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </fieldset>
             </form>
         </div>
     </div>
