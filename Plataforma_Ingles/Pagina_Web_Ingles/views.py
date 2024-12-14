@@ -71,12 +71,7 @@ class QuizListView(LoginRequiredMixin, ListView):
     context_object_name = 'quizes'
 
 @login_required
-def quiz_view(request, pk):
-    # Verificar si el usuario es profesor
-    if request.user.role == 'TEACHER' and not request.user.is_staff:
-        messages.warning(request, 'Los profesores no pueden realizar quizes.')
-        return redirect('index')
-    
+def quiz_view(request, pk):    
     try:
         quiz = Quiz.objects.get(pk=pk)
         # Obtener el perfil del estudiante si existe

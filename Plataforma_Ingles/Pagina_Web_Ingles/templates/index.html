@@ -1438,7 +1438,7 @@
           <p>Tiempo: {{ quiz.time }} minutos</p>
           <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
           {% if user.role == 'TEACHER' and not user.is_staff %}
-            <button class="quiz-button disabled" disabled title="Los profesores no pueden realizar quizes">
+            <button class="quiz-button disabled">
                 Comenzar Quiz
             </button>
           {% else %}
