@@ -57,29 +57,13 @@ if (quizBox && startButton) {
 
 // Modificar el event listener del botón start
 if (startButton) {
-    startButton.addEventListener('click', async (e) => {
+    startButton.addEventListener('click', (e) => {
         e.preventDefault();
         
-        const sectionSelect = document.getElementById('section-select');
-        if (!sectionSelect || !sectionSelect.value) {
-            alert('Por favor selecciona una sección antes de comenzar el quiz');
-            return false;
-        }
-
-        try {
-            const response = await assignSection(sectionSelect.value);
-            
-            // Si llegamos aquí, la asignación fue exitosa
-            startButton.style.display = 'none';
-            if (quizForm) quizForm.style.display = 'block';
-            if (quizData && quizData.data) loadQuizQuestions(quizData.data);
-            if (quizData && quizData.time) activateTimer(quizData.time);
-            
-        } catch (error) {
-            alert('Error al asignar la sección. Por favor, intenta nuevamente.');
-            console.error('Error detallado:', error);
-            return false;
-        }
+        startButton.style.display = 'none';
+        if (quizForm) quizForm.style.display = 'block';
+        if (quizData && quizData.data) loadQuizQuestions(quizData.data);
+        if (quizData && quizData.time) activateTimer(quizData.time);
     });
 }
 
