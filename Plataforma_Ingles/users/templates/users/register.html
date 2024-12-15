@@ -1,108 +1,109 @@
+@ -1,135 +1,709 @@
 {% extends "header.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
+<!-- Pantalla de carga -->
+{% include 'includes/loading.html' %}
+
+<div class="background fade-in-delayed"></div>
 <div id="main-register">
-    {% include 'includes/messaging.html' %}
-    <div class="content-section">
-        <form method="POST" class="form-style-register">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">¡Ingresa ahora!</legend>
-                <!-- Campos del formulario -->
+  {% include 'includes/messaging.html' %}
+  <div class="content-section">
+    <form method="POST" class="form-style-register">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">¡Ingresa ahora!</legend>
+        <!-- Campos del formulario -->
                 {{ form.email|as_crispy_field }}
                 {{ form.first_name|as_crispy_field }}
                 {{ form.last_name|as_crispy_field }}
                 {{ form.password1|as_crispy_field }}
                 {{ form.password2|as_crispy_field }}
-                
-                <!-- Campo de sección (solo visible para estudiantes) -->
-                <div class="form-group" id="section-group">
-                    <label for="section-input">Sección (para alumnos):</label>
-                    <div class="d-flex align-items-center">
+
+        <!-- Campo de sección (solo visible para estudiantes) -->
+        <div class="form-group" id="section-group">
+          <label for="section-input">Sección (para alumnos):</label>
+          <div class="d-flex align-items-center">
                         <input type="text" 
-                               class="form-control" 
-                               id="section-input" 
-                               name="section" 
-                               placeholder="Ejemplo: INI3111 - 001D"
-                               pattern="IN[UI]\d{4}\s*-\s*\d{3}[A-Z]"
+              class="form-control"
+              id="section-input"
+              name="section"
+              placeholder="Ejemplo: INI3111 - 001D"
+              pattern="IN[UI]\d{4}\s*-\s*\d{3}[A-Z]"
                                title="El formato debe ser 'INU1234-123D' o 'INI1234-123D'">
                         <button type="button" 
-                                class="btn btn-link ml-2" 
-                                data-toggle="modal" 
+              class="btn btn-link ml-2"
+              data-toggle="modal"
                                 data-target="#helpModal">
-                            <i class="fas fa-question-circle"></i>
-                        </button>
-                    </div>
-                    <small class="form-text text-muted">
+              <i class="fas fa-question-circle"></i>
+            </button>
+          </div>
+          <small class="form-text text-muted">
                         Formato requerido: INU1234-123D o INI1234-123D (ejemplo: INI3111-001D)
-                    </small>
-                </div>
-                
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Registrarse</button>
-                    <p class="terms">
-                        Al registrarte, estás aceptando los
-                        <a href="#" data-toggle="modal" data-target="#termsModal">Términos de Servicio y Políticas de Privacidad</a>.
-                    </p>
-                </div>
-                
-                <!-- Modal Términos de Servicio -->
-                <div class="modal" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="d-flex align-items-center">
-                                    <img src="{% static 'images/duoc-uc-logo.png' %}" alt="Duoc UC Logo" class="mr-3" style="max-width: 50px;">
-                                    <h5 class="modal-title" id="termsModalLabel">Términos de Servicio y Políticas de Privacidad</h5>
-                                </div>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h1>TÉRMINOS DEL SERVICIO</h1>
-                                <p>Aquí irían los términos y políticas de servicio detallados.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-            </fieldset>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                ¿Ya tienes una cuenta? <a class="ml-2" href="/login">Iniciar sesión</a>
-            </small>
+          </small>
         </div>
+
+        <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Registrarse</button>
+          <p class="terms">
+                        Al registrarte, estás aceptando los <a href="#" data-toggle="modal" data-target="#termsModal">Términos de Servicio y Políticas de Privacidad</a>.
+              </div>
+      </fieldset>
+      <div class="fondo">
+                <img src="/static/images/bg_login.jpeg" alt="Logo de Duoc UC">
+      </div>
+    </form>
+    <div class="border-top pt-3">
+      <small class="text-muted">
+        ¿Ya tienes una cuenta? <a class="ml-2" href="/login">Iniciar sesión</a>
+      </small>
     </div>
+  </div>
 </div>
 
-<!-- Modal para la imagen de ayuda -->
-<div class="modal" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+<!-- Modal para los terminos -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="helpModalLabel">¿Dónde encuentro mi sección?</h5>
+                <h5 class="modal-title" id="termsModalLabel">Términos de Servicio y Políticas de Privacidad</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body text-center">
-                <img src="{% static 'images/horario-ejemplo.png' %}" 
-                     alt="Ejemplo de horario" 
-                     class="img-fluid"
-                     style="max-width: 100%; height: auto;">
-                <p class="mt-3">Tu sección se encuentra en tu horario como se muestra en la imagen.</p>
+            <div class="modal-body">
+                <p>hola</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
+
+<!-- Modal para la imagen de ayuda -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">¿Dónde encuentro mi sección?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+                <img src="{% static 'images/horario-ejemplo.png' %}" 
+          alt="Ejemplo de horario"
+          class="img-fluid"
+                     style="max-width: 100%; height: auto;">
+                <p class="mt-3">Tu sección se encuentra en tu horario como se muestra en la imagen.</p>
+      </div>
+      <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -110,44 +111,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const sectionInput = document.getElementById('section-input');
     const sectionGroup = document.getElementById('section-group');
     const emailInput = document.querySelector('input[name="email"]');
-    
+
     // Función para mostrar/ocultar el campo de sección según el dominio del email
     function toggleSectionField() {
-        const email = emailInput.value;
+      const email = emailInput.value;
         if (email.endsWith('@duocuc.cl')) {
             sectionGroup.style.display = 'block';
-            sectionInput.required = true;
-        } else {
+        sectionInput.required = true;
+      } else {
             sectionGroup.style.display = 'none';
-            sectionInput.required = false;
+        sectionInput.required = false;
             sectionInput.value = '';
-        }
+      }
     }
-    
+
     // Escuchar cambios en el email
     emailInput.addEventListener('input', toggleSectionField);
-    
+
     // Validación de formato de sección
     const sectionRegex = /^IN[UI]\d{4}\s*-\s*\d{3}[A-Z]$/;
     sectionInput.addEventListener('input', function() {
-        const value = this.value;
-        if (value && !sectionRegex.test(value)) {
+      const value = this.value;
+      if (value && !sectionRegex.test(value)) {
             this.setCustomValidity('El formato debe ser "INU1234-123D" o "INI1234-123D"');
-        } else {
+      } else {
             this.setCustomValidity('');
-        }
+      }
     });
 
     // Formatear automáticamente mientras se escribe
     sectionInput.addEventListener('blur', function() {
-        if (sectionRegex.test(this.value)) {
+      if (sectionRegex.test(this.value)) {
             const parts = this.value.replace(' ', '').split('-');
-            this.value = `${parts[0]} - ${parts[1]}`;
-        }
+        this.value = `${parts[0]} - ${parts[1]}`;
+      }
     });
-    
+
     // Inicializar el estado del campo de sección
     toggleSectionField();
-});
+  });
 </script>
 {% endblock content %}
