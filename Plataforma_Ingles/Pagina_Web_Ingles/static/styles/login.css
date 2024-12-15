@@ -397,7 +397,7 @@ header {
 
 .modal-content {
     border-radius: 15px;
-    z-index: 1050;
+    z-index: 1100; /* Increase the z-index value */
 }
 
 .modal-header {
@@ -413,4 +413,7 @@ header {
 .modal-body img {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
+}
+.modal-backdrop {
+    z-index: 1050; /* Set a lower z-index value than the modal content */
 }
