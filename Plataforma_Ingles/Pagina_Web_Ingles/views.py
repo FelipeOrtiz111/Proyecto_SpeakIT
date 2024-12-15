@@ -354,7 +354,8 @@ def add_quiz(request):
     return redirect('teacher-crud')
 
 @login_required
-def edit_quiz(request, quiz_id):
+def edit_quiz(request):
+    quiz_id = request.POST.get('quiz_id')
     quiz = get_object_or_404(Quiz, id=quiz_id)
     if request.method == 'POST':
         form = QuizForm(request.POST, instance=quiz)
