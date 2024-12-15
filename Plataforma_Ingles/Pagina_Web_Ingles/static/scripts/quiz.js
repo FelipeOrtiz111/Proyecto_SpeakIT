@@ -156,7 +156,7 @@ const sendData = () => {
                 const resDiv = document.createElement("div");
                 for (const [question, resp] of Object.entries(res)){
                     resDiv.innerHTML += question;
-                    const cls = ['container', 'p-3', 'my-2', 'border', 'rounded', 'h5'];
+                    const cls = ['container', 'p-3', 'my-2', 'border', 'rounded', 'h5', 'spacing'];
                     resDiv.classList.add(...cls);
 
                     if (resp=='not answered'){

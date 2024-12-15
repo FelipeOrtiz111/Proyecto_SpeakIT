@@ -781,6 +781,10 @@ button:focus{
   border-bottom: 2px solid #f0f0f0;
 }
 
+.spacing {
+  margin-bottom: 5px; /* Ajusta el valor según tus necesidades */
+}
+
 /* Estilos para las alternativas */
 .form-check {
   padding: 12px 15px;
