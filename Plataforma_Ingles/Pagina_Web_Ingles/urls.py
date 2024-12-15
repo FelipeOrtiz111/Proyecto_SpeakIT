@@ -30,7 +30,7 @@ urlpatterns = [
     # CRUD de quizes
     path('teacher-crud/', teacher_crud_view, name='teacher-crud'),
     path('add-quiz/', add_quiz, name='add-quiz'),
-    path('edit-quiz/', edit_quiz, name='edit-quiz'),
+    path('edit-quiz/<int:quiz_id>/', edit_quiz, name='edit-quiz'),
     path('delete-quiz/<int:quiz_id>/', delete_quiz, name='delete-quiz'),
     # URLs para quizes
     path('<int:pk>/', quiz_view, name='quiz-view'),
