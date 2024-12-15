@@ -23,6 +23,9 @@ def index(request):
 def header_view(request):
     return render(request, 'header.html')
 
+def politicas_view(request):
+    return render(request, 'politicas.html')
+
 @login_required
 def quizes_view(request):
     return render(request, 'quizes.html')

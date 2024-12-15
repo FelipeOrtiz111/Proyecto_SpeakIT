@@ -18,6 +18,7 @@ from .views import (
     add_question,
     edit_question,
     delete_question,
+    politicas_view,
 )
 
 urlpatterns = [
@@ -27,6 +28,7 @@ urlpatterns = [
     path('estadisticas/', estadisticas_view, name='estadisticas'),
     path('seguimiento/', seguimiento_view, name='seguimiento'),
     path('assign-section/', assign_section, name='assign-section'),
+    path('politicas/', politicas_view, name='politicas'),
     # CRUD de quizes
     path('teacher-crud/', teacher_crud_view, name='teacher-crud'),
     path('add-quiz/', add_quiz, name='add-quiz'),
