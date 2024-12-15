@@ -390,7 +390,10 @@ def add_question(request):
         
         # Procesar las respuestas
         answer_texts = request.POST.getlist('answer_text[]')
-        correct_answer = request.POST.get('correct_answer')
+        correct_answers = request.POST.getlist('correct_answers[]')
+        
+        # Convertir los índices de respuestas correctas a enteros
+        correct_indices = [int(i) for i in correct_answers]
         
         # Crear las respuestas
         for i, text in enumerate(answer_texts):
@@ -398,7 +401,7 @@ def add_question(request):
                 Answer.objects.create(
                     question=question,
                     text=text,
-                    correct=(i == int(correct_answer) if correct_answer is not None else False)
+                    correct=(i in correct_indices)
                 )
         
         messages.success(request, 'Pregunta y respuestas agregadas correctamente.')

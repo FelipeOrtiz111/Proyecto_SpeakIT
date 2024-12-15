@@ -78,7 +78,7 @@
                     <label for="text" class="form-label">Texto de la pregunta</label>
                     <input type="text" class="form-control" name="text" required>
                 </div>
-                <h3>Respuestas</h3>
+                <h5>Respuestas</h5>
                 <div class="table-responsive">
                     <table class="table" id="answersTable">
                         <thead>
@@ -94,7 +94,7 @@
                                     <input type="text" class="form-control answer-text" name="answer_text[]" required>
                                 </td>
                                 <td class="text-center">
-                                    <input type="radio" class="form-check-input custom-radio" name="correct_answer" required>
+                                    <input type="checkbox" class="form-check-input custom-checkbox" name="correct_answers[]" value="0">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -107,7 +107,7 @@
                                     <input type="text" class="form-control answer-text" name="answer_text[]">
                                 </td>
                                 <td class="text-center">
-                                    <input type="radio" class="form-check-input custom-radio" name="correct_answer">
+                                    <input type="checkbox" class="form-check-input custom-checkbox" name="correct_answers[]" value="1">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -120,7 +120,7 @@
                                     <input type="text" class="form-control answer-text" name="answer_text[]">
                                 </td>
                                 <td class="text-center">
-                                    <input type="radio" class="form-check-input custom-radio" name="correct_answer">
+                                    <input type="checkbox" class="form-check-input custom-checkbox" name="correct_answers[]" value="2">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -280,7 +280,7 @@
                 <input type="text" class="form-control answer-text" name="answer_text[]">
             </td>
             <td class="text-center">
-                <input type="radio" class="form-check-input custom-radio" name="correct_answer" value="${tbody.children.length}">
+                <input type="checkbox" class="form-check-input custom-checkbox" name="correct_answers[]" value="${tbody.children.length}">
             </td>
             <td>
                 <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">

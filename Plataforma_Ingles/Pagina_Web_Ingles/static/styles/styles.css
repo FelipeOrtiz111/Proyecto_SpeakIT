@@ -1433,49 +1433,27 @@ button:focus{
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* sombra al hacer foco */
 }
 
-/* checkbox radio button */
-.custom-radio {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.custom-radio + label {
-  position: relative;
-  padding-left: 30px;
+/* checkbox  */
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 0; /* lo hace cuadrado */
   cursor: pointer;
-  display: inline-block;
-  font-size: 1rem;
-  color: #495057;
+  position: relative;
 }
 
-.custom-radio + label:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 20px; /* Size of the custom radio */
-  height: 20px; /* Size of the custom radio */
-  border: 2px solid #ced4da;
-  border-radius: 50%;
-  background: #fff;
-}
-
-.custom-radio:checked + label:before {
+.custom-checkbox:checked {
   background-color: #007bff;
-  border-color: #007bff;
 }
 
-.custom-radio:checked + label:after {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #fff;
+.custom-checkbox:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 /*====================================  
