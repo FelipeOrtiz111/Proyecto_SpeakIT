@@ -408,7 +408,7 @@ def add_question(request):
         
         # Verificar la acción
         if request.POST.get('action') == 'save_and_add':
-            return redirect('teacher-crud')  # Mantener el formulario abierto
+            return redirect('teacher-crud?keep_open=true')  # Mantener el formulario abierto
         return redirect('teacher-crud')
         
     except Exception as e:
