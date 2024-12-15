@@ -164,15 +164,12 @@
                             <td>{{ question.text }}</td>
                             <td>{{ question.created }}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editQuestionModal{{ question.id }}">
-                                    Editar
-                                </button>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addAnswerModal{{ question.id }}">
-                                    Agregar Respuesta
-                                </button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteQuestionModal{{ question.id }}">
-                                    Eliminar
-                                </button>
+                                <!-- Edit and Delete buttons -->
+                                <a href="{% url 'edit-question' question.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                <form method="post" action="{% url 'delete-question' question.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta pregunta?');">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
 
