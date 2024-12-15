@@ -364,7 +364,7 @@ def edit_quiz(request, quiz_id):
             return redirect('teacher-crud')
     else:
         form = QuizForm(instance=quiz)
-    return render(request, 'edit_quiz.html', {'form': form})
+    return render(request, 'crud/edit_quiz.html', {'form': form})
 
 @login_required
 def delete_quiz(request, quiz_id):
@@ -373,7 +373,7 @@ def delete_quiz(request, quiz_id):
         quiz.delete()
         messages.success(request, 'Quiz eliminado correctamente.')
         return redirect('teacher-crud')
-    return render(request, 'confirm_delete.html', {'quiz': quiz})
+    return render(request, 'crud/confirm_delete.html', {'quiz': quiz})
 
 @require_POST
 @login_required
@@ -415,7 +415,7 @@ def edit_question(request, question_id):
             return redirect('teacher-crud')
     else:
         form = QuestionForm(instance=question)
-    return render(request, 'edit_question.html', {'form': form})
+    return render(request, 'crud/edit_question.html', {'form': form})
 
 @login_required
 def delete_question(request, question_id):
@@ -425,4 +425,4 @@ def delete_question(request, question_id):
         question.delete()
         messages.success(request, 'Pregunta eliminada correctamente.')
         return redirect('teacher-crud')
-    return render(request, 'confirm_delete_question.html', {'question': question})
+    return render(request, 'crud/confirm_delete_question.html', {'question': question})
