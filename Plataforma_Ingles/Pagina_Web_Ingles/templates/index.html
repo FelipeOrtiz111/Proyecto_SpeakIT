@@ -1431,21 +1431,23 @@
       {% if object_list %}
       <div class="quizes-list">
         {% for quiz in object_list %}
-        <div class="quiz-card">
-          <h4>{{ quiz.name }}</h4>
-          <p>Dificultad: {{ quiz.difficulty }}</p>
-          <p>Tiempo: {{ quiz.time }} minutos</p>
-          <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
-          {% if user.role == 'TEACHER' and not user.is_staff %}
-            <button class="quiz-button disabled">
-                Comenzar Quiz
-            </button>
-          {% else %}
-            <a href="{% url 'quiz-view' quiz.id %}" class="quiz-button">
-                Comenzar Quiz
-            </a>
-          {% endif %}
-        </div>
+        {% if quiz.level == 'basic' %}
+          <div class="quiz-card">
+            <h4>{{ quiz.name }}</h4>
+            <p>Dificultad: {{ quiz.difficulty }}</p>
+            <p>Tiempo: {{ quiz.time }} minutos</p>
+            <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
+            {% if user.role == 'TEACHER' and not user.is_staff %}
+              <button class="quiz-button disabled">
+                  Comenzar Quiz
+              </button>
+            {% else %}
+              <a href="{% url 'quiz-view' quiz.id %}" class="quiz-button">
+                  Comenzar Quiz
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
         {% endfor %}
       </div>
       {% else %}
@@ -1465,21 +1467,23 @@
       {% if object_list %}
       <div class="quizes-list">
         {% for quiz in object_list %}
-        <div class="quiz-card">
-          <h4>{{ quiz.name }}</h4>
-          <p>Dificultad: {{ quiz.difficulty }}</p>
-          <p>Tiempo: {{ quiz.time }} minutos</p>
-          <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
-          {% if user.role == 'TEACHER' and not user.is_staff %}
-            <button class="quiz-button disabled">
-                Comenzar Quiz
-            </button>
-          {% else %}
-            <a href="{% url 'quiz-view' quiz.id %}" class="quiz-button">
-                Comenzar Quiz
-            </a>
+          {% if quiz.level == 'elemental' %}
+            <div class="quiz-card">
+              <h4>{{ quiz.name }}</h4>
+              <p>Dificultad: {{ quiz.difficulty }}</p>
+              <p>Tiempo: {{ quiz.time }} minutos</p>
+              <p>Número de preguntas: {{ quiz.number_of_questions }}</p>
+              {% if user.role == 'TEACHER' and not user.is_staff %}
+                <button class="quiz-button disabled">
+                    Comenzar Quiz
+                </button>
+              {% else %}
+                <a href="{% url 'quiz-view' quiz.id %}" class="quiz-button">
+                    Comenzar Quiz
+                </a>
+              {% endif %}
+            </div>
           {% endif %}
-        </div>
         {% endfor %}
       </div>
       {% else %}
