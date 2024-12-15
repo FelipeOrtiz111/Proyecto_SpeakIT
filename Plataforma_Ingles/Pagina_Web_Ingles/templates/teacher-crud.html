@@ -78,6 +78,63 @@
                     <label for="text" class="form-label">Texto de la pregunta</label>
                     <input type="text" class="form-control" name="text" required>
                 </div>
+                <h3>Respuestas</h3>
+                <div class="table-responsive">
+                    <table class="table" id="answersTable">
+                        <thead>
+                            <tr>
+                                <th>Texto</th>
+                                <th>Correcta</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control answer-text" name="answer_text[]" required>
+                                </td>
+                                <td class="text-center">
+                                    <input type="radio" class="form-check-input" name="correct_answer" required>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control answer-text" name="answer_text[]">
+                                </td>
+                                <td class="text-center">
+                                    <input type="radio" class="form-check-input" name="correct_answer">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control answer-text" name="answer_text[]">
+                                </td>
+                                <td class="text-center">
+                                    <input type="radio" class="form-check-input" name="correct_answer">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-success mb-3" onclick="addAnswer()">
+                    <i class="fas fa-plus"></i> Agregar Respuesta
+                </button>
+                <button type="submit" class="btn btn-primary">Guardar Pregunta</button>
             </form>
         </div>
     </div>
@@ -209,7 +266,33 @@
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
 
+    function addAnswer() {
+        const tbody = document.querySelector('#answersTable tbody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>
+                <input type="text" class="form-control answer-text" name="answer_text[]">
+            </td>
+            <td class="text-center">
+                <input type="radio" class="form-check-input" name="correct_answer">
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </td>
+        `;
+        tbody.appendChild(newRow);
+    }
 
+    function removeAnswer(button) {
+        const tbody = document.querySelector('#answersTable tbody');
+        if (tbody.children.length > 1) {
+            button.closest('tr').remove();
+        } else {
+            alert('Debe haber al menos una respuesta');
+        }
+    }
 
 </script>
 {% endblock %}
