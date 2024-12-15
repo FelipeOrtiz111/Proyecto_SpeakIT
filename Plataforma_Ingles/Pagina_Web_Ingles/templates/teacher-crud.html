@@ -68,7 +68,7 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="quiz" class="form-label">Quiz</label>
-                    <select class="form-select" name="quiz" required>
+                    <select class="form-select custom-select" name="quiz" required>
                         {% for quiz in quizzes %}
                             <option value="{{ quiz.id }}">{{ quiz.name }}</option>
                         {% endfor %}
@@ -94,7 +94,7 @@
                                     <input type="text" class="form-control answer-text" name="answer_text[]" required>
                                 </td>
                                 <td class="text-center">
-                                    <input type="radio" class="form-check-input" name="correct_answer" required>
+                                    <input type="radio" class="form-check-input custom-radio" name="correct_answer" required>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -107,7 +107,7 @@
                                     <input type="text" class="form-control answer-text" name="answer_text[]">
                                 </td>
                                 <td class="text-center">
-                                    <input type="radio" class="form-check-input" name="correct_answer">
+                                    <input type="radio" class="form-check-input custom-radio" name="correct_answer">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -120,7 +120,7 @@
                                     <input type="text" class="form-control answer-text" name="answer_text[]">
                                 </td>
                                 <td class="text-center">
-                                    <input type="radio" class="form-check-input" name="correct_answer">
+                                    <input type="radio" class="form-check-input custom-radio" name="correct_answer">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -134,7 +134,13 @@
                 <button type="button" class="btn btn-success mb-3" onclick="addAnswer()">
                     <i class="fas fa-plus"></i> Agregar Respuesta
                 </button>
-                <button type="submit" class="btn btn-primary">Guardar Pregunta</button>
+                <input type="hidden" name="action" id="form-action" value="save">
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary" onclick="setAction('save')">Guardar</button>
+                    <button type="submit" class="btn btn-primary" onclick="setAction('save_and_add')">
+                        Guardar y agregar otra pregunta
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -274,7 +280,7 @@
                 <input type="text" class="form-control answer-text" name="answer_text[]">
             </td>
             <td class="text-center">
-                <input type="radio" class="form-check-input" name="correct_answer">
+                <input type="radio" class="form-check-input custom-radio" name="correct_answer" value="${tbody.children.length}">
             </td>
             <td>
                 <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
@@ -292,6 +298,10 @@
         } else {
             alert('Debe haber al menos una respuesta');
         }
+    }
+
+    function setAction(action) {
+        document.getElementById('form-action').value = action;
     }
 
 </script>

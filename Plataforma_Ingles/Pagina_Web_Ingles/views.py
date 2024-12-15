@@ -378,17 +378,39 @@ def delete_quiz(request, quiz_id):
 @require_POST
 @login_required
 def add_question(request):
-    quiz_id = request.POST.get('quiz')
-    quiz = get_object_or_404(Quiz, id=quiz_id)
-    form = QuestionForm(request.POST)
-    if form.is_valid():
-        question = form.save(commit=False)
-        question.quiz = quiz
-        question.save()
-        messages.success(request, 'Pregunta agregada correctamente.')
-    else:
-        messages.error(request, 'Error al agregar pregunta.')
-    return redirect('teacher-crud')
+    try:
+        quiz_id = request.POST.get('quiz')
+        quiz = get_object_or_404(Quiz, id=quiz_id)
+        
+        # Crear la pregunta
+        question = Question.objects.create(
+            quiz=quiz,
+            text=request.POST.get('text')
+        )
+        
+        # Procesar las respuestas
+        answer_texts = request.POST.getlist('answer_text[]')
+        correct_answer = request.POST.get('correct_answer')
+        
+        # Crear las respuestas
+        for i, text in enumerate(answer_texts):
+            if text:  # Solo crear si hay texto
+                Answer.objects.create(
+                    question=question,
+                    text=text,
+                    correct=(i == int(correct_answer) if correct_answer is not None else False)
+                )
+        
+        messages.success(request, 'Pregunta y respuestas agregadas correctamente.')
+        
+        # Verificar la acción
+        if request.POST.get('action') == 'save_and_add':
+            return redirect('teacher-crud')  # Mantener el formulario abierto
+        return redirect('teacher-crud')
+        
+    except Exception as e:
+        messages.error(request, f'Error al agregar pregunta: {str(e)}')
+        return redirect('teacher-crud')
 
 @require_POST
 @login_required

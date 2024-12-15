@@ -1417,6 +1417,67 @@ button:focus{
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.custom-select {
+  background-color: #f8f9fa; /* fondo gris claro */
+  border: 1px solid #ced4da; /* borde gris claro */
+  border-radius: 0.25rem; /* bordes redondeados */
+  padding: 0.375rem 1.75rem 0.375rem 0.75rem; /* padding */
+  font-size: 1rem; /* tamaño de fuente */
+  color: #495057; /* color de texto */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* transición para el foco */
+}
+
+.custom-select:focus {
+  border-color: #80bdff; /* color del borde al hacer foco */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* sombra al hacer foco */
+}
+
+/* checkbox radio button */
+.custom-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio + label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  color: #495057;
+}
+
+.custom-radio + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px; /* Size of the custom radio */
+  height: 20px; /* Size of the custom radio */
+  border: 2px solid #ced4da;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.custom-radio:checked + label:before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.custom-radio:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+}
+
 /*====================================  
   ALERTAS 
 ======================================*/
