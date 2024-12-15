@@ -8,7 +8,7 @@
                 <li><a href="{% url 'perfil' user.username %}">Mi perfil</a></li>
                 {% if user.role == 'TEACHER' or user.is_staff %}
                     <li><a href="{% url 'seguimiento' %}">Seguimiento</a></li>
-                    <li><a href="{% url 'teacher-crud' %}">QUIZES</a></li>
+                    <li><a href="{% url 'teacher-crud' %}">Quizes</a></li>
                 {% endif %}
                 {% if user.role != 'TEACHER' or user.is_staff %}
                     <li><a href="{% url 'estadisticas' %}">Estadisticas Personales</a></li>

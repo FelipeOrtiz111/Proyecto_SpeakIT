@@ -3,22 +3,79 @@
 {% load static %}
 
 {% block content %}
-
 <div class="container-teacher-crud">
-    <h2 class="mb-4">Editar Pregunta</h2>
-    <div class="card mb-4" style="margin-bottom: 30px !important;">
+    {% include 'includes/messaging.html' %}
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Editar Pregunta</h5>
+        </div>
         <div class="card-body">
-            <form method="post" class="form-style-teacher-crud">
+            <form method="post" action="{% url 'edit-question' question.id %}">
                 {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Editar Pregunta</legend>
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                <div class="mb-3">
+                    <label for="quiz" class="form-label">Quiz</label>
+                    <select class="form-select custom-select" name="quiz" required disabled>
+                        {% for quiz in quizzes %}
+                            <option value="{{ quiz.id }}" {% if quiz.id == question.quiz.id %}selected{% endif %}>
+                                {{ quiz.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <!-- Campo oculto para mantener el valor del quiz -->
+                    <input type="hidden" name="quiz" value="{{ question.quiz.id }}">
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Texto de la pregunta</label>
+                    <input type="text" class="form-control" name="text" value="{{ question.text }}" required>
+                </div>
+                <h5>Respuestas</h5>
+                <div class="table-responsive">
+                    <table class="table" id="answersTable">
+                        <thead>
+                            <tr>
+                                <th>Texto</th>
+                                <th>Correcta</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for answer in question.answer_set.all %}
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control answer-text" 
+                                           name="answer_text[]" 
+                                           value="{{ answer.text }}" 
+                                           required>
+                                </td>
+                                <td class="text-center">
+                                    <input type="checkbox" 
+                                           class="form-check-input custom-checkbox" 
+                                           name="correct_answers[]" 
+                                           value="{{ forloop.counter0 }}"
+                                           {% if answer.correct %}checked{% endif %}>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeAnswer(this)">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-success mb-3" onclick="addAnswer()">
+                    <i class="fas fa-plus"></i> Agregar Respuesta
+                </button>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     <a href="{% url 'teacher-crud' %}" class="btn btn-secondary">Cancelar</a>
-                </fieldset>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
+<script src="{% static 'scripts/teacher-crud.js' %}"></script>
 {% endblock %}

@@ -4,21 +4,6 @@
 
 {% block content %}
 
-<div class="container-teacher-crud">
-    <h2 class="mb-4">Editar Quiz</h2>
-    <div class="card mb-4" style="margin-bottom: 30px !important;">
-        <div class="card-body">
-            <form method="post" class="form-style-teacher-crud">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Editar Quiz</legend>
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                    <a href="{% url 'teacher-crud' %}" class="btn btn-secondary">Cancelar</a>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</div>
+
 
 {% endblock %}

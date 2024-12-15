@@ -441,7 +441,12 @@ def edit_question(request, question_id):
             return redirect('teacher-crud')
     else:
         form = QuestionForm(instance=question)
-    return render(request, 'crud/edit_question.html', {'form': form, 'question': question})
+    context = {
+        'form': form,
+        'question': question,
+        'quizzes': Quiz.objects.all()
+    }
+    return render(request, 'crud/edit_question.html', context)
 
 @login_required
 def delete_question(request, question_id):
