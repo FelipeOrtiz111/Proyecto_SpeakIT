@@ -54,7 +54,142 @@
 
     <h2 class="mb-4">Gestionar Preguntas</h2>
 
-    
+    <!-- Tabla de preguntas -->
+    <div class="table-responsive mb-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Quiz</th>
+                    <th>Pregunta</th>
+                    <th>Fecha de creación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in quizzes %}
+                    {% for question in quiz.question_set.all %}
+                        <tr>
+                            <td>{{ quiz.name }}</td>
+                            <td>{{ question.text }}</td>
+                            <td>{{ question.created }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editQuestionModal{{ question.id }}">
+                                    Editar
+                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteQuestionModal{{ question.id }}">
+                                    Eliminar
+                                </button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addAnswerModal{{ question.id }}">
+                                    Agregar Respuesta
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Modal Editar Pregunta -->
+                        <div class="modal fade" id="editQuestionModal{{ question.id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Editar Pregunta</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <form method="post" action="{% url 'edit-question' question.id %}">
+                                        {% csrf_token %}
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="text" class="form-label">Texto de la pregunta</label>
+                                                <input type="text" class="form-control" name="text" value="{{ question.text }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Eliminar Pregunta -->
+                        <div class="modal fade" id="deleteQuestionModal{{ question.id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Confirmar eliminación</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas eliminar esta pregunta?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" action="{% url 'delete-question' question.id %}">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Agregar Respuesta -->
+                        <div class="modal fade" id="addAnswerModal{{ question.id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Agregar Respuesta</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <form method="post" action="{% url 'add-answer' question.id %}">
+                                        {% csrf_token %}
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="text" class="form-label">Texto de la respuesta</label>
+                                                <input type="text" class="form-control" name="text" required>
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" name="correct" id="correct{{ question.id }}">
+                                                <label class="form-check-label" for="correct{{ question.id }}">¿Es correcta?</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario para agregar nueva pregunta -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Agregar Nueva Pregunta</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'add-question' quiz.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="quiz" class="form-label">Quiz</label>
+                    <select class="form-select" name="quiz" required>
+                        {% for quiz in quizzes %}
+                            <option value="{{ quiz.id }}">{{ quiz.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Texto de la pregunta</label>
+                    <input type="text" class="form-control" name="text" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Pregunta</button>
+            </form>
+        </div>
+    </div>
 
 </div>
 
