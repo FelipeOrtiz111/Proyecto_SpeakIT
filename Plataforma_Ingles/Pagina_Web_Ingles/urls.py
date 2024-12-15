@@ -12,12 +12,12 @@ from .views import (
     assign_section,
     teacher_crud_view,
     add_quiz,
-    add_question,
-    add_answer,
     edit_quiz,
     delete_quiz,
+    add_question,
     edit_question,
     delete_question,
+    add_answer,
 )
 
 urlpatterns = [
@@ -30,12 +30,12 @@ urlpatterns = [
     # CRUD de quizes
     path('teacher-crud/', teacher_crud_view, name='teacher-crud'),
     path('add-quiz/', add_quiz, name='add-quiz'),
-    path('add-question/<int:quiz_id>/', add_question, name='add-question'),
-    path('add-answer/<int:question_id>/', add_answer, name='add-answer'),
-    path('edit-question/<int:question_id>/', edit_question, name='edit-question'),
-    path('delete-question/<int:question_id>/', delete_question, name='delete-question'),
     path('edit-quiz/<int:quiz_id>/', edit_quiz, name='edit-quiz'),
     path('delete-quiz/<int:quiz_id>/', delete_quiz, name='delete-quiz'),
+    path('add-question/<int:quiz_id>/', add_question, name='add-question'),
+    path('edit-question/<int:question_id>/', edit_question, name='edit-question'),
+    path('delete-question/<int:question_id>/', delete_question, name='delete-question'),
+    path('add-answer/<int:question_id>/', add_answer, name='add-answer'),
     # URLs para quizes
     path('<int:pk>/', quiz_view, name='quiz-view'),
     path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
