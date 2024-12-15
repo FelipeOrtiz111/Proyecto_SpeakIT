@@ -441,7 +441,7 @@ def edit_question(request, question_id):
             return redirect('teacher-crud')
     else:
         form = QuestionForm(instance=question)
-    return render(request, 'edit_question.html', {'form': form})
+    return render(request, 'crud/edit_question.html', {'form': form, 'question': question})
 
 @login_required
 def delete_question(request, question_id):
