@@ -434,19 +434,40 @@ def add_answer(request, question_id):
 def edit_question(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     if request.method == 'POST':
-        form = QuestionForm(request.POST, instance=question)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Pregunta actualizada correctamente.')
+        try:
+            # Actualizar la pregunta
+            question.text = request.POST.get('text')
+            question.save()
+            
+            # Obtener las respuestas actuales y nuevas
+            answer_texts = request.POST.getlist('answer_text[]')
+            correct_answers = request.POST.getlist('correct_answers[]')
+            correct_indices = [int(i) for i in correct_answers]
+            
+            # Eliminar respuestas existentes
+            question.answer_set.all().delete()
+            
+            # Crear las nuevas respuestas
+            for i, text in enumerate(answer_texts):
+                if text:  # Solo crear si hay texto
+                    Answer.objects.create(
+                        question=question,
+                        text=text,
+                        correct=(i in correct_indices)
+                    )
+            
+            messages.success(request, 'Pregunta y respuestas actualizadas correctamente.')
+            return redirect('teacher-crud')
+            
+        except Exception as e:
+            messages.error(request, f'Error al actualizar pregunta: {str(e)}')
             return redirect('teacher-crud')
     else:
-        form = QuestionForm(instance=question)
-    context = {
-        'form': form,
-        'question': question,
-        'quizzes': Quiz.objects.all()
-    }
-    return render(request, 'crud/edit_question.html', context)
+        context = {
+            'question': question,
+            'quizzes': Quiz.objects.all()
+        }
+        return render(request, 'crud/edit_question.html', context)
 
 @login_required
 def delete_question(request, question_id):
