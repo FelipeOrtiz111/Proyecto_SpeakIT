@@ -158,7 +158,7 @@
             </thead>
             <tbody>
                 {% for quiz in quizzes %}
-                    {% for question in quiz.question_set.all %}
+                    {% for question in quiz.question_set.all|dictsort:"-created" %}
                         <tr>
                             <td>{{ quiz.name }}</td>
                             <td>{{ question.text }}</td>
