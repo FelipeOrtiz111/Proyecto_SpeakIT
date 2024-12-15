@@ -7,10 +7,10 @@
     {% include 'includes/messaging.html' %}
     <h2 class="mb-4">Gestionar Quizes</h2>
 
-    <!-- Button to toggle the add quiz form -->
+    <!-- Botón para mostrar el formulario de agregar quiz -->
     <button class="btn btn-primary mb-3" onclick="toggleAddQuizForm()">Agregar Quiz</button>
 
-    <!-- Add Quiz Form -->
+    <!-- Formulario para agregar un nuevo quiz -->
     <div id="add-quiz-form" class="card mb-4" style="display: none;">
         <div class="card-body">
             <form method="post" action="{% url 'add-quiz' %}" class="form-style-teacher-crud">
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <!-- Existing Quizzes Table -->
+    <!-- Tabla de quizzes existentes -->
     <div class="table-responsive">
         <table class="table table-striped">
             <thead class="thead-dark">
@@ -55,6 +55,33 @@
 
     <h2 class="mb-4">Gestionar Preguntas</h2>
 
+    <!-- Botón para mostrar el formulario de agregar pregunta -->
+    <button class="btn btn-primary mb-3" onclick="toggleAddQuestionForm()">Agregar Pregunta</button>
+
+    <!-- Formulario para agregar nueva pregunta -->
+    <div id="add-question-form" class="card mb-4" style="display: none;">
+        <div class="card-header">
+            <h5 class="mb-0">Agregar Nueva Pregunta</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'add-question' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="quiz" class="form-label">Quiz</label>
+                    <select class="form-select" name="quiz" required>
+                        {% for quiz in quizzes %}
+                            <option value="{{ quiz.id }}">{{ quiz.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Texto de la pregunta</label>
+                    <input type="text" class="form-control" name="text" required>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Tabla de preguntas -->
     <div class="table-responsive mb-4">
         <table class="table table-striped">
@@ -77,11 +104,11 @@
                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editQuestionModal{{ question.id }}">
                                     Editar
                                 </button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteQuestionModal{{ question.id }}">
-                                    Eliminar
-                                </button>
                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addAnswerModal{{ question.id }}">
                                     Agregar Respuesta
+                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteQuestionModal{{ question.id }}">
+                                    Eliminar
                                 </button>
                             </td>
                         </tr>
@@ -107,28 +134,6 @@
                                             <button type="submit" class="btn btn-primary">Guardar cambios</button>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal Eliminar Pregunta -->
-                        <div class="modal fade" id="deleteQuestionModal{{ question.id }}" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirmar eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar esta pregunta?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form method="post" action="{% url 'delete-question' question.id %}">
-                                            {% csrf_token %}
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,6 +165,28 @@
                                     </form>
                                 </div>
                             </div>
+                        </div>                                                
+
+                        <!-- Modal Eliminar Pregunta -->
+                        <div class="modal fade" id="deleteQuestionModal{{ question.id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Confirmar eliminación</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas eliminar esta pregunta?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" action="{% url 'delete-question' question.id %}">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
                 {% endfor %}
@@ -167,36 +194,18 @@
         </table>
     </div>
 
-    <!-- Formulario para agregar nueva pregunta -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Agregar Nueva Pregunta</h5>
-        </div>
-        <div class="card-body">
-            <form method="post" action="{% url 'add-question' %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="quiz" class="form-label">Quiz</label>
-                    <select class="form-select" name="quiz" required>
-                        {% for quiz in quizzes %}
-                            <option value="{{ quiz.id }}">{{ quiz.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="text" class="form-label">Texto de la pregunta</label>
-                    <input type="text" class="form-control" name="text" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Agregar Pregunta</button>
-            </form>
-        </div>
-    </div>
+
 
 </div>
 
 <script>
     function toggleAddQuizForm() {
         var form = document.getElementById('add-quiz-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleAddQuestionForm() {
+        var form = document.getElementById('add-question-form');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
 
