@@ -377,7 +377,8 @@ def delete_quiz(request, quiz_id):
 
 @require_POST
 @login_required
-def add_question(request, quiz_id):
+def add_question(request):
+    quiz_id = request.POST.get('quiz')
     quiz = get_object_or_404(Quiz, id=quiz_id)
     form = QuestionForm(request.POST)
     if form.is_valid():

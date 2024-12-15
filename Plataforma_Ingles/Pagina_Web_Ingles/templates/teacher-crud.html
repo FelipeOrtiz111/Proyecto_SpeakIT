@@ -172,7 +172,7 @@
             <h5 class="mb-0">Agregar Nueva Pregunta</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{% url 'add-question' quiz.id %}">
+            <form method="post" action="{% url 'add-question' %}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="quiz" class="form-label">Quiz</label>

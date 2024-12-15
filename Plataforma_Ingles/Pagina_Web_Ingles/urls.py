@@ -38,7 +38,7 @@ urlpatterns = [
     path('<int:pk>/data/', quiz_data_view, name='quiz-data-view'),
     path('<int:pk>/save/', save_quiz_view, name='quiz-save-view'),
     # CRUD de preguntas
-    path('add-question/<int:quiz_id>/', add_question, name='add-question'),
+    path('add-question/', add_question, name='add-question'),
     path('edit-question/<int:question_id>/', edit_question, name='edit-question'),
     path('delete-question/<int:question_id>/', delete_question, name='delete-question'),
 ]   
