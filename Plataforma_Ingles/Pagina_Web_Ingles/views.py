@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import QuizForm, QuestionForm, AnswerForm
+from django.urls import reverse
 
 def index(request):
     return render(request, 'index.html')
@@ -408,7 +409,7 @@ def add_question(request):
         
         # Verificar la acción
         if request.POST.get('action') == 'save_and_add':
-            return redirect('teacher-crud?keep_open=true')  # Mantener el formulario abierto
+            return redirect(f"{reverse('teacher-crud')}?keep_open=true")  # Mantener el formulario abierto
         return redirect('teacher-crud')
         
     except Exception as e:

@@ -269,7 +269,12 @@
 
     function toggleAddQuestionForm() {
         var form = document.getElementById('add-question-form');
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+            form.querySelector('form').reset();
+        } else {
+            form.style.display = 'none';
+        }
     }
 
     function addAnswer() {
@@ -302,7 +307,6 @@
 
     function setAction(action, keepOpen = false) {
         document.getElementById('form-action').value = action;
-        document.getElementById('keep-open').value = keepOpen;
     }
 
     // Check if the form should be open on page load
@@ -310,6 +314,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('keep_open') === 'true') {
             toggleAddQuestionForm();
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
     }
 
