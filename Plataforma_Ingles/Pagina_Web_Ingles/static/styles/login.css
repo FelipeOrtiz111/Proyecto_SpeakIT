@@ -88,7 +88,7 @@ header {
     width: 100%;
     flex-flow: column;
     margin-top: 80px !important;
-    margin-bottom: 80px !important;
+    padding-bottom: 80px !important;
 }
 
 /* Estilos del formulario */
