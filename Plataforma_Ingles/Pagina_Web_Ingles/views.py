@@ -337,7 +337,11 @@ def teacher_crud_view(request):
         logger.debug("Redirigiendo a index porque el usuario no es un profesor")
         return redirect('index')
 
-    quizzes = Quiz.objects.all()
+    # Obtener quizzes y sus preguntas ordenadas por fecha de creación
+    quizzes = Quiz.objects.prefetch_related(
+        'question_set'
+    ).all()
+    
     context = {
         'quizzes': quizzes,
         'quiz_form': QuizForm(),
