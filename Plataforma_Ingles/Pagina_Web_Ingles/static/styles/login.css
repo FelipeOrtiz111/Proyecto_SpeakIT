@@ -97,7 +97,7 @@ header {
     border-radius: 12px;
     box-shadow: 12px 12px 3px rgba(0, 0, 0, 0.3);
     animation: slide-in 0.5s ease forwards;
-    height: 80vh;
+    height: auto;
     display: inline-grid;
     overflow-y: scroll;
 }
