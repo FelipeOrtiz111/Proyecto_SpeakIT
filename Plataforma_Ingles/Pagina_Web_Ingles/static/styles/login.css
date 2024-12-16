@@ -87,6 +87,8 @@ header {
     height: 100%;
     width: 100%;
     flex-flow: column;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 /* Estilos del formulario */
@@ -412,4 +414,9 @@ header {
 .modal-body img {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
+}
+
+ul {
+    margin-bottom: 0;
+    margin-right: 10px;
 }

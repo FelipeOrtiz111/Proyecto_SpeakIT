@@ -1485,3 +1485,8 @@ button:focus{
 .alert .close:hover {
   opacity: 1;
 }
+
+ul {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
